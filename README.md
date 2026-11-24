@@ -1,16 +1,51 @@
-# React + Vite
+# Saturnino
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Everything in its orbit.
 
-Currently, two official plugins are available:
+Saturnino is a project management and productivity application designed to help people organize their projects, manage tasks, and stay focused.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Philosophy
 
-## React Compiler
+Organize. Focus. Evolve.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Status
 
-## Expanding the ESLint configuration
+Currently in development.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- React
+- JavaScript
+- Vite
+- Tailwind CSS v4
+- ESLint
+- Prettier
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+| Command                | Description                  |
+| ---------------------- | ---------------------------- |
+| `npm run dev`          | Start the development server |
+| `npm run build`        | Create a production build    |
+| `npm run preview`      | Preview the production build |
+| `npm run lint`         | Check code quality           |
+| `npm run format`       | Format project files         |
+| `npm run format:check` | Check code formatting        |
+
+---
+
+Built with purpose. Inspired by legacy.
