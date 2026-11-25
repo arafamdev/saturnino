@@ -5,12 +5,23 @@
 
 /* Saturnino brand tokens */
 :root {
+  /* Dark palette */
   --space-black: #101114;
   --graphite: #191b20;
+
+  /* Brand colors */
   --orbital-indigo: #818cf8;
   --deep-indigo: #4f46e5;
+
+  /* Soft light palette */
   --lunar-white: #f4f4f5;
   --pure-white: #ffffff;
+  --soft-background: #eeeff2;
+  --soft-surface: #f7f7f9;
+  --soft-muted: #e4e6eb;
+  --soft-border: #d9dbe1;
+  --soft-foreground: #272930;
+  --soft-muted-foreground: #555963;
 }
 
 /* Dark mode variant */
@@ -78,29 +89,29 @@
 /* Light theme */
 :root {
   /* Base colors */
-  --background: var(--lunar-white);
-  --foreground: var(--space-black);
+  --background: var(--soft-background);
+  --foreground: var(--soft-foreground);
 
   /* Surface colors */
-  --card: var(--pure-white);
-  --card-foreground: var(--space-black);
-  --popover: var(--pure-white);
-  --popover-foreground: var(--space-black);
+  --card: var(--soft-surface);
+  --card-foreground: var(--soft-foreground);
+  --popover: var(--soft-surface);
+  --popover-foreground: var(--soft-foreground);
 
   /* Interactive colors */
   --primary: var(--deep-indigo);
   --primary-foreground: var(--pure-white);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.52 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --secondary: var(--soft-muted);
+  --secondary-foreground: var(--soft-foreground);
+  --muted: var(--soft-muted);
+  --muted-foreground: var(--soft-muted-foreground);
+  --accent: var(--soft-muted);
+  --accent-foreground: var(--soft-foreground);
   --destructive: oklch(0.577 0.245 27.325);
 
   /* Borders and focus */
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: var(--soft-border);
+  --input: #858995;
   --ring: var(--deep-indigo);
 
   /* Chart colors */
@@ -111,13 +122,13 @@
   --chart-5: oklch(0.269 0 0);
 
   /* Sidebar colors */
-  --sidebar: var(--pure-white);
-  --sidebar-foreground: var(--space-black);
+  --sidebar: var(--soft-surface);
+  --sidebar-foreground: var(--soft-foreground);
   --sidebar-primary: var(--deep-indigo);
   --sidebar-primary-foreground: var(--pure-white);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-accent: var(--soft-muted);
+  --sidebar-accent-foreground: var(--soft-foreground);
+  --sidebar-border: var(--soft-border);
   --sidebar-ring: var(--deep-indigo);
 
   /* Shared border radius */
