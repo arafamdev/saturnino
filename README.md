@@ -1,16 +1,88 @@
-# React + Vite
+# Saturnino
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Everything in its orbit.
 
-Currently, two official plugins are available:
+Saturnino is a project management and productivity application designed to help people organize their projects, manage tasks, and stay focused.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Philosophy
 
-## React Compiler
+Organize. Focus. Evolve.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Status
 
-## Expanding the ESLint configuration
+Currently in development.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+### Core
+
+- React 19
+- JavaScript
+- Vite
+- React Router
+
+### Styling and UI
+
+- Tailwind CSS v4
+- shadcn/ui
+- Radix UI
+- Lucide React
+- Inter
+
+### Testing
+
+- Vitest
+- React Testing Library
+- jsdom
+
+### Code Quality and Automation
+
+- ESLint
+- Prettier
+- GitHub Actions
+
+## Architecture
+
+Saturnino follows a hybrid feature-based architecture, separating application configuration, business features, shared components, layouts, and utilities.
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/arafamdev/saturnino.git
+cd saturnino
+```
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+| Command                | Description                  |
+| ---------------------- | ---------------------------- |
+| `npm run dev`          | Start the development server |
+| `npm run build`        | Create a production build    |
+| `npm run preview`      | Preview the production build |
+| `npm run lint`         | Check code quality           |
+| `npm run format`       | Format project files         |
+| `npm run format:check` | Check code formatting        |
+| `npm test`             | Run all automated tests      |
+| `npm run test:watch`   | Run tests in watch mode      |
+
+## Continuous Integration
+
+GitHub Actions automatically checks code formatting, linting, automated tests, production builds, and production dependency security.
+
+---
+
+Built with purpose. Inspired by legacy.

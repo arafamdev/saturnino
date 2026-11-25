@@ -2,10 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>saturnino</title>
+    <meta
+      name="description"
+      content="Saturnino — A project management and productivity application."
+    />
+
+    <title>Saturnino</title>
+
+    <script>
+      // Apply the saved theme before the application renders.
+      ;(() => {
+        let theme = 'dark'
+
+        try {
+          const storedTheme = localStorage.getItem('saturnino-theme')
+
+          if (storedTheme === 'light' || storedTheme === 'dark') {
+            theme = storedTheme
+          }
+        } catch {
+          // Use the default theme when storage is unavailable.
+        }
+
+        document.documentElement.classList.toggle('dark', theme === 'dark')
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
