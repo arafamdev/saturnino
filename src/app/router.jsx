@@ -12,7 +12,8 @@ import SettingsPage from '@/features/settings/pages/SettingsPage'
 import AboutPage from '@/features/about/pages/AboutPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
-export const router = createBrowserRouter([
+export const routes = [
+  // Public routes
   {
     path: '/',
     element: <PublicLayout />,
@@ -27,6 +28,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // Application routes
   {
     path: '/app',
     element: <AppLayout />,
@@ -53,8 +56,14 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // Fallback route
   {
     path: '*',
     element: <NotFoundPage />,
   },
-])
+]
+
+export function createAppRouter() {
+  return createBrowserRouter(routes)
+}
