@@ -3,6 +3,16 @@
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
 
+/* Saturnino brand tokens */
+:root {
+  --space-black: #101114;
+  --graphite: #191b20;
+  --orbital-indigo: #818cf8;
+  --deep-indigo: #4f46e5;
+  --lunar-white: #f4f4f5;
+  --pure-white: #ffffff;
+}
+
 /* Dark mode variant */
 @custom-variant dark (&:is(.dark *));
 
@@ -68,22 +78,22 @@
 /* Light theme */
 :root {
   /* Base colors */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: var(--lunar-white);
+  --foreground: var(--space-black);
 
   /* Surface colors */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --card: var(--pure-white);
+  --card-foreground: var(--space-black);
+  --popover: var(--pure-white);
+  --popover-foreground: var(--space-black);
 
   /* Interactive colors */
-  --primary: oklch(0.457 0.24 277.023);
-  --primary-foreground: oklch(0.962 0.018 272.314);
+  --primary: var(--deep-indigo);
+  --primary-foreground: var(--pure-white);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.52 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -91,7 +101,7 @@
   /* Borders and focus */
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: var(--deep-indigo);
 
   /* Chart colors */
   --chart-1: oklch(0.87 0 0);
@@ -101,14 +111,14 @@
   --chart-5: oklch(0.269 0 0);
 
   /* Sidebar colors */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.511 0.262 276.966);
-  --sidebar-primary-foreground: oklch(0.962 0.018 272.314);
+  --sidebar: var(--pure-white);
+  --sidebar-foreground: var(--space-black);
+  --sidebar-primary: var(--deep-indigo);
+  --sidebar-primary-foreground: var(--pure-white);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: var(--deep-indigo);
 
   /* Shared border radius */
   --radius: 0.625rem;
@@ -117,18 +127,18 @@
 /* Dark theme */
 .dark {
   /* Base colors */
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --background: var(--space-black);
+  --foreground: var(--lunar-white);
 
   /* Surface colors */
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --card: var(--graphite);
+  --card-foreground: var(--lunar-white);
+  --popover: var(--graphite);
+  --popover-foreground: var(--lunar-white);
 
   /* Interactive colors */
-  --primary: oklch(0.398 0.195 277.366);
-  --primary-foreground: oklch(0.962 0.018 272.314);
+  --primary: var(--orbital-indigo);
+  --primary-foreground: var(--space-black);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -140,7 +150,7 @@
   /* Borders and focus */
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: var(--orbital-indigo);
 
   /* Chart colors */
   --chart-1: oklch(0.87 0 0);
@@ -150,14 +160,14 @@
   --chart-5: oklch(0.269 0 0);
 
   /* Sidebar colors */
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.585 0.233 277.117);
-  --sidebar-primary-foreground: oklch(0.962 0.018 272.314);
+  --sidebar: var(--graphite);
+  --sidebar-foreground: var(--lunar-white);
+  --sidebar-primary: var(--orbital-indigo);
+  --sidebar-primary-foreground: var(--space-black);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: var(--orbital-indigo);
 }
 
 /* Global styles */
