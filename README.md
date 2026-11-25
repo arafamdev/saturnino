@@ -14,19 +14,50 @@ Currently in development.
 
 ## Tech Stack
 
-- React
+### Core
+
+- React 19
 - JavaScript
 - Vite
+- React Router
+
+### Styling and UI
+
 - Tailwind CSS v4
+- shadcn/ui
+- Radix UI
+- Lucide React
+- Inter
+
+### Testing
+
+- Vitest
+- React Testing Library
+- jsdom
+
+### Code Quality and Automation
+
 - ESLint
 - Prettier
+- GitHub Actions
+
+## Architecture
+
+Saturnino follows a hybrid feature-based architecture, separating application configuration, business features, shared components, layouts, and utilities.
 
 ## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/arafamdev/saturnino.git
+cd saturnino
+```
 
 Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 Start the development server:
@@ -45,6 +76,12 @@ npm run dev
 | `npm run lint`         | Check code quality           |
 | `npm run format`       | Format project files         |
 | `npm run format:check` | Check code formatting        |
+| `npm test`             | Run all automated tests      |
+| `npm run test:watch`   | Run tests in watch mode      |
+
+## Continuous Integration
+
+GitHub Actions automatically checks code formatting, linting, automated tests, production builds, and production dependency security.
 
 ---
 
