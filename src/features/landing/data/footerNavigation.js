@@ -40,15 +40,27 @@ export const footerNavigation = [
 
 export const socialLinks = [
   {
-    label: 'GitHub',
+    id: 'github',
+    labelKey: 'footer.social.github',
     href: 'https://github.com/arafamdev',
+    external: true,
   },
   {
-    label: 'LinkedIn',
+    id: 'linkedin',
+    labelKey: 'footer.social.linkedin',
     href: 'https://www.linkedin.com/in/arafam-mussa-silla-5a7866446/',
+    external: true,
   },
   {
-    labelKey: 'footer.portfolio',
+    id: 'email',
+    labelKey: 'footer.social.email',
+    href: 'mailto:arafam.dev@gmail.com',
+    external: false,
+  },
+  {
+    id: 'website',
+    labelKey: 'footer.social.website',
     href: 'https://arafam.dev',
+    external: true,
   },
 ]

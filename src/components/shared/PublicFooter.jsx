@@ -4,11 +4,9 @@ import { useTranslation } from 'react-i18next'
 
 import BackToTopButton from '@/components/shared/BackToTopButton'
 import Logo from '@/components/shared/Logo'
+import SocialLinks from '@/components/shared/SocialLinks'
 
-import {
-  footerNavigation,
-  socialLinks,
-} from '@/features/landing/data/footerNavigation'
+import { footerNavigation } from '@/features/landing/data/footerNavigation'
 
 const footerLinkClassName =
   'inline-flex w-fit items-center gap-1 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground'
@@ -96,30 +94,7 @@ function PublicFooter() {
             </p>
           </div>
 
-          <nav aria-label={t('footer.socialLinks')}>
-            <ul className="flex flex-wrap items-center gap-5">
-              {socialLinks.map(({ label, labelKey, href }) => {
-                const linkLabel = labelKey ? t(labelKey) : label
-
-                return (
-                  <li key={href}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={footerLinkClassName}
-                    >
-                      {linkLabel}
-
-                      <ArrowUpRight className="size-3" aria-hidden="true" />
-
-                      <span className="sr-only"> ({newTabLabel})</span>
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
+          <SocialLinks />
         </div>
 
         {/* Project signature and back-to-top action */}

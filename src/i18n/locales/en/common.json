@@ -31,7 +31,12 @@
     "designedBy": "Designed & developed by",
     "copyright": "© {{year}} Saturnino.",
     "socialLinks": "Developer social links",
-    "portfolio": "Portfolio"
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Send an email",
+      "website": "Personal website"
+    }
   },
   "accessibility": {
     "opensInNewTab": "Opens in a new tab"
