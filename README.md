@@ -65,6 +65,14 @@ Tasks use four statuses (Backlog, To do, In progress, Done) and four priorities 
 
 Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; backup/export and offline application-shell caching are separate upcoming roadmap features.
 
+## Kanban Board
+
+Inside a project, switch between **List** and **Board**. The board groups tasks into Backlog, To do, In progress and Done. Drag a card by its handle to another column or onto another card to change its position. A column background appends the task; dropping onto a card uses that card's position. Escape cancels a drag.
+
+Every card also offers a status selector and move-up/down buttons, so moving tasks does not require a dragging gesture. The selector inserts at the start of the chosen status. On mobile, choose the visible column using the column selector. Successful moves restore focus to the corresponding control in the destination column.
+
+Movement re-reads persisted tasks and renumbers both affected columns in one IndexedDB transaction. A failed write preserves the previous order; a task edited during the gesture produces a conflict message. Moving to Done records completion, and reopening clears it. The board loads on demand and does not add drag-and-drop code to the global task list until opened.
+
 ## Getting Started
 
 Clone the repository:
