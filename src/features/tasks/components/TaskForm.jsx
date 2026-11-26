@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -41,14 +41,18 @@ function TaskForm({
   projects,
   onSubmit,
   onCancel,
+  onDirtyChange,
+  stickyActions = false,
+  children,
 }) {
   const { t, i18n } = useTranslation('app')
   const formId = useId()
+  const submitErrorRef = useRef(null)
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm({
     defaultValues: {
       title: task?.title ?? '',
@@ -59,6 +63,14 @@ function TaskForm({
       dueDate: task?.dueDate ?? '',
     },
   })
+  useEffect(() => {
+    onDirtyChange?.(isDirty)
+  }, [isDirty, onDirtyChange])
+
+  useEffect(() => {
+    if (errors.root) submitErrorRef.current?.focus()
+  }, [errors.root])
+
   const collator = new Intl.Collator(i18n.resolvedLanguage, {
     numeric: true,
     sensitivity: 'base',
@@ -93,6 +105,7 @@ function TaskForm({
         TASK_PRIORITY_INVALID: 'priorityInvalid',
         TASK_DUE_DATE_INVALID: 'dueDateInvalid',
         TASK_NOT_FOUND: 'notFound',
+        TASK_UPDATE_CONFLICT: 'updateConflict',
       }
       setError('root', {
         message: t(`tasks.errors.${errorKeys[error?.message] ?? 'saveFailed'}`),
@@ -104,7 +117,7 @@ function TaskForm({
     <form
       noValidate
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="space-y-4"
+      className={stickyActions ? 'flex min-h-full flex-col gap-4' : 'space-y-4'}
     >
       <TaskField
         id={`${formId}-title`}
@@ -209,13 +222,18 @@ function TaskForm({
       </TaskField>
       {errors.root && (
         <p
+          ref={submitErrorRef}
+          tabIndex={-1}
           role="alert"
           className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive"
         >
           {errors.root.message}
         </p>
       )}
-      <div className="flex flex-wrap justify-end gap-2 border-t pt-4">
+      {children}
+      <div
+        className={`flex flex-wrap justify-end gap-2 border-t bg-background pt-4 ${stickyActions ? 'sticky bottom-0 z-10 mt-auto pb-2' : ''}`}
+      >
         <Button
           type="button"
           variant="outline"

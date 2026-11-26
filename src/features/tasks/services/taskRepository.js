@@ -50,6 +50,15 @@ export function normalizeTaskData(data) {
   }
 }
 
+// Keep the revision timestamp distinct even when two writes share a clock tick.
+function nextTaskTimestamp(tasks) {
+  const previous = tasks.reduce(
+    (latest, task) => Math.max(latest, Date.parse(task.updatedAt)),
+    0,
+  )
+  return new Date(Math.max(Date.now(), previous + 1)).toISOString()
+}
+
 export function createTaskRepository(db = database) {
   async function getTasks(projectId) {
     const tasks =
@@ -110,13 +119,18 @@ export function createTaskRepository(db = database) {
     })
   }
 
-  async function updateTask(taskId, data) {
+  async function updateTask(taskId, data, { expectedUpdatedAt } = {}) {
     const normalizedData = normalizeTaskData(data)
     return db.transaction('rw', db.projects, db.tasks, async () => {
       const existingTask = await db.tasks.get(taskId)
       if (!existingTask) throw new Error('TASK_NOT_FOUND')
+      if (
+        expectedUpdatedAt !== undefined &&
+        existingTask.updatedAt !== expectedUpdatedAt
+      )
+        throw new Error('TASK_UPDATE_CONFLICT')
       await assertProjectExists(normalizedData.projectId)
-      const timestamp = new Date().toISOString()
+      const timestamp = nextTaskTimestamp([existingTask])
       const hasMoved =
         existingTask.projectId !== normalizedData.projectId ||
         existingTask.status !== normalizedData.status
@@ -186,7 +200,7 @@ export function createTaskRepository(db = database) {
       const columnOrders = [targetColumn]
       if (task.status !== status)
         columnOrders.push(sourceColumn.filter((item) => item.id !== taskId))
-      const timestamp = new Date().toISOString()
+      const timestamp = nextTaskTimestamp(projectTasks)
       let completedAt = null
       if (status === 'done')
         completedAt =

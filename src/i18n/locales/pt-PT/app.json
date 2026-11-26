@@ -204,7 +204,8 @@
       "saveFailed": "Não foi possível guardar a tarefa. Tenta novamente.",
       "deleteFailed": "Não foi possível eliminar a tarefa. Tenta novamente.",
       "loadTitle": "Não foi possível carregar as tarefas",
-      "loadFailed": "Ocorreu um problema ao aceder às tarefas ou aos projetos locais. Tenta novamente."
+      "loadFailed": "Ocorreu um problema ao aceder às tarefas ou aos projetos locais. Tenta novamente.",
+      "updateConflict": "Esta tarefa foi alterada noutro local. O rascunho foi preservado. Fecha e volta a abrir para consultar a versão mais recente."
     }
   },
   "kanban": {
@@ -377,5 +378,17 @@
   },
   "taskCard": {
     "actions": "Ações de {{title}}"
+  },
+  "taskDetails": {
+    "description": "Consulta os detalhes. As alterações só são guardadas quando escolhes Guardar tarefa.",
+    "createdAt": "Criada",
+    "updatedAt": "Última atualização",
+    "completedAt": "Concluída",
+    "removed": "Esta tarefa foi eliminada noutro local. O rascunho mantém-se aqui; não pode ser guardado na tarefa eliminada.",
+    "changed": "Esta tarefa foi alterada noutro local. O rascunho foi preservado. Fecha e volta a abrir a tarefa para consultar a versão mais recente antes de guardar.",
+    "discardTitle": "Descartar alterações não guardadas?",
+    "discardDescription": "As alterações ainda não foram guardadas. Continua a editar para manter o rascunho ou descarta-o para sair.",
+    "keepEditing": "Continuar a editar",
+    "discard": "Descartar alterações"
   }
 }

@@ -19,6 +19,7 @@ import { useProjectTaskView } from '../hooks/useProjectTaskView'
 
 import DeleteTaskDialog from './DeleteTaskDialog'
 import TaskDialog from './TaskDialog'
+import TaskDetailsPanel from './TaskDetailsPanel'
 import TaskFilters from './TaskFilters'
 import TaskList from './TaskList'
 
@@ -47,8 +48,7 @@ function TaskCollection({ projectId, project }) {
   const movementRestricted =
     hasTaskFilters(filters) || filters.sort !== 'manual'
   const canCreate = !isLoading && !isError && projectQuery.projects.length > 0
-  const isTaskDialogOpen =
-    activeDialog?.type === 'create' || activeDialog?.type === 'edit'
+  const isTaskDialogOpen = activeDialog?.type === 'create'
 
   function openDialog(type, task = null, trigger = null, initialStatus) {
     actionTriggerRef.current = trigger
@@ -223,6 +223,23 @@ function TaskCollection({ projectId, project }) {
         projects={projectQuery.projects}
         onCloseAutoFocus={restoreFocus}
       />
+      {activeDialog?.type === 'edit' && (
+        <TaskDetailsPanel
+          key={activeDialog.task.id}
+          task={activeDialog.task}
+          currentTask={taskQuery.tasks.find(
+            (task) => task.id === activeDialog.task.id,
+          )}
+          isMissing={
+            !isLoading &&
+            !isError &&
+            !taskQuery.tasks.some((task) => task.id === activeDialog.task.id)
+          }
+          projects={projectQuery.projects}
+          onClose={() => setActiveDialog(null)}
+          onCloseAutoFocus={restoreFocus}
+        />
+      )}
       <DeleteTaskDialog
         open={activeDialog?.type === 'delete'}
         onOpenChange={handleOpenChange}
