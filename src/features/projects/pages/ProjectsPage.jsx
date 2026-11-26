@@ -52,8 +52,14 @@ function ProjectsPage() {
     }
   }
 
-  function handleRestoreFocus() {
-    newProjectButtonRef.current?.focus()
+  // Restore keyboard focus after a project dialog closes.
+  function handleRestoreFocus(event) {
+    const newProjectButton = newProjectButtonRef.current
+
+    if (newProjectButton && !newProjectButton.disabled) {
+      event.preventDefault()
+      newProjectButton.focus()
+    }
   }
 
   function renderProjectsContent() {

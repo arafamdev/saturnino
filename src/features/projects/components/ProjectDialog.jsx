@@ -9,7 +9,12 @@ import { Button } from '@/components/ui/button'
 import { projectRepository } from '../services/projectRepository'
 import ProjectForm from './ProjectForm'
 
-function ProjectDialog({ open, onOpenChange, project = null }) {
+function ProjectDialog({
+  open,
+  onOpenChange,
+  project = null,
+  onCloseAutoFocus,
+}) {
   const { t } = useTranslation('app')
   const [isSaving, setIsSaving] = useState(false)
 
@@ -42,7 +47,10 @@ function ProjectDialog({ open, onOpenChange, project = null }) {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60" />
 
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl sm:p-6">
+        <Dialog.Content
+          onCloseAutoFocus={onCloseAutoFocus}
+          className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl sm:p-6"
+        >
           {/* Dialog header */}
           <div className="mb-6 flex items-start gap-3">
             <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">

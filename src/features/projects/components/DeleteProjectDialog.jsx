@@ -8,7 +8,12 @@ import { Button } from '@/components/ui/button'
 
 import { projectRepository } from '../services/projectRepository'
 
-function DeleteProjectDialog({ open, onOpenChange, project }) {
+function DeleteProjectDialog({
+  open,
+  onOpenChange,
+  project,
+  onCloseAutoFocus,
+}) {
   const { t } = useTranslation('app')
   const [isDeleting, setIsDeleting] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -42,7 +47,10 @@ function DeleteProjectDialog({ open, onOpenChange, project }) {
       <AlertDialog.Portal>
         <AlertDialog.Overlay className="fixed inset-0 z-50 bg-black/60" />
 
-        <AlertDialog.Content className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-6 shadow-xl">
+        <AlertDialog.Content
+          onCloseAutoFocus={onCloseAutoFocus}
+          className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-6 shadow-xl"
+        >
           <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-destructive/10 text-destructive">
             <Trash2 className="size-5" aria-hidden="true" />
           </div>
