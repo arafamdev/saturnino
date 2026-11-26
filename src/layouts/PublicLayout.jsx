@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 
+import PublicFooter from '@/components/shared/PublicFooter'
 import LandingHeader from '@/features/landing/components/LandingHeader'
 
 function PublicLayout() {
@@ -10,6 +11,8 @@ function PublicLayout() {
       <main className="flex flex-1 flex-col">
         <Outlet />
       </main>
+
+      <PublicFooter />
     </div>
   )
 }

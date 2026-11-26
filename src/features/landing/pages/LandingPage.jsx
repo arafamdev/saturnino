@@ -4,6 +4,7 @@ import FeaturesSection from '../components/FeaturesSection'
 import PhilosophySection from '../components/PhilosophySection'
 import HowItWorksSection from '../components/HowItWorksSection'
 import OurStorySection from '../components/OurStorySection'
+import FinalCTASection from '../components/FinalCTASection'
 
 function LandingPage() {
   return (
@@ -14,6 +15,7 @@ function LandingPage() {
       <PhilosophySection />
       <HowItWorksSection />
       <OurStorySection />
+      <FinalCTASection />
     </>
   )
 }

@@ -39,10 +39,12 @@ describe('Application routing', () => {
 
     renderRoute('/')
 
-    const mainContent = screen.getByRole('main')
+    const heroSection = screen.getByRole('region', {
+      name: 'Bring your work into orbit.',
+    })
 
     await user.click(
-      within(mainContent).getByRole('link', {
+      within(heroSection).getByRole('link', {
         name: 'Open Saturnino',
       }),
     )

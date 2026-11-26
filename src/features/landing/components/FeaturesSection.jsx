@@ -7,7 +7,7 @@ function FeaturesSection() {
     <section
       id="features"
       aria-labelledby="features-heading"
-      className="mx-auto w-full max-w-7xl space-y-8 px-4 py-12 sm:space-y-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="mx-auto w-full max-w-7xl scroll-mt-24 space-y-8 px-4 py-12 sm:space-y-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
       {/* Section introduction */}
       <div className="mx-auto max-w-2xl space-y-4 text-center">
