@@ -136,5 +136,75 @@
     "compact": "Barra lateral compacta",
     "expand": "Expandir barra lateral",
     "resize": "Redimensionar barra lateral"
+  },
+  "tasks": {
+    "title": "Tarefas",
+    "description": "Transforma os teus planos em próximos passos claros.",
+    "loading": "A carregar tarefas...",
+    "empty": "Ainda não existem tarefas. Cria uma tarefa para começar.",
+    "noProjects": "Cria um projeto antes de adicionares tarefas.",
+    "manageProjects": "Ir para projetos",
+    "listLabel": "Lista de tarefas",
+    "unknownProject": "Projeto indisponível",
+    "due": "Prazo: {{date}}",
+    "actions": {
+      "new": "Nova tarefa",
+      "create": "Criar tarefa",
+      "save": "Guardar tarefa",
+      "edit": "Editar tarefa",
+      "editNamed": "Editar {{title}}",
+      "delete": "Eliminar tarefa",
+      "deleteNamed": "Eliminar {{title}}",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "saving": "A guardar...",
+      "deleting": "A eliminar...",
+      "retry": "Tentar novamente"
+    },
+    "form": {
+      "title": "Título da tarefa",
+      "description": "Descrição",
+      "project": "Projeto",
+      "chooseProject": "Escolhe um projeto",
+      "status": "Estado",
+      "priority": "Prioridade",
+      "dueDate": "Prazo"
+    },
+    "status": {
+      "backlog": "Por planear",
+      "todo": "Por fazer",
+      "in-progress": "Em curso",
+      "done": "Concluída"
+    },
+    "priority": {
+      "low": "Baixa",
+      "medium": "Média",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "dialog": {
+      "createTitle": "Criar tarefa",
+      "editTitle": "Editar tarefa",
+      "description": "Define o projeto, o estado, a prioridade e um prazo opcional."
+    },
+    "delete": {
+      "title": "Eliminar tarefa?",
+      "description": "Eliminar \"{{title}}\"? Esta ação não pode ser desfeita."
+    },
+    "errors": {
+      "titleRequired": "Introduz um título para a tarefa.",
+      "titleTooLong": "O título não pode exceder 120 caracteres.",
+      "descriptionInvalid": "A descrição deve ser texto com até 2000 caracteres.",
+      "projectRequired": "Escolhe um projeto.",
+      "projectNotFound": "Este projeto já não existe. Escolhe outro projeto.",
+      "statusInvalid": "Escolhe um estado válido.",
+      "priorityInvalid": "Escolhe uma prioridade válida.",
+      "dueDateInvalid": "Introduz uma data válida.",
+      "notFound": "Esta tarefa já não existe.",
+      "saveFailed": "Não foi possível guardar a tarefa. Tenta novamente.",
+      "deleteFailed": "Não foi possível eliminar a tarefa. Tenta novamente.",
+      "loadTitle": "Não foi possível carregar as tarefas",
+      "loadFailed": "Ocorreu um problema ao aceder às tarefas ou aos projetos locais. Tenta novamente."
+    }
   }
 }

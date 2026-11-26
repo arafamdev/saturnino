@@ -136,5 +136,75 @@
     "compact": "Compact sidebar",
     "expand": "Expand sidebar",
     "resize": "Resize sidebar"
+  },
+  "tasks": {
+    "title": "Tasks",
+    "description": "Turn your plans into clear next steps.",
+    "loading": "Loading tasks...",
+    "empty": "No tasks yet. Create a task to get started.",
+    "noProjects": "Create a project before adding tasks.",
+    "manageProjects": "Go to projects",
+    "listLabel": "Task list",
+    "unknownProject": "Project unavailable",
+    "due": "Due {{date}}",
+    "actions": {
+      "new": "New task",
+      "create": "Create task",
+      "save": "Save task",
+      "edit": "Edit task",
+      "editNamed": "Edit {{title}}",
+      "delete": "Delete task",
+      "deleteNamed": "Delete {{title}}",
+      "cancel": "Cancel",
+      "close": "Close",
+      "saving": "Saving...",
+      "deleting": "Deleting...",
+      "retry": "Try again"
+    },
+    "form": {
+      "title": "Task title",
+      "description": "Description",
+      "project": "Project",
+      "chooseProject": "Choose a project",
+      "status": "Status",
+      "priority": "Priority",
+      "dueDate": "Due date"
+    },
+    "status": {
+      "backlog": "Backlog",
+      "todo": "To do",
+      "in-progress": "In progress",
+      "done": "Done"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "dialog": {
+      "createTitle": "Create task",
+      "editTitle": "Edit task",
+      "description": "Set the project, status, priority and optional due date."
+    },
+    "delete": {
+      "title": "Delete task?",
+      "description": "Delete \"{{title}}\"? This action cannot be undone."
+    },
+    "errors": {
+      "titleRequired": "Enter a task title.",
+      "titleTooLong": "The title cannot exceed 120 characters.",
+      "descriptionInvalid": "The description must be text of at most 2000 characters.",
+      "projectRequired": "Choose a project.",
+      "projectNotFound": "This project no longer exists. Choose another project.",
+      "statusInvalid": "Choose a valid status.",
+      "priorityInvalid": "Choose a valid priority.",
+      "dueDateInvalid": "Enter a valid date.",
+      "notFound": "This task no longer exists.",
+      "saveFailed": "Unable to save the task. Please try again.",
+      "deleteFailed": "Unable to delete the task. Please try again.",
+      "loadTitle": "Unable to load tasks",
+      "loadFailed": "There was a problem accessing your local tasks or projects. Please try again."
+    }
   }
 }
