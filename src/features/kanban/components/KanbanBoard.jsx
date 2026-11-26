@@ -37,6 +37,7 @@ function KanbanBoard({
   onEdit,
   onDelete,
   movementRestricted = false,
+  today,
 }) {
   const { t } = useTranslation('app')
   const [column, setColumn] = useState('todo')
@@ -222,6 +223,7 @@ function KanbanBoard({
             <KanbanColumn
               key={status}
               status={status}
+              today={today}
               tasks={tasks.filter((task) => task.status === status)}
               visible={column === status}
               projectsById={projectsById}

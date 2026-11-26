@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import TaskCard from './TaskCard'
 
-function TaskList({ tasks, projects, onEdit, onDelete }) {
+function TaskList({ tasks, projects, onEdit, onDelete, today }) {
   const { t } = useTranslation('app')
   const projectsById = new Map(projects.map((project) => [project.id, project]))
   return (
@@ -10,6 +10,7 @@ function TaskList({ tasks, projects, onEdit, onDelete }) {
         <li key={task.id}>
           <TaskCard
             task={task}
+            today={today}
             project={projectsById.get(task.projectId)}
             onEdit={onEdit}
             onDelete={onDelete}

@@ -16,6 +16,7 @@ function TaskCard({
   dragHandle,
   children,
   headingLevel = 3,
+  today = getTodayDateOnly(),
 }) {
   const { t, i18n } = useTranslation('app')
   const Heading = headingLevel === 4 ? 'h4' : 'h3'
@@ -84,7 +85,7 @@ function TaskCard({
           </time>
         )}
       </div>
-      {isTaskOverdue(task, getTodayDateOnly()) && (
+      {isTaskOverdue(task, today) && (
         <p className="mt-2 text-xs font-medium text-destructive">
           {t('filters.overdue')}
         </p>
