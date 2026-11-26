@@ -17,9 +17,78 @@
   "breadcrumbs": {
     "label": "Caminho de navegação"
   },
+  "projects": {
+    "title": "Projetos",
+    "description": "Organiza o teu trabalho, um projeto de cada vez.",
+    "loading": "A carregar projetos...",
+    "noDescription": "Sem descrição",
+    "actions": {
+      "new": "Novo projeto",
+      "create": "Criar projeto",
+      "edit": "Editar projeto",
+      "save": "Guardar alterações",
+      "saving": "A guardar...",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "delete": "Eliminar projeto",
+      "deleting": "A eliminar...",
+      "view": "Ver projeto",
+      "viewNamed": "Ver projeto {{name}}",
+      "menu": "Ações para {{name}}"
+    },
+    "dialog": {
+      "createTitle": "Criar projeto",
+      "createDescription": "Dá à tua próxima ideia um espaço para crescer.",
+      "editTitle": "Editar projeto",
+      "editDescription": "Atualiza as informações do teu projeto."
+    },
+    "form": {
+      "name": "Nome do projeto",
+      "namePlaceholder": "Ex.: Portefólio pessoal",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Qual é o objetivo deste projeto?",
+      "color": "Cor do projeto"
+    },
+    "colors": {
+      "indigo": "Índigo",
+      "blue": "Azul",
+      "cyan": "Ciano",
+      "green": "Verde",
+      "yellow": "Amarelo",
+      "orange": "Laranja",
+      "red": "Vermelho",
+      "pink": "Rosa",
+      "purple": "Roxo",
+      "gray": "Cinzento"
+    },
+    "empty": {
+      "title": "Todas as grandes ideias começam algures.",
+      "description": "Cria o teu primeiro projeto e dá ao teu trabalho um espaço para crescer."
+    },
+    "deleteDialog": {
+      "title": "Eliminar projeto?",
+      "description": "Tens a certeza de que pretendes eliminar \"{{name}}\"? Todas as tarefas associadas a este projeto também serão eliminadas.",
+      "warning": "Esta ação não pode ser desfeita."
+    },
+    "errors": {
+      "nameRequired": "Introduz um nome para o projeto.",
+      "nameTooLong": "O nome do projeto não pode exceder 80 caracteres.",
+      "descriptionInvalid": "Introduz uma descrição válida.",
+      "descriptionTooLong": "A descrição não pode exceder 500 caracteres.",
+      "colorInvalid": "Seleciona uma cor válida para o projeto.",
+      "notFound": "Este projeto já não existe.",
+      "saveFailed": "Não foi possível guardar o projeto. Tenta novamente.",
+      "deleteFailed": "Não foi possível eliminar o projeto. Tenta novamente."
+    }
+  },
   "projectDetails": {
     "title": "Detalhes do projeto",
-    "identifier": "ID do projeto: {{projectId}}"
+    "identifier": "ID do projeto: {{projectId}}",
+    "backToProjects": "Voltar aos projetos",
+    "notFoundTitle": "Projeto não encontrado",
+    "notFoundDescription": "Este projeto poderá ter sido eliminado ou não existir.",
+    "tasksTitle": "As tuas tarefas terão aqui o seu espaço",
+    "tasksDescription": "A gestão de tarefas e o quadro Kanban serão adicionados em breve."
   },
   "notFound": {
     "title": "Página não encontrada",
