@@ -15,7 +15,7 @@ function ProjectCard({ project, onEdit, onDelete }) {
   const { t } = useTranslation('app')
 
   return (
-    <article className="flex min-w-0 flex-col rounded-xl border bg-card p-5 text-card-foreground transition-colors hover:border-primary/40">
+    <article className="group relative flex min-w-0 flex-col rounded-xl border bg-card p-5 text-card-foreground transition-colors hover:border-primary/40 hover:bg-accent/30 focus-within:border-primary/40">
       {/* Project header */}
       <div className="mb-5 flex items-center justify-between gap-3">
         <div
@@ -35,7 +35,7 @@ function ProjectCard({ project, onEdit, onDelete }) {
               type="button"
               variant="ghost"
               size="icon"
-              className="size-10"
+              className="relative z-10 size-10"
               aria-label={t('projects.actions.menu', {
                 name: project.name,
               })}
@@ -90,11 +90,14 @@ function ProjectCard({ project, onEdit, onDelete }) {
           aria-label={t('projects.actions.viewNamed', {
             name: project.name,
           })}
-          className="flex items-center justify-between gap-2 rounded-md py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="flex items-center justify-between gap-2 rounded-md py-2 text-sm font-medium text-muted-foreground transition-colors after:absolute after:inset-0 after:rounded-xl after:content-[''] after:cursor-pointer group-hover:text-primary focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-ring"
         >
           {t('projects.actions.view')}
 
-          <ArrowRight className="size-4" aria-hidden="true" />
+          <ArrowRight
+            className="size-4 transition-transform motion-safe:group-hover:translate-x-1"
+            aria-hidden="true"
+          />
         </Link>
       </div>
     </article>

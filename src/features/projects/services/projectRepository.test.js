@@ -1,6 +1,6 @@
 import 'fake-indexeddb/auto'
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { createDatabase } from '@/lib/db/database'
 
@@ -282,6 +282,42 @@ describe('Project repository', () => {
     )
 
     expect(await testDatabase.tasks.get('task-3')).toBeDefined()
+  })
+
+  it('rolls back task deletion when project deletion fails', async () => {
+    const project = await repository.createProject({
+      name: 'Saturnino',
+    })
+
+    const task = {
+      id: 'rollback-task',
+      projectId: project.id,
+      title: 'Preserve this task',
+      status: 'todo',
+      position: 0,
+    }
+
+    await testDatabase.tasks.add(task)
+
+    // Simulate a failure after the related tasks have been deleted.
+    const deleteProjectSpy = vi
+      .spyOn(testDatabase.projects, 'delete')
+      .mockRejectedValueOnce(new Error('PROJECT_DELETE_FAILED'))
+
+    try {
+      await expect(repository.deleteProject(project.id)).rejects.toThrow(
+        'PROJECT_DELETE_FAILED',
+      )
+
+      expect(deleteProjectSpy).toHaveBeenCalledWith(project.id)
+
+      // Verify that the transaction preserves both records.
+      expect(await repository.getProjectById(project.id)).toEqual(project)
+
+      expect(await testDatabase.tasks.get(task.id)).toEqual(task)
+    } finally {
+      deleteProjectSpy.mockRestore()
+    }
   })
 
   it('rejects deletion of a missing project', async () => {

@@ -9,15 +9,21 @@ import DeleteProjectDialog from '../components/DeleteProjectDialog'
 import ProjectDialog from '../components/ProjectDialog'
 import ProjectList from '../components/ProjectList'
 import ProjectsEmptyState from '../components/ProjectsEmptyState'
+import ProjectsErrorState from '../components/ProjectsErrorState'
 import { useProjects } from '../hooks/useProjects'
 
 function ProjectsPage() {
   const { t } = useTranslation('app')
-  const { projects, isLoading } = useProjects()
+  const { projects, isLoading, isError, retry } = useProjects()
 
   const newProjectButtonRef = useRef(null)
 
   const [activeDialog, setActiveDialog] = useState(null)
+
+  const isProjectDialogOpen =
+    activeDialog?.type === 'create' || activeDialog?.type === 'edit'
+
+  const isDeleteDialogOpen = activeDialog?.type === 'delete'
 
   function handleCreateProject() {
     setActiveDialog({
@@ -50,10 +56,40 @@ function ProjectsPage() {
     newProjectButtonRef.current?.focus()
   }
 
-  const isProjectDialogOpen =
-    activeDialog?.type === 'create' || activeDialog?.type === 'edit'
+  function renderProjectsContent() {
+    if (isLoading) {
+      return (
+        <div
+          role="status"
+          className="flex min-h-64 items-center justify-center gap-2 text-sm text-muted-foreground"
+        >
+          <LoaderCircle
+            className="size-5 motion-safe:animate-spin"
+            aria-hidden="true"
+          />
 
-  const isDeleteDialogOpen = activeDialog?.type === 'delete'
+          {t('projects.loading')}
+        </div>
+      )
+    }
+
+    if (isError) {
+      return <ProjectsErrorState onRetry={retry} />
+    }
+
+    if (projects.length === 0) {
+      return <ProjectsEmptyState onCreate={handleCreateProject} />
+    }
+
+    return (
+      <ProjectList
+        projects={projects}
+        onCreate={handleCreateProject}
+        onEdit={handleEditProject}
+        onDelete={handleDeleteProject}
+      />
+    )
+  }
 
   return (
     <section className="space-y-6">
@@ -73,6 +109,7 @@ function ProjectsPage() {
           ref={newProjectButtonRef}
           type="button"
           onClick={handleCreateProject}
+          disabled={isLoading || isError}
           className="min-h-11 px-4"
         >
           <Plus aria-hidden="true" />
@@ -81,45 +118,22 @@ function ProjectsPage() {
       </div>
 
       {/* Projects content */}
-      {isLoading ? (
-        <div
-          role="status"
-          className="flex min-h-64 items-center justify-center gap-2 text-sm text-muted-foreground"
-        >
-          <LoaderCircle
-            className="size-5 motion-safe:animate-spin"
-            aria-hidden="true"
-          />
-
-          {t('projects.loading')}
-        </div>
-      ) : projects.length === 0 ? (
-        <ProjectsEmptyState onCreate={handleCreateProject} />
-      ) : (
-        <ProjectList
-          projects={projects}
-          onCreate={handleCreateProject}
-          onEdit={handleEditProject}
-          onDelete={handleDeleteProject}
-        />
-      )}
+      {renderProjectsContent()}
 
       {/* Project dialogs */}
-      <div onFocusCapture={undefined}>
-        <ProjectDialog
-          open={isProjectDialogOpen}
-          onOpenChange={handleDialogOpenChange}
-          project={activeDialog?.project}
-          onCloseAutoFocus={handleRestoreFocus}
-        />
+      <ProjectDialog
+        open={isProjectDialogOpen}
+        onOpenChange={handleDialogOpenChange}
+        project={activeDialog?.project}
+        onCloseAutoFocus={handleRestoreFocus}
+      />
 
-        <DeleteProjectDialog
-          open={isDeleteDialogOpen}
-          onOpenChange={handleDialogOpenChange}
-          project={activeDialog?.project}
-          onCloseAutoFocus={handleRestoreFocus}
-        />
-      </div>
+      <DeleteProjectDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={handleDialogOpenChange}
+        project={activeDialog?.project}
+        onCloseAutoFocus={handleRestoreFocus}
+      />
     </section>
   )
 }

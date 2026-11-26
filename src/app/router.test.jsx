@@ -1,9 +1,13 @@
+import 'fake-indexeddb/auto'
+
 import { beforeEach, describe, expect, it } from 'vitest'
 import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
 import ThemeProvider from '@/app/providers/theme/ThemeProvider'
+import { projectRepository } from '@/features/projects/services/projectRepository'
+import { database } from '@/lib/db/database'
 
 import i18n from '@/i18n'
 
@@ -22,8 +26,18 @@ function renderRoute(initialPath = '/') {
 }
 
 describe('Application routing', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     localStorage.clear()
+
+    await database.transaction(
+      'rw',
+      database.projects,
+      database.tasks,
+      async () => {
+        await database.tasks.clear()
+        await database.projects.clear()
+      },
+    )
   })
 
   it('renders the landing page at the root route', async () => {
@@ -103,10 +117,39 @@ describe('Application routing', () => {
     expect(overviewLink).not.toHaveAttribute('aria-current')
   })
 
-  it('renders the project identifier from the URL', async () => {
-    renderRoute('/app/projects/demo-123')
+  it('renders the project associated with the URL identifier', async () => {
+    const project = await projectRepository.createProject({
+      name: 'Saturnino',
+      description: 'Personal productivity application',
+    })
 
-    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
+    renderRoute(`/app/projects/${project.id}`)
+
+    expect(
+      await screen.findByRole('heading', {
+        name: project.name,
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+
+    expect(screen.getByText(project.description)).toBeInTheDocument()
+  })
+
+  it('renders a not found state for a missing project', async () => {
+    renderRoute('/app/projects/missing-project')
+
+    expect(
+      await screen.findByRole('heading', {
+        name: 'Project not found',
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+
+    expect(
+      screen.getByRole('link', {
+        name: 'Back to projects',
+      }),
+    ).toHaveAttribute('href', '/app/projects')
   })
 
   it('renders the about page', async () => {
@@ -197,10 +240,20 @@ describe('Application routing', () => {
     ).not.toHaveAttribute('aria-current')
   })
 
-  it('preserves the project identifier when changing language', async () => {
-    renderRoute('/app/projects/demo-123')
+  it('preserves project data when changing language', async () => {
+    const project = await projectRepository.createProject({
+      name: 'Saturnino',
+      description: 'Personal productivity application',
+    })
 
-    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
+    renderRoute(`/app/projects/${project.id}`)
+
+    expect(
+      await screen.findByRole('heading', {
+        name: project.name,
+        level: 1,
+      }),
+    ).toBeInTheDocument()
 
     await act(async () => {
       await i18n.changeLanguage('pt-PT')
@@ -208,11 +261,18 @@ describe('Application routing', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'Detalhes do projeto',
+        name: project.name,
+        level: 1,
       }),
     ).toBeInTheDocument()
 
-    expect(screen.getByText('ID do projeto: demo-123')).toBeInTheDocument()
+    expect(screen.getByText(project.description)).toBeInTheDocument()
+
+    expect(
+      screen.getByRole('link', {
+        name: 'Voltar aos projetos',
+      }),
+    ).toBeInTheDocument()
   })
 
   it('renders the not found page and home link in Portuguese', async () => {

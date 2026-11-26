@@ -34,7 +34,8 @@
       "deleting": "A eliminar...",
       "view": "Ver projeto",
       "viewNamed": "Ver projeto {{name}}",
-      "menu": "Ações para {{name}}"
+      "menu": "Ações para {{name}}",
+      "retry": "Tentar novamente"
     },
     "dialog": {
       "createTitle": "Criar projeto",
@@ -78,7 +79,9 @@
       "colorInvalid": "Seleciona uma cor válida para o projeto.",
       "notFound": "Este projeto já não existe.",
       "saveFailed": "Não foi possível guardar o projeto. Tenta novamente.",
-      "deleteFailed": "Não foi possível eliminar o projeto. Tenta novamente."
+      "deleteFailed": "Não foi possível eliminar o projeto. Tenta novamente.",
+      "loadTitle": "Não foi possível carregar os projetos",
+      "loadFailed": "Ocorreu um problema ao aceder aos teus dados locais. Tenta novamente."
     }
   },
   "projectDetails": {

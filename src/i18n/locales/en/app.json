@@ -34,7 +34,8 @@
       "deleting": "Deleting...",
       "view": "View project",
       "viewNamed": "View project {{name}}",
-      "menu": "Actions for {{name}}"
+      "menu": "Actions for {{name}}",
+      "retry": "Try again"
     },
     "dialog": {
       "createTitle": "Create project",
@@ -78,7 +79,9 @@
       "colorInvalid": "Select a valid project color.",
       "notFound": "This project no longer exists.",
       "saveFailed": "Unable to save the project. Please try again.",
-      "deleteFailed": "Unable to delete the project. Please try again."
+      "deleteFailed": "Unable to delete the project. Please try again.",
+      "loadTitle": "Unable to load projects",
+      "loadFailed": "There was a problem accessing your local data. Please try again."
     }
   },
   "projectDetails": {

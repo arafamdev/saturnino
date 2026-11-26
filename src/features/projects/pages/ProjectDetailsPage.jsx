@@ -4,13 +4,15 @@ import { Link, useParams } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 
+import ProjectsErrorState from '../components/ProjectsErrorState'
 import { useProject } from '../hooks/useProject'
 
 function ProjectDetailsPage() {
   const { projectId } = useParams()
   const { t } = useTranslation('app')
 
-  const { project, isLoading, isNotFound } = useProject(projectId)
+  const { project, isLoading, isNotFound, isError, retry } =
+    useProject(projectId)
 
   if (isLoading) {
     return (
@@ -25,6 +27,21 @@ function ProjectDetailsPage() {
 
         {t('projects.loading')}
       </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <section className="space-y-6">
+        <Button asChild variant="outline">
+          <Link to="/app/projects">
+            <ArrowLeft aria-hidden="true" />
+            {t('projectDetails.backToProjects')}
+          </Link>
+        </Button>
+
+        <ProjectsErrorState onRetry={retry} />
+      </section>
     )
   }
 
