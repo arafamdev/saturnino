@@ -1,16 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 
 import LandingPage from './LandingPage'
 
+function renderLandingPage() {
+  return render(
+    <MemoryRouter>
+      <LandingPage />
+    </MemoryRouter>,
+  )
+}
+
 describe('LandingPage', () => {
   it('renders the main heading', () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>,
-    )
+    renderLandingPage()
 
     const heading = screen.getByRole('heading', {
       name: 'Bring your work into orbit.',
@@ -21,25 +25,39 @@ describe('LandingPage', () => {
   })
 
   it('renders the application slogan', () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>,
-    )
+    renderLandingPage()
 
-    const slogan = screen.getByText('Everything in its orbit.')
+    const heroSection = screen.getByRole('region', {
+      name: 'Bring your work into orbit.',
+    })
+
+    const slogan = within(heroSection).getByText('Everything in its orbit.')
 
     expect(slogan).toBeInTheDocument()
   })
 
-  it('provides a link to the application', () => {
-    render(
-      <MemoryRouter>
-        <LandingPage />
-      </MemoryRouter>,
-    )
+  it('provides a link to the application in the hero section', () => {
+    renderLandingPage()
 
-    const applicationLink = screen.getByRole('link', {
+    const heroSection = screen.getByRole('region', {
+      name: 'Bring your work into orbit.',
+    })
+
+    const applicationLink = within(heroSection).getByRole('link', {
+      name: 'Open Saturnino',
+    })
+
+    expect(applicationLink).toHaveAttribute('href', '/app')
+  })
+
+  it('provides a link to the application in the final CTA', () => {
+    renderLandingPage()
+
+    const finalCTASection = screen.getByRole('region', {
+      name: 'Ready to bring your work into orbit?',
+    })
+
+    const applicationLink = within(finalCTASection).getByRole('link', {
       name: 'Open Saturnino',
     })
 

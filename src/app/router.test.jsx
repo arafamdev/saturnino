@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
@@ -39,8 +39,12 @@ describe('Application routing', () => {
 
     renderRoute('/')
 
+    const heroSection = screen.getByRole('region', {
+      name: 'Bring your work into orbit.',
+    })
+
     await user.click(
-      screen.getByRole('link', {
+      within(heroSection).getByRole('link', {
         name: 'Open Saturnino',
       }),
     )
@@ -108,7 +112,8 @@ describe('Application routing', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'About Saturnino',
+        level: 1,
+        name: /every name has a story\.\s*this one has a legacy\./i,
       }),
     ).toBeInTheDocument()
   })
