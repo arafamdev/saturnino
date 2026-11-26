@@ -26,11 +26,11 @@ describe('Application routing', () => {
     localStorage.clear()
   })
 
-  it('renders the landing page at the root route', () => {
+  it('renders the landing page at the root route', async () => {
     renderRoute('/')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Bring your work into orbit.',
       }),
     ).toBeInTheDocument()
@@ -41,7 +41,7 @@ describe('Application routing', () => {
 
     renderRoute('/')
 
-    const heroSection = screen.getByRole('region', {
+    const heroSection = await screen.findByRole('region', {
       name: 'Bring your work into orbit.',
     })
 
@@ -58,40 +58,40 @@ describe('Application routing', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the tasks page', () => {
+  it('renders the tasks page', async () => {
     renderRoute('/app/tasks')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'My Tasks',
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the projects page', () => {
+  it('renders the projects page', async () => {
     renderRoute('/app/projects')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Projects',
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the settings page', () => {
+  it('renders the settings page', async () => {
     renderRoute('/app/settings')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Settings',
       }),
     ).toBeInTheDocument()
   })
 
-  it('highlights the active navigation link', () => {
+  it('highlights the active navigation link', async () => {
     renderRoute('/app/projects')
 
-    const projectsLink = screen.getByRole('link', {
+    const projectsLink = await screen.findByRole('link', {
       name: 'Projects',
     })
 
@@ -103,28 +103,28 @@ describe('Application routing', () => {
     expect(overviewLink).not.toHaveAttribute('aria-current')
   })
 
-  it('renders the project identifier from the URL', () => {
+  it('renders the project identifier from the URL', async () => {
     renderRoute('/app/projects/demo-123')
 
-    expect(screen.getByText('Project ID: demo-123')).toBeInTheDocument()
+    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
   })
 
-  it('renders the about page', () => {
+  it('renders the about page', async () => {
     renderRoute('/about')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         level: 1,
         name: /every name has a story\.\s*this one has a legacy\./i,
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the not found page for unknown routes', () => {
+  it('renders the not found page for unknown routes', async () => {
     renderRoute('/unknown')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: '404',
       }),
     ).toBeInTheDocument()
@@ -138,7 +138,7 @@ describe('Application routing', () => {
     renderRoute('/unknown')
 
     await user.click(
-      screen.getByRole('link', {
+      await screen.findByRole('link', {
         name: 'Back to home',
       }),
     )
@@ -161,7 +161,7 @@ describe('Application routing', () => {
     renderRoute(path)
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: heading,
         level: 1,
       }),
@@ -170,6 +170,10 @@ describe('Application routing', () => {
 
   it('preserves the active navigation link when changing language', async () => {
     renderRoute('/app/projects')
+
+    await screen.findByRole('heading', {
+      name: 'Projects',
+    })
 
     await act(async () => {
       await i18n.changeLanguage('pt-PT')
@@ -196,7 +200,7 @@ describe('Application routing', () => {
   it('preserves the project identifier when changing language', async () => {
     renderRoute('/app/projects/demo-123')
 
-    expect(screen.getByText('Project ID: demo-123')).toBeInTheDocument()
+    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
 
     await act(async () => {
       await i18n.changeLanguage('pt-PT')
@@ -218,7 +222,7 @@ describe('Application routing', () => {
 
     renderRoute('/unknown')
 
-    expect(screen.getByText('Página não encontrada')).toBeInTheDocument()
+    expect(await screen.findByText('Página não encontrada')).toBeInTheDocument()
 
     expect(
       screen.getByText('Esta página está fora da nossa órbita.'),
@@ -243,7 +247,7 @@ describe('Application routing', () => {
 
     renderRoute('/app')
 
-    const languageSwitcher = screen.getByRole('group', {
+    const languageSwitcher = await screen.findByRole('group', {
       name: 'Change language',
     })
 

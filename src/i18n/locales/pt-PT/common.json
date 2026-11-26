@@ -19,6 +19,9 @@
   "actions": {
     "backToTop": "Voltar ao topo"
   },
+  "status": {
+    "loading": "A carregar o Saturnino..."
+  },
   "brand": {
     "home": "Página inicial do Saturnino",
     "tagline": "Tudo na sua órbita.",
