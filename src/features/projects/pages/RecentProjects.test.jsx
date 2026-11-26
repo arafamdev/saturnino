@@ -335,4 +335,28 @@ describe('Recent projects integration', () => {
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
+  it.each([false, true])(
+    'prunes deleted projects when Recent Projects is hidden (compact: %s)',
+    async (compact) => {
+      const project = await projectRepository.createProject({
+        name: 'Hidden history project',
+      })
+      localStorage.setItem(
+        'saturnino:sidebar-preferences',
+        JSON.stringify({
+          hiddenSections: ['recentProjects'],
+          compact,
+          recentProjectIds: [project.id],
+        }),
+      )
+      renderProjectRoute()
+      await waitFor(() =>
+        expect(getStoredRecentProjectIds()).toEqual([project.id]),
+      )
+      await act(async () => {
+        await projectRepository.deleteProject(project.id)
+      })
+      await waitFor(() => expect(getStoredRecentProjectIds()).toEqual([]))
+    },
+  )
 })

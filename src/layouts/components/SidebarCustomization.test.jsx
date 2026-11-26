@@ -90,7 +90,7 @@ describe('Sidebar customization', () => {
     fireEvent.pointerUp(handle, { pointerId: 1, clientX: 100, clientY: 125 })
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
     fireEvent.pointerDown(handle, { button: 0, pointerId: 2 })
-    fireEvent.pointerCancel(handle)
+    fireEvent.pointerCancel(handle, { pointerId: 2 })
     fireEvent.pointerUp(handle, { pointerId: 2, clientX: 100, clientY: 125 })
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
   })
@@ -122,5 +122,31 @@ describe('Sidebar customization', () => {
       screen.getByRole('button', { name: 'Reset sidebar preferences' }),
     )
     expect(loadSidebarPreferences()).toEqual(initialSidebarState)
+  })
+  it('ignores secondary pointers and cancellation from another pointer', async () => {
+    await renderCustomization()
+    const handle = screen.getByRole('button', { name: 'Reorder Favorites' })
+    const otherHandle = screen.getByRole('button', {
+      name: 'Reorder Workspace',
+    })
+    handle.setPointerCapture = () => {}
+    otherHandle.setPointerCapture = () => {}
+    screen.getAllByRole('listitem')[3].getBoundingClientRect = () => ({
+      left: 0,
+      right: 200,
+      top: 100,
+      bottom: 150,
+    })
+    fireEvent.pointerDown(handle, { button: 0, pointerId: 1 })
+    fireEvent.pointerDown(otherHandle, { button: 0, pointerId: 2 })
+    fireEvent.pointerUp(otherHandle, {
+      pointerId: 2,
+      clientX: 100,
+      clientY: 125,
+    })
+    fireEvent.pointerCancel(handle, { pointerId: 2 })
+    expect(loadSidebarPreferences().sectionOrder[1]).toBe('favorites')
+    fireEvent.pointerUp(handle, { pointerId: 1, clientX: 100, clientY: 125 })
+    expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
   })
 })

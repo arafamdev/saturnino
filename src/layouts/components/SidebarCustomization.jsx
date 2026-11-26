@@ -40,9 +40,13 @@ function SidebarCustomization() {
   }
 
   function finishDrag(event) {
-    const sectionId = draggedSection.current
+    if (
+      !draggedSection.current ||
+      draggedSection.current.pointerId !== event.pointerId
+    )
+      return
+    const { sectionId } = draggedSection.current
     draggedSection.current = null
-    if (!sectionId) return
     const rows = Array.from(listRef.current.children)
     const target = rows.find((row) => {
       const bounds = row.getBoundingClientRect()
@@ -54,6 +58,12 @@ function SidebarCustomization() {
       )
     })
     reorder(sectionId, target?.dataset.sectionId)
+  }
+
+  function cancelDrag(event) {
+    if (draggedSection.current?.pointerId === event.pointerId) {
+      draggedSection.current = null
+    }
   }
 
   return (
@@ -91,17 +101,16 @@ function SidebarCustomization() {
                   })}
                   className="flex min-h-11 w-7 shrink-0 touch-none items-center justify-center rounded focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                   onPointerDown={(event) => {
-                    if (event.button !== 0) return
-                    draggedSection.current = id
+                    if (event.button !== 0 || draggedSection.current) return
+                    draggedSection.current = {
+                      sectionId: id,
+                      pointerId: event.pointerId,
+                    }
                     event.currentTarget.setPointerCapture(event.pointerId)
                   }}
                   onPointerUp={finishDrag}
-                  onPointerCancel={() => {
-                    draggedSection.current = null
-                  }}
-                  onLostPointerCapture={() => {
-                    draggedSection.current = null
-                  }}
+                  onPointerCancel={cancelDrag}
+                  onLostPointerCapture={cancelDrag}
                   onKeyDown={(event) => {
                     const offset =
                       event.key === 'ArrowUp'

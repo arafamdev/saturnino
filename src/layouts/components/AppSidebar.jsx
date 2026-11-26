@@ -101,7 +101,7 @@ function AppSidebar() {
           className="absolute inset-y-0 -right-1 z-10 w-2 touch-none cursor-col-resize hover:bg-primary/30 focus-visible:bg-primary/40 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           onKeyDown={resizeWithKeyboard}
           onPointerDown={(event) => {
-            if (event.button !== 0) return
+            if (event.button !== 0 || drag.current) return
             event.preventDefault()
             event.currentTarget.focus()
             event.currentTarget.setPointerCapture(event.pointerId)

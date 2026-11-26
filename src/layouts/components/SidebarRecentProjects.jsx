@@ -1,12 +1,7 @@
-import { useEffect } from 'react'
-
 import { useTranslation } from 'react-i18next'
 
-import { projectRepository } from '@/features/projects/services/projectRepository'
-
-import { useSidebarProjects } from '../hooks/useSidebarProjects'
-
 import { useSidebar } from '../hooks/useSidebar'
+import { useSidebarProjects } from '../hooks/useSidebarProjects'
 import { sidebarSectionIds } from '../state/sidebarReducer'
 
 import SidebarProjectList from './SidebarProjectList'
@@ -15,7 +10,7 @@ import SidebarSection from './SidebarSection'
 function SidebarRecentProjects({ onNavigate }) {
   const { t } = useTranslation('app')
 
-  const { recentProjectIds, pruneRecentProjects } = useSidebar()
+  const { recentProjectIds } = useSidebar()
 
   const { projects, isLoading, isError, retry } = useSidebarProjects()
 
@@ -24,40 +19,6 @@ function SidebarRecentProjects({ onNavigate }) {
   const recentProjects = recentProjectIds
     .map((projectId) => projectsById.get(projectId))
     .filter(Boolean)
-
-  useEffect(() => {
-    if (isLoading || isError) {
-      return
-    }
-
-    let cancelled = false
-    const missingIds = recentProjectIds.filter(
-      (id) => !projects.some((project) => project.id === id),
-    )
-    if (missingIds.length === 0) return
-    Promise.all(
-      missingIds.map(async (id) => [
-        id,
-        await projectRepository.getProjectById(id),
-      ]),
-    )
-      .then((results) => {
-        if (cancelled) return
-        const deletedIds = new Set(
-          results.filter(([, project]) => !project).map(([id]) => id),
-        )
-        pruneRecentProjects(
-          recentProjectIds.filter((id) => !deletedIds.has(id)),
-          recentProjectIds,
-        )
-      })
-      .catch(() => {
-        /* Preserve history when verification fails. */
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [projects, isLoading, isError, recentProjectIds, pruneRecentProjects])
 
   return (
     <SidebarSection

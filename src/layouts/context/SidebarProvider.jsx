@@ -2,6 +2,8 @@ import { useCallback, useEffect, useReducer } from 'react'
 
 import { useProjects } from '@/features/projects/hooks/useProjects'
 
+import { usePruneRecentProjects } from '../hooks/usePruneRecentProjects'
+
 import {
   initialSidebarState,
   sidebarActionTypes,
@@ -51,6 +53,12 @@ function SidebarProvider({ children }) {
       })
     },
     [],
+  )
+
+  usePruneRecentProjects(
+    projectQuery,
+    state.recentProjectIds,
+    pruneRecentProjects,
   )
 
   useEffect(() => {

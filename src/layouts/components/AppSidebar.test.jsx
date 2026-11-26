@@ -155,4 +155,17 @@ describe('Resizable and compact sidebar', () => {
       screen.getByRole('separator', { name: 'Resize sidebar' }),
     ).toHaveAttribute('aria-valuenow', '256')
   })
+  it('keeps the original resize pointer when another pointer touches the handle', () => {
+    renderSidebar()
+    const separator = screen.getByRole('separator', { name: 'Resize sidebar' })
+    separator.setPointerCapture = () => {}
+    fireEvent.pointerDown(separator, { button: 0, pointerId: 1, clientX: 256 })
+    fireEvent.pointerDown(separator, { button: 0, pointerId: 2, clientX: 100 })
+    fireEvent.pointerMove(separator, { pointerId: 2, clientX: 400 })
+    fireEvent.pointerCancel(separator, { pointerId: 2 })
+    expect(separator).toHaveAttribute('aria-valuenow', '256')
+    fireEvent.pointerMove(separator, { pointerId: 1, clientX: 300 })
+    fireEvent.pointerUp(separator, { pointerId: 1, clientX: 300 })
+    expect(loadSidebarPreferences().width).toBe(300)
+  })
 })
