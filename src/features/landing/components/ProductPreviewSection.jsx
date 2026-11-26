@@ -1,6 +1,10 @@
+import { Trans, useTranslation } from 'react-i18next'
+
 import BoardPreview from './preview/BoardPreview'
 
 function ProductPreviewSection() {
+  const { t } = useTranslation('landing')
+
   return (
     <section
       id="product-preview"
@@ -10,27 +14,29 @@ function ProductPreviewSection() {
       {/* Section introduction */}
       <div className="mx-auto max-w-2xl space-y-4 text-center">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          Your work, in sync
+          {t('productPreview.eyebrow')}
         </p>
 
         <h2
           id="product-preview-heading"
           className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl"
         >
-          A little more clarity.
-          <br />A lot more focus.
+          <Trans
+            t={t}
+            i18nKey="productPreview.title"
+            components={{ break: <br /> }}
+          />
         </h2>
 
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Visualize your progress, organize your priorities, and move from ideas
-          to achievements.
+          {t('productPreview.description')}
         </p>
       </div>
 
       <BoardPreview />
 
       <p className="text-center text-xs text-muted-foreground">
-        Illustrative product preview
+        {t('productPreview.caption')}
       </p>
     </section>
   )

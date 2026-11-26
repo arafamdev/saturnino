@@ -1,12 +1,15 @@
 import { Link } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/utils'
 
 function Logo({ className }) {
+  const { t } = useTranslation('common')
+
   return (
     <Link
       to="/"
-      aria-label="Saturnino home"
+      aria-label={t('brand.home')}
       className={cn(
         'inline-flex w-fit items-center gap-2 rounded-md',
         className,

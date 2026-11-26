@@ -1,36 +1,36 @@
 export const footerNavigation = [
   {
     id: 'product',
-    title: 'Product',
+    titleKey: 'footer.product',
     links: [
       {
-        label: 'Features',
+        labelKey: 'navigation.features',
         href: '/#features',
       },
       {
-        label: 'How it works',
+        labelKey: 'navigation.howItWorks',
         href: '/#how-it-works',
       },
       {
-        label: 'Open Saturnino',
+        labelKey: 'navigation.openApp',
         href: '/app',
       },
     ],
   },
   {
     id: 'about',
-    title: 'About',
+    titleKey: 'navigation.about',
     links: [
       {
-        label: 'Our story',
+        labelKey: 'navigation.ourStory',
         href: '/about',
       },
       {
-        label: 'Philosophy',
+        labelKey: 'navigation.philosophy',
         href: '/#philosophy',
       },
       {
-        label: 'Source code',
+        labelKey: 'navigation.sourceCode',
         href: 'https://github.com/arafamdev/saturnino',
         external: true,
       },
@@ -48,7 +48,7 @@ export const socialLinks = [
     href: 'https://www.linkedin.com/in/arafam-mussa-silla-5a7866446/',
   },
   {
-    label: 'Portfolio',
+    labelKey: 'footer.portfolio',
     href: 'https://arafam.dev',
   },
 ]

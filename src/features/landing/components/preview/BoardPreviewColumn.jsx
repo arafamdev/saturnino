@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { cn } from '@/lib/utils'
 
 import BoardPreviewTask from './BoardPreviewTask'
@@ -10,7 +12,9 @@ const statusStyles = {
 }
 
 function BoardPreviewColumn({ column }) {
-  const { id, title, tasks } = column
+  const { t } = useTranslation('landing')
+
+  const { id, tasks } = column
 
   return (
     <section className="min-w-0 space-y-3 rounded-xl bg-muted/40 p-3">
@@ -20,7 +24,7 @@ function BoardPreviewColumn({ column }) {
           className={cn('size-2 shrink-0 rounded-full', statusStyles[id])}
         />
 
-        <h3 className="text-sm font-medium">{title}</h3>
+        <h3 className="text-sm font-medium">{t(`board.columns.${id}`)}</h3>
 
         <span className="ml-auto text-xs text-muted-foreground">
           {tasks.length}

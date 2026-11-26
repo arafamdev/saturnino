@@ -1,11 +1,14 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
 
 import OrbitalIllustration from './OrbitalIllustration'
 
 function HeroSection() {
+  const { t } = useTranslation(['landing', 'common'])
+
   return (
     <section
       aria-labelledby="hero-heading"
@@ -14,30 +17,35 @@ function HeroSection() {
       {/* Hero content */}
       <div className="flex flex-col items-center gap-5 text-center sm:gap-6 lg:items-start lg:text-left">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          Organize. Focus. Evolve.
+          {t('hero.eyebrow')}
         </p>
 
         <h1
           id="hero-heading"
           className="text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
         >
-          Bring your work into <span className="text-primary">orbit.</span>
+          <Trans
+            t={t}
+            i18nKey="hero.title"
+            components={{
+              highlight: <span className="text-primary" />,
+            }}
+          />
         </h1>
 
         <p className="max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Organize your projects, manage your tasks, and focus on what truly
-          matters.
+          {t('hero.description')}
         </p>
 
         <Button asChild size="lg" className="h-12 gap-2 px-6 text-base">
           <Link to="/app">
-            Open Saturnino
+            {t('common:navigation.openApp')}
             <ArrowRight aria-hidden="true" />
           </Link>
         </Button>
 
         <p className="text-sm text-muted-foreground">
-          Everything in its orbit.
+          {t('common:brand.tagline')}
         </p>
       </div>
 

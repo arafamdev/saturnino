@@ -1,11 +1,14 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
 
 import LegacyIllustration from './illustrations/LegacyIllustration'
 
 function OurStorySection() {
+  const { t } = useTranslation(['landing', 'common'])
+
   return (
     <section
       id="our-story"
@@ -25,27 +28,29 @@ function OurStorySection() {
           {/* Personal tribute */}
           <div className="space-y-4">
             <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-              The story behind Saturnino
+              {t('ourStory.eyebrow')}
             </p>
 
             <h2
               id="our-story-heading"
               className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl"
             >
-              More than a name.
-              <br />
-              <span className="text-primary">A legacy.</span>
+              <Trans
+                t={t}
+                i18nKey="ourStory.title"
+                components={{
+                  break: <br />,
+                  highlight: <span className="text-primary" />,
+                }}
+              />
             </h2>
 
             <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Saturnino is named in honour of my late father, Manuel Saturnino
-              da Costa, a freedom fighter who contributed to the independence of
-              Guinea-Bissau.
+              {t('ourStory.description')}
             </p>
 
             <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-              More than a software project, it is a personal tribute to his
-              memory and enduring legacy.
+              {t('ourStory.tribute')}
             </p>
           </div>
 
@@ -55,7 +60,7 @@ function OurStorySection() {
             className="gap-2 text-primary hover:text-primary"
           >
             <Link to="/about">
-              Discover the story
+              {t('ourStory.discover')}
               <ArrowRight aria-hidden="true" />
             </Link>
           </Button>
@@ -63,7 +68,7 @@ function OurStorySection() {
           {/* Project signature */}
           <div className="w-full border-t pt-6">
             <p className="text-sm text-muted-foreground italic">
-              Built with purpose. Inspired by legacy.
+              {t('common:brand.signature')}
             </p>
           </div>
         </div>

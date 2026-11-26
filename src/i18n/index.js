@@ -1,6 +1,9 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
+import enLanding from './locales/en/landing.json'
+import ptLanding from './locales/pt-PT/landing.json'
+
 import {
   DEFAULT_LANGUAGE,
   LANGUAGE_STORAGE_KEY,
@@ -44,16 +47,18 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       common: enCommon,
+      landing: enLanding,
     },
     'pt-PT': {
       common: ptCommon,
+      landing: ptLanding,
     },
   },
   lng: getStoredLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
   supportedLngs: supportedLanguageCodes,
   defaultNS: 'common',
-  ns: ['common'],
+  ns: ['common', 'landing'],
   interpolation: {
     escapeValue: false,
   },

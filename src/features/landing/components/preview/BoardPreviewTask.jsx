@@ -1,4 +1,5 @@
 import { Flag } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/lib/utils'
 
@@ -9,22 +10,28 @@ const priorityStyles = {
 }
 
 function BoardPreviewTask({ task }) {
-  const { title, priority, label } = task
+  const { t } = useTranslation('landing')
+
+  const { id, priority, label } = task
 
   return (
     <article className="space-y-3 rounded-lg border bg-card p-3 shadow-sm">
-      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className="text-xs text-muted-foreground">
+        {t(`board.labels.${label}`)}
+      </span>
 
-      <h4 className="text-sm leading-snug font-medium">{title}</h4>
+      <h4 className="text-sm leading-snug font-medium">
+        {t(`board.tasks.${id}`)}
+      </h4>
 
       <div
         className={cn(
-          'flex items-center gap-1.5 text-xs capitalize',
+          'flex items-center gap-1.5 text-xs',
           priorityStyles[priority],
         )}
       >
         <Flag className="size-3" aria-hidden="true" />
-        {priority}
+        {t(`board.priorities.${priority}`)}
       </div>
     </article>
   )

@@ -5,7 +5,12 @@
   "navigation": {
     "home": "Home",
     "about": "About",
-    "openApp": "Open Saturnino"
+    "openApp": "Open Saturnino",
+    "features": "Features",
+    "howItWorks": "How it works",
+    "ourStory": "Our story",
+    "philosophy": "Philosophy",
+    "sourceCode": "Source code"
   },
   "theme": {
     "switchToLight": "Switch to light mode",
@@ -15,7 +20,20 @@
     "backToTop": "Back to top"
   },
   "brand": {
+    "home": "Saturnino home",
     "tagline": "Everything in its orbit.",
     "signature": "Built with purpose. Inspired by legacy."
+  },
+  "footer": {
+    "description": "A thoughtful space to organize your work, focus on what matters, and make meaningful progress.",
+    "product": "Product",
+    "navigationLabel": "Footer {{section}}",
+    "designedBy": "Designed & developed by",
+    "copyright": "© {{year}} Saturnino.",
+    "socialLinks": "Developer social links",
+    "portfolio": "Portfolio"
+  },
+  "accessibility": {
+    "opensInNewTab": "Opens in a new tab"
   }
 }

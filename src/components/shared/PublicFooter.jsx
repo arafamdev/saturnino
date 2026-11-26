@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { ArrowUpRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import BackToTopButton from '@/components/shared/BackToTopButton'
 import Logo from '@/components/shared/Logo'
@@ -13,7 +14,10 @@ const footerLinkClassName =
   'inline-flex w-fit items-center gap-1 rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground'
 
 function PublicFooter() {
+  const { t } = useTranslation('common')
+
   const currentYear = new Date().getFullYear()
+  const newTabLabel = t('accessibility.opensInNewTab')
 
   return (
     <footer className="mt-auto border-t">
@@ -24,22 +28,25 @@ function PublicFooter() {
             <Logo />
 
             <p className="text-sm text-muted-foreground">
-              Everything in its orbit.
+              {t('brand.tagline')}
             </p>
 
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-              A thoughtful space to organize your work,
-              <br className="hidden md:block" /> focus on what matters,
-              <br className="hidden md:block" /> and make meaningful progress.
+              {t('footer.description')}
             </p>
           </div>
 
-          {footerNavigation.map(({ id, title, links }) => (
-            <nav key={id} aria-label={`Footer ${title}`}>
-              <h2 className="mb-4 text-sm font-semibold">{title}</h2>
+          {footerNavigation.map(({ id, titleKey, links }) => (
+            <nav
+              key={id}
+              aria-label={t('footer.navigationLabel', {
+                section: t(titleKey),
+              })}
+            >
+              <h2 className="mb-4 text-sm font-semibold">{t(titleKey)}</h2>
 
               <ul className="space-y-3">
-                {links.map(({ label, href, external }) => (
+                {links.map(({ labelKey, href, external }) => (
                   <li key={href}>
                     {external ? (
                       <a
@@ -48,13 +55,15 @@ function PublicFooter() {
                         rel="noopener noreferrer"
                         className={footerLinkClassName}
                       >
-                        {label}
+                        {t(labelKey)}
+
                         <ArrowUpRight className="size-3" aria-hidden="true" />
-                        <span className="sr-only"> (opens in a new tab)</span>
+
+                        <span className="sr-only"> ({newTabLabel})</span>
                       </a>
                     ) : (
                       <Link to={href} className={footerLinkClassName}>
-                        {label}
+                        {t(labelKey)}
                       </Link>
                     )}
                   </li>
@@ -68,7 +77,7 @@ function PublicFooter() {
         <div className="flex flex-col gap-6 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">
-              Designed & developed by{' '}
+              {t('footer.designedBy')}{' '}
               <a
                 href="https://arafam.dev"
                 target="_blank"
@@ -76,31 +85,39 @@ function PublicFooter() {
                 className="font-medium text-foreground transition-colors hover:text-primary"
               >
                 Arafam Mussa Silla
-                <span className="sr-only"> (opens in a new tab)</span>
+                <span className="sr-only"> ({newTabLabel})</span>
               </a>
             </p>
 
             <p className="text-xs text-muted-foreground">
-              © {currentYear} Saturnino.
+              {t('footer.copyright', {
+                year: currentYear,
+              })}
             </p>
           </div>
 
-          <nav aria-label="Developer social links">
+          <nav aria-label={t('footer.socialLinks')}>
             <ul className="flex flex-wrap items-center gap-5">
-              {socialLinks.map(({ label, href }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={footerLinkClassName}
-                  >
-                    {label}
-                    <ArrowUpRight className="size-3" aria-hidden="true" />
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
+              {socialLinks.map(({ label, labelKey, href }) => {
+                const linkLabel = labelKey ? t(labelKey) : label
+
+                return (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={footerLinkClassName}
+                    >
+                      {linkLabel}
+
+                      <ArrowUpRight className="size-3" aria-hidden="true" />
+
+                      <span className="sr-only"> ({newTabLabel})</span>
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </nav>
         </div>
@@ -108,7 +125,7 @@ function PublicFooter() {
         {/* Project signature and back-to-top action */}
         <div className="flex items-center justify-between gap-4 border-t pt-6">
           <p className="text-xs text-muted-foreground italic">
-            Built with purpose. Inspired by legacy.
+            {t('brand.signature')}
           </p>
 
           <BackToTopButton />
