@@ -4,7 +4,18 @@
     "overview": "Visão geral",
     "tasks": "As minhas tarefas",
     "projects": "Projetos",
-    "settings": "Definições"
+    "settings": "Definições",
+    "openMenu": "Abrir menu de navegação",
+    "closeMenu": "Fechar menu de navegação",
+    "menuDescription": "Navegar entre as páginas do espaço de trabalho."
+  },
+  "workspace": {
+    "title": "Espaço de trabalho",
+    "local": "Espaço de trabalho local",
+    "localDescription": "Guardado neste dispositivo"
+  },
+  "breadcrumbs": {
+    "label": "Caminho de navegação"
   },
   "projectDetails": {
     "title": "Detalhes do projeto",
