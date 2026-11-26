@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { Button } from '@/components/ui/button'
 import { useTodayDateOnly } from '@/lib/dates/useTodayDateOnly'
-import { useDashboardData } from '../hooks/useDashboardData'
+import { useWorkspaceSnapshot } from '@/lib/db/useWorkspaceSnapshot'
 import { buildDashboardSummary } from '../utils/buildDashboardSummary'
 import DashboardStats from '../components/DashboardStats'
 import DashboardActivity from '../components/DashboardActivity'
@@ -10,7 +10,7 @@ import DashboardActivity from '../components/DashboardActivity'
 function OverviewPage() {
   const { t } = useTranslation('app')
   const today = useTodayDateOnly()
-  const query = useDashboardData()
+  const query = useWorkspaceSnapshot()
   const summary = query.snapshot
     ? buildDashboardSummary(query.snapshot, today)
     : null

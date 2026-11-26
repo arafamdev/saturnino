@@ -2,7 +2,7 @@ import { database } from '@/lib/db/database'
 
 import { DEFAULT_PROJECT_COLOR, PROJECT_COLORS } from '../data/projectColors'
 
-function normalizeProjectData({
+export function normalizeProjectData({
   name,
   description = '',
   color = DEFAULT_PROJECT_COLOR,
