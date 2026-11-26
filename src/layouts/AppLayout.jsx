@@ -1,34 +1,58 @@
 import { Link, NavLink, Outlet } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
+import LanguageSwitcher from '@/components/shared/LanguageSwitcher'
 import ThemeToggle from '@/components/shared/ThemeToggle'
 
 import { cn } from '@/lib/utils'
 
 const navigationItems = [
-  { label: 'Overview', to: '/app', end: true },
-  { label: 'My Tasks', to: '/app/tasks' },
-  { label: 'Projects', to: '/app/projects' },
-  { label: 'Settings', to: '/app/settings' },
+  {
+    labelKey: 'navigation.overview',
+    to: '/app',
+    end: true,
+  },
+  {
+    labelKey: 'navigation.tasks',
+    to: '/app/tasks',
+  },
+  {
+    labelKey: 'navigation.projects',
+    to: '/app/projects',
+  },
+  {
+    labelKey: 'navigation.settings',
+    to: '/app/settings',
+  },
 ]
 
 function AppLayout() {
+  const { t } = useTranslation(['app', 'common'])
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Application header */}
-      <header className="flex items-center justify-between border-b px-6 py-4">
-        <Link to="/" className="text-xl font-semibold tracking-tight">
+      <header className="flex items-center justify-between gap-4 border-b px-4 py-4 sm:px-6">
+        <Link
+          to="/"
+          aria-label={t('common:brand.home')}
+          className="text-xl font-semibold tracking-tight"
+        >
           saturnino.
         </Link>
 
-        <ThemeToggle />
+        <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* Application navigation */}
       <nav
-        aria-label="Main navigation"
-        className="flex flex-wrap gap-2 border-b px-6 py-3"
+        aria-label={t('navigation.label')}
+        className="flex flex-wrap gap-2 border-b px-4 py-3 sm:px-6"
       >
-        {navigationItems.map(({ label, to, end }) => (
+        {navigationItems.map(({ labelKey, to, end }) => (
           <NavLink
             key={to}
             to={to}
@@ -42,7 +66,7 @@ function AppLayout() {
               )
             }
           >
-            {label}
+            {t(labelKey)}
           </NavLink>
         ))}
       </nav>

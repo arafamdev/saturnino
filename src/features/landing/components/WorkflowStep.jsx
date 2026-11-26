@@ -1,5 +1,9 @@
+import { useTranslation } from 'react-i18next'
+
 function WorkflowStep({ step, stepNumber }) {
-  const { icon: StepIcon, title, description } = step
+  const { t } = useTranslation('landing')
+
+  const { id, icon: StepIcon } = step
 
   const formattedStepNumber = String(stepNumber).padStart(2, '0')
 
@@ -26,11 +30,11 @@ function WorkflowStep({ step, stepNumber }) {
       {/* Step content */}
       <div className="max-w-xs space-y-3">
         <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">
-          {title}
+          {t(`howItWorks.steps.${id}.title`)}
         </h3>
 
         <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-          {description}
+          {t(`howItWorks.steps.${id}.description`)}
         </p>
       </div>
     </li>

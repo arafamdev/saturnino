@@ -1,30 +1,33 @@
 import { createBrowserRouter } from 'react-router'
 
-import PublicLayout from '@/layouts/PublicLayout'
-import AppLayout from '@/layouts/AppLayout'
+import PageLoader from '@/components/shared/PageLoader'
 
-import LandingPage from '@/features/landing/pages/LandingPage'
-import OverviewPage from '@/features/dashboard/pages/OverviewPage'
-import TasksPage from '@/features/tasks/pages/TasksPage'
-import ProjectsPage from '@/features/projects/pages/ProjectsPage'
-import ProjectDetailsPage from '@/features/projects/pages/ProjectDetailsPage'
-import SettingsPage from '@/features/settings/pages/SettingsPage'
-import AboutPage from '@/features/about/pages/AboutPage'
-import NotFoundPage from '@/pages/NotFoundPage'
+import PublicLayout from '@/layouts/PublicLayout'
 
 export const routes = [
   // Public routes
   {
     path: '/',
     element: <PublicLayout />,
+    HydrateFallback: PageLoader,
     children: [
       {
         index: true,
-        element: <LandingPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/landing/pages/LandingPage')
+
+          return { Component }
+        },
       },
       {
         path: 'about',
-        element: <AboutPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/about/pages/AboutPage')
+
+          return { Component }
+        },
       },
     ],
   },
@@ -32,27 +35,57 @@ export const routes = [
   // Application routes
   {
     path: '/app',
-    element: <AppLayout />,
+    HydrateFallback: PageLoader,
+    lazy: async () => {
+      const { default: Component } = await import('@/layouts/AppLayout')
+
+      return { Component }
+    },
     children: [
       {
         index: true,
-        element: <OverviewPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/dashboard/pages/OverviewPage')
+
+          return { Component }
+        },
       },
       {
         path: 'tasks',
-        element: <TasksPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/tasks/pages/TasksPage')
+
+          return { Component }
+        },
       },
       {
         path: 'projects',
-        element: <ProjectsPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/projects/pages/ProjectsPage')
+
+          return { Component }
+        },
       },
       {
         path: 'projects/:projectId',
-        element: <ProjectDetailsPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/projects/pages/ProjectDetailsPage')
+
+          return { Component }
+        },
       },
       {
         path: 'settings',
-        element: <SettingsPage />,
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/settings/pages/SettingsPage')
+
+          return { Component }
+        },
       },
     ],
   },
@@ -60,7 +93,12 @@ export const routes = [
   // Fallback route
   {
     path: '*',
-    element: <NotFoundPage />,
+    HydrateFallback: PageLoader,
+    lazy: async () => {
+      const { default: Component } = await import('@/pages/NotFoundPage')
+
+      return { Component }
+    },
   },
 ]
 

@@ -1,0 +1,47 @@
+{
+  "language": {
+    "changeLanguage": "Alterar idioma"
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre",
+    "openApp": "Abrir Saturnino",
+    "features": "Funcionalidades",
+    "howItWorks": "Como funciona",
+    "ourStory": "A nossa história",
+    "philosophy": "Filosofia",
+    "sourceCode": "Código-fonte"
+  },
+  "theme": {
+    "switchToLight": "Mudar para o modo claro",
+    "switchToDark": "Mudar para o modo escuro"
+  },
+  "actions": {
+    "backToTop": "Voltar ao topo"
+  },
+  "status": {
+    "loading": "A carregar o Saturnino..."
+  },
+  "brand": {
+    "home": "Página inicial do Saturnino",
+    "tagline": "Tudo na sua órbita.",
+    "signature": "Criado com propósito. Inspirado por um legado."
+  },
+  "footer": {
+    "description": "Um espaço pensado para organizares o teu trabalho, te focares no que importa e progredires com propósito.",
+    "product": "Produto",
+    "navigationLabel": "Rodapé — {{section}}",
+    "designedBy": "Concebido e desenvolvido por",
+    "copyright": "© {{year}} Saturnino.",
+    "socialLinks": "Redes sociais do programador",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Enviar um email",
+      "website": "Website pessoal"
+    }
+  },
+  "accessibility": {
+    "opensInNewTab": "Abre num novo separador"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "eyebrow": "Organize. Focus. Evolve.",
+    "title": "Bring your work into <highlight>orbit.</highlight>",
+    "description": "Organize your projects, manage your tasks, and focus on what truly matters."
+  },
+  "productPreview": {
+    "eyebrow": "Your work, in sync",
+    "title": "A little more clarity.<break/>A lot more focus.",
+    "description": "Visualize your progress, organize your priorities, and move from ideas to achievements.",
+    "caption": "Illustrative product preview"
+  },
+  "features": {
+    "eyebrow": "Built for focus",
+    "title": "Everything you need.<break/>Nothing you don't.",
+    "description": "A thoughtful set of tools to keep your projects, tasks, and priorities in orbit.",
+    "items": {
+      "visual-kanban": {
+        "title": "Visual Kanban",
+        "description": "See your work move from idea to completion with a clear, visual workflow."
+      },
+      "project-management": {
+        "title": "Project Management",
+        "description": "Keep every project organized in its own space, without losing sight of the bigger picture."
+      },
+      "task-management": {
+        "title": "Task Management",
+        "description": "Break complex work into manageable tasks and stay focused on your next step."
+      },
+      "smart-priorities": {
+        "title": "Smart Priorities",
+        "description": "Give your most important tasks the attention they deserve."
+      },
+      "progress-tracking": {
+        "title": "Progress Tracking",
+        "description": "Understand how far you have come and see what is left to accomplish."
+      },
+      "personal-workspace": {
+        "title": "Your Space, Your Way",
+        "description": "Choose between light and dark themes for a workspace that feels right for you."
+      }
+    }
+  },
+  "philosophy": {
+    "eyebrow": "Our philosophy",
+    "title": "A better way to work.",
+    "description": "Three simple principles for a more intentional and meaningful workflow.",
+    "items": {
+      "organize": {
+        "title": "Organize.",
+        "description": "Give everything its place. Bring clarity to your projects, tasks, and ideas."
+      },
+      "focus": {
+        "title": "Focus.",
+        "description": "Make space for what matters. Work with intention, not distraction."
+      },
+      "evolve": {
+        "title": "Evolve.",
+        "description": "Turn small steps into meaningful progress. Grow at your own pace."
+      }
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "From idea to done.",
+    "description": "Three simple steps. One clear direction.",
+    "steps": {
+      "create-project": {
+        "title": "Create a project",
+        "description": "Give your ideas a place to grow. Create a dedicated space for everything you want to achieve."
+      },
+      "organize-tasks": {
+        "title": "Organize your tasks",
+        "description": "Break down your work into manageable tasks, set priorities, and build a clear plan."
+      },
+      "make-progress": {
+        "title": "Make progress",
+        "description": "Move tasks through your board, track your achievements, and keep moving forward."
+      }
+    }
+  },
+  "ourStory": {
+    "eyebrow": "The story behind Saturnino",
+    "title": "More than a name.<break/><highlight>A legacy.</highlight>",
+    "description": "Saturnino is named in honour of my hero, Manuel Saturnino da Costa, a freedom fighter who contributed to the independence of Guinea-Bissau.",
+    "tribute": "More than a software project, it is a personal tribute to his memory and enduring legacy.",
+    "discover": "Discover the story"
+  },
+  "finalCta": {
+    "eyebrow": "Your next move",
+    "title": "Ready to bring your work into <highlight>orbit?</highlight>",
+    "description": "Start small. Stay focused. Make meaningful progress."
+  },
+  "board": {
+    "workspacePath": "saturnino / workspace",
+    "overview": "Overview",
+    "projects": "Projects",
+    "workspace": "Workspace",
+    "website": "Website",
+    "breadcrumb": "Projects / Website",
+    "projectName": "Website redesign",
+    "boardView": "Board",
+    "progress": "Project progress",
+    "completion": "{{percentage}}% complete",
+    "columns": {
+      "backlog": "Backlog",
+      "todo": "To Do",
+      "in-progress": "In Progress",
+      "done": "Done"
+    },
+    "priorities": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "labels": {
+      "research": "Research",
+      "planning": "Planning",
+      "design": "Design",
+      "development": "Development"
+    },
+    "tasks": {
+      "task-1": "Explore new ideas",
+      "task-2": "Plan next release",
+      "task-3": "Create wireframes",
+      "task-4": "Define user flows",
+      "task-5": "Build landing page",
+      "task-6": "Refine visual identity",
+      "task-7": "Set up project",
+      "task-8": "Configure design tokens"
+    }
+  }
+}

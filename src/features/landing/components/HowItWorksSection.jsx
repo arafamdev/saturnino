@@ -1,8 +1,12 @@
+import { useTranslation } from 'react-i18next'
+
 import WorkflowStep from './WorkflowStep'
 
 import { workflowSteps } from '../data/workflowSteps'
 
 function HowItWorksSection() {
+  const { t } = useTranslation('landing')
+
   return (
     <section
       id="how-it-works"
@@ -12,18 +16,18 @@ function HowItWorksSection() {
       {/* Section introduction */}
       <div className="mx-auto max-w-2xl space-y-4 text-center">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          How it works
+          {t('howItWorks.eyebrow')}
         </p>
 
         <h2
           id="how-it-works-heading"
           className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl"
         >
-          From idea to done.
+          {t('howItWorks.title')}
         </h2>
 
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Three simple steps. One clear direction.
+          {t('howItWorks.description')}
         </p>
       </div>
 

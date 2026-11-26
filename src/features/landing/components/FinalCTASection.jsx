@@ -1,11 +1,14 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
 
 import LegacyIllustration from './illustrations/LegacyIllustration'
 
 function FinalCTASection() {
+  const { t } = useTranslation(['landing', 'common'])
+
   return (
     <section
       aria-labelledby="final-cta-heading"
@@ -25,30 +28,35 @@ function FinalCTASection() {
           </div>
 
           <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-            Your next move
+            {t('finalCta.eyebrow')}
           </p>
 
           <h2
             id="final-cta-heading"
             className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl"
           >
-            Ready to bring your work into{' '}
-            <span className="text-primary">orbit?</span>
+            <Trans
+              t={t}
+              i18nKey="finalCta.title"
+              components={{
+                highlight: <span className="text-primary" />,
+              }}
+            />
           </h2>
 
           <p className="max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Start small. Stay focused. Make meaningful progress.
+            {t('finalCta.description')}
           </p>
 
           <Button asChild size="lg" className="h-12 gap-2 px-6 text-base">
             <Link to="/app">
-              Open Saturnino
+              {t('common:navigation.openApp')}
               <ArrowRight aria-hidden="true" />
             </Link>
           </Button>
 
           <p className="text-sm text-muted-foreground">
-            Everything in its orbit.
+            {t('common:brand.tagline')}
           </p>
         </div>
       </div>

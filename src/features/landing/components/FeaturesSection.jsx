@@ -1,8 +1,12 @@
+import { Trans, useTranslation } from 'react-i18next'
+
 import { features } from '../data/featuresData'
 
 import FeatureCard from './FeatureCard'
 
 function FeaturesSection() {
+  const { t } = useTranslation('landing')
+
   return (
     <section
       id="features"
@@ -12,21 +16,22 @@ function FeaturesSection() {
       {/* Section introduction */}
       <div className="mx-auto max-w-2xl space-y-4 text-center">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          Built for focus
+          {t('features.eyebrow')}
         </p>
 
         <h2
           id="features-heading"
           className="text-3xl font-semibold tracking-tight text-balance sm:text-5xl"
         >
-          Everything you need.
-          <br />
-          Nothing you don't.
+          <Trans
+            t={t}
+            i18nKey="features.title"
+            components={{ break: <br /> }}
+          />
         </h2>
 
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A thoughtful set of tools to keep your projects, tasks, and priorities
-          in orbit.
+          {t('features.description')}
         </p>
       </div>
 

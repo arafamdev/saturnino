@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
 import ThemeProvider from '@/app/providers/theme/ThemeProvider'
+
+import i18n from '@/i18n'
 
 import { routes } from './router'
 
@@ -24,11 +26,11 @@ describe('Application routing', () => {
     localStorage.clear()
   })
 
-  it('renders the landing page at the root route', () => {
+  it('renders the landing page at the root route', async () => {
     renderRoute('/')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Bring your work into orbit.',
       }),
     ).toBeInTheDocument()
@@ -39,7 +41,7 @@ describe('Application routing', () => {
 
     renderRoute('/')
 
-    const heroSection = screen.getByRole('region', {
+    const heroSection = await screen.findByRole('region', {
       name: 'Bring your work into orbit.',
     })
 
@@ -56,40 +58,40 @@ describe('Application routing', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the tasks page', () => {
+  it('renders the tasks page', async () => {
     renderRoute('/app/tasks')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'My Tasks',
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the projects page', () => {
+  it('renders the projects page', async () => {
     renderRoute('/app/projects')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Projects',
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the settings page', () => {
+  it('renders the settings page', async () => {
     renderRoute('/app/settings')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: 'Settings',
       }),
     ).toBeInTheDocument()
   })
 
-  it('highlights the active navigation link', () => {
+  it('highlights the active navigation link', async () => {
     renderRoute('/app/projects')
 
-    const projectsLink = screen.getByRole('link', {
+    const projectsLink = await screen.findByRole('link', {
       name: 'Projects',
     })
 
@@ -101,28 +103,28 @@ describe('Application routing', () => {
     expect(overviewLink).not.toHaveAttribute('aria-current')
   })
 
-  it('renders the project identifier from the URL', () => {
+  it('renders the project identifier from the URL', async () => {
     renderRoute('/app/projects/demo-123')
 
-    expect(screen.getByText('Project ID: demo-123')).toBeInTheDocument()
+    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
   })
 
-  it('renders the about page', () => {
+  it('renders the about page', async () => {
     renderRoute('/about')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         level: 1,
         name: /every name has a story\.\s*this one has a legacy\./i,
       }),
     ).toBeInTheDocument()
   })
 
-  it('renders the not found page for unknown routes', () => {
+  it('renders the not found page for unknown routes', async () => {
     renderRoute('/unknown')
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: '404',
       }),
     ).toBeInTheDocument()
@@ -136,7 +138,7 @@ describe('Application routing', () => {
     renderRoute('/unknown')
 
     await user.click(
-      screen.getByRole('link', {
+      await screen.findByRole('link', {
         name: 'Back to home',
       }),
     )
@@ -146,5 +148,121 @@ describe('Application routing', () => {
         name: 'Bring your work into orbit.',
       }),
     ).toBeInTheDocument()
+  })
+
+  it.each([
+    ['/app', 'Visão geral'],
+    ['/app/tasks', 'As minhas tarefas'],
+    ['/app/projects', 'Projetos'],
+    ['/app/settings', 'Definições'],
+  ])('renders %s in Portuguese', async (path, heading) => {
+    await i18n.changeLanguage('pt-PT')
+
+    renderRoute(path)
+
+    expect(
+      await screen.findByRole('heading', {
+        name: heading,
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('preserves the active navigation link when changing language', async () => {
+    renderRoute('/app/projects')
+
+    await screen.findByRole('heading', {
+      name: 'Projects',
+    })
+
+    await act(async () => {
+      await i18n.changeLanguage('pt-PT')
+    })
+
+    const navigation = screen.getByRole('navigation', {
+      name: 'Navegação principal',
+    })
+
+    const projectsLink = within(navigation).getByRole('link', {
+      name: 'Projetos',
+    })
+
+    expect(projectsLink).toHaveAttribute('aria-current', 'page')
+    expect(projectsLink).toHaveAttribute('href', '/app/projects')
+
+    expect(
+      within(navigation).getByRole('link', {
+        name: 'Visão geral',
+      }),
+    ).not.toHaveAttribute('aria-current')
+  })
+
+  it('preserves the project identifier when changing language', async () => {
+    renderRoute('/app/projects/demo-123')
+
+    expect(await screen.findByText('Project ID: demo-123')).toBeInTheDocument()
+
+    await act(async () => {
+      await i18n.changeLanguage('pt-PT')
+    })
+
+    expect(
+      screen.getByRole('heading', {
+        name: 'Detalhes do projeto',
+      }),
+    ).toBeInTheDocument()
+
+    expect(screen.getByText('ID do projeto: demo-123')).toBeInTheDocument()
+  })
+
+  it('renders the not found page and home link in Portuguese', async () => {
+    const user = userEvent.setup()
+
+    await i18n.changeLanguage('pt-PT')
+
+    renderRoute('/unknown')
+
+    expect(await screen.findByText('Página não encontrada')).toBeInTheDocument()
+
+    expect(
+      screen.getByText('Esta página está fora da nossa órbita.'),
+    ).toBeInTheDocument()
+
+    await user.click(
+      screen.getByRole('link', {
+        name: 'Voltar ao início',
+      }),
+    )
+
+    expect(
+      await screen.findByRole('heading', {
+        name: 'Coloca o teu trabalho em órbita.',
+        level: 1,
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('allows changing language from the application header', async () => {
+    const user = userEvent.setup()
+
+    renderRoute('/app')
+
+    const languageSwitcher = await screen.findByRole('group', {
+      name: 'Change language',
+    })
+
+    await user.click(
+      within(languageSwitcher).getByRole('button', {
+        name: 'Português',
+      }),
+    )
+
+    expect(
+      await screen.findByRole('heading', {
+        name: 'Visão geral',
+      }),
+    ).toBeInTheDocument()
+
+    expect(i18n.resolvedLanguage).toBe('pt-PT')
   })
 })

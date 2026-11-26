@@ -1,5 +1,9 @@
+import { useTranslation } from 'react-i18next'
+
 function SettingsPage() {
-  return <h1 className="text-2xl font-semibold">Settings</h1>
+  const { t } = useTranslation('app')
+
+  return <h1 className="text-2xl font-semibold">{t('navigation.settings')}</h1>
 }
 
 export default SettingsPage

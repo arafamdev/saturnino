@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "eyebrow": "Organiza. Foca-te. Evolui.",
+    "title": "Coloca o teu trabalho em <highlight>órbita.</highlight>",
+    "description": "Organiza os teus projetos, gere as tuas tarefas e foca-te no que realmente importa."
+  },
+  "productPreview": {
+    "eyebrow": "O teu trabalho, em sintonia",
+    "title": "Um pouco mais de clareza.<break/>Muito mais foco.",
+    "description": "Visualiza o teu progresso, organiza as tuas prioridades e transforma ideias em conquistas.",
+    "caption": "Pré-visualização ilustrativa do produto"
+  },
+  "features": {
+    "eyebrow": "Criado para o foco",
+    "title": "Tudo o que precisas.<break/>Nada mais.",
+    "description": "Um conjunto de ferramentas pensado para manter os teus projetos, tarefas e prioridades em órbita.",
+    "items": {
+      "visual-kanban": {
+        "title": "Kanban Visual",
+        "description": "Acompanha o teu trabalho desde a ideia até à conclusão, através de um fluxo visual e intuitivo."
+      },
+      "project-management": {
+        "title": "Gestão de Projetos",
+        "description": "Mantém cada projeto organizado no seu próprio espaço, sem perder a visão global."
+      },
+      "task-management": {
+        "title": "Gestão de Tarefas",
+        "description": "Divide trabalhos complexos em tarefas mais simples e mantém o foco no próximo passo."
+      },
+      "smart-priorities": {
+        "title": "Prioridades Inteligentes",
+        "description": "Dá às tuas tarefas mais importantes a atenção que merecem."
+      },
+      "progress-tracking": {
+        "title": "Acompanhamento do Progresso",
+        "description": "Percebe o quanto já avançaste e o que ainda falta alcançar."
+      },
+      "personal-workspace": {
+        "title": "O Teu Espaço, à Tua Maneira",
+        "description": "Escolhe entre os modos claro e escuro para criares um espaço de trabalho à tua medida."
+      }
+    }
+  },
+  "philosophy": {
+    "eyebrow": "A nossa filosofia",
+    "title": "Uma melhor forma de trabalhar.",
+    "description": "Três princípios simples para trabalhares com mais intenção e propósito.",
+    "items": {
+      "organize": {
+        "title": "Organiza.",
+        "description": "Dá a cada coisa o seu lugar. Traz clareza aos teus projetos, tarefas e ideias."
+      },
+      "focus": {
+        "title": "Foca-te.",
+        "description": "Cria espaço para o que importa. Trabalha com intenção, sem distrações."
+      },
+      "evolve": {
+        "title": "Evolui.",
+        "description": "Transforma pequenos passos em progresso significativo. Cresce ao teu próprio ritmo."
+      }
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "Como funciona",
+    "title": "Da ideia à concretização.",
+    "description": "Três passos simples. Uma direção clara.",
+    "steps": {
+      "create-project": {
+        "title": "Cria um projeto",
+        "description": "Dá às tuas ideias espaço para crescer. Cria um espaço dedicado a tudo o que pretendes alcançar."
+      },
+      "organize-tasks": {
+        "title": "Organiza as tuas tarefas",
+        "description": "Divide o teu trabalho em tarefas mais simples, define prioridades e constrói um plano claro."
+      },
+      "make-progress": {
+        "title": "Faz progressos",
+        "description": "Move as tarefas pelo teu quadro, acompanha as tuas conquistas e continua a avançar."
+      }
+    }
+  },
+  "ourStory": {
+    "eyebrow": "A história por detrás do Saturnino",
+    "title": "Mais do que um nome.<break/><highlight>Um legado.</highlight>",
+    "description": "Saturnino recebeu o seu nome em homenagem ao meu herói, Manuel Saturnino da Costa, um combatente pela liberdade que contribuiu para a independência da Guiné-Bissau.",
+    "tribute": "Mais do que um projeto de software, é uma homenagem pessoal à sua memória e ao seu legado duradouro.",
+    "discover": "Descobre a história"
+  },
+  "finalCta": {
+    "eyebrow": "O teu próximo passo",
+    "title": "Pronto para colocar o teu trabalho em <highlight>órbita?</highlight>",
+    "description": "Começa com pequenos passos. Mantém o foco. Avança com propósito."
+  },
+  "board": {
+    "workspacePath": "saturnino / espaço de trabalho",
+    "overview": "Visão geral",
+    "projects": "Projetos",
+    "workspace": "Espaço de trabalho",
+    "website": "Website",
+    "breadcrumb": "Projetos / Website",
+    "projectName": "Redesign do website",
+    "boardView": "Quadro",
+    "progress": "Progresso do projeto",
+    "completion": "{{percentage}}% concluído",
+    "columns": {
+      "backlog": "Por planear",
+      "todo": "Por fazer",
+      "in-progress": "Em curso",
+      "done": "Concluído"
+    },
+    "priorities": {
+      "low": "Baixa",
+      "medium": "Média",
+      "high": "Alta"
+    },
+    "labels": {
+      "research": "Investigação",
+      "planning": "Planeamento",
+      "design": "Design",
+      "development": "Desenvolvimento"
+    },
+    "tasks": {
+      "task-1": "Explorar novas ideias",
+      "task-2": "Planear a próxima versão",
+      "task-3": "Criar wireframes",
+      "task-4": "Definir fluxos de utilização",
+      "task-5": "Desenvolver a landing page",
+      "task-6": "Refinar a identidade visual",
+      "task-7": "Configurar o projeto",
+      "task-8": "Configurar design tokens"
+    }
+  }
+}
