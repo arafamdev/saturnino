@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event'
 import ThemeToggle from '@/components/shared/ThemeToggle'
 
 import ThemeProvider from './ThemeProvider'
+import { useTheme } from './useTheme'
 
 const THEME_STORAGE_KEY = 'saturnino-theme'
 
@@ -117,4 +118,21 @@ describe('ThemeProvider', () => {
     expect(document.documentElement).not.toHaveClass('dark')
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('light')
   })
+})
+
+function InvalidThemeControl() {
+  const { setTheme } = useTheme()
+  return <button onClick={() => setTheme('invalid')}>Invalid theme</button>
+}
+
+it('rejects unsupported themes through the explicit setter', async () => {
+  localStorage.clear()
+  render(
+    <ThemeProvider>
+      <InvalidThemeControl />
+    </ThemeProvider>,
+  )
+  await userEvent.click(screen.getByRole('button', { name: 'Invalid theme' }))
+  expect(document.documentElement).toHaveClass('dark')
+  expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('dark')
 })
