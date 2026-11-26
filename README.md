@@ -4,6 +4,8 @@
 
 Saturnino is a project management and productivity application designed to help people organize their projects, manage tasks, and stay focused.
 
+[Open Saturnino](https://saturnino-ten.vercel.app) · [Source code](https://github.com/arafamdev/saturnino)
+
 ## Philosophy
 
 Organize. Focus. Evolve.
