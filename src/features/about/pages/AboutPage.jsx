@@ -1,12 +1,18 @@
+import AboutHeroSection from '../components/AboutHeroSection'
+import LegacyProfileSection from '../components/LegacyProfileSection'
+import LegacyTimelineSection from '../components/LegacyTimelineSection'
+import ProjectPurposeSection from '../components/ProjectPurposeSection'
+import MemorialSection from '../components/MemorialSection'
+
 function AboutPage() {
   return (
-    <section className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-      <h1 className="text-3xl font-semibold">About Saturnino</h1>
-
-      <p className="text-muted-foreground">
-        Built with purpose. Inspired by legacy.
-      </p>
-    </section>
+    <>
+      <AboutHeroSection />
+      <LegacyProfileSection />
+      <LegacyTimelineSection />
+      <ProjectPurposeSection />
+      <MemorialSection />
+    </>
   )
 }
 

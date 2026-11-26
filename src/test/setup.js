@@ -1,9 +1,14 @@
 import '@testing-library/jest-dom/vitest'
 
 import { cleanup } from '@testing-library/react'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 
-// Remove rendered components after each test.
+// Mock browser scrolling APIs unavailable in jsdom.
+window.scrollTo = vi.fn()
+Element.prototype.scrollIntoView = vi.fn()
+
+// Remove rendered components and clear mocks after each test.
 afterEach(() => {
   cleanup()
+  vi.clearAllMocks()
 })

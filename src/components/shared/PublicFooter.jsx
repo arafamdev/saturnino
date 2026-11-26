@@ -52,10 +52,6 @@ function PublicFooter() {
                         <ArrowUpRight className="size-3" aria-hidden="true" />
                         <span className="sr-only"> (opens in a new tab)</span>
                       </a>
-                    ) : href.includes('#') ? (
-                      <a href={href} className={footerLinkClassName}>
-                        {label}
-                      </a>
                     ) : (
                       <Link to={href} className={footerLinkClassName}>
                         {label}

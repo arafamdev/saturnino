@@ -112,7 +112,8 @@ describe('Application routing', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'About Saturnino',
+        level: 1,
+        name: /every name has a story\.\s*this one has a legacy\./i,
       }),
     ).toBeInTheDocument()
   })

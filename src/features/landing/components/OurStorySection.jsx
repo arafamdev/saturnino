@@ -39,7 +39,7 @@ function OurStorySection() {
 
             <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
               Saturnino is named in honour of my late father, Manuel Saturnino
-              da Costa, a freedom fighter and former Prime Minister of
+              da Costa, a freedom fighter who contributed to the independence of
               Guinea-Bissau.
             </p>
 
