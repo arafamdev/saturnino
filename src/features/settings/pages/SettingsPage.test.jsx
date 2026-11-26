@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import ThemeProvider from '@/app/providers/theme/ThemeProvider'
+import PwaProvider from '@/features/pwa/context/PwaProvider'
 import { routes } from '@/app/router'
 import { database } from '@/lib/db/database'
 import { projectRepository } from '@/features/projects/services/projectRepository'
@@ -16,7 +17,9 @@ function renderSettings() {
   })
   return render(
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <PwaProvider>
+        <RouterProvider router={router} />
+      </PwaProvider>
     </ThemeProvider>,
   )
 }

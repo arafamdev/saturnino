@@ -338,5 +338,28 @@
       "BACKUP_READ_FAILED": "Could not read the file. Select it again.",
       "ACTION_FAILED": "Could not complete this action. Try again."
     }
+  },
+  "pwa": {
+    "title": "App and offline use",
+    "installDescription": "Install Saturnino from your browser menu when available. Complete an online visit before relying on offline use.",
+    "application": "Application",
+    "connection": "Browser connection",
+    "online": "Online",
+    "offline": "Offline",
+    "cacheStatus": "Offline cache status",
+    "unavailable": "Offline caching is unavailable in this session.",
+    "ready": "Ready for offline use.",
+    "preparing": "Preparing offline use…",
+    "check": "Check for updates",
+    "checking": "Checking…",
+    "registrationFailed": "Could not enable offline use. Reload the page to try again.",
+    "checkFailed": "Could not check for updates. Check your connection and try again.",
+    "updateFailed": "Could not apply the update. Save your work and try again.",
+    "updateTitle": "An update is ready",
+    "updateDescription": "Save your changes before reloading. Your saved projects and tasks will stay on this device.",
+    "later": "Later",
+    "reload": "Reload to update",
+    "updating": "Updating…",
+    "storageNote": "Offline caching stores application files. Projects and tasks stay in this browser. Keep JSON backups before clearing browser data."
   }
 }

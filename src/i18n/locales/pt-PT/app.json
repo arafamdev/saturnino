@@ -338,5 +338,28 @@
       "BACKUP_READ_FAILED": "Não foi possível ler o ficheiro. Selecione-o novamente.",
       "ACTION_FAILED": "Não foi possível concluir esta ação. Tente novamente."
     }
+  },
+  "pwa": {
+    "title": "Aplicação e utilização offline",
+    "installDescription": "Instale o Saturnino através do menu do navegador, quando disponível. Conclua uma visita online antes de depender da utilização offline.",
+    "application": "Aplicação",
+    "connection": "Ligação do navegador",
+    "online": "Online",
+    "offline": "Offline",
+    "cacheStatus": "Estado do cache offline",
+    "unavailable": "O cache offline não está disponível nesta sessão.",
+    "ready": "Pronto para utilização offline.",
+    "preparing": "A preparar a utilização offline…",
+    "check": "Procurar atualizações",
+    "checking": "A procurar…",
+    "registrationFailed": "Não foi possível ativar a utilização offline. Recarregue a página para tentar novamente.",
+    "checkFailed": "Não foi possível procurar atualizações. Verifique a ligação e tente novamente.",
+    "updateFailed": "Não foi possível aplicar a atualização. Guarde o trabalho e tente novamente.",
+    "updateTitle": "Está disponível uma atualização",
+    "updateDescription": "Guarde as alterações antes de recarregar. Os projetos e tarefas guardados mantêm-se neste dispositivo.",
+    "later": "Mais tarde",
+    "reload": "Recarregar para atualizar",
+    "updating": "A atualizar…",
+    "storageNote": "O cache offline guarda os ficheiros da aplicação. Os projetos e tarefas mantêm-se neste navegador. Guarde backups JSON antes de limpar os dados do navegador."
   }
 }
