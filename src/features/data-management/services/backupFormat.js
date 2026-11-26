@@ -15,7 +15,7 @@ function object(value) {
 function exactKeys(value, keys) {
   if (
     Object.keys(value).length !== keys.length ||
-    keys.some((key) => !Object.hasOwn(value, key))
+    keys.some((key) => !Object.hasOwn(value, key) || value[key] === undefined)
   )
     invalid()
 }
@@ -36,7 +36,6 @@ function timestamp(value) {
 function dates(record) {
   const createdAt = timestamp(record.createdAt)
   const updatedAt = timestamp(record.updatedAt)
-  if (updatedAt < createdAt) invalid()
   return { createdAt, updatedAt }
 }
 
@@ -104,11 +103,6 @@ export function validateBackup(value) {
       let completedAt = null
       if (data.status === 'done') {
         completedAt = timestamp(task.completedAt)
-        if (
-          completedAt < recordDates.createdAt ||
-          completedAt > recordDates.updatedAt
-        )
-          invalid()
       } else if (task.completedAt !== null) invalid()
       return {
         id,

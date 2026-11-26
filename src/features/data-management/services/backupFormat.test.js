@@ -171,9 +171,9 @@ it.each([
     },
   ],
   [
-    'reversed timestamps',
+    'noncanonical timestamp',
     (b) => {
-      b.tasks[0].createdAt = '2026-11-27T12:00:00.000Z'
+      b.tasks[0].updatedAt = '2026-11-26T12:00:00Z'
     },
   ],
   [
@@ -189,10 +189,10 @@ it.each([
     },
   ],
   [
-    'future completion',
+    'invalid completion timestamp',
     (b) => {
       b.tasks[0].status = 'done'
-      b.tasks[0].completedAt = '2026-11-27T12:00:00.000Z'
+      b.tasks[0].completedAt = 'tomorrow'
     },
   ],
   [
@@ -244,4 +244,21 @@ it('makes revisions independent of record and property order but detects favorit
       projects: [{ ...project, isFavorite: false }],
     }),
   ).not.toBe(getWorkspaceRevision(source))
+})
+
+it('preserves canonical timestamps even if the system clock moved backwards', () => {
+  const value = backup()
+  value.tasks[0].status = 'done'
+  value.tasks[0].updatedAt = '2026-11-25T12:00:00.000Z'
+  value.tasks[0].completedAt = timestamp
+  expect(validateBackup(value).tasks[0]).toMatchObject({
+    createdAt: timestamp,
+    updatedAt: '2026-11-25T12:00:00.000Z',
+    completedAt: timestamp,
+  })
+})
+it('rejects an explicitly undefined field through the repository-facing validator', () => {
+  const value = backup()
+  value.tasks[0].status = undefined
+  expect(() => validateBackup(value)).toThrow('BACKUP_INVALID')
 })
