@@ -390,5 +390,15 @@
     "discardDescription": "As alterações ainda não foram guardadas. Continua a editar para manter o rascunho ou descarta-o para sair.",
     "keepEditing": "Continuar a editar",
     "discard": "Descartar alterações"
+  },
+  "datePicker": {
+    "placeholder": "Escolher uma data",
+    "title": "Escolher prazo",
+    "close": "Fechar calendário",
+    "loading": "A carregar calendário…",
+    "manual": "Data (AAAA-MM-DD)",
+    "hint": "Introduz uma data de calendário, por exemplo 2026-12-15.",
+    "clear": "Limpar data",
+    "done": "Concluir"
   }
 }

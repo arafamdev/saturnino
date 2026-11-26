@@ -1,9 +1,14 @@
 import { useEffect, useId, useRef } from 'react'
 
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
+import { DatePicker } from '@/components/ui/date-picker'
+import { Field } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 import { isValidDateOnly } from '@/lib/dates/dateOnly'
 
 import {
@@ -14,25 +19,6 @@ import {
   TASK_STATUSES,
   TASK_TITLE_MAX_LENGTH,
 } from '../data/taskOptions'
-
-const fieldClassName =
-  'min-h-11 w-full min-w-0 rounded-lg border border-input bg-background px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none aria-invalid:border-destructive disabled:opacity-50'
-
-function TaskField({ id, label, error, children }) {
-  return (
-    <div className="min-w-0 space-y-2">
-      <label htmlFor={id} className="text-sm font-medium">
-        {label}
-      </label>
-      {children}
-      {error && (
-        <p id={`${id}-error`} role="alert" className="text-sm text-destructive">
-          {error.message}
-        </p>
-      )}
-    </div>
-  )
-}
 
 function TaskForm({
   task,
@@ -50,6 +36,7 @@ function TaskForm({
   const submitErrorRef = useRef(null)
   const {
     register,
+    control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting, isDirty },
@@ -87,8 +74,33 @@ function TaskForm({
       disabled: isSubmitting,
       'aria-invalid': Boolean(errors[name]),
       'aria-describedby': errors[name] ? `${formId}-${name}-error` : undefined,
-      className: fieldClassName,
     }
+  }
+
+  function selectField(name, options, placeholder) {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        rules={
+          name === 'projectId'
+            ? { required: t('tasks.errors.projectRequired') }
+            : undefined
+        }
+        render={({ field }) => (
+          <Select
+            {...fieldAttributes(name)}
+            ref={field.ref}
+            name={field.name}
+            value={field.value}
+            onBlur={field.onBlur}
+            onValueChange={field.onChange}
+            options={options}
+            placeholder={placeholder}
+          />
+        )}
+      />
+    )
   }
 
   async function handleFormSubmit(data) {
@@ -119,12 +131,12 @@ function TaskForm({
       onSubmit={handleSubmit(handleFormSubmit)}
       className={stickyActions ? 'flex min-h-full flex-col gap-4' : 'space-y-4'}
     >
-      <TaskField
+      <Field
         id={`${formId}-title`}
         label={t('tasks.form.title')}
         error={errors.title}
       >
-        <input
+        <Input
           {...fieldAttributes('title')}
           type="text"
           required
@@ -138,13 +150,13 @@ function TaskForm({
             },
           })}
         />
-      </TaskField>
-      <TaskField
+      </Field>
+      <Field
         id={`${formId}-description`}
         label={t('tasks.form.description')}
         error={errors.description}
       >
-        <textarea
+        <Textarea
           {...fieldAttributes('description')}
           rows={3}
           {...register('description', {
@@ -153,73 +165,65 @@ function TaskForm({
               t('tasks.errors.descriptionInvalid'),
           })}
         />
-      </TaskField>
-      <TaskField
+      </Field>
+      <Field
         id={`${formId}-projectId`}
         label={t('tasks.form.project')}
         error={errors.projectId}
       >
-        <select
-          {...fieldAttributes('projectId')}
-          required
-          {...register('projectId', {
-            required: t('tasks.errors.projectRequired'),
-          })}
-        >
-          <option value="">{t('tasks.form.chooseProject')}</option>
-          {sortedProjects.map((project) => (
-            <option key={project.id} value={project.id}>
-              {project.name}
-            </option>
-          ))}
-        </select>
-      </TaskField>
+        {selectField(
+          'projectId',
+          [
+            ['', t('tasks.form.chooseProject')],
+            ...sortedProjects.map((project) => [project.id, project.name]),
+          ],
+          t('tasks.form.chooseProject'),
+        )}
+      </Field>
       <div className="grid min-w-0 gap-4 sm:grid-cols-2">
-        <TaskField
+        <Field
           id={`${formId}-status`}
           label={t('tasks.form.status')}
           error={errors.status}
         >
-          <select {...fieldAttributes('status')} {...register('status')}>
-            {TASK_STATUSES.map((status) => (
-              <option key={status} value={status}>
-                {t(`tasks.status.${status}`)}
-              </option>
-            ))}
-          </select>
-        </TaskField>
-        <TaskField
+          {selectField(
+            'status',
+            TASK_STATUSES.map((value) => [value, t(`tasks.status.${value}`)]),
+          )}
+        </Field>
+        <Field
           id={`${formId}-priority`}
           label={t('tasks.form.priority')}
           error={errors.priority}
         >
-          <select {...fieldAttributes('priority')} {...register('priority')}>
-            {TASK_PRIORITIES.map((priority) => (
-              <option key={priority} value={priority}>
-                {t(`tasks.priority.${priority}`)}
-              </option>
-            ))}
-          </select>
-        </TaskField>
+          {selectField(
+            'priority',
+            TASK_PRIORITIES.map((value) => [
+              value,
+              t(`tasks.priority.${value}`),
+            ]),
+          )}
+        </Field>
       </div>
-      <TaskField
+      <Field
         id={`${formId}-dueDate`}
         label={t('tasks.form.dueDate')}
         error={errors.dueDate}
       >
-        <input
-          {...fieldAttributes('dueDate')}
-          type="date"
-          min="0001-01-01"
-          max="9999-12-31"
-          {...register('dueDate', {
+        <Controller
+          name="dueDate"
+          control={control}
+          rules={{
             validate: (value) =>
               !value ||
               isValidDateOnly(value) ||
               t('tasks.errors.dueDateInvalid'),
-          })}
+          }}
+          render={({ field }) => (
+            <DatePicker {...fieldAttributes('dueDate')} {...field} />
+          )}
         />
-      </TaskField>
+      </Field>
       {errors.root && (
         <p
           ref={submitErrorRef}

@@ -390,5 +390,15 @@
     "discardDescription": "Your changes have not been saved. Continue editing to keep your draft, or discard it to leave.",
     "keepEditing": "Continue editing",
     "discard": "Discard changes"
+  },
+  "datePicker": {
+    "placeholder": "Choose a date",
+    "title": "Choose due date",
+    "close": "Close calendar",
+    "loading": "Loading calendar…",
+    "manual": "Date (YYYY-MM-DD)",
+    "hint": "Enter a calendar date, for example 2026-12-15.",
+    "clear": "Clear date",
+    "done": "Done"
   }
 }

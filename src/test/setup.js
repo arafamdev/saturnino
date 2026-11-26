@@ -9,6 +9,11 @@ import i18n from '@/i18n'
 window.scrollTo = vi.fn()
 Element.prototype.scrollIntoView = vi.fn()
 
+// Radix Select uses pointer capture, which jsdom does not implement.
+Element.prototype.hasPointerCapture ??= vi.fn(() => false)
+Element.prototype.setPointerCapture ??= vi.fn()
+Element.prototype.releasePointerCapture ??= vi.fn()
+
 // Start each test with the default language.
 beforeEach(async () => {
   await i18n.changeLanguage('en')
