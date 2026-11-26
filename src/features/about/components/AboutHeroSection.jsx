@@ -1,4 +1,8 @@
+import { Trans, useTranslation } from 'react-i18next'
+
 function AboutHeroSection() {
+  const { t } = useTranslation('about')
+
   return (
     <section
       aria-labelledby="about-heading"
@@ -6,20 +10,25 @@ function AboutHeroSection() {
     >
       <div className="mx-auto max-w-3xl space-y-6 text-center">
         <p className="text-xs font-semibold tracking-widest text-primary uppercase">
-          Behind the name
+          {t('hero.eyebrow')}
         </p>
 
         <h1
           id="about-heading"
           className="text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-6xl"
         >
-          Every name has a story.
-          <br />
-          <span className="text-primary">This one has a legacy.</span>
+          <Trans
+            t={t}
+            i18nKey="hero.title"
+            components={{
+              break: <br />,
+              highlight: <span className="text-primary" />,
+            }}
+          />
         </h1>
 
         <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Inspired by a legacy. Built with purpose.
+          {t('hero.description')}
         </p>
       </div>
     </section>

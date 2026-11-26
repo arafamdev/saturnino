@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "eyebrow": "Behind the name",
+    "title": "Every name has a story.<break/><highlight>This one has a legacy.</highlight>",
+    "description": "Inspired by a legacy. Built with purpose."
+  },
+  "profile": {
+    "eyebrow": "The inspiration",
+    "subtitle": "A freedom fighter. A statesman. A hero.",
+    "description": "Saturnino is named in honour of my hero, who fought for the independence of Guinea-Bissau and devoted years of his life to serving his country.",
+    "tribute": "His courage, dedication, and legacy will always be a source of inspiration to me. This project is a personal tribute to his memory."
+  },
+  "images": {
+    "portraitAlt": "Portrait of Manuel Saturnino da Costa",
+    "historyAlt": "Another portrait of Manuel Saturnino da Costa",
+    "caption": "From the family archive."
+  },
+  "timeline": {
+    "eyebrow": "A legacy to remember",
+    "title": "A life of purpose.",
+    "listLabel": "Historical milestones",
+    "items": {
+      "freedom": {
+        "title": "The struggle for freedom",
+        "description": "A commander in Guinea-Bissau's independence struggle."
+      },
+      "service": {
+        "title": "A life of service",
+        "description": "Years of service to his homeland."
+      },
+      "leadership": {
+        "title": "National leadership",
+        "description": "Former Prime Minister of Guinea-Bissau."
+      },
+      "legacy": {
+        "title": "An enduring legacy",
+        "description": "A memory that lives on through generations."
+      }
+    }
+  },
+  "sources": {
+    "title": "Discover his story",
+    "description": "Explore historical accounts of his life and contribution to Guinea-Bissau.",
+    "items": {
+      "rtp": "Life and historical legacy",
+      "observador": "Historical background",
+      "voa": "Historical and public service record"
+    }
+  },
+  "purpose": {
+    "eyebrow": "Our purpose",
+    "title": "Small steps. Meaningful progress.",
+    "description": "Saturnino exists to help people bring clarity to their work, focus on what matters, and move forward with intention.",
+    "items": {
+      "organize": {
+        "title": "Organize.",
+        "description": "Bring clarity to your work."
+      },
+      "focus": {
+        "title": "Focus.",
+        "description": "Make space for what matters."
+      },
+      "evolve": {
+        "title": "Evolve.",
+        "description": "Move forward with intention."
+      }
+    }
+  },
+  "memorial": {
+    "eyebrow": "In loving memory",
+    "title": "Some legacies live forever."
+  }
+}

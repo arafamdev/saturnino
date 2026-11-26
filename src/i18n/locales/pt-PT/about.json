@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "eyebrow": "Por detrás do nome",
+    "title": "Cada nome tem uma história.<break/><highlight>Este carrega um legado.</highlight>",
+    "description": "Inspirado por um legado. Criado com propósito."
+  },
+  "profile": {
+    "eyebrow": "A inspiração",
+    "subtitle": "Um combatente pela liberdade. Um estadista. Um herói.",
+    "description": "Saturnino recebeu o seu nome em homenagem ao meu herói, que lutou pela independência da Guiné-Bissau e dedicou anos da sua vida ao serviço do seu país.",
+    "tribute": "A sua coragem, dedicação e legado serão sempre uma fonte de inspiração para mim. Este projeto é uma homenagem pessoal à sua memória."
+  },
+  "images": {
+    "portraitAlt": "Retrato de Manuel Saturnino da Costa",
+    "historyAlt": "Outro retrato de Manuel Saturnino da Costa",
+    "caption": "Do arquivo familiar."
+  },
+  "timeline": {
+    "eyebrow": "Um legado a recordar",
+    "title": "Uma vida com propósito.",
+    "listLabel": "Marcos históricos",
+    "items": {
+      "freedom": {
+        "title": "A luta pela liberdade",
+        "description": "Comandante na luta pela independência da Guiné-Bissau."
+      },
+      "service": {
+        "title": "Uma vida ao serviço da pátria",
+        "description": "Anos dedicados ao serviço do seu país."
+      },
+      "leadership": {
+        "title": "Liderança nacional",
+        "description": "Antigo primeiro-ministro da Guiné-Bissau."
+      },
+      "legacy": {
+        "title": "Um legado duradouro",
+        "description": "Uma memória que permanece viva através das gerações."
+      }
+    }
+  },
+  "sources": {
+    "title": "Descobre a sua história",
+    "description": "Explora relatos históricos sobre a sua vida e o seu contributo para a Guiné-Bissau.",
+    "items": {
+      "rtp": "Vida e legado histórico",
+      "observador": "Contexto histórico",
+      "voa": "Percurso histórico e serviço público"
+    }
+  },
+  "purpose": {
+    "eyebrow": "O nosso propósito",
+    "title": "Pequenos passos. Progresso com propósito.",
+    "description": "Saturnino existe para ajudar as pessoas a trazer clareza ao seu trabalho, a focarem-se no que importa e a avançarem com intenção.",
+    "items": {
+      "organize": {
+        "title": "Organiza.",
+        "description": "Traz clareza ao teu trabalho."
+      },
+      "focus": {
+        "title": "Foca-te.",
+        "description": "Cria espaço para o que importa."
+      },
+      "evolve": {
+        "title": "Evolui.",
+        "description": "Avança com intenção."
+      }
+    }
+  },
+  "memorial": {
+    "eyebrow": "Em sua memória",
+    "title": "Há legados que vivem para sempre."
+  }
+}
