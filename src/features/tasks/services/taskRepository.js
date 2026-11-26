@@ -147,7 +147,72 @@ export function createTaskRepository(db = database) {
     })
   }
 
-  return { getTasks, getTaskById, createTask, updateTask, deleteTask }
+  async function moveTask(taskId, movement) {
+    if (!movement || typeof movement !== 'object' || Array.isArray(movement))
+      throw new Error('TASK_MOVE_INVALID')
+    const { projectId, status, index, expectedUpdatedAt } = movement
+    if (typeof projectId !== 'string' || !projectId.trim())
+      throw new Error('TASK_PROJECT_REQUIRED')
+    if (!TASK_STATUSES.includes(status)) throw new Error('TASK_STATUS_INVALID')
+    if (!Number.isSafeInteger(index) || index < 0)
+      throw new Error('TASK_MOVE_INVALID')
+
+    return db.transaction('rw', db.projects, db.tasks, async () => {
+      const task = await db.tasks.get(taskId)
+      if (!task) throw new Error('TASK_NOT_FOUND')
+      if (task.projectId !== projectId) throw new Error('TASK_MOVE_INVALID')
+      await assertProjectExists(projectId)
+      if (!TASK_STATUSES.includes(task.status))
+        throw new Error('TASK_STATUS_INVALID')
+      if (
+        expectedUpdatedAt !== undefined &&
+        task.updatedAt !== expectedUpdatedAt
+      )
+        throw new Error('TASK_MOVE_CONFLICT')
+
+      // Re-read both affected columns inside the transaction; never trust a UI snapshot of all tasks.
+      const projectTasks = await getTasks(projectId)
+      const sourceColumn = projectTasks.filter(
+        (item) => item.status === task.status,
+      )
+      const targetColumn = projectTasks.filter(
+        (item) => item.status === status && item.id !== taskId,
+      )
+      if (index > targetColumn.length) throw new Error('TASK_MOVE_INVALID')
+      const sourceIndex = sourceColumn.findIndex((item) => item.id === taskId)
+      if (task.status === status && sourceIndex === index) return task
+
+      targetColumn.splice(index, 0, task)
+      const columnOrders = [targetColumn]
+      if (task.status !== status)
+        columnOrders.push(sourceColumn.filter((item) => item.id !== taskId))
+      const timestamp = new Date().toISOString()
+      let completedAt = null
+      if (status === 'done')
+        completedAt =
+          task.status === 'done' && task.completedAt
+            ? task.completedAt
+            : timestamp
+      const updates = []
+      for (const column of columnOrders) {
+        column.forEach((item, position) => {
+          const nextStatus = item.id === taskId ? status : item.status
+          if (item.position === position && item.status === nextStatus) return
+          updates.push({
+            ...item,
+            position,
+            status: nextStatus,
+            updatedAt: timestamp,
+            completedAt: item.id === taskId ? completedAt : item.completedAt,
+          })
+        })
+      }
+      await db.tasks.bulkPut(updates)
+      return updates.find((item) => item.id === taskId) ?? task
+    })
+  }
+
+  return { getTasks, getTaskById, createTask, updateTask, deleteTask, moveTask }
 }
 
 export const taskRepository = createTaskRepository()
