@@ -4,7 +4,18 @@
     "overview": "Overview",
     "tasks": "My Tasks",
     "projects": "Projects",
-    "settings": "Settings"
+    "settings": "Settings",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "menuDescription": "Navigate between workspace pages."
+  },
+  "workspace": {
+    "title": "Workspace",
+    "local": "Local Workspace",
+    "localDescription": "Stored on this device"
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb"
   },
   "projectDetails": {
     "title": "Project Details",
