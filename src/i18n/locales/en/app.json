@@ -361,5 +361,16 @@
     "reload": "Reload to update",
     "updating": "Updating…",
     "storageNote": "Offline caching stores application files. Projects and tasks stay in this browser. Keep JSON backups before clearing browser data."
+  },
+  "taskToolbar": {
+    "filters": "Filters",
+    "closeFilters": "Close filters",
+    "removeFilter": "Remove filter: {{label}}"
+  },
+  "projectWorkspace": {
+    "progress": "{{completed}} of {{total}} completed",
+    "progressLabel": "Project completion",
+    "more": "Show description",
+    "less": "Show less"
   }
 }

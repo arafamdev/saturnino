@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import TaskCollection from '@/features/tasks/components/TaskCollection'
 import { useSidebar } from '@/layouts/hooks/useSidebar'
 
-import ProjectFavoriteButton from '../components/ProjectFavoriteButton'
 import ProjectsErrorState from '../components/ProjectsErrorState'
 import { useProject } from '../hooks/useProject'
 
@@ -89,43 +88,7 @@ function ProjectDetailsPage() {
   }
 
   return (
-    <section className="space-y-6">
-      <Link
-        to="/app/projects"
-        className="inline-flex items-center gap-2 rounded-md text-sm text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-      >
-        <ArrowLeft className="size-4" aria-hidden="true" />
-        {t('projectDetails.backToProjects')}
-      </Link>
-
-      {/* Project information */}
-      <div className="flex items-start gap-4">
-        <div
-          className="flex size-14 shrink-0 items-center justify-center rounded-xl"
-          style={{ backgroundColor: `${project.color}20` }}
-        >
-          <FolderKanban
-            className="size-7"
-            style={{ color: project.color }}
-            aria-hidden="true"
-          />
-        </div>
-
-        <div className="min-w-0 flex-1 space-y-2">
-          <h1 className="text-2xl font-semibold wrap-break-word">
-            {project.name}
-          </h1>
-
-          <p className="text-sm leading-relaxed wrap-break-word text-muted-foreground">
-            {project.description || t('projects.noDescription')}
-          </p>
-        </div>
-
-        <ProjectFavoriteButton project={project} />
-      </div>
-
-      <TaskCollection key={project.id} projectId={project.id} />
-    </section>
+    <TaskCollection key={project.id} projectId={project.id} project={project} />
   )
 }
 

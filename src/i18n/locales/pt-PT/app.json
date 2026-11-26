@@ -361,5 +361,16 @@
     "reload": "Recarregar para atualizar",
     "updating": "A atualizar…",
     "storageNote": "O cache offline guarda os ficheiros da aplicação. Os projetos e tarefas mantêm-se neste navegador. Guarde backups JSON antes de limpar os dados do navegador."
+  },
+  "taskToolbar": {
+    "filters": "Filtros",
+    "closeFilters": "Fechar filtros",
+    "removeFilter": "Remover filtro: {{label}}"
+  },
+  "projectWorkspace": {
+    "progress": "{{completed}} de {{total}} concluídas",
+    "progressLabel": "Conclusão do projeto",
+    "more": "Mostrar descrição",
+    "less": "Mostrar menos"
   }
 }

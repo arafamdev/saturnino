@@ -272,10 +272,12 @@ describe('Application routing', () => {
     expect(screen.getByText(project.description)).toBeInTheDocument()
 
     expect(
-      screen.getByRole('link', {
-        name: 'Voltar aos projetos',
+      within(
+        screen.getByRole('navigation', { name: 'Caminho de navegação' }),
+      ).getByRole('link', {
+        name: 'Projetos',
       }),
-    ).toBeInTheDocument()
+    ).toHaveAttribute('href', '/app/projects')
   })
 
   it('renders the not found page and home link in Portuguese', async () => {

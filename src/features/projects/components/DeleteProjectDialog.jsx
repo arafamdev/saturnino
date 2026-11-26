@@ -13,6 +13,7 @@ function DeleteProjectDialog({
   onOpenChange,
   project,
   onCloseAutoFocus,
+  onDeleted,
 }) {
   const { t } = useTranslation('app')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -33,7 +34,7 @@ function DeleteProjectDialog({
 
     try {
       await projectRepository.deleteProject(project.id)
-
+      onDeleted?.()
       onOpenChange(false)
     } catch {
       setHasError(true)
