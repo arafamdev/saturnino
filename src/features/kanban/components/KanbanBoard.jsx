@@ -30,7 +30,14 @@ function sensors(defaults) {
   ]
 }
 
-function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
+function KanbanBoard({
+  projectId,
+  tasks,
+  projects,
+  onEdit,
+  onDelete,
+  movementRestricted = false,
+}) {
   const { t } = useTranslation('app')
   const [column, setColumn] = useState('todo')
   const [busy, setBusy] = useState(false)
@@ -67,9 +74,13 @@ function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
 
   useEffect(() => {
     const request = focusRequest.current
+    if (!request || busy) return
+    if (!tasks.some((task) => task.id === request.id)) {
+      boardRef.current?.focus()
+      focusRequest.current = null
+      return
+    }
     if (
-      !request ||
-      busy ||
       !tasks.some(
         (task) =>
           task.id === request.id &&
@@ -131,7 +142,13 @@ function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
   }
 
   function handleDragEnd({ canceled, operation }) {
-    if (canceled || !operation.source || !operation.target) return
+    if (
+      movementRestricted ||
+      canceled ||
+      !operation.source ||
+      !operation.target
+    )
+      return
     const task = operation.source.data.task
     const { status, index } = operation.target.data
     if (
@@ -147,7 +164,14 @@ function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
   }
 
   return (
-    <div ref={boardRef} className="relative min-w-0 space-y-4" aria-busy={busy}>
+    <div
+      ref={boardRef}
+      tabIndex={-1}
+      role="region"
+      aria-label={t('kanban.board')}
+      className="relative min-w-0 space-y-4"
+      aria-busy={busy}
+    >
       <p
         role="status"
         aria-label={t('kanban.view')}
@@ -155,6 +179,14 @@ function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
       >
         {busy ? t('kanban.saving') : announcement}
       </p>
+      {movementRestricted && (
+        <p className="text-sm text-muted-foreground">
+          {t('filters.reorderHint')}
+        </p>
+      )}
+      {tasks.length === 0 && movementRestricted && (
+        <p className="text-sm text-muted-foreground">{t('filters.empty')}</p>
+      )}
       {error && (
         <p
           role="alert"
@@ -194,6 +226,7 @@ function KanbanBoard({ projectId, tasks, projects, onEdit, onDelete }) {
               visible={column === status}
               projectsById={projectsById}
               busy={busy}
+              movementRestricted={movementRestricted}
               onMove={move}
               onEdit={onEdit}
               onDelete={onDelete}

@@ -73,6 +73,14 @@ Every card also offers a status selector and move-up/down buttons, so moving tas
 
 Movement re-reads persisted tasks and renumbers both affected columns in one IndexedDB transaction. A failed write preserves the previous order; a task edited during the gesture produces a conflict message. Moving to Done records completion, and reopening clears it. The board loads on demand and does not add drag-and-drop code to the global task list until opened.
 
+## Search and Filters
+
+Search task titles and descriptions without case or accent differences. Combine status, priority and due-date filters; **My Tasks** also filters by project. Deadlines can show overdue, today, after today or undated tasks. Completed tasks are excluded from overdue results and warnings.
+
+Sort by manual order, earliest due date (undated tasks last), highest priority, natural title order or latest update. Sorting changes presentation only. The result count and empty-result message reflect the combined criteria; **Clear filters** restores the default view. Filters apply to both list and board and remain local to the current collection view.
+
+While filters or an alternative sort are active, board dragging and position buttons are unavailable because hidden cards would make insertion positions ambiguous. Clear filters and select manual order to reorder. Status selectors remain available; if changing status hides a card, focus returns to the board.
+
 ## Getting Started
 
 Clone the repository:

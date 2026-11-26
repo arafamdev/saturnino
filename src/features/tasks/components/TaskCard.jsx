@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
-import { formatDateOnly } from '@/lib/dates/dateOnly'
+import { formatDateOnly, getTodayDateOnly } from '@/lib/dates/dateOnly'
+
+import { isTaskOverdue } from '../utils/selectTasks'
 
 function TaskCard({
   ref,
@@ -82,6 +84,11 @@ function TaskCard({
           </time>
         )}
       </div>
+      {isTaskOverdue(task, getTodayDateOnly()) && (
+        <p className="mt-2 text-xs font-medium text-destructive">
+          {t('filters.overdue')}
+        </p>
+      )}
       {children}
     </article>
   )

@@ -106,7 +106,11 @@ describe('Task management integration', () => {
       await main.findByRole('heading', { name: 'Build the first screen' }),
     ).toBeInTheDocument()
     expect(main.getByText('Priority: Urgent')).toBeInTheDocument()
-    expect(main.getByText('In progress')).toBeInTheDocument()
+    expect(
+      within(main.getByRole('list', { name: 'Task list' })).getByText(
+        'In progress',
+      ),
+    ).toBeInTheDocument()
     expect((await taskRepository.getTasks())[0]).toMatchObject({
       projectId: project.id,
       status: 'in-progress',
@@ -272,7 +276,11 @@ describe('Task management integration', () => {
     expect(
       await main.findByRole('heading', { name: 'First task' }),
     ).toBeInTheDocument()
-    expect(main.getByText('Por fazer')).toBeInTheDocument()
+    expect(
+      within(main.getByRole('list', { name: 'Lista de tarefas' })).getByText(
+        'Por fazer',
+      ),
+    ).toBeInTheDocument()
     expect(main.getByRole('button', { name: 'Nova tarefa' })).toBeEnabled()
   })
 
@@ -349,5 +357,102 @@ describe('Task management integration', () => {
         await mainRegion()
       ).findByRole('heading', { name: 'Keep my draft' }),
     ).toBeInTheDocument()
+  })
+})
+
+describe('Task filters integration', () => {
+  it('combines search, priority and project and clears an empty result', async () => {
+    const user = userEvent.setup()
+    const first = await projectRepository.createProject({
+      name: 'First project',
+    })
+    const second = await projectRepository.createProject({
+      name: 'Second project',
+    })
+    await taskRepository.createTask({
+      projectId: first.id,
+      title: 'Revisão',
+      description: 'Árvore',
+      priority: 'high',
+    })
+    await taskRepository.createTask({
+      projectId: second.id,
+      title: 'Another',
+      priority: 'low',
+    })
+    renderTasks()
+    const main = await mainRegion()
+    const search = await main.findByRole('searchbox', { name: 'Search tasks' })
+    await waitFor(() => expect(search).toBeEnabled())
+    await user.type(search, 'arvore')
+    await user.selectOptions(
+      main.getByRole('combobox', { name: 'Filter by priority' }),
+      'high',
+    )
+    expect(
+      main.getByRole('status', { name: 'Filtered task count' }),
+    ).toHaveTextContent('1 of 2 tasks')
+    await user.selectOptions(
+      main.getByRole('combobox', { name: 'Filter by project' }),
+      second.id,
+    )
+    expect(main.getByText('No tasks match your filters.')).toBeInTheDocument()
+    await user.click(main.getByRole('button', { name: 'Clear filters' }))
+    expect(
+      main.getByRole('status', { name: 'Filtered task count' }),
+    ).toHaveTextContent('2 of 2 tasks')
+    expect(search).toHaveValue('')
+    expect(await taskRepository.getTasks()).toHaveLength(2)
+  })
+
+  it('sorts the rendered list without persisting a different manual order', async () => {
+    const user = userEvent.setup()
+    const project = await projectRepository.createProject({ name: 'Sort QA' })
+    const first = await createTask(project.id, 'Zebra')
+    const second = await createTask(project.id, 'Alpha')
+    renderTasks()
+    const main = await mainRegion()
+    const sort = await main.findByRole('combobox', { name: 'Sort tasks' })
+    await waitFor(() => expect(sort).toBeEnabled())
+    await user.selectOptions(sort, 'title')
+    expect(
+      main
+        .getAllByRole('heading', { level: 3 })
+        .map((heading) => heading.textContent),
+    ).toEqual(['Alpha', 'Zebra'])
+    expect(
+      (await taskRepository.getTasks(project.id)).map((task) => task.id),
+    ).toEqual([first.id, second.id])
+  })
+
+  it('shows overdue only for unfinished tasks and filters completed records out', async () => {
+    const user = userEvent.setup()
+    const project = await projectRepository.createProject({
+      name: 'Deadline QA',
+    })
+    await taskRepository.createTask({
+      projectId: project.id,
+      title: 'Late open',
+      dueDate: '2000-01-01',
+    })
+    await taskRepository.createTask({
+      projectId: project.id,
+      title: 'Past completed',
+      dueDate: '2000-01-01',
+      status: 'done',
+    })
+    renderTasks()
+    const main = await mainRegion()
+    const due = await main.findByRole('combobox', {
+      name: 'Filter by due date',
+    })
+    await waitFor(() => expect(due).toBeEnabled())
+    const list = within(main.getByRole('list', { name: 'Task list' }))
+    expect(list.getAllByText('Overdue')).toHaveLength(1)
+    await user.selectOptions(due, 'overdue')
+    expect(main.getByRole('heading', { name: 'Late open' })).toBeInTheDocument()
+    expect(
+      main.queryByRole('heading', { name: 'Past completed' }),
+    ).not.toBeInTheDocument()
   })
 })

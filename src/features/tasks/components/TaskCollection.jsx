@@ -6,11 +6,18 @@ import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 import { useProjects } from '@/features/projects/hooks/useProjects'
+import { getTodayDateOnly } from '@/lib/dates/dateOnly'
+import {
+  DEFAULT_TASK_FILTERS,
+  hasTaskFilters,
+  selectTasks,
+} from '../utils/selectTasks'
 
 import { useTasks } from '../hooks/useTasks'
 
 import DeleteTaskDialog from './DeleteTaskDialog'
 import TaskDialog from './TaskDialog'
+import TaskFilters from './TaskFilters'
 import TaskList from './TaskList'
 
 const KanbanBoard = lazy(
@@ -18,10 +25,11 @@ const KanbanBoard = lazy(
 )
 
 function TaskCollection({ projectId }) {
-  const { t } = useTranslation('app')
+  const { t, i18n } = useTranslation('app')
   const headingId = useId()
   const taskQuery = useTasks(projectId)
   const projectQuery = useProjects()
+  const [filters, setFilters] = useState(DEFAULT_TASK_FILTERS)
   const [view, setView] = useState('list')
   const [activeDialog, setActiveDialog] = useState(null)
   const createButtonRef = useRef(null)
@@ -29,6 +37,12 @@ function TaskCollection({ projectId }) {
 
   const isLoading = taskQuery.isLoading || projectQuery.isLoading
   const isError = taskQuery.isError || projectQuery.isError
+  const visibleTasks = selectTasks(taskQuery.tasks, filters, {
+    today: getTodayDateOnly(),
+    locale: i18n.resolvedLanguage,
+  })
+  const movementRestricted =
+    hasTaskFilters(filters) || filters.sort !== 'manual'
   const canCreate = !isLoading && !isError && projectQuery.projects.length > 0
   const isTaskDialogOpen =
     activeDialog?.type === 'create' || activeDialog?.type === 'edit'
@@ -100,7 +114,8 @@ function TaskCollection({ projectId }) {
         <Suspense fallback={<p role="status">{t('tasks.loading')}</p>}>
           <KanbanBoard
             projectId={projectId}
-            tasks={taskQuery.tasks}
+            tasks={visibleTasks}
+            movementRestricted={movementRestricted}
             projects={projectQuery.projects}
             onEdit={(task, trigger) => openDialog('edit', task, trigger)}
             onDelete={(task, trigger) => openDialog('delete', task, trigger)}
@@ -113,9 +128,15 @@ function TaskCollection({ projectId }) {
           {t('tasks.empty')}
         </p>
       )
+    if (visibleTasks.length === 0)
+      return (
+        <p className="rounded-xl border border-dashed p-6 text-sm text-muted-foreground">
+          {t('filters.empty')}
+        </p>
+      )
     return (
       <TaskList
-        tasks={taskQuery.tasks}
+        tasks={visibleTasks}
         projects={projectQuery.projects}
         onEdit={(task, trigger) => openDialog('edit', task, trigger)}
         onDelete={(task, trigger) => openDialog('delete', task, trigger)}
@@ -156,6 +177,18 @@ function TaskCollection({ projectId }) {
           ))}
         </div>
       )}
+      <TaskFilters
+        filters={filters}
+        onChange={(name, value) =>
+          setFilters((previous) => ({ ...previous, [name]: value }))
+        }
+        onReset={() => setFilters(DEFAULT_TASK_FILTERS)}
+        projects={projectQuery.projects}
+        showProjects={!projectId}
+        disabled={isLoading || isError}
+        count={visibleTasks.length}
+        total={taskQuery.tasks.length}
+      />
       {renderTasks()}
       <TaskDialog
         open={isTaskDialogOpen}
