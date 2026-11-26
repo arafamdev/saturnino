@@ -57,6 +57,14 @@ Preferences are stored locally under `saturnino:sidebar-preferences`. Older pref
 
 For contributors: `SidebarProvider` owns reducer state and a shared sidebar project query. `useReducer` applies immutable preference changes; `useContext` shares them; `useEffect` persists preferences and verifies missing history references; `useRef` tracks focus targets and pointer gestures; local `useState` previews resizing without writing storage on every movement. Project data continues through the repository and Dexie, separately from UI preferences.
 
+## Task Management
+
+Open **My Tasks** to manage all tasks, or open a project for its own task list. Every task belongs to a project and includes a title, description, status, priority and optional due date. Creation, editing and confirmed deletion update all relevant views reactively.
+
+Tasks use four statuses (Backlog, To do, In progress, Done) and four priorities (Low, Medium, High, Urgent). Due dates are calendar dates; creation, modification and completion use ISO timestamps. Reopening a completed task clears its completion timestamp. Project/task writes validate the project relationship inside a database transaction, and deleting a project still deletes its tasks atomically.
+
+Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; backup/export and offline application-shell caching are separate upcoming roadmap features.
+
 ## Getting Started
 
 Clone the repository:
