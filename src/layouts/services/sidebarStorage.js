@@ -31,6 +31,26 @@ export function loadSidebarPreferences() {
     return {
       ...initialSidebarState,
       expandedSections,
+      sectionOrder: [
+        ...new Set([
+          ...(Array.isArray(parsedPreferences?.sectionOrder)
+            ? parsedPreferences.sectionOrder
+            : []
+          ).filter((id) => initialSidebarState.sectionOrder.includes(id)),
+          ...initialSidebarState.sectionOrder,
+        ]),
+      ],
+      hiddenSections: Array.isArray(parsedPreferences?.hiddenSections)
+        ? [
+            ...new Set(
+              parsedPreferences.hiddenSections.filter(
+                (id) =>
+                  id !== 'workspace' &&
+                  initialSidebarState.sectionOrder.includes(id),
+              ),
+            ),
+          ]
+        : [],
       recentProjectIds: normalizeRecentProjectIds(
         parsedPreferences?.recentProjectIds,
       ),

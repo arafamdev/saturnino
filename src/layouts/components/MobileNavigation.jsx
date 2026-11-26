@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import Logo from '@/components/shared/Logo'
 import { Button } from '@/components/ui/button'
 
+import SidebarCustomization from './SidebarCustomization'
 import SidebarProjectSections from './SidebarProjectSections'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
@@ -65,6 +66,7 @@ function MobileNavigation() {
             {/* Navigation sections */}
             <div className="flex-1 space-y-4 overflow-y-auto p-3">
               <SidebarProjectSections onNavigate={handleCloseMenu} />
+              <SidebarCustomization />
             </div>
 
             {/* Workspace information */}

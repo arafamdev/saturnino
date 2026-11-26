@@ -122,5 +122,16 @@
     "noResults": "No matching projects.",
     "loading": "Loading project explorer...",
     "loadError": "Unable to load project explorer."
+  },
+  "sidebar": {
+    "customize": "Customize sidebar",
+    "sections": "Sidebar sections",
+    "reorderHelp": "Drag a handle, use its arrow keys, or use the move buttons. Main navigation always stays available.",
+    "drag": "Reorder {{name}}",
+    "moveUp": "Move {{name}} up",
+    "moveDown": "Move {{name}} down",
+    "moved": "{{name}} moved to position {{position}}.",
+    "reset": "Reset sidebar preferences",
+    "resetDone": "Sidebar preferences reset."
   }
 }

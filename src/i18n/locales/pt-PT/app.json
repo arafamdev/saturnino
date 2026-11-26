@@ -122,5 +122,16 @@
     "noResults": "Nenhum projeto encontrado.",
     "loading": "A carregar o explorador de projetos...",
     "loadError": "Não foi possível carregar o explorador de projetos."
+  },
+  "sidebar": {
+    "customize": "Personalizar barra lateral",
+    "sections": "Secções da barra lateral",
+    "reorderHelp": "Arrasta uma pega, usa as suas teclas de seta ou os botões para mover. A navegação principal permanece sempre disponível.",
+    "drag": "Reordenar {{name}}",
+    "moveUp": "Mover {{name}} para cima",
+    "moveDown": "Mover {{name}} para baixo",
+    "moved": "{{name}} na posição {{position}}.",
+    "reset": "Repor preferências da barra lateral",
+    "resetDone": "Preferências da barra lateral repostas."
   }
 }

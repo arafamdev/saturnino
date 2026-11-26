@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
+import { useSidebar } from '../hooks/useSidebar'
 import { sidebarSectionIds } from '../state/sidebarReducer'
 
 import AppNavigation from './AppNavigation'
@@ -10,18 +11,24 @@ import SidebarSection from './SidebarSection'
 
 function SidebarProjectSections({ onNavigate }) {
   const { t } = useTranslation('app')
-  return (
-    <>
+  const { sectionOrder, hiddenSections } = useSidebar()
+  const sections = {
+    workspace: (
       <SidebarSection
         sectionId={sidebarSectionIds.WORKSPACE}
         title={t('workspace.title')}
       >
         <AppNavigation onNavigate={onNavigate} />
       </SidebarSection>
-      <SidebarFavoriteProjects onNavigate={onNavigate} />
-      <SidebarRecentProjects onNavigate={onNavigate} />
-      <SidebarProjectExplorer onNavigate={onNavigate} />
-    </>
-  )
+    ),
+    favorites: <SidebarFavoriteProjects onNavigate={onNavigate} />,
+    recentProjects: <SidebarRecentProjects onNavigate={onNavigate} />,
+    projectExplorer: <SidebarProjectExplorer onNavigate={onNavigate} />,
+  }
+
+  return sectionOrder
+    .filter((id) => !hiddenSections.includes(id))
+    .map((id) => <div key={id}>{sections[id]}</div>)
 }
+
 export default SidebarProjectSections

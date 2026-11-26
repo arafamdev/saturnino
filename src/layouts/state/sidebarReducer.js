@@ -8,6 +8,8 @@ export const sidebarSectionIds = {
 }
 
 export const sidebarActionTypes = {
+  SET_VISIBILITY: 'sidebar/setVisibility',
+  MOVE_SECTION: 'sidebar/moveSection',
   TOGGLE_SECTION: 'sidebar/toggleSection',
   RESET_PREFERENCES: 'sidebar/resetPreferences',
   RECORD_PROJECT_ACCESS: 'sidebar/recordProjectAccess',
@@ -21,6 +23,8 @@ export const initialSidebarState = {
     [sidebarSectionIds.RECENT_PROJECTS]: true,
     [sidebarSectionIds.PROJECT_EXPLORER]: true,
   },
+  sectionOrder: Object.values(sidebarSectionIds),
+  hiddenSections: [],
   recentProjectIds: [],
 }
 
@@ -41,6 +45,31 @@ export function normalizeRecentProjectIds(projectIds) {
 
 export function sidebarReducer(state, action) {
   switch (action.type) {
+    case sidebarActionTypes.SET_VISIBILITY: {
+      const { sectionId, visible } = action.payload
+      if (
+        sectionId === 'workspace' ||
+        !Object.values(sidebarSectionIds).includes(sectionId)
+      )
+        return state
+      return {
+        ...state,
+        hiddenSections: visible
+          ? state.hiddenSections.filter((id) => id !== sectionId)
+          : [...new Set([...state.hiddenSections, sectionId])],
+      }
+    }
+    case sidebarActionTypes.MOVE_SECTION: {
+      const { sectionId, targetId } = action.payload
+      const sectionOrder = [...state.sectionOrder]
+      const from = sectionOrder.indexOf(sectionId)
+      const to = sectionOrder.indexOf(targetId)
+      if (from < 0 || to < 0 || from === to) return state
+      sectionOrder.splice(from, 1)
+      sectionOrder.splice(to, 0, sectionId)
+      return { ...state, sectionOrder }
+    }
+
     case sidebarActionTypes.TOGGLE_SECTION: {
       const sectionId = action.payload
 

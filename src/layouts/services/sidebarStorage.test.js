@@ -53,6 +53,7 @@ describe('sidebarStorage', () => {
     )
 
     expect(loadSidebarPreferences()).toEqual({
+      ...initialSidebarState,
       expandedSections: {
         workspace: true,
         favorites: false,
@@ -76,6 +77,7 @@ describe('sidebarStorage', () => {
     )
 
     expect(loadSidebarPreferences()).toEqual({
+      ...initialSidebarState,
       expandedSections: {
         workspace: true,
         favorites: true,

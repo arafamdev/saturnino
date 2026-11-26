@@ -56,6 +56,16 @@ function SidebarProvider({ children }) {
 
   const contextValue = {
     ...state,
+    setSectionVisible: (sectionId, visible) =>
+      dispatch({
+        type: sidebarActionTypes.SET_VISIBILITY,
+        payload: { sectionId, visible },
+      }),
+    moveSection: (sectionId, targetId) =>
+      dispatch({
+        type: sidebarActionTypes.MOVE_SECTION,
+        payload: { sectionId, targetId },
+      }),
     toggleSection,
     resetPreferences,
     recordProjectAccess,

@@ -1,5 +1,6 @@
 import Logo from '@/components/shared/Logo'
 
+import SidebarCustomization from './SidebarCustomization'
 import SidebarProjectSections from './SidebarProjectSections'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
@@ -14,6 +15,7 @@ function AppSidebar() {
       {/* Navigation sections */}
       <div className="flex-1 space-y-4 overflow-y-auto px-3 py-4">
         <SidebarProjectSections />
+        <SidebarCustomization />
       </div>
 
       {/* Workspace information */}
