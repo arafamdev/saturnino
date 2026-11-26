@@ -262,5 +262,33 @@
       "title": "Title, A–Z",
       "updated": "Recently updated"
     }
+  },
+  "dashboard": {
+    "description": "A clear view of your local projects, progress and upcoming work.",
+    "metrics": {
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "open": "Open tasks",
+      "completed": "Completed tasks",
+      "overdue": "Overdue tasks",
+      "completion": "Completion rate"
+    },
+    "distribution": "Tasks by status",
+    "noTasks": "Create tasks to see their distribution.",
+    "projectProgress": "Project progress",
+    "allProjects": "View all projects",
+    "noProjects": "No projects yet.",
+    "progressNamed": "Progress for {{name}}",
+    "projectEmpty": "No tasks in this project.",
+    "projectCount": "{{completed}} / {{total}} completed",
+    "upcoming": "Upcoming deadlines",
+    "upcomingDescription": "Your next five unfinished tasks due today or later.",
+    "noDeadlines": "No upcoming deadlines.",
+    "errorTitle": "Could not load your overview",
+    "errorDescription": "Your local workspace could not be read. Try again.",
+    "loading": "Loading overview…",
+    "welcome": "Start your first project",
+    "startDescription": "Create a project, add tasks and track your progress here.",
+    "startAction": "Go to projects"
   }
 }

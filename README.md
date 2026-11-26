@@ -81,6 +81,12 @@ Sort by manual order, earliest due date (undated tasks last), highest priority, 
 
 While filters or an alternative sort are active, board dragging and position buttons are unavailable because hidden cards would make insertion positions ambiguous. Clear filters and select manual order to reorder. Status selectors remain available; if changing status hides a card, focus returns to the board.
 
+## Dashboard
+
+**Overview** shows project/task totals, open and completed tasks, overdue work and the completion rate. Status distribution includes text counts and percentages; project progress uses labelled native progress bars. The six most recently updated projects link to their details, and the next five unfinished deadlines include today and later dates.
+
+Metrics come from a consistent read-only snapshot of projects and tasks and update reactively after local changes. No derived counters are stored in the database. Empty, loading and storage-error states have distinct feedback and retry. The civil day refreshes after local midnight and when the tab regains focus or visibility, keeping dashboard deadlines, filters and overdue labels current.
+
 ## Getting Started
 
 Clone the repository:
