@@ -97,5 +97,44 @@
     "title": "Page not found",
     "description": "This page is outside our orbit.",
     "backToHome": "Back to home"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "No favorite projects yet.",
+    "loading": "Loading favorites...",
+    "loadError": "Unable to load favorite projects.",
+    "updateError": "Unable to update favorite. Please try again.",
+    "toggle": "Favorite project {{name}}",
+    "add": "Add {{name}} to favorites",
+    "remove": "Remove {{name}} from favorites"
+  },
+  "recentProjects": {
+    "title": "Recent Projects",
+    "empty": "No recently visited projects.",
+    "loading": "Loading recent projects...",
+    "loadError": "Unable to load recent projects."
+  },
+  "projectExplorer": {
+    "title": "Project Explorer",
+    "search": "Search projects...",
+    "newProject": "New project",
+    "empty": "No projects yet.",
+    "noResults": "No matching projects.",
+    "loading": "Loading project explorer...",
+    "loadError": "Unable to load project explorer."
+  },
+  "sidebar": {
+    "customize": "Customize sidebar",
+    "sections": "Sidebar sections",
+    "reorderHelp": "Drag a handle, use its arrow keys, or use the move buttons. Main navigation always stays available.",
+    "drag": "Reorder {{name}}",
+    "moveUp": "Move {{name}} up",
+    "moveDown": "Move {{name}} down",
+    "moved": "{{name}} moved to position {{position}}.",
+    "reset": "Reset sidebar preferences",
+    "resetDone": "Sidebar preferences reset.",
+    "compact": "Compact sidebar",
+    "expand": "Expand sidebar",
+    "resize": "Resize sidebar"
   }
 }

@@ -1,18 +1,34 @@
+import { useEffect } from 'react'
+
 import { ArrowLeft, FolderKanban, LoaderCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router'
 
 import { Button } from '@/components/ui/button'
+import { useSidebar } from '@/layouts/hooks/useSidebar'
 
+import ProjectFavoriteButton from '../components/ProjectFavoriteButton'
 import ProjectsErrorState from '../components/ProjectsErrorState'
 import { useProject } from '../hooks/useProject'
 
 function ProjectDetailsPage() {
   const { projectId } = useParams()
   const { t } = useTranslation('app')
+  const { recordProjectAccess } = useSidebar()
 
   const { project, isLoading, isNotFound, isError, retry } =
     useProject(projectId)
+
+  const visitedProjectId =
+    !isLoading && !isError && !isNotFound && project?.id === projectId
+      ? project.id
+      : null
+
+  useEffect(() => {
+    if (visitedProjectId) {
+      recordProjectAccess(visitedProjectId)
+    }
+  }, [visitedProjectId, recordProjectAccess])
 
   if (isLoading) {
     return (
@@ -94,7 +110,7 @@ function ProjectDetailsPage() {
           />
         </div>
 
-        <div className="min-w-0 space-y-2">
+        <div className="min-w-0 flex-1 space-y-2">
           <h1 className="text-2xl font-semibold wrap-break-word">
             {project.name}
           </h1>
@@ -103,6 +119,8 @@ function ProjectDetailsPage() {
             {project.description || t('projects.noDescription')}
           </p>
         </div>
+
+        <ProjectFavoriteButton project={project} />
       </div>
 
       {/* Future task management area */}

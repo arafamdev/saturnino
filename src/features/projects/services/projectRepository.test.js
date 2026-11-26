@@ -41,6 +41,7 @@ describe('Project repository', () => {
       name: 'Saturnino',
       description: 'Task management application',
       color: DEFAULT_PROJECT_COLOR,
+      isFavorite: false,
       createdAt: expect.any(String),
       updatedAt: expect.any(String),
     })

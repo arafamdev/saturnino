@@ -53,7 +53,9 @@ describe('Project read errors', () => {
 
     renderProjectRoute()
 
-    const errorState = await screen.findByRole('alert')
+    const errorState = await within(await screen.findByRole('main')).findByRole(
+      'alert',
+    )
 
     expect(
       within(errorState).getByRole('heading', {
@@ -68,7 +70,7 @@ describe('Project read errors', () => {
     ).not.toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', {
+      within(screen.getByRole('main')).getByRole('button', {
         name: 'New project',
       }),
     ).toBeDisabled()
@@ -87,7 +89,9 @@ describe('Project read errors', () => {
 
     renderProjectRoute()
 
-    const errorState = await screen.findByRole('alert')
+    const errorState = await within(await screen.findByRole('main')).findByRole(
+      'alert',
+    )
 
     readProjectsSpy.mockRestore()
 
@@ -111,7 +115,7 @@ describe('Project read errors', () => {
     ).not.toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', {
+      within(screen.getByRole('main')).getByRole('button', {
         name: 'New project',
       }),
     ).toBeEnabled()
@@ -161,7 +165,9 @@ describe('Project read errors', () => {
 
     renderProjectRoute(`/app/projects/${project.id}`)
 
-    const errorState = await screen.findByRole('alert')
+    const errorState = await within(await screen.findByRole('main')).findByRole(
+      'alert',
+    )
 
     readProjectSpy.mockRestore()
 
@@ -190,7 +196,9 @@ describe('Project read errors', () => {
 
     renderProjectRoute()
 
-    const errorState = await screen.findByRole('alert')
+    const errorState = await within(await screen.findByRole('main')).findByRole(
+      'alert',
+    )
 
     expect(
       within(errorState).getByRole('heading', {

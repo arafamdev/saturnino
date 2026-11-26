@@ -97,5 +97,44 @@
     "title": "Página não encontrada",
     "description": "Esta página está fora da nossa órbita.",
     "backToHome": "Voltar ao início"
+  },
+  "favorites": {
+    "title": "Favoritos",
+    "empty": "Ainda não tens projetos favoritos.",
+    "loading": "A carregar favoritos...",
+    "loadError": "Não foi possível carregar os projetos favoritos.",
+    "updateError": "Não foi possível atualizar o favorito. Tenta novamente.",
+    "toggle": "Projeto favorito {{name}}",
+    "add": "Adicionar {{name}} aos favoritos",
+    "remove": "Remover {{name}} dos favoritos"
+  },
+  "recentProjects": {
+    "title": "Projetos recentes",
+    "empty": "Ainda não visitaste nenhum projeto.",
+    "loading": "A carregar projetos recentes...",
+    "loadError": "Não foi possível carregar os projetos recentes."
+  },
+  "projectExplorer": {
+    "title": "Explorador de projetos",
+    "search": "Pesquisar projetos...",
+    "newProject": "Novo projeto",
+    "empty": "Ainda não existem projetos.",
+    "noResults": "Nenhum projeto encontrado.",
+    "loading": "A carregar o explorador de projetos...",
+    "loadError": "Não foi possível carregar o explorador de projetos."
+  },
+  "sidebar": {
+    "customize": "Personalizar barra lateral",
+    "sections": "Secções da barra lateral",
+    "reorderHelp": "Arrasta uma pega, usa as suas teclas de seta ou os botões para mover. A navegação principal permanece sempre disponível.",
+    "drag": "Reordenar {{name}}",
+    "moveUp": "Mover {{name}} para cima",
+    "moveDown": "Mover {{name}} para baixo",
+    "moved": "{{name}} na posição {{position}}.",
+    "reset": "Repor preferências da barra lateral",
+    "resetDone": "Preferências da barra lateral repostas.",
+    "compact": "Barra lateral compacta",
+    "expand": "Expandir barra lateral",
+    "resize": "Redimensionar barra lateral"
   }
 }

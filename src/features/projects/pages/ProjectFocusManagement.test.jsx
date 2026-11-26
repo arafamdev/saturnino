@@ -24,7 +24,9 @@ function renderProjectsPage() {
 }
 
 async function getNewProjectButton() {
-  const newProjectButton = await screen.findByRole('button', {
+  const newProjectButton = await within(
+    await screen.findByRole('main'),
+  ).findByRole('button', {
     name: 'New project',
   })
 
@@ -37,7 +39,7 @@ async function getNewProjectButton() {
 
 async function openProjectAction(user, projectName, actionName) {
   await user.click(
-    await screen.findByRole('button', {
+    await within(await screen.findByRole('main')).findByRole('button', {
       name: `Actions for ${projectName}`,
     }),
   )
