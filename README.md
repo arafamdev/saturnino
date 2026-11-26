@@ -10,7 +10,9 @@ Organize. Focus. Evolve.
 
 ## Project Status
 
-Currently in development.
+V1 implements a local-first workspace with projects, tasks, an accessible Kanban board, combined filters, dashboard metrics, preferences, JSON backup/restore, CSV export and an installable offline application. No account is required.
+
+Data belongs to the current browser profile and origin. Keep JSON backups when changing devices, domains or browser profiles.
 
 ## Tech Stack
 
@@ -20,6 +22,10 @@ Currently in development.
 - JavaScript
 - Vite
 - React Router
+- Dexie and IndexedDB
+- React Hook Form
+- i18next (English and Portuguese)
+- Workbox and vite-plugin-pwa
 
 ### Styling and UI
 
@@ -123,6 +129,8 @@ After the cache is ready, stopping that preview server lets you verify cached na
 
 ## Getting Started
 
+Use a Node.js version supported by Vite 8 (20.19+ or 22.12+); this release was verified with Node 26.3.0 and npm 11.16.0. No API keys or environment variables are required.
+
 Clone the repository:
 
 ```bash
@@ -157,7 +165,24 @@ npm run dev
 
 ## Continuous Integration
 
-GitHub Actions automatically checks code formatting, linting, automated tests, production builds, and production dependency security.
+GitHub Actions automatically checks code formatting, linting, automated tests, production builds, PWA precache coverage and production dependency security.
+
+The release suite includes 461 tests across 45 files, covering transaction rollback, import validation, conflicting writes, filtering, keyboard interactions, storage failures and controlled service-worker updates. Browser verification also covered writes with the preview server stopped and a real update from 1.0.0-rc.1 to 1.0.0 across two tabs, preserving an unsaved form in the second tab. Native operating-system installation, physical airplane mode and a full browser/screen-reader matrix remain manual checks.
+
+## Deployment
+
+Deploy the repository as a Vite frontend with `npm ci`, `npm run build`, and output directory `dist`. `vercel.json` serves the SPA shell for direct client routes and requests revalidation of the service worker and manifest. No backend or managed database is needed. Keep the same production origin to retain access to existing browser data; use JSON backup/restore to transfer a workspace to another origin.
+
+## Project Structure
+
+- `src/app`: route configuration and application setup.
+- `src/features`: projects, tasks, dashboard, settings, sidebar, backup and PWA behavior.
+- `src/lib/db`: Dexie schema, repositories and consistent workspace snapshots.
+- `src/components`: shared presentation and UI primitives.
+- `src/i18n`: English and Portuguese translations.
+- `scripts/check-pwa.mjs`: production manifest and precache verification.
+
+Server state lives in IndexedDB and is observed through Dexie live queries. Context/reducers hold shared interface preferences; forms and filters use local component state. Metrics are derived from a consistent snapshot rather than stored as duplicated counters.
 
 ---
 
