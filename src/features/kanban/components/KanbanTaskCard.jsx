@@ -13,6 +13,7 @@ function KanbanTaskCard({
   count,
   busy,
   movementRestricted = false,
+  today,
   onMove,
   onEdit,
   onDelete,
@@ -42,6 +43,7 @@ function KanbanTaskCard({
       <TaskCard
         ref={ref}
         task={task}
+        today={today}
         project={project}
         onEdit={onEdit}
         onDelete={onDelete}

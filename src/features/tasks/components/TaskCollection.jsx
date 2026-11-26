@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 import { useProjects } from '@/features/projects/hooks/useProjects'
-import { getTodayDateOnly } from '@/lib/dates/dateOnly'
+import { useTodayDateOnly } from '@/lib/dates/useTodayDateOnly'
 import {
   DEFAULT_TASK_FILTERS,
   hasTaskFilters,
@@ -27,6 +27,7 @@ const KanbanBoard = lazy(
 function TaskCollection({ projectId }) {
   const { t, i18n } = useTranslation('app')
   const headingId = useId()
+  const today = useTodayDateOnly()
   const taskQuery = useTasks(projectId)
   const projectQuery = useProjects()
   const [filters, setFilters] = useState(DEFAULT_TASK_FILTERS)
@@ -38,7 +39,7 @@ function TaskCollection({ projectId }) {
   const isLoading = taskQuery.isLoading || projectQuery.isLoading
   const isError = taskQuery.isError || projectQuery.isError
   const visibleTasks = selectTasks(taskQuery.tasks, filters, {
-    today: getTodayDateOnly(),
+    today,
     locale: i18n.resolvedLanguage,
   })
   const movementRestricted =
@@ -115,6 +116,7 @@ function TaskCollection({ projectId }) {
           <KanbanBoard
             projectId={projectId}
             tasks={visibleTasks}
+            today={today}
             movementRestricted={movementRestricted}
             projects={projectQuery.projects}
             onEdit={(task, trigger) => openDialog('edit', task, trigger)}
@@ -137,6 +139,7 @@ function TaskCollection({ projectId }) {
     return (
       <TaskList
         tasks={visibleTasks}
+        today={today}
         projects={projectQuery.projects}
         onEdit={(task, trigger) => openDialog('edit', task, trigger)}
         onDelete={(task, trigger) => openDialog('delete', task, trigger)}

@@ -262,5 +262,33 @@
       "title": "Título, A–Z",
       "updated": "Atualizadas recentemente"
     }
+  },
+  "dashboard": {
+    "description": "Uma visão clara dos seus projetos locais, progresso e próximos prazos.",
+    "metrics": {
+      "projects": "Projetos",
+      "tasks": "Tarefas",
+      "open": "Tarefas abertas",
+      "completed": "Tarefas concluídas",
+      "overdue": "Tarefas em atraso",
+      "completion": "Taxa de conclusão"
+    },
+    "distribution": "Tarefas por estado",
+    "noTasks": "Crie tarefas para ver a sua distribuição.",
+    "projectProgress": "Progresso dos projetos",
+    "allProjects": "Ver todos os projetos",
+    "noProjects": "Ainda não existem projetos.",
+    "progressNamed": "Progresso de {{name}}",
+    "projectEmpty": "Sem tarefas neste projeto.",
+    "projectCount": "{{completed}} / {{total}} concluídas",
+    "upcoming": "Próximos prazos",
+    "upcomingDescription": "As próximas cinco tarefas por concluir com prazo para hoje ou depois.",
+    "noDeadlines": "Sem próximos prazos.",
+    "errorTitle": "Não foi possível carregar a visão geral",
+    "errorDescription": "Não foi possível ler o espaço de trabalho local. Tente novamente.",
+    "loading": "A carregar a visão geral…",
+    "welcome": "Comece pelo primeiro projeto",
+    "startDescription": "Crie um projeto, adicione tarefas e acompanhe aqui o progresso.",
+    "startAction": "Ir para projetos"
   }
 }
