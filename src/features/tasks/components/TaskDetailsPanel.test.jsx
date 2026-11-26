@@ -30,11 +30,13 @@ afterEach(() => vi.restoreAllMocks())
 async function openPanel() {
   const user = userEvent.setup()
   const router = createMemoryRouter(routes, { initialEntries: ['/app/tasks'] })
-  render(
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>,
-  )
+  await act(async () => {
+    render(
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>,
+    )
+  })
   const trigger = await screen.findByRole('button', {
     name: task.title,
     exact: true,
@@ -99,12 +101,16 @@ it('blocks route navigation until the user discards the draft', async () => {
   await act(async () => {
     await router.navigate('/app/projects')
   })
-  await user.click(
-    await screen.findByRole('button', { name: 'Discard changes' }),
-  )
+  const discard = await screen.findByRole('button', { name: 'Discard changes' })
+  await act(async () => {
+    await user.click(discard)
+  })
   await waitFor(() =>
     expect(router.state.location.pathname).toBe('/app/projects'),
   )
+  expect(
+    await screen.findByRole('heading', { name: 'Projects', level: 1 }),
+  ).toBeInTheDocument()
 })
 
 it('guards native reloads and explicit PWA updates without activating them prematurely', async () => {
@@ -118,7 +124,7 @@ it('guards native reloads and explicit PWA updates without activating them prema
   expect(unload.defaultPrevented).toBe(true)
   const proceed = vi.fn()
   let allowed
-  act(() => {
+  await act(async () => {
     allowed = window.dispatchEvent(
       new CustomEvent(BEFORE_PWA_UPDATE, {
         cancelable: true,
@@ -131,7 +137,7 @@ it('guards native reloads and explicit PWA updates without activating them prema
     await screen.findByRole('button', { name: 'Continue editing' }),
   )
   expect(proceed).not.toHaveBeenCalled()
-  act(() => {
+  await act(async () => {
     window.dispatchEvent(
       new CustomEvent(BEFORE_PWA_UPDATE, {
         cancelable: true,
@@ -235,4 +241,25 @@ it('cancels deletion without losing the draft, then deletes only after confirmat
   await waitFor(() =>
     expect(screen.getByRole('button', { name: 'New task' })).toHaveFocus(),
   )
+})
+
+it('closes the nested calendar with Escape before guarding a dirty panel', async () => {
+  const { user, panel } = await openPanel()
+  await user.click(panel.getByRole('button', { name: 'Due date' }))
+  await user.type(
+    await screen.findByRole('textbox', { name: 'Date (YYYY-MM-DD)' }),
+    '2028-02-29',
+  )
+  await user.keyboard('{Escape}')
+  expect(
+    screen.queryByRole('dialog', { name: 'Choose due date' }),
+  ).not.toBeInTheDocument()
+  expect(screen.getByRole('dialog', { name: 'Edit task' })).toBeInTheDocument()
+  expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument()
+  expect(panel.getByRole('button', { name: 'Due date' })).toHaveTextContent(
+    'Feb 29, 2028',
+  )
+  await user.keyboard('{Escape}')
+  expect(await screen.findByRole('alertdialog')).toBeInTheDocument()
+  expect((await taskRepository.getTaskById(task.id)).dueDate).toBeNull()
 })

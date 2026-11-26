@@ -146,7 +146,7 @@ function TaskDetailsPanel({
         }}
       >
         <AlertDialog.Portal>
-          <AlertDialog.Overlay className="fixed inset-0 z-[60] bg-black/60" />
+          <AlertDialog.Overlay className="fixed inset-0 z-[80] bg-black/60" />
           <AlertDialog.Content
             onCloseAutoFocus={(event) => {
               if (lastPanelFocus.current?.isConnected) {
@@ -154,7 +154,7 @@ function TaskDetailsPanel({
                 lastPanelFocus.current.focus()
               }
             }}
-            className="fixed top-1/2 left-1/2 z-[60] max-h-[90dvh] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl"
+            className="fixed top-1/2 left-1/2 z-[80] max-h-[90dvh] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl"
           >
             <AlertDialog.Title className="text-lg font-semibold">
               {t('taskDetails.discardTitle')}

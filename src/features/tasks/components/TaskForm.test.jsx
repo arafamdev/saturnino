@@ -56,7 +56,8 @@ describe('Task form', () => {
     )
   })
 
-  it('prepopulates editing and sorts projects naturally', () => {
+  it('prepopulates editing and sorts projects naturally', async () => {
+    const user = userEvent.setup()
     renderForm({
       task: {
         id: 'task-1',
@@ -71,11 +72,14 @@ describe('Task form', () => {
     expect(screen.getByRole('textbox', { name: 'Task title' })).toHaveValue(
       'Existing',
     )
-    expect(screen.getByRole('combobox', { name: 'Status' })).toHaveValue('done')
-    expect(screen.getByRole('combobox', { name: 'Priority' })).toHaveValue(
-      'urgent',
+    expect(screen.getByRole('combobox', { name: 'Status' })).toHaveTextContent(
+      'Done',
     )
-    expect(screen.getByLabelText('Due date')).toHaveValue('2026-12-01')
+    expect(
+      screen.getByRole('combobox', { name: 'Priority' }),
+    ).toHaveTextContent('Urgent')
+    expect(screen.getByLabelText('Due date')).toHaveTextContent('Dec 1, 2026')
+    await user.click(screen.getByRole('combobox', { name: 'Project' }))
     expect(
       screen
         .getAllByRole('option')
@@ -117,4 +121,37 @@ describe('Task form', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('120 characters')
     expect(onSubmit).not.toHaveBeenCalled()
   })
+})
+
+it('rejects invalid manual civil dates and submits a corrected leap day without UTC conversion', async () => {
+  const user = userEvent.setup()
+  const onSubmit = renderForm({ projectId: 'project-1' })
+  await user.type(
+    screen.getByRole('textbox', { name: 'Task title' }),
+    'Calendar QA',
+  )
+  await user.click(screen.getByRole('button', { name: 'Due date' }))
+  const input = await screen.findByRole('textbox', {
+    name: 'Date (YYYY-MM-DD)',
+  })
+  await user.type(input, '2026-02-29')
+  await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
+  await user.click(screen.getByRole('button', { name: 'Create task' }))
+  expect(await screen.findByRole('alert')).toHaveTextContent(
+    'Enter a valid date.',
+  )
+  expect(onSubmit).not.toHaveBeenCalled()
+  await user.click(screen.getByRole('button', { name: 'Due date' }))
+  const corrected = await screen.findByRole('textbox', {
+    name: 'Date (YYYY-MM-DD)',
+  })
+  await user.clear(corrected)
+  await user.type(corrected, '2028-02-29')
+  await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
+  await user.click(screen.getByRole('button', { name: 'Create task' }))
+  await waitFor(() =>
+    expect(onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({ dueDate: '2028-02-29' }),
+    ),
+  )
 })

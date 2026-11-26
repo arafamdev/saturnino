@@ -1,14 +1,7 @@
 import 'fake-indexeddb/auto'
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  within,
-} from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
@@ -17,6 +10,7 @@ import { routes } from '@/app/router'
 import { projectRepository } from '@/features/projects/services/projectRepository'
 import { database } from '@/lib/db/database'
 import i18n from '@/i18n'
+import { selectOption } from '@/test/selectOption'
 
 import { taskRepository } from '../services/taskRepository'
 
@@ -85,21 +79,27 @@ describe('Task management integration', () => {
       form.getByRole('textbox', { name: 'Task title' }),
       'Build the first screen',
     )
-    await user.selectOptions(
+    await selectOption(
+      user,
       form.getByRole('combobox', { name: 'Project' }),
-      project.id,
+      project.name,
     )
-    await user.selectOptions(
+    await selectOption(
+      user,
       form.getByRole('combobox', { name: 'Status' }),
-      'in-progress',
+      'In progress',
     )
-    await user.selectOptions(
+    await selectOption(
+      user,
       form.getByRole('combobox', { name: 'Priority' }),
-      'urgent',
+      'Urgent',
     )
-    fireEvent.change(form.getByLabelText('Due date'), {
-      target: { value: '2026-12-15' },
-    })
+    await user.click(form.getByLabelText('Due date'))
+    await user.type(
+      await screen.findByRole('textbox', { name: 'Date (YYYY-MM-DD)' }),
+      '2026-12-15',
+    )
+    await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
     await user.click(form.getByRole('button', { name: 'Create task' }))
     const main = await mainRegion()
     expect(
@@ -137,8 +137,8 @@ describe('Task management integration', () => {
       main.queryByRole('heading', { name: 'Other task' }),
     ).not.toBeInTheDocument()
     const form = await openCreate(user)
-    expect(form.getByRole('combobox', { name: 'Project' })).toHaveValue(
-      first.id,
+    expect(form.getByRole('combobox', { name: 'Project' })).toHaveTextContent(
+      first.name,
     )
   })
 
@@ -159,9 +159,10 @@ describe('Task management integration', () => {
     const title = form.getByRole('textbox', { name: 'Task title' })
     await user.clear(title)
     await user.type(title, 'Finished task')
-    await user.selectOptions(
+    await selectOption(
+      user,
       form.getByRole('combobox', { name: 'Status' }),
-      'done',
+      'Done',
     )
     await user.click(form.getByRole('button', { name: 'Save task' }))
     expect(
@@ -351,9 +352,10 @@ describe('Task management integration', () => {
       form.getByRole('textbox', { name: 'Task title' }),
       'Keep my draft',
     )
-    await user.selectOptions(
+    await selectOption(
+      user,
       form.getByRole('combobox', { name: 'Project' }),
-      project.id,
+      project.name,
     )
     await user.click(form.getByRole('button', { name: 'Create task' }))
     expect(await form.findByRole('alert')).toHaveTextContent(
@@ -398,16 +400,18 @@ describe('Task filters integration', () => {
     await waitFor(() => expect(search).toBeEnabled())
     await user.type(search, 'arvore')
     await user.click(main.getByRole('button', { name: 'Filters' }))
-    await user.selectOptions(
+    await selectOption(
+      user,
       screen.getByRole('combobox', { name: 'Filter by priority' }),
-      'high',
+      'High',
     )
     expect(
       main.getByRole('status', { name: 'Filtered task count' }),
     ).toHaveTextContent('1 of 2 tasks')
-    await user.selectOptions(
+    await selectOption(
+      user,
       screen.getByRole('combobox', { name: 'Filter by project' }),
-      second.id,
+      second.name,
     )
     expect(main.getByText('No tasks match your filters.')).toBeInTheDocument()
     await user.click(main.getByRole('button', { name: 'Clear filters' }))
@@ -463,7 +467,7 @@ describe('Task filters integration', () => {
     const due = screen.getByRole('combobox', { name: 'Filter by due date' })
     const list = within(main.getByRole('list', { name: 'Task list' }))
     expect(list.getAllByText('Overdue')).toHaveLength(1)
-    await user.selectOptions(due, 'overdue')
+    await selectOption(user, due, 'Overdue')
     expect(main.getByRole('heading', { name: 'Late open' })).toBeInTheDocument()
     expect(
       main.queryByRole('heading', { name: 'Past completed' }),
@@ -515,9 +519,10 @@ it('removes one filter without resetting the chosen sort and returns popover foc
   const filters = await main.findByRole('button', { name: 'Filters' })
   await waitFor(() => expect(filters).toBeEnabled())
   await user.click(filters)
-  await user.selectOptions(
+  await selectOption(
+    user,
     screen.getByRole('combobox', { name: 'Filter by priority' }),
-    'high',
+    'High',
   )
   await user.keyboard('{Escape}')
   await waitFor(() => expect(filters).toHaveFocus())
@@ -608,8 +613,8 @@ it('creates from a column with its status and restores the column trigger', asyn
   const form = within(
     await screen.findByRole('dialog', { name: 'Create task' }),
   )
-  expect(form.getByRole('combobox', { name: 'Status' })).toHaveValue(
-    'in-progress',
+  expect(form.getByRole('combobox', { name: 'Status' })).toHaveTextContent(
+    'In progress',
   )
   await user.type(
     form.getByRole('textbox', { name: 'Task title' }),

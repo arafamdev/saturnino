@@ -5,6 +5,9 @@ import { DropdownMenu, Popover } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
+import { Field } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select'
 
 import { TASK_PRIORITIES, TASK_STATUSES } from '../data/taskOptions'
 
@@ -83,7 +86,7 @@ function TaskFilters({
             className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden="true"
           />
-          <input
+          <Input
             id={`${id}-search`}
             type="search"
             disabled={disabled}
@@ -138,25 +141,20 @@ function TaskFilters({
               <fieldset disabled={disabled} className="space-y-4">
                 <legend className="sr-only">{t('filters.title')}</legend>
                 {criteria.map(({ name, options }) => (
-                  <label
+                  <Field
                     key={name}
-                    htmlFor={`${id}-${name}`}
-                    className="block space-y-1.5 text-sm"
+                    id={`${id}-${name}`}
+                    label={t(`filters.${name}`)}
                   >
-                    <span>{t(`filters.${name}`)}</span>
-                    <select
+                    <Select
                       id={`${id}-${name}`}
-                      className="min-h-11 w-full min-w-0 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-9"
                       value={filters[name]}
-                      onChange={(event) => onChange(name, event.target.value)}
-                    >
-                      {options.map(([value, label]) => (
-                        <option key={value} value={value}>
-                          {label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                      onValueChange={(value) => onChange(name, value)}
+                      options={options}
+                      disabled={disabled}
+                      className="sm:min-h-9"
+                    />
+                  </Field>
                 ))}
               </fieldset>
             </Popover.Content>

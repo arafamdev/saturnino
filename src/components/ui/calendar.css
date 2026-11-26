@@ -1,0 +1,28 @@
+.saturnino-calendar {
+  --rdp-accent-color: var(--primary);
+  --rdp-accent-background-color: var(--accent);
+  --rdp-today-color: var(--primary);
+  --rdp-day-height: 44px;
+  --rdp-day-width: 44px;
+  --rdp-day_button-height: 44px;
+  --rdp-day_button-width: 44px;
+  --rdp-day_button-border-radius: var(--radius);
+  --rdp-nav_button-height: 44px;
+  --rdp-nav_button-width: 44px;
+  margin-inline: auto;
+  font-size: 0.875rem;
+}
+
+.saturnino-calendar .rdp-selected .rdp-day_button {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.saturnino-calendar button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.saturnino-calendar .rdp-month_caption {
+  font-size: 0.875rem;
+}

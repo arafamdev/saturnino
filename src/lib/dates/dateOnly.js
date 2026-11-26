@@ -24,3 +24,23 @@ export function formatDateOnly(value, locale) {
     new Date(`${value}T12:00:00`),
   )
 }
+
+export function dateOnlyToLocalDate(value) {
+  if (!isValidDateOnly(value)) return undefined
+  const [year, month, day] = value.split('-').map(Number)
+  const date = new Date(0)
+  // setFullYear avoids the Date constructor's special handling of years 0–99.
+  date.setFullYear(year, month - 1, day)
+  date.setHours(12, 0, 0, 0)
+  return date
+}
+
+export function localDateToDateOnly(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return ''
+  const value = [
+    String(date.getFullYear()).padStart(4, '0'),
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0'),
+  ].join('-')
+  return isValidDateOnly(value) ? value : ''
+}

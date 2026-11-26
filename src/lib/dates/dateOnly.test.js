@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import { formatDateOnly, getTodayDateOnly, isValidDateOnly } from './dateOnly'
+import {
+  dateOnlyToLocalDate,
+  localDateToDateOnly,
+  formatDateOnly,
+  getTodayDateOnly,
+  isValidDateOnly,
+} from './dateOnly'
 
 describe('Calendar dates', () => {
   it.each(['2026-11-26', '2028-02-29', '2000-02-29', '0001-01-01'])(
@@ -28,4 +34,26 @@ describe('Calendar dates', () => {
     expect(formatDateOnly('2026-11-26', 'en')).toContain('26')
     expect(formatDateOnly('bad', 'en')).toBe('')
   })
+})
+
+it.each([
+  '0001-01-01',
+  '0099-12-31',
+  '2000-02-29',
+  '2028-02-29',
+  '2026-03-29',
+  '2026-10-25',
+  '9999-12-31',
+])('round-trips a civil date through a local calendar Date: %s', (value) => {
+  const date = dateOnlyToLocalDate(value)
+  expect(date.getHours()).toBe(12)
+  expect(date.getFullYear()).toBe(Number(value.slice(0, 4)))
+  expect(localDateToDateOnly(date)).toBe(value)
+})
+
+it('rejects invalid calendar boundaries instead of normalizing them to another day', () => {
+  expect(dateOnlyToLocalDate('2026-02-29')).toBeUndefined()
+  expect(dateOnlyToLocalDate('0000-01-01')).toBeUndefined()
+  expect(localDateToDateOnly(new Date('invalid'))).toBe('')
+  expect(localDateToDateOnly(null)).toBe('')
 })
