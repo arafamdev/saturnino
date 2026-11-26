@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router'
 
 import { Button } from '@/components/ui/button'
+import TaskCollection from '@/features/tasks/components/TaskCollection'
 import { useSidebar } from '@/layouts/hooks/useSidebar'
 
 import ProjectFavoriteButton from '../components/ProjectFavoriteButton'
@@ -123,19 +124,7 @@ function ProjectDetailsPage() {
         <ProjectFavoriteButton project={project} />
       </div>
 
-      {/* Future task management area */}
-      <div className="flex min-h-64 flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-6 text-center">
-        <FolderKanban
-          className="size-8 text-muted-foreground"
-          aria-hidden="true"
-        />
-
-        <h2 className="font-medium">{t('projectDetails.tasksTitle')}</h2>
-
-        <p className="max-w-sm text-sm text-muted-foreground">
-          {t('projectDetails.tasksDescription')}
-        </p>
-      </div>
+      <TaskCollection key={project.id} projectId={project.id} />
     </section>
   )
 }
