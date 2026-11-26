@@ -1,0 +1,18 @@
+{
+  "navigation": {
+    "label": "Main navigation",
+    "overview": "Overview",
+    "tasks": "My Tasks",
+    "projects": "Projects",
+    "settings": "Settings"
+  },
+  "projectDetails": {
+    "title": "Project Details",
+    "identifier": "Project ID: {{projectId}}"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page is outside our orbit.",
+    "backToHome": "Back to home"
+  }
+}

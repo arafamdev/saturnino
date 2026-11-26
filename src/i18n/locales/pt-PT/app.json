@@ -1,0 +1,18 @@
+{
+  "navigation": {
+    "label": "Navegação principal",
+    "overview": "Visão geral",
+    "tasks": "As minhas tarefas",
+    "projects": "Projetos",
+    "settings": "Definições"
+  },
+  "projectDetails": {
+    "title": "Detalhes do projeto",
+    "identifier": "ID do projeto: {{projectId}}"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "Esta página está fora da nossa órbita.",
+    "backToHome": "Voltar ao início"
+  }
+}

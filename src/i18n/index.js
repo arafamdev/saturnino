@@ -10,10 +10,12 @@ import {
 import enCommon from './locales/en/common.json'
 import enLanding from './locales/en/landing.json'
 import enAbout from './locales/en/about.json'
+import enApp from './locales/en/app.json'
 
 import ptCommon from './locales/pt-PT/common.json'
 import ptLanding from './locales/pt-PT/landing.json'
 import ptAbout from './locales/pt-PT/about.json'
+import ptApp from './locales/pt-PT/app.json'
 
 const supportedLanguageCodes = supportedLanguages.map(
   (language) => language.code,
@@ -51,18 +53,20 @@ i18n.use(initReactI18next).init({
       common: enCommon,
       landing: enLanding,
       about: enAbout,
+      app: enApp,
     },
     'pt-PT': {
       common: ptCommon,
       landing: ptLanding,
       about: ptAbout,
+      app: ptApp,
     },
   },
   lng: getStoredLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
   supportedLngs: supportedLanguageCodes,
   defaultNS: 'common',
-  ns: ['common', 'landing', 'about'],
+  ns: ['common', 'landing', 'about', 'app'],
   interpolation: {
     escapeValue: false,
   },

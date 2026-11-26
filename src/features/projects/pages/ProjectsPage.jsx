@@ -1,5 +1,9 @@
+import { useTranslation } from 'react-i18next'
+
 function ProjectsPage() {
-  return <h1 className="text-2xl font-semibold">Projects</h1>
+  const { t } = useTranslation('app')
+
+  return <h1 className="text-2xl font-semibold">{t('navigation.projects')}</h1>
 }
 
 export default ProjectsPage
