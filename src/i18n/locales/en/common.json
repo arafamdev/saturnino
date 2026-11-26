@@ -1,0 +1,21 @@
+{
+  "language": {
+    "changeLanguage": "Change language"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "openApp": "Open Saturnino"
+  },
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+  "actions": {
+    "backToTop": "Back to top"
+  },
+  "brand": {
+    "tagline": "Everything in its orbit.",
+    "signature": "Built with purpose. Inspired by legacy."
+  }
+}

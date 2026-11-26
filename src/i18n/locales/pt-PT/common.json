@@ -1,0 +1,21 @@
+{
+  "language": {
+    "changeLanguage": "Alterar idioma"
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Sobre",
+    "openApp": "Abrir Saturnino"
+  },
+  "theme": {
+    "switchToLight": "Mudar para o modo claro",
+    "switchToDark": "Mudar para o modo escuro"
+  },
+  "actions": {
+    "backToTop": "Voltar ao topo"
+  },
+  "brand": {
+    "tagline": "Tudo na sua órbita.",
+    "signature": "Criado com propósito. Inspirado por um legado."
+  }
+}
