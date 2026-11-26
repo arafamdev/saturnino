@@ -290,5 +290,21 @@
     "welcome": "Start your first project",
     "startDescription": "Create a project, add tasks and track your progress here.",
     "startAction": "Go to projects"
+  },
+  "settings": {
+    "description": "Make this workspace feel right for you.",
+    "appearance": "Appearance and language",
+    "theme": "Color theme",
+    "dark": "Dark",
+    "light": "Light",
+    "language": "Display language",
+    "persistence": "Changes apply immediately. Preferences are saved in this browser when local storage is available.",
+    "sidebar": "Sidebar",
+    "sidebarDescription": "Desktop width and compact mode share the same preferences as the navigation. Mobile uses the full navigation drawer.",
+    "width": "Sidebar width on desktop",
+    "localData": "Projects and tasks are stored in this browser profile. Preferences are stored separately. No account is required and data is not synchronized across devices.",
+    "feedback": "Preference feedback",
+    "applied": "Preferences applied.",
+    "languageFailed": "Could not change the language. Try again."
   }
 }

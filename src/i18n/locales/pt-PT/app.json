@@ -290,5 +290,21 @@
     "welcome": "Comece pelo primeiro projeto",
     "startDescription": "Crie um projeto, adicione tarefas e acompanhe aqui o progresso.",
     "startAction": "Ir para projetos"
+  },
+  "settings": {
+    "description": "Adapte este espaço de trabalho às suas preferências.",
+    "appearance": "Aspeto e idioma",
+    "theme": "Tema de cores",
+    "dark": "Escuro",
+    "light": "Claro",
+    "language": "Idioma da interface",
+    "persistence": "As alterações são aplicadas de imediato. As preferências são guardadas neste navegador quando o armazenamento local está disponível.",
+    "sidebar": "Barra lateral",
+    "sidebarDescription": "A largura no desktop e o modo compacto usam as mesmas preferências da navegação. Em mobile é usado o menu completo.",
+    "width": "Largura da barra lateral no desktop",
+    "localData": "Os projetos e tarefas são guardados neste perfil do navegador. As preferências são guardadas separadamente. Não é necessária uma conta e os dados não são sincronizados entre dispositivos.",
+    "feedback": "Feedback das preferências",
+    "applied": "Preferências aplicadas.",
+    "languageFailed": "Não foi possível alterar o idioma. Tente novamente."
   }
 }

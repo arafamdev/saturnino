@@ -87,6 +87,12 @@ While filters or an alternative sort are active, board dragging and position but
 
 Metrics come from a consistent read-only snapshot of projects and tasks and update reactively after local changes. No derived counters are stored in the database. Empty, loading and storage-error states have distinct feedback and retry. The civil day refreshes after local midnight and when the tab regains focus or visibility, keeping dashboard deadlines, filters and overdue labels current.
 
+## Settings
+
+**Settings** provides explicit light/dark theme and English/Portuguese selection, sharing the same state as the header. Desktop sidebar width, compact mode and section customization reuse the existing sidebar preferences. Resetting sidebar preferences changes layout/history only and preserves projects and favorites.
+
+Preferences apply immediately and are saved in localStorage when available; controls remain usable in memory if storage is blocked. Projects and tasks remain separately in IndexedDB in this browser profile. No account or cross-device synchronization is required or provided by V1.
+
 ## Getting Started
 
 Clone the repository:
