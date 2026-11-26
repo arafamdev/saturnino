@@ -63,7 +63,7 @@ Open **My Tasks** to manage all tasks, or open a project for its own task list. 
 
 Tasks use four statuses (Backlog, To do, In progress, Done) and four priorities (Low, Medium, High, Urgent). Due dates are calendar dates; creation, modification and completion use ISO timestamps. Reopening a completed task clears its completion timestamp. Project/task writes validate the project relationship inside a database transaction, and deleting a project still deletes its tasks atomically.
 
-Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; JSON backup and restore are available in Settings; offline application-shell caching is a separate upcoming roadmap feature.
+Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; JSON backup and restore are available in Settings; offline application-shell caching is available after the first completed online visit.
 
 ## Kanban Board
 
@@ -102,6 +102,24 @@ To restore, select a Saturnino JSON backup (up to 20 MiB). The application valid
 Both tables are replaced in one transaction. A failed write rolls back every change. If local records change after preview, restore is refused; cancel and select the backup again to review the latest state. Unknown versions, malformed records, duplicate IDs/positions and orphan tasks are rejected.
 
 CSV is export-only and intended for analysis. Fields are quoted and escaped; formula-like values receive a tab prefix, including Unicode variants. This changes the exported cell text and reduces spreadsheet formula interpretation, but spreadsheet applications and re-saving behavior differ. JSON is the exact restoration format.
+
+## Installable App and Offline Use
+
+Install Saturnino using your browser's **Install app** or **Add to Home Screen** option when available. Open **Settings → App and offline use** and wait for **Ready for offline use** before relying on the cached application. The first visit needs a connection; clearing browser storage can remove both the cache and local records, so keep JSON backups.
+
+The production build precaches the application shell, lazy route/board chunks, fonts and images. After caching, direct navigation, task creation and Kanban changes work without the application server. Projects and tasks remain in IndexedDB; the service worker only manages application files.
+
+An update banner lets you reload when ready or postpone. Save unfinished form edits before choosing **Reload to update**. An update activated in another tab also asks before reloading this page. Saved records and interface preferences are preserved.
+
+Service workers are disabled in the development server. Verify the production build locally with:
+
+```bash
+npm run build
+npm run check:pwa
+npm run preview -- --host 127.0.0.1 --port 4173
+```
+
+After the cache is ready, stopping that preview server lets you verify cached navigation on the same origin. `npm run check:pwa` validates manifest icons and actual precache coverage and also runs in CI. Regenerate the committed PWA icons from the existing orbital SVG with `npm run generate:pwa-assets`.
 
 ## Getting Started
 

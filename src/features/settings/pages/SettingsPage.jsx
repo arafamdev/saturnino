@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import PwaSettingsPanel from '@/features/pwa/components/PwaSettingsPanel'
 import DataManagementPanel from '@/features/data-management/components/DataManagementPanel'
 import { useTheme } from '@/app/providers/theme/useTheme'
 import { supportedLanguages } from '@/i18n/languages'
@@ -155,6 +156,7 @@ function SettingsPage() {
         </p>
       </section>
       <DataManagementPanel />
+      <PwaSettingsPanel />
       {languageError && (
         <p role="alert" className="text-sm text-destructive">
           {t('settings.languageFailed')}

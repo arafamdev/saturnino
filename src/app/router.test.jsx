@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
 import ThemeProvider from '@/app/providers/theme/ThemeProvider'
+import PwaProvider from '@/features/pwa/context/PwaProvider'
 import { projectRepository } from '@/features/projects/services/projectRepository'
 import { database } from '@/lib/db/database'
 
@@ -20,7 +21,9 @@ function renderRoute(initialPath = '/') {
 
   return render(
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <PwaProvider>
+        <RouterProvider router={router} />
+      </PwaProvider>
     </ThemeProvider>,
   )
 }
