@@ -97,5 +97,15 @@
     "title": "Page not found",
     "description": "This page is outside our orbit.",
     "backToHome": "Back to home"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "No favorite projects yet.",
+    "loading": "Loading favorites...",
+    "loadError": "Unable to load favorite projects.",
+    "updateError": "Unable to update favorite. Please try again.",
+    "toggle": "Favorite project {{name}}",
+    "add": "Add {{name}} to favorites",
+    "remove": "Remove {{name}} from favorites"
   }
 }

@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 
+import ProjectFavoriteButton from '../components/ProjectFavoriteButton'
 import ProjectsErrorState from '../components/ProjectsErrorState'
 import { useProject } from '../hooks/useProject'
 
@@ -94,7 +95,7 @@ function ProjectDetailsPage() {
           />
         </div>
 
-        <div className="min-w-0 space-y-2">
+        <div className="min-w-0 flex-1 space-y-2">
           <h1 className="text-2xl font-semibold wrap-break-word">
             {project.name}
           </h1>
@@ -103,6 +104,8 @@ function ProjectDetailsPage() {
             {project.description || t('projects.noDescription')}
           </p>
         </div>
+
+        <ProjectFavoriteButton project={project} />
       </div>
 
       {/* Future task management area */}
@@ -114,7 +117,7 @@ function ProjectDetailsPage() {
 
         <h2 className="font-medium">{t('projectDetails.tasksTitle')}</h2>
 
-        <p className="max-w-sm text-sm text-muted-foreground">
+        <p className="max-w-sm text-muted-foreground">
           {t('projectDetails.tasksDescription')}
         </p>
       </div>

@@ -97,5 +97,15 @@
     "title": "Página não encontrada",
     "description": "Esta página está fora da nossa órbita.",
     "backToHome": "Voltar ao início"
+  },
+  "favorites": {
+    "title": "Favoritos",
+    "empty": "Ainda não tens projetos favoritos.",
+    "loading": "A carregar favoritos...",
+    "loadError": "Não foi possível carregar os projetos favoritos.",
+    "updateError": "Não foi possível atualizar o favorito. Tenta novamente.",
+    "toggle": "Projeto favorito {{name}}",
+    "add": "Adicionar {{name}} aos favoritos",
+    "remove": "Remover {{name}} dos favoritos"
   }
 }

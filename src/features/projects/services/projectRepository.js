@@ -51,6 +51,12 @@ export function createProjectRepository(db = database) {
     return db.projects.get(projectId)
   }
 
+  async function getFavoriteProjects() {
+    const projects = await getProjects()
+
+    return projects.filter((project) => project.isFavorite === true)
+  }
+
   async function createProject(projectData) {
     const normalizedData = normalizeProjectData(projectData)
     const timestamp = new Date().toISOString()
@@ -58,6 +64,7 @@ export function createProjectRepository(db = database) {
     const project = {
       id: crypto.randomUUID(),
       ...normalizedData,
+      isFavorite: false,
       createdAt: timestamp,
       updatedAt: timestamp,
     }
@@ -89,6 +96,25 @@ export function createProjectRepository(db = database) {
     })
   }
 
+  async function toggleProjectFavorite(projectId) {
+    return db.transaction('rw', db.projects, async () => {
+      const existingProject = await db.projects.get(projectId)
+
+      if (!existingProject) {
+        throw new Error('PROJECT_NOT_FOUND')
+      }
+
+      const updatedProject = {
+        ...existingProject,
+        isFavorite: existingProject.isFavorite !== true,
+      }
+
+      await db.projects.put(updatedProject)
+
+      return updatedProject
+    })
+  }
+
   async function deleteProject(projectId) {
     return db.transaction('rw', db.projects, db.tasks, async () => {
       const existingProject = await db.projects.get(projectId)
@@ -106,8 +132,10 @@ export function createProjectRepository(db = database) {
   return {
     getProjects,
     getProjectById,
+    getFavoriteProjects,
     createProject,
     updateProject,
+    toggleProjectFavorite,
     deleteProject,
   }
 }

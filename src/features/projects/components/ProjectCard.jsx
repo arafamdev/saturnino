@@ -11,6 +11,8 @@ import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 
+import ProjectFavoriteButton from './ProjectFavoriteButton'
+
 function ProjectCard({ project, onEdit, onDelete }) {
   const { t } = useTranslation('app')
 
@@ -29,47 +31,52 @@ function ProjectCard({ project, onEdit, onDelete }) {
           />
         </div>
 
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="relative z-10 size-10"
-              aria-label={t('projects.actions.menu', {
-                name: project.name,
-              })}
-            >
-              <Ellipsis className="size-5" aria-hidden="true" />
-            </Button>
-          </DropdownMenu.Trigger>
+        {/* Project actions */}
+        <div className="flex items-center gap-1">
+          <ProjectFavoriteButton project={project} />
 
-          <DropdownMenu.Portal>
-            <DropdownMenu.Content
-              align="end"
-              sideOffset={6}
-              className="z-50 min-w-44 rounded-lg border bg-popover p-1 text-popover-foreground shadow-lg"
-            >
-              <DropdownMenu.Item
-                onSelect={() => onEdit(project)}
-                className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="relative z-10 size-10"
+                aria-label={t('projects.actions.menu', {
+                  name: project.name,
+                })}
               >
-                <Pencil className="size-4" aria-hidden="true" />
-                {t('projects.actions.edit')}
-              </DropdownMenu.Item>
+                <Ellipsis className="size-5" aria-hidden="true" />
+              </Button>
+            </DropdownMenu.Trigger>
 
-              <DropdownMenu.Separator className="my-1 h-px bg-border" />
-
-              <DropdownMenu.Item
-                onSelect={() => onDelete(project)}
-                className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-destructive outline-none focus:bg-destructive/10"
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content
+                align="end"
+                sideOffset={6}
+                className="z-50 min-w-44 rounded-lg border bg-popover p-1 text-popover-foreground shadow-lg"
               >
-                <Trash2 className="size-4" aria-hidden="true" />
-                {t('projects.actions.delete')}
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Portal>
-        </DropdownMenu.Root>
+                <DropdownMenu.Item
+                  onSelect={() => onEdit(project)}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                >
+                  <Pencil className="size-4" aria-hidden="true" />
+                  {t('projects.actions.edit')}
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Separator className="my-1 h-px bg-border" />
+
+                <DropdownMenu.Item
+                  onSelect={() => onDelete(project)}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm text-destructive outline-none focus:bg-destructive/10"
+                >
+                  <Trash2 className="size-4" aria-hidden="true" />
+                  {t('projects.actions.delete')}
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+        </div>
       </div>
 
       {/* Project information */}
