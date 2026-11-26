@@ -229,5 +229,38 @@
     "failed": "Could not move the task. Your previous order was preserved. Try again.",
     "saving": "Saving task movement…",
     "column": "Visible column"
+  },
+  "filters": {
+    "title": "Search and filters",
+    "search": "Search tasks",
+    "placeholder": "Title or description…",
+    "status": "Filter by status",
+    "priority": "Filter by priority",
+    "projectId": "Filter by project",
+    "due": "Filter by due date",
+    "sort": "Sort tasks",
+    "allStatuses": "All statuses",
+    "allPriorities": "All priorities",
+    "allProjects": "All projects",
+    "results": "Filtered task count",
+    "count": "{{count}} of {{total}} tasks",
+    "clear": "Clear filters",
+    "empty": "No tasks match your filters.",
+    "reorderHint": "Clear filters and select manual order to reorder cards. You can still change a task’s status.",
+    "overdue": "Overdue",
+    "dueOptions": {
+      "all": "Any due date",
+      "overdue": "Overdue",
+      "today": "Due today",
+      "upcoming": "After today",
+      "none": "No due date"
+    },
+    "sortOptions": {
+      "manual": "Manual order",
+      "dueDate": "Due date, soonest first",
+      "priority": "Priority, highest first",
+      "title": "Title, A–Z",
+      "updated": "Recently updated"
+    }
   }
 }

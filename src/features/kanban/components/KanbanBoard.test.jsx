@@ -11,13 +11,16 @@ import { useTasks } from '@/features/tasks/hooks/useTasks'
 import KanbanBoard from './KanbanBoard'
 
 let project
-function ReactiveBoard() {
+function ReactiveBoard({ movementRestricted = false, onlyTodo = false }) {
   const { tasks } = useTasks(project.id)
   return (
     <MemoryRouter>
       <KanbanBoard
         projectId={project.id}
-        tasks={tasks}
+        movementRestricted={movementRestricted}
+        tasks={
+          onlyTodo ? tasks.filter((task) => task.status === 'todo') : tasks
+        }
         projects={[project]}
         onEdit={vi.fn()}
         onDelete={vi.fn()}
@@ -187,4 +190,54 @@ it('explains a stale task conflict without overwriting it', async () => {
     'changed during the movement',
   )
   expect((await taskRepository.getTaskById(task.id)).status).toBe('todo')
+})
+
+it('restricts position changes under filters but keeps status changes available', async () => {
+  const user = userEvent.setup()
+  const first = await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Filtered first',
+  })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Filtered second',
+  })
+  render(<ReactiveBoard movementRestricted />)
+  const down = await screen.findByRole('button', {
+    name: 'Move Filtered first down',
+  })
+  expect(down).toHaveAttribute('aria-disabled', 'true')
+  await user.click(down)
+  expect((await taskRepository.getTaskById(first.id)).position).toBe(0)
+  expect(
+    screen.getByText(/Clear filters and select manual order/),
+  ).toBeInTheDocument()
+  await user.selectOptions(
+    screen.getByRole('combobox', { name: 'Move Filtered first to status' }),
+    'done',
+  )
+  await waitFor(async () =>
+    expect((await taskRepository.getTaskById(first.id)).status).toBe('done'),
+  )
+})
+
+it('returns focus to the board when a status change hides the filtered card', async () => {
+  const user = userEvent.setup()
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Will disappear',
+  })
+  render(<ReactiveBoard movementRestricted onlyTodo />)
+  await user.selectOptions(
+    await screen.findByRole('combobox', {
+      name: 'Move Will disappear to status',
+    }),
+    'done',
+  )
+  await waitFor(() =>
+    expect(
+      screen.queryByRole('heading', { name: 'Will disappear' }),
+    ).not.toBeInTheDocument(),
+  )
+  expect(screen.getByRole('region', { name: 'Board' })).toHaveFocus()
 })

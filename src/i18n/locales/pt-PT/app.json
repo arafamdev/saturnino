@@ -229,5 +229,38 @@
     "failed": "Não foi possível mover a tarefa. A ordem anterior foi preservada. Tente novamente.",
     "saving": "A guardar o movimento…",
     "column": "Coluna visível"
+  },
+  "filters": {
+    "title": "Pesquisa e filtros",
+    "search": "Pesquisar tarefas",
+    "placeholder": "Título ou descrição…",
+    "status": "Filtrar por estado",
+    "priority": "Filtrar por prioridade",
+    "projectId": "Filtrar por projeto",
+    "due": "Filtrar por prazo",
+    "sort": "Ordenar tarefas",
+    "allStatuses": "Todos os estados",
+    "allPriorities": "Todas as prioridades",
+    "allProjects": "Todos os projetos",
+    "results": "Contagem de tarefas filtradas",
+    "count": "{{count}} de {{total}} tarefas",
+    "clear": "Limpar filtros",
+    "empty": "Nenhuma tarefa corresponde aos filtros.",
+    "reorderHint": "Limpe os filtros e selecione a ordem manual para reordenar cartões. Pode continuar a alterar o estado de uma tarefa.",
+    "overdue": "Em atraso",
+    "dueOptions": {
+      "all": "Qualquer prazo",
+      "overdue": "Em atraso",
+      "today": "Para hoje",
+      "upcoming": "Depois de hoje",
+      "none": "Sem prazo"
+    },
+    "sortOptions": {
+      "manual": "Ordem manual",
+      "dueDate": "Prazo mais próximo",
+      "priority": "Prioridade mais elevada",
+      "title": "Título, A–Z",
+      "updated": "Atualizadas recentemente"
+    }
   }
 }

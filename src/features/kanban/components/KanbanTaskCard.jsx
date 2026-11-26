@@ -12,6 +12,7 @@ function KanbanTaskCard({
   index,
   count,
   busy,
+  movementRestricted = false,
   onMove,
   onEdit,
   onDelete,
@@ -21,7 +22,7 @@ function KanbanTaskCard({
     id: task.id,
     type: 'task',
     data: { task },
-    disabled: busy,
+    disabled: busy || movementRestricted,
   })
   const { ref: targetRef, isDropTarget } = useDroppable({
     id: `task-target:${task.id}`,
@@ -51,7 +52,7 @@ function KanbanTaskCard({
             type="button"
             variant="ghost"
             className="mb-2 min-h-11 touch-none"
-            disabled={busy}
+            disabled={busy || movementRestricted}
             aria-label={t('kanban.drag', { title: task.title })}
             {...focusProps('handle')}
           >
@@ -88,11 +89,12 @@ function KanbanTaskCard({
               variant="outline"
               className="size-11"
               disabled={busy}
-              aria-disabled={index === 0}
+              aria-disabled={index === 0 || movementRestricted}
               aria-label={t('kanban.up', { title: task.title })}
               {...focusProps('up')}
               onClick={() => {
-                if (index > 0) onMove(task, task.status, index - 1, 'up')
+                if (!movementRestricted && index > 0)
+                  onMove(task, task.status, index - 1, 'up')
               }}
             >
               <ArrowUp aria-hidden="true" />
@@ -102,11 +104,11 @@ function KanbanTaskCard({
               variant="outline"
               className="size-11"
               disabled={busy}
-              aria-disabled={index === count - 1}
+              aria-disabled={index === count - 1 || movementRestricted}
               aria-label={t('kanban.down', { title: task.title })}
               {...focusProps('down')}
               onClick={() => {
-                if (index < count - 1)
+                if (!movementRestricted && index < count - 1)
                   onMove(task, task.status, index + 1, 'down')
               }}
             >
