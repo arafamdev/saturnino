@@ -1,6 +1,7 @@
 import HeroSection from '../components/HeroSection'
 import ProductPreviewSection from '../components/ProductPreviewSection'
 import FeaturesSection from '../components/FeaturesSection'
+import PhilosophySection from '../components/PhilosophySection'
 
 function LandingPage() {
   return (
@@ -8,6 +9,7 @@ function LandingPage() {
       <HeroSection />
       <ProductPreviewSection />
       <FeaturesSection />
+      <PhilosophySection />
     </>
   )
 }
