@@ -97,7 +97,9 @@ describe('Favorite projects integration', () => {
       }),
     ).toHaveAttribute('href', `/app/projects/${project.id}`)
 
-    expect(favoriteButton).toHaveAttribute('aria-pressed', 'true')
+    await waitFor(() => {
+      expect(favoriteButton).toHaveAttribute('aria-pressed', 'true')
+    })
 
     expect(router.state.location.pathname).toBe('/app/projects')
 
@@ -129,7 +131,9 @@ describe('Favorite projects integration', () => {
       await within(sidebar).findByText('No favorite projects yet.'),
     ).toBeInTheDocument()
 
-    expect(favoriteButton).toHaveAttribute('aria-pressed', 'false')
+    await waitFor(() => {
+      expect(favoriteButton).toHaveAttribute('aria-pressed', 'false')
+    })
 
     expect(
       (await projectRepository.getProjectById(project.id)).isFavorite,
@@ -157,7 +161,9 @@ describe('Favorite projects integration', () => {
       }),
     ).toHaveAttribute('aria-current', 'page')
 
-    expect(favoriteButton).toHaveAttribute('aria-pressed', 'true')
+    await waitFor(() => {
+      expect(favoriteButton).toHaveAttribute('aria-pressed', 'true')
+    })
   })
 
   it('navigates to project details from the favorites section', async () => {
@@ -277,7 +283,9 @@ describe('Favorite projects integration', () => {
       'Unable to update favorite. Please try again.',
     )
 
-    expect(favoriteButton).toHaveAttribute('aria-pressed', 'false')
+    await waitFor(() => {
+      expect(favoriteButton).toHaveAttribute('aria-pressed', 'false')
+    })
 
     expect(
       (await projectRepository.getProjectById(project.id)).isFavorite,
@@ -341,8 +349,17 @@ describe('Favorite projects integration', () => {
 
     readProjectsSpy.mockRestore()
 
+    const favoritesTrigger = within(sidebar).getByRole('button', {
+      name: 'Favorites',
+    })
+
+    const favoritesContentId = favoritesTrigger.getAttribute('aria-controls')
+    const favoritesContent = document.getElementById(favoritesContentId)
+
+    expect(favoritesContent).toBeInTheDocument()
+
     await user.click(
-      within(sidebar).getByRole('button', {
+      within(favoritesContent).getByRole('button', {
         name: 'Try again',
       }),
     )

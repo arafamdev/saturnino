@@ -59,6 +59,7 @@ describe('sidebarStorage', () => {
         recentProjects: true,
         projectExplorer: true,
       },
+      recentProjectIds: [],
     })
   })
 
@@ -81,6 +82,7 @@ describe('sidebarStorage', () => {
         recentProjects: false,
         projectExplorer: true,
       },
+      recentProjectIds: [],
     })
   })
 

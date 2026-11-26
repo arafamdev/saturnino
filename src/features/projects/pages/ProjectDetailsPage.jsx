@@ -1,8 +1,11 @@
+import { useEffect } from 'react'
+
 import { ArrowLeft, FolderKanban, LoaderCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router'
 
 import { Button } from '@/components/ui/button'
+import { useSidebar } from '@/layouts/hooks/useSidebar'
 
 import ProjectFavoriteButton from '../components/ProjectFavoriteButton'
 import ProjectsErrorState from '../components/ProjectsErrorState'
@@ -11,9 +14,21 @@ import { useProject } from '../hooks/useProject'
 function ProjectDetailsPage() {
   const { projectId } = useParams()
   const { t } = useTranslation('app')
+  const { recordProjectAccess } = useSidebar()
 
   const { project, isLoading, isNotFound, isError, retry } =
     useProject(projectId)
+
+  const visitedProjectId =
+    !isLoading && !isError && !isNotFound && project?.id === projectId
+      ? project.id
+      : null
+
+  useEffect(() => {
+    if (visitedProjectId) {
+      recordProjectAccess(visitedProjectId)
+    }
+  }, [visitedProjectId, recordProjectAccess])
 
   if (isLoading) {
     return (
@@ -117,7 +132,7 @@ function ProjectDetailsPage() {
 
         <h2 className="font-medium">{t('projectDetails.tasksTitle')}</h2>
 
-        <p className="max-w-sm text-muted-foreground">
+        <p className="max-w-sm text-sm text-muted-foreground">
           {t('projectDetails.tasksDescription')}
         </p>
       </div>

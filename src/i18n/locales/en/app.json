@@ -107,5 +107,11 @@
     "toggle": "Favorite project {{name}}",
     "add": "Add {{name}} to favorites",
     "remove": "Remove {{name}} from favorites"
+  },
+  "recentProjects": {
+    "title": "Recent Projects",
+    "empty": "No recently visited projects.",
+    "loading": "Loading recent projects...",
+    "loadError": "Unable to load recent projects."
   }
 }

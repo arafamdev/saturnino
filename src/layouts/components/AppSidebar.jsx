@@ -6,6 +6,7 @@ import { sidebarSectionIds } from '../state/sidebarReducer'
 
 import AppNavigation from './AppNavigation'
 import SidebarFavoriteProjects from './SidebarFavoriteProjects'
+import SidebarRecentProjects from './SidebarRecentProjects'
 import SidebarSection from './SidebarSection'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
@@ -29,6 +30,8 @@ function AppSidebar() {
         </SidebarSection>
 
         <SidebarFavoriteProjects />
+
+        <SidebarRecentProjects />
       </div>
 
       {/* Workspace information */}

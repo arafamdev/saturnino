@@ -11,6 +11,7 @@ import { sidebarSectionIds } from '../state/sidebarReducer'
 
 import AppNavigation from './AppNavigation'
 import SidebarFavoriteProjects from './SidebarFavoriteProjects'
+import SidebarRecentProjects from './SidebarRecentProjects'
 import SidebarSection from './SidebarSection'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
@@ -76,6 +77,8 @@ function MobileNavigation() {
               </SidebarSection>
 
               <SidebarFavoriteProjects onNavigate={handleCloseMenu} />
+
+              <SidebarRecentProjects onNavigate={handleCloseMenu} />
             </div>
 
             {/* Workspace information */}

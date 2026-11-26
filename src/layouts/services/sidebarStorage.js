@@ -1,4 +1,7 @@
-import { initialSidebarState } from '../state/sidebarReducer'
+import {
+  initialSidebarState,
+  normalizeRecentProjectIds,
+} from '../state/sidebarReducer'
 
 const SIDEBAR_STORAGE_KEY = 'saturnino:sidebar-preferences'
 
@@ -28,6 +31,9 @@ export function loadSidebarPreferences() {
     return {
       ...initialSidebarState,
       expandedSections,
+      recentProjectIds: normalizeRecentProjectIds(
+        parsedPreferences?.recentProjectIds,
+      ),
     }
   } catch {
     // Invalid or unavailable storage must not prevent navigation.

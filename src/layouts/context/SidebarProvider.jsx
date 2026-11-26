@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 
 import {
   initialSidebarState,
@@ -32,6 +32,20 @@ function SidebarProvider({ children }) {
     })
   }
 
+  const recordProjectAccess = useCallback((projectId) => {
+    dispatch({
+      type: sidebarActionTypes.RECORD_PROJECT_ACCESS,
+      payload: projectId,
+    })
+  }, [])
+
+  const pruneRecentProjects = useCallback((existingProjectIds) => {
+    dispatch({
+      type: sidebarActionTypes.PRUNE_RECENT_PROJECTS,
+      payload: existingProjectIds,
+    })
+  }, [])
+
   useEffect(() => {
     saveSidebarPreferences(state)
   }, [state])
@@ -40,6 +54,8 @@ function SidebarProvider({ children }) {
     ...state,
     toggleSection,
     resetPreferences,
+    recordProjectAccess,
+    pruneRecentProjects,
   }
 
   return <SidebarContext value={contextValue}>{children}</SidebarContext>
