@@ -10,6 +10,13 @@ import { taskRepository } from '@/features/tasks/services/taskRepository'
 import { useTasks } from '@/features/tasks/hooks/useTasks'
 import KanbanBoard from './KanbanBoard'
 
+async function chooseAction(user, title, action) {
+  await user.click(
+    await screen.findByRole('button', { name: `Actions for ${title}` }),
+  )
+  await user.click(screen.getByRole('menuitem', { name: action, exact: true }))
+}
+
 let project
 function ReactiveBoard({ movementRestricted = false, onlyTodo = false }) {
   const { tasks } = useTasks(project.id)
@@ -54,10 +61,7 @@ it('moves a task to a different column, persists completion and restores focus',
     title: 'Ship board',
   })
   render(<ReactiveBoard />)
-  const select = await screen.findByRole('combobox', {
-    name: 'Move Ship board to status',
-  })
-  await user.selectOptions(select, 'done')
+  await chooseAction(user, 'Ship board', 'Done')
   await waitFor(async () =>
     expect(await taskRepository.getTaskById(task.id)).toMatchObject({
       status: 'done',
@@ -67,7 +71,7 @@ it('moves a task to a different column, persists completion and restores focus',
   )
   await waitFor(() =>
     expect(
-      screen.getByRole('combobox', { name: 'Move Ship board to status' }),
+      screen.getByRole('button', { name: 'Actions for Ship board' }),
     ).toHaveFocus(),
   )
   expect(screen.getByRole('status', { name: 'Task view' })).toHaveTextContent(
@@ -86,18 +90,19 @@ it('reorders within a column using buttons and preserves boundary focus', async 
     title: 'Second',
   })
   render(<ReactiveBoard />)
-  await user.click(
-    await screen.findByRole('button', { name: 'Move Second up' }),
-  )
+  await chooseAction(user, 'Second', 'Move Second up')
   await waitFor(async () =>
     expect(
       (await taskRepository.getTasks(project.id)).map((task) => task.id),
     ).toEqual([second.id, first.id]),
   )
-  const up = screen.getByRole('button', { name: 'Move Second up' })
-  await waitFor(() => expect(up).toHaveFocus())
-  expect(up).toHaveAttribute('aria-disabled', 'true')
+  const trigger = screen.getByRole('button', { name: 'Actions for Second' })
+  await waitFor(() => expect(trigger).toHaveFocus())
+  await user.click(trigger)
+  const up = screen.getByRole('menuitem', { name: 'Move Second up' })
+  expect(up).toHaveAttribute('data-disabled')
   await user.click(up)
+  await user.keyboard('{Escape}')
   expect((await taskRepository.getTaskById(second.id)).position).toBe(0)
 })
 
@@ -111,18 +116,12 @@ it('preserves persisted order on failure and allows a new attempt', async () => 
     .spyOn(taskRepository, 'moveTask')
     .mockRejectedValueOnce(new Error('WRITE_FAILED'))
   render(<ReactiveBoard />)
-  await user.selectOptions(
-    await screen.findByRole('combobox', { name: 'Move Retry move to status' }),
-    'done',
-  )
+  await chooseAction(user, 'Retry move', 'Done')
   expect(await screen.findByRole('alert')).toHaveTextContent(
     'previous order was preserved',
   )
   expect((await taskRepository.getTaskById(task.id)).status).toBe('todo')
-  await user.selectOptions(
-    screen.getByRole('combobox', { name: 'Move Retry move to status' }),
-    'done',
-  )
+  await chooseAction(user, 'Retry move', 'Done')
   await waitFor(async () =>
     expect((await taskRepository.getTaskById(task.id)).status).toBe('done'),
   )
@@ -153,12 +152,9 @@ it('blocks overlapping writes until storage finishes', async () => {
       return original(...args)
     })
   render(<ReactiveBoard />)
-  await user.selectOptions(
-    await screen.findByRole('combobox', { name: 'Move Pending to status' }),
-    'done',
-  )
+  await chooseAction(user, 'Pending', 'Done')
   expect(
-    screen.getByRole('combobox', { name: 'Move Pending to status' }),
+    screen.getByRole('button', { name: 'Actions for Pending' }),
   ).toBeDisabled()
   expect(screen.getByRole('status', { name: 'Task view' })).toHaveTextContent(
     'Saving task movement',
@@ -167,7 +163,7 @@ it('blocks overlapping writes until storage finishes', async () => {
   release()
   await waitFor(() =>
     expect(
-      screen.getByRole('combobox', { name: 'Move Pending to status' }),
+      screen.getByRole('button', { name: 'Actions for Pending' }),
     ).toBeEnabled(),
   )
 })
@@ -182,10 +178,7 @@ it('explains a stale task conflict without overwriting it', async () => {
     new Error('TASK_MOVE_CONFLICT'),
   )
   render(<ReactiveBoard />)
-  await user.selectOptions(
-    await screen.findByRole('combobox', { name: 'Move Conflict to status' }),
-    'done',
-  )
+  await chooseAction(user, 'Conflict', 'Done')
   expect(await screen.findByRole('alert')).toHaveTextContent(
     'changed during the movement',
   )
@@ -203,19 +196,20 @@ it('restricts position changes under filters but keeps status changes available'
     title: 'Filtered second',
   })
   render(<ReactiveBoard movementRestricted />)
-  const down = await screen.findByRole('button', {
+  await user.click(
+    await screen.findByRole('button', { name: 'Actions for Filtered first' }),
+  )
+  const down = screen.getByRole('menuitem', {
     name: 'Move Filtered first down',
   })
-  expect(down).toHaveAttribute('aria-disabled', 'true')
+  expect(down).toHaveAttribute('data-disabled')
   await user.click(down)
+  await user.keyboard('{Escape}')
   expect((await taskRepository.getTaskById(first.id)).position).toBe(0)
   expect(
     screen.getByText(/Clear filters and select manual order/),
   ).toBeInTheDocument()
-  await user.selectOptions(
-    screen.getByRole('combobox', { name: 'Move Filtered first to status' }),
-    'done',
-  )
+  await chooseAction(user, 'Filtered first', 'Done')
   await waitFor(async () =>
     expect((await taskRepository.getTaskById(first.id)).status).toBe('done'),
   )
@@ -228,12 +222,7 @@ it('returns focus to the board when a status change hides the filtered card', as
     title: 'Will disappear',
   })
   render(<ReactiveBoard movementRestricted onlyTodo />)
-  await user.selectOptions(
-    await screen.findByRole('combobox', {
-      name: 'Move Will disappear to status',
-    }),
-    'done',
-  )
+  await chooseAction(user, 'Will disappear', 'Done')
   await waitFor(() =>
     expect(
       screen.queryByRole('heading', { name: 'Will disappear' }),

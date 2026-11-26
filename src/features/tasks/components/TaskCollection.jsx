@@ -15,6 +15,7 @@ import {
 } from '../utils/selectTasks'
 
 import { useTasks } from '../hooks/useTasks'
+import { useProjectTaskView } from '../hooks/useProjectTaskView'
 
 import DeleteTaskDialog from './DeleteTaskDialog'
 import TaskDialog from './TaskDialog'
@@ -32,7 +33,7 @@ function TaskCollection({ projectId, project }) {
   const taskQuery = useTasks(projectId)
   const projectQuery = useProjects()
   const [filters, setFilters] = useState(DEFAULT_TASK_FILTERS)
-  const [view, setView] = useState('list')
+  const [view, setView] = useProjectTaskView(projectId)
   const [activeDialog, setActiveDialog] = useState(null)
   const createButtonRef = useRef(null)
   const actionTriggerRef = useRef(null)
@@ -49,9 +50,9 @@ function TaskCollection({ projectId, project }) {
   const isTaskDialogOpen =
     activeDialog?.type === 'create' || activeDialog?.type === 'edit'
 
-  function openDialog(type, task = null, trigger = null) {
+  function openDialog(type, task = null, trigger = null, initialStatus) {
     actionTriggerRef.current = trigger
-    setActiveDialog({ type, task })
+    setActiveDialog({ type, task, initialStatus })
   }
 
   function handleOpenChange(open) {
@@ -116,6 +117,9 @@ function TaskCollection({ projectId, project }) {
         <Suspense fallback={<p role="status">{t('tasks.loading')}</p>}>
           <KanbanBoard
             projectId={projectId}
+            onCreate={(status, trigger) =>
+              openDialog('create', null, trigger, status)
+            }
             tasks={visibleTasks}
             today={today}
             movementRestricted={movementRestricted}
@@ -214,6 +218,7 @@ function TaskCollection({ projectId, project }) {
         open={isTaskDialogOpen}
         onOpenChange={handleOpenChange}
         task={activeDialog?.task}
+        initialStatus={activeDialog?.initialStatus}
         projectId={projectId}
         projects={projectQuery.projects}
         onCloseAutoFocus={restoreFocus}

@@ -34,7 +34,14 @@ function TaskField({ id, label, error, children }) {
   )
 }
 
-function TaskForm({ task, projectId, projects, onSubmit, onCancel }) {
+function TaskForm({
+  task,
+  initialStatus,
+  projectId,
+  projects,
+  onSubmit,
+  onCancel,
+}) {
   const { t, i18n } = useTranslation('app')
   const formId = useId()
   const {
@@ -47,7 +54,7 @@ function TaskForm({ task, projectId, projects, onSubmit, onCancel }) {
       title: task?.title ?? '',
       description: task?.description ?? '',
       projectId: task?.projectId ?? projectId ?? '',
-      status: task?.status ?? DEFAULT_TASK_STATUS,
+      status: task?.status ?? initialStatus ?? DEFAULT_TASK_STATUS,
       priority: task?.priority ?? DEFAULT_TASK_PRIORITY,
       dueDate: task?.dueDate ?? '',
     },
