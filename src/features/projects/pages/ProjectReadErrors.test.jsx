@@ -70,7 +70,7 @@ describe('Project read errors', () => {
     ).not.toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', {
+      within(screen.getByRole('main')).getByRole('button', {
         name: 'New project',
       }),
     ).toBeDisabled()
@@ -115,7 +115,7 @@ describe('Project read errors', () => {
     ).not.toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', {
+      within(screen.getByRole('main')).getByRole('button', {
         name: 'New project',
       }),
     ).toBeEnabled()

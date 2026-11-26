@@ -113,5 +113,14 @@
     "empty": "Ainda não visitaste nenhum projeto.",
     "loading": "A carregar projetos recentes...",
     "loadError": "Não foi possível carregar os projetos recentes."
+  },
+  "projectExplorer": {
+    "title": "Explorador de projetos",
+    "search": "Pesquisar projetos...",
+    "newProject": "Novo projeto",
+    "empty": "Ainda não existem projetos.",
+    "noResults": "Nenhum projeto encontrado.",
+    "loading": "A carregar o explorador de projetos...",
+    "loadError": "Não foi possível carregar o explorador de projetos."
   }
 }

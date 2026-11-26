@@ -113,5 +113,14 @@
     "empty": "No recently visited projects.",
     "loading": "Loading recent projects...",
     "loadError": "Unable to load recent projects."
+  },
+  "projectExplorer": {
+    "title": "Project Explorer",
+    "search": "Search projects...",
+    "newProject": "New project",
+    "empty": "No projects yet.",
+    "noResults": "No matching projects.",
+    "loading": "Loading project explorer...",
+    "loadError": "Unable to load project explorer."
   }
 }

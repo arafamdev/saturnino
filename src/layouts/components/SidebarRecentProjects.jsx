@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router'
 
-import { useProjects } from '@/features/projects/hooks/useProjects'
-import { cn } from '@/lib/utils'
+import { projectRepository } from '@/features/projects/services/projectRepository'
+
+import { useSidebarProjects } from '../hooks/useSidebarProjects'
 
 import { useSidebar } from '../hooks/useSidebar'
 import { sidebarSectionIds } from '../state/sidebarReducer'
 
+import SidebarProjectList from './SidebarProjectList'
 import SidebarSection from './SidebarSection'
 
 function SidebarRecentProjects({ onNavigate }) {
@@ -16,7 +17,7 @@ function SidebarRecentProjects({ onNavigate }) {
 
   const { recentProjectIds, pruneRecentProjects } = useSidebar()
 
-  const { projects, isLoading, isError, retry } = useProjects()
+  const { projects, isLoading, isError, retry } = useSidebarProjects()
 
   const projectsById = new Map(projects.map((project) => [project.id, project]))
 
@@ -29,86 +30,50 @@ function SidebarRecentProjects({ onNavigate }) {
       return
     }
 
-    const existingProjectIds = projects.map((project) => project.id)
-
-    pruneRecentProjects(existingProjectIds)
-  }, [projects, isLoading, isError, pruneRecentProjects])
-
-  function renderRecentProjects() {
-    if (isError) {
-      return (
-        <div className="space-y-2 px-3 py-2">
-          <p className="text-xs text-muted-foreground">
-            {t('recentProjects.loadError')}
-          </p>
-
-          <button
-            type="button"
-            onClick={retry}
-            className="rounded-sm text-xs font-medium text-primary hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            {t('projects.actions.retry')}
-          </button>
-        </div>
-      )
-    }
-
-    if (isLoading) {
-      return (
-        <p className="px-3 py-2 text-xs text-muted-foreground">
-          {t('recentProjects.loading')}
-        </p>
-      )
-    }
-
-    if (recentProjects.length === 0) {
-      return (
-        <p className="px-3 py-2 text-xs text-muted-foreground">
-          {t('recentProjects.empty')}
-        </p>
-      )
-    }
-
-    return (
-      <nav
-        aria-label={t('recentProjects.title')}
-        className="flex flex-col gap-1"
-      >
-        {recentProjects.map((project) => (
-          <NavLink
-            key={project.id}
-            to={`/app/projects/${project.id}`}
-            onClick={onNavigate}
-            title={project.name}
-            className={({ isActive }) =>
-              cn(
-                'flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors',
-                'focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
-                isActive
-                  ? 'bg-primary/10 font-medium text-primary'
-                  : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-              )
-            }
-          >
-            <span
-              className="size-2.5 shrink-0 rounded-full"
-              style={{ backgroundColor: project.color }}
-              aria-hidden="true"
-            />
-
-            <span className="min-w-0 truncate">{project.name}</span>
-          </NavLink>
-        ))}
-      </nav>
+    let cancelled = false
+    const missingIds = recentProjectIds.filter(
+      (id) => !projects.some((project) => project.id === id),
     )
-  }
+    if (missingIds.length === 0) return
+    Promise.all(
+      missingIds.map(async (id) => [
+        id,
+        await projectRepository.getProjectById(id),
+      ]),
+    )
+      .then((results) => {
+        if (cancelled) return
+        const deletedIds = new Set(
+          results.filter(([, project]) => !project).map(([id]) => id),
+        )
+        pruneRecentProjects(
+          recentProjectIds.filter((id) => !deletedIds.has(id)),
+        )
+      })
+      .catch(() => {
+        /* Preserve history when verification fails. */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [projects, isLoading, isError, recentProjectIds, pruneRecentProjects])
 
   return (
     <SidebarSection
       sectionId={sidebarSectionIds.RECENT_PROJECTS}
       title={t('recentProjects.title')}
     >
-      {renderRecentProjects()}
+      <SidebarProjectList
+        projects={recentProjects}
+        label={t('recentProjects.title')}
+        emptyMessage={t('recentProjects.empty')}
+        loadingMessage={t('recentProjects.loading')}
+        errorMessage={t('recentProjects.loadError')}
+        isLoading={isLoading}
+        isError={isError}
+        retry={retry}
+        onNavigate={onNavigate}
+      />
     </SidebarSection>
   )
 }

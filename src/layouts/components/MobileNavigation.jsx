@@ -7,12 +7,7 @@ import { useTranslation } from 'react-i18next'
 import Logo from '@/components/shared/Logo'
 import { Button } from '@/components/ui/button'
 
-import { sidebarSectionIds } from '../state/sidebarReducer'
-
-import AppNavigation from './AppNavigation'
-import SidebarFavoriteProjects from './SidebarFavoriteProjects'
-import SidebarRecentProjects from './SidebarRecentProjects'
-import SidebarSection from './SidebarSection'
+import SidebarProjectSections from './SidebarProjectSections'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
 function MobileNavigation() {
@@ -69,16 +64,7 @@ function MobileNavigation() {
 
             {/* Navigation sections */}
             <div className="flex-1 space-y-4 overflow-y-auto p-3">
-              <SidebarSection
-                sectionId={sidebarSectionIds.WORKSPACE}
-                title={t('workspace.title')}
-              >
-                <AppNavigation onNavigate={handleCloseMenu} />
-              </SidebarSection>
-
-              <SidebarFavoriteProjects onNavigate={handleCloseMenu} />
-
-              <SidebarRecentProjects onNavigate={handleCloseMenu} />
+              <SidebarProjectSections onNavigate={handleCloseMenu} />
             </div>
 
             {/* Workspace information */}

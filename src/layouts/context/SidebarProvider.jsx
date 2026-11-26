@@ -10,9 +10,13 @@ import {
   saveSidebarPreferences,
 } from '../services/sidebarStorage'
 
-import { SidebarContext } from './SidebarContext'
+import { useProjects } from '@/features/projects/hooks/useProjects'
+
+import { SidebarContext, SidebarProjectsContext } from './SidebarContext'
 
 function SidebarProvider({ children }) {
+  const projectQuery = useProjects()
+
   const [state, dispatch] = useReducer(
     sidebarReducer,
     initialSidebarState,
@@ -58,7 +62,13 @@ function SidebarProvider({ children }) {
     pruneRecentProjects,
   }
 
-  return <SidebarContext value={contextValue}>{children}</SidebarContext>
+  return (
+    <SidebarContext value={contextValue}>
+      <SidebarProjectsContext value={projectQuery}>
+        {children}
+      </SidebarProjectsContext>
+    </SidebarContext>
+  )
 }
 
 export default SidebarProvider
