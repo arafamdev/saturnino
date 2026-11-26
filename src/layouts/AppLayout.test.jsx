@@ -7,6 +7,8 @@ import ThemeProvider from '@/app/providers/theme/ThemeProvider'
 
 import { routes } from '@/app/router'
 
+const SIDEBAR_STORAGE_KEY = 'saturnino:sidebar-preferences'
+
 function renderAppLayout(initialPath = '/app') {
   const router = createMemoryRouter(routes, {
     initialEntries: [initialPath],
@@ -189,5 +191,130 @@ describe('Application layout', () => {
     ).toBeInTheDocument()
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('allows collapsing and expanding the desktop workspace navigation', async () => {
+    const user = userEvent.setup()
+
+    renderAppLayout()
+
+    const sidebar = await screen.findByRole('complementary')
+
+    const workspaceTrigger = within(sidebar).getByRole('button', {
+      name: 'Workspace',
+    })
+
+    await user.click(workspaceTrigger)
+
+    expect(workspaceTrigger).toHaveAttribute('aria-expanded', 'false')
+
+    expect(
+      within(sidebar).queryByRole('navigation', {
+        name: 'Main navigation',
+      }),
+    ).not.toBeInTheDocument()
+
+    await user.click(workspaceTrigger)
+
+    expect(workspaceTrigger).toHaveAttribute('aria-expanded', 'true')
+
+    expect(
+      within(sidebar).getByRole('navigation', {
+        name: 'Main navigation',
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('restores the collapsed workspace preference', async () => {
+    localStorage.setItem(
+      SIDEBAR_STORAGE_KEY,
+      JSON.stringify({
+        expandedSections: {
+          workspace: false,
+        },
+      }),
+    )
+
+    renderAppLayout()
+
+    const sidebar = await screen.findByRole('complementary')
+
+    expect(
+      within(sidebar).getByRole('button', { name: 'Workspace' }),
+    ).toHaveAttribute('aria-expanded', 'false')
+
+    expect(
+      within(sidebar).queryByRole('navigation', {
+        name: 'Main navigation',
+      }),
+    ).not.toBeInTheDocument()
+  })
+
+  it('shares the workspace expanded state between desktop and mobile', async () => {
+    const user = userEvent.setup()
+
+    renderAppLayout()
+
+    const sidebar = await screen.findByRole('complementary')
+
+    const desktopWorkspaceTrigger = within(sidebar).getByRole('button', {
+      name: 'Workspace',
+    })
+
+    await user.click(desktopWorkspaceTrigger)
+
+    await user.click(
+      screen.getByRole('button', {
+        name: 'Open navigation menu',
+      }),
+    )
+
+    const dialog = await screen.findByRole('dialog')
+
+    const mobileWorkspaceTrigger = within(dialog).getByRole('button', {
+      name: 'Workspace',
+    })
+
+    expect(mobileWorkspaceTrigger).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(mobileWorkspaceTrigger)
+
+    expect(mobileWorkspaceTrigger).toHaveAttribute('aria-expanded', 'true')
+
+    await user.keyboard('{Escape}')
+
+    expect(desktopWorkspaceTrigger).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('preserves the mobile workspace preference after reopening the menu', async () => {
+    const user = userEvent.setup()
+
+    renderAppLayout()
+
+    const openMenuButton = await screen.findByRole('button', {
+      name: 'Open navigation menu',
+    })
+
+    await user.click(openMenuButton)
+
+    const dialog = await screen.findByRole('dialog')
+
+    await user.click(
+      within(dialog).getByRole('button', {
+        name: 'Workspace',
+      }),
+    )
+
+    await user.keyboard('{Escape}')
+
+    await user.click(openMenuButton)
+
+    const reopenedDialog = await screen.findByRole('dialog')
+
+    expect(
+      within(reopenedDialog).getByRole('button', {
+        name: 'Workspace',
+      }),
+    ).toHaveAttribute('aria-expanded', 'false')
   })
 })

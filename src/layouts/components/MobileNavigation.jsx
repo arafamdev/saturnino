@@ -7,7 +7,10 @@ import { useTranslation } from 'react-i18next'
 import Logo from '@/components/shared/Logo'
 import { Button } from '@/components/ui/button'
 
+import { sidebarSectionIds } from '../state/sidebarReducer'
+
 import AppNavigation from './AppNavigation'
+import SidebarSection from './SidebarSection'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
 function MobileNavigation() {
@@ -62,11 +65,17 @@ function MobileNavigation() {
               </Dialog.Close>
             </div>
 
-            {/* Navigation links */}
+            {/* Navigation sections */}
             <div className="flex-1 overflow-y-auto p-3">
-              <AppNavigation onNavigate={handleCloseMenu} />
+              <SidebarSection
+                sectionId={sidebarSectionIds.WORKSPACE}
+                title={t('workspace.title')}
+              >
+                <AppNavigation onNavigate={handleCloseMenu} />
+              </SidebarSection>
             </div>
 
+            {/* Workspace information */}
             <div className="border-t p-3">
               <WorkspaceIndicator />
             </div>

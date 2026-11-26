@@ -2,7 +2,10 @@ import { useTranslation } from 'react-i18next'
 
 import Logo from '@/components/shared/Logo'
 
+import { sidebarSectionIds } from '../state/sidebarReducer'
+
 import AppNavigation from './AppNavigation'
+import SidebarSection from './SidebarSection'
 import WorkspaceIndicator from './WorkspaceIndicator'
 
 function AppSidebar() {
@@ -17,11 +20,12 @@ function AppSidebar() {
 
       {/* Workspace navigation */}
       <div className="flex-1 overflow-y-auto px-3 py-4">
-        <p className="mb-3 px-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          {t('workspace.title')}
-        </p>
-
-        <AppNavigation />
+        <SidebarSection
+          sectionId={sidebarSectionIds.WORKSPACE}
+          title={t('workspace.title')}
+        >
+          <AppNavigation />
+        </SidebarSection>
       </div>
 
       {/* Workspace information */}
