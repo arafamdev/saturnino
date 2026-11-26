@@ -204,7 +204,8 @@
       "saveFailed": "Unable to save the task. Please try again.",
       "deleteFailed": "Unable to delete the task. Please try again.",
       "loadTitle": "Unable to load tasks",
-      "loadFailed": "There was a problem accessing your local tasks or projects. Please try again."
+      "loadFailed": "There was a problem accessing your local tasks or projects. Please try again.",
+      "updateConflict": "This task changed elsewhere. Your draft was preserved. Close and reopen to review the latest version."
     }
   },
   "kanban": {
@@ -377,5 +378,17 @@
   },
   "taskCard": {
     "actions": "Actions for {{title}}"
+  },
+  "taskDetails": {
+    "description": "Review the details. Changes are saved only when you choose Save task.",
+    "createdAt": "Created",
+    "updatedAt": "Last updated",
+    "completedAt": "Completed",
+    "removed": "This task was removed elsewhere. Your draft is still here; it cannot be saved to the removed task.",
+    "changed": "This task changed elsewhere. Your draft is preserved. Close and reopen the task to review the latest version before saving.",
+    "discardTitle": "Discard unsaved changes?",
+    "discardDescription": "Your changes have not been saved. Continue editing to keep your draft, or discard it to leave.",
+    "keepEditing": "Continue editing",
+    "discard": "Discard changes"
   }
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { registerSW } from 'virtual:pwa-register'
 import { PwaContext } from './PwaContext'
 import PwaUpdateBanner from '../components/PwaUpdateBanner'
+import { BEFORE_PWA_UPDATE } from '../events/updateGuard'
 
 function subscribeNetwork(listener) {
   window.addEventListener('online', listener)
@@ -104,13 +105,20 @@ function PwaProvider({
     }
   }
 
-  async function applyUpdate() {
+  async function applyUpdate({ skipDraftGuard = false } = {}) {
     if (
       !updateRef.current ||
       operations.current.updating ||
       operations.current.checking
     )
       return
+    if (!skipDraftGuard) {
+      const event = new CustomEvent(BEFORE_PWA_UPDATE, {
+        cancelable: true,
+        detail: { proceed: () => applyUpdate({ skipDraftGuard: true }) },
+      })
+      if (!window.dispatchEvent(event)) return
+    }
     operations.current.updating = true
     setIsUpdating(true)
     setError('')

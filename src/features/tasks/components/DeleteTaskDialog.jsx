@@ -7,7 +7,13 @@ import { Button } from '@/components/ui/button'
 
 import { taskRepository } from '../services/taskRepository'
 
-function DeleteTaskDialog({ open, onOpenChange, task, onCloseAutoFocus }) {
+function DeleteTaskDialog({
+  open,
+  onOpenChange,
+  task,
+  onCloseAutoFocus,
+  onDeleted,
+}) {
   const { t } = useTranslation('app')
   const [isDeleting, setIsDeleting] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -24,6 +30,7 @@ function DeleteTaskDialog({ open, onOpenChange, task, onCloseAutoFocus }) {
     setHasError(false)
     try {
       await taskRepository.deleteTask(task.id)
+      onDeleted?.()
       onOpenChange(false)
     } catch {
       setHasError(true)

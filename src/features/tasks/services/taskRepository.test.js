@@ -218,4 +218,28 @@ describe('Task repository', () => {
     expect(await db.tasks.where('projectId').equals(project.id).count()).toBe(0)
     await expect(createTask()).rejects.toThrow('TASK_PROJECT_NOT_FOUND')
   })
+  it('rejects stale edits atomically, including two writes in the same clock tick', async () => {
+    const task = await createTask()
+    vi.spyOn(Date, 'now').mockReturnValue(Date.parse(task.updatedAt))
+    const updated = await repository.updateTask(
+      task.id,
+      { ...task, title: 'Other tab' },
+      { expectedUpdatedAt: task.updatedAt },
+    )
+    expect(updated.updatedAt).not.toBe(task.updatedAt)
+    await expect(
+      repository.updateTask(
+        task.id,
+        { ...task, title: 'Stale draft' },
+        { expectedUpdatedAt: task.updatedAt },
+      ),
+    ).rejects.toThrow('TASK_UPDATE_CONFLICT')
+    expect((await repository.getTaskById(task.id)).title).toBe('Other tab')
+    const current = await repository.updateTask(
+      task.id,
+      { ...updated, title: 'Reviewed' },
+      { expectedUpdatedAt: updated.updatedAt },
+    )
+    expect(current.title).toBe('Reviewed')
+  })
 })

@@ -235,3 +235,29 @@ it('updates cache readiness when a worker gains control', () => {
     screen.getByRole('status', { name: 'Offline cache status' }),
   ).toHaveTextContent('Ready for offline use.')
 })
+
+it('waits for a dirty-draft guard before activating an explicit update', async () => {
+  const user = userEvent.setup()
+  let resume
+  const guard = (event) => {
+    event.preventDefault()
+    resume = event.detail.proceed
+  }
+  window.addEventListener('saturnino:before-pwa-update', guard)
+  try {
+    setup()
+    registered({ active: {}, waiting: {} })
+    await user.click(screen.getByRole('button', { name: 'Reload to update' }))
+    expect(update).not.toHaveBeenCalled()
+    expect(reload).not.toHaveBeenCalled()
+    expect(resume).toBeTypeOf('function')
+    await act(async () => {
+      await resume()
+    })
+    expect(update).toHaveBeenCalledOnce()
+    act(() => options.onNeedReload())
+    expect(reload).toHaveBeenCalledOnce()
+  } finally {
+    window.removeEventListener('saturnino:before-pwa-update', guard)
+  }
+})
