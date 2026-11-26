@@ -17,9 +17,81 @@
   "breadcrumbs": {
     "label": "Breadcrumb"
   },
+  "projects": {
+    "title": "Projects",
+    "description": "Organize your work, one project at a time.",
+    "loading": "Loading projects...",
+    "noDescription": "No description",
+    "actions": {
+      "new": "New project",
+      "create": "Create project",
+      "edit": "Edit project",
+      "save": "Save changes",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "close": "Close",
+      "delete": "Delete project",
+      "deleting": "Deleting...",
+      "view": "View project",
+      "viewNamed": "View project {{name}}",
+      "menu": "Actions for {{name}}",
+      "retry": "Try again"
+    },
+    "dialog": {
+      "createTitle": "Create project",
+      "createDescription": "Give your next idea a place to grow.",
+      "editTitle": "Edit project",
+      "editDescription": "Update your project information."
+    },
+    "form": {
+      "name": "Project name",
+      "namePlaceholder": "e.g. Portfolio Website",
+      "description": "Description",
+      "descriptionPlaceholder": "What is this project about?",
+      "color": "Project color"
+    },
+    "colors": {
+      "indigo": "Indigo",
+      "blue": "Blue",
+      "cyan": "Cyan",
+      "green": "Green",
+      "yellow": "Yellow",
+      "orange": "Orange",
+      "red": "Red",
+      "pink": "Pink",
+      "purple": "Purple",
+      "gray": "Gray"
+    },
+    "empty": {
+      "title": "Every great idea starts somewhere.",
+      "description": "Create your first project and give your work a place to grow."
+    },
+    "deleteDialog": {
+      "title": "Delete project?",
+      "description": "Are you sure you want to delete \"{{name}}\"? All tasks associated with this project will also be deleted.",
+      "warning": "This action cannot be undone."
+    },
+    "errors": {
+      "nameRequired": "Enter a project name.",
+      "nameTooLong": "The project name cannot exceed 80 characters.",
+      "descriptionInvalid": "Enter a valid description.",
+      "descriptionTooLong": "The description cannot exceed 500 characters.",
+      "colorInvalid": "Select a valid project color.",
+      "notFound": "This project no longer exists.",
+      "saveFailed": "Unable to save the project. Please try again.",
+      "deleteFailed": "Unable to delete the project. Please try again.",
+      "loadTitle": "Unable to load projects",
+      "loadFailed": "There was a problem accessing your local data. Please try again."
+    }
+  },
   "projectDetails": {
     "title": "Project Details",
-    "identifier": "Project ID: {{projectId}}"
+    "identifier": "Project ID: {{projectId}}",
+    "backToProjects": "Back to projects",
+    "notFoundTitle": "Project not found",
+    "notFoundDescription": "This project may have been deleted or does not exist.",
+    "tasksTitle": "Your tasks will live here",
+    "tasksDescription": "Task management and your Kanban board are coming next."
   },
   "notFound": {
     "title": "Page not found",
