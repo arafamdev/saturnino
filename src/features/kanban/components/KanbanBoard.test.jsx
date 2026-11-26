@@ -239,5 +239,7 @@ it('returns focus to the board when a status change hides the filtered card', as
       screen.queryByRole('heading', { name: 'Will disappear' }),
     ).not.toBeInTheDocument(),
   )
-  expect(screen.getByRole('region', { name: 'Board' })).toHaveFocus()
+  await waitFor(() =>
+    expect(screen.getByRole('region', { name: 'Board' })).toHaveFocus(),
+  )
 })

@@ -306,5 +306,37 @@
     "feedback": "Feedback das preferências",
     "applied": "Preferências aplicadas.",
     "languageFailed": "Não foi possível alterar o idioma. Tente novamente."
+  },
+  "dataManagement": {
+    "title": "Gestão de dados",
+    "description": "Guarde uma cópia de segurança do espaço local ou exporte tarefas para análise.",
+    "counts": "Projetos: {{projects}} · Tarefas: {{tasks}}",
+    "loading": "A ler o espaço de trabalho local…",
+    "loadFailed": "Não foi possível ler o espaço de trabalho local. Tente novamente.",
+    "exportJson": "Descarregar backup JSON",
+    "exportCsv": "Exportar tarefas em CSV",
+    "import": "Restaurar backup JSON",
+    "file": "Escolher um backup JSON",
+    "notes": "Os backups JSON até 20 MiB são processados neste dispositivo. Incluem projetos e tarefas, mas não as preferências da interface. O CSV destina-se a exportação e análise; use JSON para restaurar.",
+    "feedback": "Feedback da gestão de dados",
+    "working": "A preparar os dados…",
+    "exportedJson": "Backup preparado. Consulte as transferências do navegador.",
+    "exportedCsv": "CSV preparado. Consulte as transferências do navegador.",
+    "restored": "Espaço de trabalho restaurado.",
+    "restoreTitle": "Substituir o espaço local?",
+    "restoreDescription": "Esta ação substitui todos os projetos e tarefas locais pelo backup selecionado. Os registos existentes que não estejam no backup serão removidos. As preferências da interface mantêm-se. Descarregue primeiro um backup se precisar de preservar os dados atuais.",
+    "current": "Espaço atual",
+    "backup": "Backup selecionado",
+    "exportedAt": "Backup criado: {{date}}",
+    "confirmRestore": "Substituir espaço",
+    "restoring": "A restaurar…",
+    "errors": {
+      "BACKUP_INVALID": "Este ficheiro não é um backup válido do Saturnino. Selecione um backup válido.",
+      "BACKUP_VERSION_UNSUPPORTED": "Esta versão de backup não é suportada pela aplicação.",
+      "BACKUP_TOO_LARGE": "O backup JSON excede o limite de 20 MiB.",
+      "WORKSPACE_CHANGED": "O espaço de trabalho foi alterado após esta pré-visualização. Cancele e selecione novamente o backup para rever os dados atuais.",
+      "BACKUP_READ_FAILED": "Não foi possível ler o ficheiro. Selecione-o novamente.",
+      "ACTION_FAILED": "Não foi possível concluir esta ação. Tente novamente."
+    }
   }
 }

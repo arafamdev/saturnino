@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import DataManagementPanel from '@/features/data-management/components/DataManagementPanel'
 import { useTheme } from '@/app/providers/theme/useTheme'
 import { supportedLanguages } from '@/i18n/languages'
 import SidebarCustomization from '@/layouts/components/SidebarCustomization'
@@ -153,6 +154,7 @@ function SettingsPage() {
           {t('settings.localData')}
         </p>
       </section>
+      <DataManagementPanel />
       {languageError && (
         <p role="alert" className="text-sm text-destructive">
           {t('settings.languageFailed')}

@@ -306,5 +306,37 @@
     "feedback": "Preference feedback",
     "applied": "Preferences applied.",
     "languageFailed": "Could not change the language. Try again."
+  },
+  "dataManagement": {
+    "title": "Data management",
+    "description": "Keep a backup of your local workspace or export tasks for analysis.",
+    "counts": "Projects: {{projects}} · Tasks: {{tasks}}",
+    "loading": "Reading local workspace…",
+    "loadFailed": "Could not read your local workspace. Try again.",
+    "exportJson": "Download JSON backup",
+    "exportCsv": "Export tasks as CSV",
+    "import": "Restore JSON backup",
+    "file": "Choose a JSON backup",
+    "notes": "JSON backups up to 20 MiB are processed on this device. Backups include projects and tasks, not interface preferences. CSV is for export and analysis; use JSON to restore.",
+    "feedback": "Data management feedback",
+    "working": "Preparing your data…",
+    "exportedJson": "Backup ready. Check your browser downloads.",
+    "exportedCsv": "CSV ready. Check your browser downloads.",
+    "restored": "Workspace restored.",
+    "restoreTitle": "Replace local workspace?",
+    "restoreDescription": "This replaces all local projects and tasks with the selected backup. Existing records not in the backup will be removed. Interface preferences stay unchanged. Download a backup first if you need to keep the current data.",
+    "current": "Current workspace",
+    "backup": "Selected backup",
+    "exportedAt": "Backup created: {{date}}",
+    "confirmRestore": "Replace workspace",
+    "restoring": "Restoring…",
+    "errors": {
+      "BACKUP_INVALID": "This file is not a valid Saturnino backup. Select a valid backup file.",
+      "BACKUP_VERSION_UNSUPPORTED": "This backup version is not supported by this application.",
+      "BACKUP_TOO_LARGE": "The JSON backup exceeds the 20 MiB limit.",
+      "WORKSPACE_CHANGED": "Your workspace changed after this preview. Cancel and select the backup again to review the current data.",
+      "BACKUP_READ_FAILED": "Could not read the file. Select it again.",
+      "ACTION_FAILED": "Could not complete this action. Try again."
+    }
   }
 }
