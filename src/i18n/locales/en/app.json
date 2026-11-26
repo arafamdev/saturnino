@@ -206,5 +206,28 @@
       "loadTitle": "Unable to load tasks",
       "loadFailed": "There was a problem accessing your local tasks or projects. Please try again."
     }
+  },
+  "kanban": {
+    "view": "Task view",
+    "list": "List",
+    "board": "Board",
+    "drag": "Drag {{title}}",
+    "dragging": "Dragging",
+    "dragShort": "Drag",
+    "moveTo": "Move to",
+    "moveNamed": "Move {{title}} to status",
+    "up": "Move {{title}} up",
+    "down": "Move {{title}} down",
+    "empty": "No tasks in this column.",
+    "instructions": "Press Space or Enter to pick up a task, arrow keys to move, and Space or Enter to drop. Escape cancels. You can also use the status selector and move up or down buttons.",
+    "started": "Picked up {{title}}.",
+    "over": "Over {{status}}.",
+    "cancelled": "Movement cancelled.",
+    "requested": "Drop requested. Waiting for local storage.",
+    "moved": "{{title}} moved to {{status}}.",
+    "conflict": "This task changed during the movement. Review its current state and try again.",
+    "failed": "Could not move the task. Your previous order was preserved. Try again.",
+    "saving": "Saving task movement…",
+    "column": "Visible column"
   }
 }

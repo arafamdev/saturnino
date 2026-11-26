@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react'
+import { lazy, Suspense, useId, useRef, useState } from 'react'
 
 import { Plus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -13,11 +13,16 @@ import DeleteTaskDialog from './DeleteTaskDialog'
 import TaskDialog from './TaskDialog'
 import TaskList from './TaskList'
 
+const KanbanBoard = lazy(
+  () => import('@/features/kanban/components/KanbanBoard'),
+)
+
 function TaskCollection({ projectId }) {
   const { t } = useTranslation('app')
   const headingId = useId()
   const taskQuery = useTasks(projectId)
   const projectQuery = useProjects()
+  const [view, setView] = useState('list')
   const [activeDialog, setActiveDialog] = useState(null)
   const createButtonRef = useRef(null)
   const actionTriggerRef = useRef(null)
@@ -90,6 +95,18 @@ function TaskCollection({ projectId }) {
           </Button>
         </div>
       )
+    if (projectId && view === 'board')
+      return (
+        <Suspense fallback={<p role="status">{t('tasks.loading')}</p>}>
+          <KanbanBoard
+            projectId={projectId}
+            tasks={taskQuery.tasks}
+            projects={projectQuery.projects}
+            onEdit={(task, trigger) => openDialog('edit', task, trigger)}
+            onDelete={(task, trigger) => openDialog('delete', task, trigger)}
+          />
+        </Suspense>
+      )
     if (taskQuery.tasks.length === 0)
       return (
         <p className="rounded-xl border border-dashed p-6 text-sm text-muted-foreground">
@@ -123,6 +140,22 @@ function TaskCollection({ projectId }) {
           {t('tasks.actions.new')}
         </Button>
       </div>
+      {projectId && (
+        <div role="group" aria-label={t('kanban.view')} className="flex gap-2">
+          {['list', 'board'].map((option) => (
+            <Button
+              key={option}
+              type="button"
+              variant={view === option ? 'secondary' : 'outline'}
+              className="min-h-11"
+              aria-pressed={view === option}
+              onClick={() => setView(option)}
+            >
+              {t(`kanban.${option}`)}
+            </Button>
+          ))}
+        </div>
+      )}
       {renderTasks()}
       <TaskDialog
         open={isTaskDialogOpen}

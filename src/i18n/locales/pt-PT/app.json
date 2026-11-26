@@ -206,5 +206,28 @@
       "loadTitle": "Não foi possível carregar as tarefas",
       "loadFailed": "Ocorreu um problema ao aceder às tarefas ou aos projetos locais. Tenta novamente."
     }
+  },
+  "kanban": {
+    "view": "Vista das tarefas",
+    "list": "Lista",
+    "board": "Quadro",
+    "drag": "Arrastar {{title}}",
+    "dragging": "A arrastar",
+    "dragShort": "Arrastar",
+    "moveTo": "Mover para",
+    "moveNamed": "Mover {{title}} para o estado",
+    "up": "Mover {{title}} para cima",
+    "down": "Mover {{title}} para baixo",
+    "empty": "Sem tarefas nesta coluna.",
+    "instructions": "Prima Espaço ou Enter para pegar numa tarefa, as setas para mover e Espaço ou Enter para largar. Escape cancela. Também pode usar o seletor de estado e os botões para mover para cima ou para baixo.",
+    "started": "Selecionada a tarefa {{title}}.",
+    "over": "Sobre {{status}}.",
+    "cancelled": "Movimento cancelado.",
+    "requested": "Movimento solicitado. A aguardar armazenamento local.",
+    "moved": "{{title}} movida para {{status}}.",
+    "conflict": "Esta tarefa foi alterada durante o movimento. Reveja o estado atual e tente novamente.",
+    "failed": "Não foi possível mover a tarefa. A ordem anterior foi preservada. Tente novamente.",
+    "saving": "A guardar o movimento…",
+    "column": "Coluna visível"
   }
 }
