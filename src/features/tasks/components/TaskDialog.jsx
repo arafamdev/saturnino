@@ -15,6 +15,7 @@ function TaskDialog({
   onOpenChange,
   task,
   projectId,
+  initialStatus,
   projects,
   onCloseAutoFocus,
 }) {
@@ -68,8 +69,9 @@ function TaskDialog({
             </Dialog.Close>
           </div>
           <TaskForm
-            key={task?.id ?? 'new-task'}
+            key={task?.id ?? `new-task-${initialStatus ?? 'todo'}`}
             task={task}
+            initialStatus={initialStatus}
             projectId={projectId}
             projects={projects}
             onSubmit={handleSave}

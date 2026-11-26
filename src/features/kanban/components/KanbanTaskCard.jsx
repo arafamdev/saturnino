@@ -1,5 +1,9 @@
 import { useDraggable, useDroppable } from '@dnd-kit/react'
 import { ArrowDown, ArrowUp, GripVertical } from 'lucide-react'
+import { DropdownMenu } from 'radix-ui'
+import TaskActionsMenu, {
+  taskMenuItemClass,
+} from '@/features/tasks/components/TaskActionsMenu'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
@@ -28,17 +32,12 @@ function KanbanTaskCard({
   const { ref: targetRef, isDropTarget } = useDroppable({
     id: `task-target:${task.id}`,
     accept: (source) => source.type === 'task' && source.id !== task.id,
-    collisionPriority: 10,
     data: { status: task.status, index, title: task.title },
-  })
-  const focusProps = (kind) => ({
-    'data-task-focus': kind,
-    'data-task-id': task.id,
   })
   return (
     <li
       ref={targetRef}
-      className={isDropTarget ? 'rounded-xl ring-2 ring-primary' : ''}
+      className={`${isDropTarget ? 'rounded-lg ring-2 ring-primary' : ''} ${isDragSource ? 'opacity-40' : ''}`}
     >
       <TaskCard
         ref={ref}
@@ -48,77 +47,61 @@ function KanbanTaskCard({
         onEdit={onEdit}
         onDelete={onDelete}
         headingLevel={4}
+        actions={
+          <TaskActionsMenu
+            task={task}
+            onEdit={onEdit}
+            onDelete={onDelete}
+            busy={busy}
+          >
+            <DropdownMenu.Separator className="my-1 h-px bg-border" />
+            <DropdownMenu.Label className="px-2 py-1 text-xs text-muted-foreground">
+              {t('kanban.moveTo')}
+            </DropdownMenu.Label>
+            {TASK_STATUSES.map((status) => (
+              <DropdownMenu.Item
+                key={status}
+                className={taskMenuItemClass}
+                disabled={status === task.status}
+                onSelect={() => onMove(task, status, 0, 'menu')}
+              >
+                {t(`tasks.status.${status}`)}
+              </DropdownMenu.Item>
+            ))}
+            <DropdownMenu.Separator className="my-1 h-px bg-border" />
+            <DropdownMenu.Item
+              className={taskMenuItemClass}
+              disabled={index === 0 || movementRestricted}
+              onSelect={() => onMove(task, task.status, index - 1, 'menu')}
+            >
+              <ArrowUp className="size-4" aria-hidden="true" />
+              {t('kanban.up', { title: task.title })}
+            </DropdownMenu.Item>
+            <DropdownMenu.Item
+              className={taskMenuItemClass}
+              disabled={index === count - 1 || movementRestricted}
+              onSelect={() => onMove(task, task.status, index + 1, 'menu')}
+            >
+              <ArrowDown className="size-4" aria-hidden="true" />
+              {t('kanban.down', { title: task.title })}
+            </DropdownMenu.Item>
+          </TaskActionsMenu>
+        }
         dragHandle={
           <Button
             ref={handleRef}
             type="button"
             variant="ghost"
-            className="mb-2 min-h-11 touch-none"
+            className="size-11 shrink-0 touch-none px-0 text-muted-foreground md:size-8"
             disabled={busy || movementRestricted}
             aria-label={t('kanban.drag', { title: task.title })}
-            {...focusProps('handle')}
+            data-task-focus="handle"
+            data-task-id={task.id}
           >
             <GripVertical aria-hidden="true" />
-            <span>
-              {t(isDragSource ? 'kanban.dragging' : 'kanban.dragShort')}
-            </span>
           </Button>
         }
-      >
-        <div className="mt-4 flex flex-wrap gap-2">
-          <label className="min-w-0 flex-1 text-xs text-muted-foreground">
-            {t('kanban.moveTo')}
-            <select
-              className="mt-1 min-h-11 w-full rounded-md border bg-background px-2 text-sm text-foreground"
-              aria-label={t('kanban.moveNamed', { title: task.title })}
-              value={task.status}
-              disabled={busy}
-              {...focusProps('select')}
-              onChange={(event) =>
-                onMove(task, event.target.value, 0, 'select')
-              }
-            >
-              {TASK_STATUSES.map((status) => (
-                <option key={status} value={status}>
-                  {t(`tasks.status.${status}`)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <div className="flex items-end gap-1">
-            <Button
-              type="button"
-              variant="outline"
-              className="size-11"
-              disabled={busy}
-              aria-disabled={index === 0 || movementRestricted}
-              aria-label={t('kanban.up', { title: task.title })}
-              {...focusProps('up')}
-              onClick={() => {
-                if (!movementRestricted && index > 0)
-                  onMove(task, task.status, index - 1, 'up')
-              }}
-            >
-              <ArrowUp aria-hidden="true" />
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="size-11"
-              disabled={busy}
-              aria-disabled={index === count - 1 || movementRestricted}
-              aria-label={t('kanban.down', { title: task.title })}
-              {...focusProps('down')}
-              onClick={() => {
-                if (!movementRestricted && index < count - 1)
-                  onMove(task, task.status, index + 1, 'down')
-              }}
-            >
-              <ArrowDown aria-hidden="true" />
-            </Button>
-          </div>
-        </div>
-      </TaskCard>
+      />
     </li>
   )
 }

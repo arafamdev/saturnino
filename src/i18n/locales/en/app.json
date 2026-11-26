@@ -228,7 +228,9 @@
     "conflict": "This task changed during the movement. Review its current state and try again.",
     "failed": "Could not move the task. Your previous order was preserved. Try again.",
     "saving": "Saving task movement…",
-    "column": "Visible column"
+    "column": "Visible column",
+    "createIn": "Add task to {{status}}",
+    "columns": "Task columns, scroll horizontally"
   },
   "filters": {
     "title": "Search and filters",
@@ -372,5 +374,8 @@
     "progressLabel": "Project completion",
     "more": "Show description",
     "less": "Show less"
+  },
+  "taskCard": {
+    "actions": "Actions for {{title}}"
   }
 }

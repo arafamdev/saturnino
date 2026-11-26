@@ -105,7 +105,7 @@ describe('Task management integration', () => {
     expect(
       await main.findByRole('heading', { name: 'Build the first screen' }),
     ).toBeInTheDocument()
-    expect(main.getByText('Priority: Urgent')).toBeInTheDocument()
+    expect(main.getByText('Urgent', { exact: false })).toBeInTheDocument()
     expect(
       within(main.getByRole('list', { name: 'Task list' })).getByText(
         'In progress',
@@ -148,7 +148,10 @@ describe('Task management integration', () => {
     const task = await createTask(project.id)
     renderTasks()
     const main = await mainRegion()
-    const trigger = await main.findByRole('button', { name: 'Edit First task' })
+    const trigger = await main.findByRole('button', {
+      name: 'First task',
+      exact: true,
+    })
     await user.click(trigger)
     const form = within(
       await screen.findByRole('dialog', { name: 'Edit task' }),
@@ -177,14 +180,20 @@ describe('Task management integration', () => {
     renderTasks()
     const main = await mainRegion()
     const trigger = await main.findByRole('button', {
-      name: 'Delete First task',
+      name: 'Actions for First task',
     })
     await user.click(trigger)
+    await user.click(
+      screen.getByRole('menuitem', { name: 'Delete First task' }),
+    )
     let dialog = within(await screen.findByRole('alertdialog'))
     await user.click(dialog.getByRole('button', { name: 'Cancel' }))
     await waitFor(() => expect(trigger).toHaveFocus())
     expect(await taskRepository.getTaskById(task.id)).toBeDefined()
     await user.click(trigger)
+    await user.click(
+      screen.getByRole('menuitem', { name: 'Delete First task' }),
+    )
     dialog = within(await screen.findByRole('alertdialog'))
     await user.click(dialog.getByRole('button', { name: 'Delete task' }))
     expect(
@@ -206,7 +215,10 @@ describe('Task management integration', () => {
     renderTasks()
     const main = await mainRegion()
     await user.click(
-      await main.findByRole('button', { name: 'Delete First task' }),
+      await main.findByRole('button', { name: 'Actions for First task' }),
+    )
+    await user.click(
+      screen.getByRole('menuitem', { name: 'Delete First task' }),
     )
     const dialog = within(await screen.findByRole('alertdialog'))
     await user.click(dialog.getByRole('button', { name: 'Delete task' }))
@@ -581,4 +593,32 @@ it('preserves the workspace when project deletion is cancelled and navigates aft
   )
   expect(await projectRepository.getProjectById(project.id)).toBeUndefined()
   expect(await taskRepository.getTaskById(task.id)).toBeUndefined()
+})
+
+it('creates from a column with its status and restores the column trigger', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Column creation',
+  })
+  renderTasks(`/app/projects/${project.id}`)
+  const trigger = await screen.findByRole('button', {
+    name: 'Add task to In progress',
+  })
+  await user.click(trigger)
+  const form = within(
+    await screen.findByRole('dialog', { name: 'Create task' }),
+  )
+  expect(form.getByRole('combobox', { name: 'Status' })).toHaveValue(
+    'in-progress',
+  )
+  await user.type(
+    form.getByRole('textbox', { name: 'Task title' }),
+    'Column task',
+  )
+  await user.click(form.getByRole('button', { name: 'Create task' }))
+  await screen.findByRole('heading', { name: 'Column task' })
+  expect((await taskRepository.getTasks(project.id))[0].status).toBe(
+    'in-progress',
+  )
+  await waitFor(() => expect(trigger).toHaveFocus())
 })

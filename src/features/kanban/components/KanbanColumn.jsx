@@ -1,33 +1,56 @@
 import { useId } from 'react'
 import { useDroppable } from '@dnd-kit/react'
 import { useTranslation } from 'react-i18next'
+import { Plus } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import KanbanTaskCard from './KanbanTaskCard'
 
-function KanbanColumn({ status, tasks, visible, projectsById, ...cardProps }) {
+function KanbanColumn({ status, tasks, onCreate, projectsById, ...cardProps }) {
   const { t } = useTranslation('app')
   const headingId = useId()
   const { ref, isDropTarget } = useDroppable({
     id: `column:${status}`,
     accept: 'task',
     data: { status, index: tasks.length },
-    collisionPriority: 0,
   })
   return (
     <section
       ref={ref}
+      data-column={status}
       aria-labelledby={headingId}
-      className={`${visible ? '' : 'hidden md:block'} min-w-0 rounded-xl border bg-muted/30 p-3 ${isDropTarget ? 'ring-2 ring-primary' : ''}`}
+      className={`flex w-72 min-w-64 shrink-0 flex-col rounded-xl bg-muted/40 p-3 md:flex-1 ${isDropTarget ? 'ring-2 ring-inset ring-primary' : ''}`}
     >
-      <h3
-        id={headingId}
-        className="mb-3 flex items-center justify-between gap-2 font-semibold"
+      <div className="mb-2 flex items-center gap-2">
+        <span
+          aria-hidden="true"
+          className={`size-2 shrink-0 rounded-full ${status === 'done' ? 'bg-emerald-500' : status === 'todo' ? 'bg-blue-500' : status === 'in-progress' ? 'bg-primary' : 'bg-muted-foreground'}`}
+        />
+        <h3
+          id={headingId}
+          className="flex min-w-0 flex-1 items-center gap-2 text-sm font-medium"
+        >
+          {t(`tasks.status.${status}`)}{' '}
+          <span className="text-xs text-muted-foreground">{tasks.length}</span>
+        </h3>
+        {onCreate && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="size-11 shrink-0 md:size-8"
+            aria-label={t('kanban.createIn', {
+              status: t(`tasks.status.${status}`),
+            })}
+            onClick={(event) => onCreate(status, event.currentTarget)}
+          >
+            <Plus className="size-4" aria-hidden="true" />
+          </Button>
+        )}
+      </div>
+      <ul
+        className="min-h-24 space-y-3 md:min-h-0 md:flex-1 md:overflow-y-auto"
+        aria-labelledby={headingId}
       >
-        {t(`tasks.status.${status}`)}{' '}
-        <span className="rounded-full bg-muted px-2 py-1 text-xs">
-          {tasks.length}
-        </span>
-      </h3>
-      <ul className="min-h-24 space-y-3" aria-labelledby={headingId}>
         {tasks.map((task, index) => (
           <KanbanTaskCard
             key={task.id}
@@ -38,12 +61,12 @@ function KanbanColumn({ status, tasks, visible, projectsById, ...cardProps }) {
             {...cardProps}
           />
         ))}
+        {tasks.length === 0 && (
+          <li className="py-4 text-sm text-muted-foreground">
+            {t('kanban.empty')}
+          </li>
+        )}
       </ul>
-      {tasks.length === 0 && (
-        <p className="py-4 text-sm text-muted-foreground">
-          {t('kanban.empty')}
-        </p>
-      )}
     </section>
   )
 }

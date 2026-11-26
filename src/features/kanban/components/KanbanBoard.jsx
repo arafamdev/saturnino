@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { TASK_STATUSES } from '@/features/tasks/data/taskOptions'
 import { taskRepository } from '@/features/tasks/services/taskRepository'
 import KanbanColumn from './KanbanColumn'
+import { useBoardHeight } from './useBoardHeight'
 
 function sensors(defaults) {
   return [
@@ -36,17 +37,20 @@ function KanbanBoard({
   projects,
   onEdit,
   onDelete,
+  onCreate,
   movementRestricted = false,
   today,
 }) {
   const { t } = useTranslation('app')
-  const [column, setColumn] = useState('todo')
+  const [column, setColumn] = useState('backlog')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [announcement, setAnnouncement] = useState('')
   const pending = useRef(false)
   const focusRequest = useRef(null)
   const boardRef = useRef(null)
+  const scrollerRef = useRef(null)
+  useBoardHeight(scrollerRef)
   const projectsById = new Map(projects.map((project) => [project.id, project]))
   const plugins = useMemo(
     () => (defaults) => [
@@ -98,7 +102,8 @@ function KanbanBoard({
         element.dataset.taskFocus === request.kind,
     )
     if (control) {
-      control.focus()
+      control.scrollIntoView?.({ block: 'nearest', inline: 'nearest' })
+      control.focus({ preventScroll: true })
       focusRequest.current = null
     }
   }, [tasks, busy])
@@ -196,12 +201,18 @@ function KanbanBoard({
           {error}
         </p>
       )}
-      <label className="block text-sm font-medium md:hidden">
+      <label className="sr-only text-sm font-medium focus-within:not-sr-only md:hidden">
         {t('kanban.column')}
         <select
           className="mt-2 min-h-11 w-full rounded-md border bg-background px-3"
           value={column}
-          onChange={(event) => setColumn(event.target.value)}
+          onChange={(event) => {
+            const status = event.target.value
+            setColumn(status)
+            boardRef.current
+              ?.querySelector(`[data-column="${status}"]`)
+              ?.scrollIntoView?.({ block: 'nearest', inline: 'start' })
+          }}
         >
           {TASK_STATUSES.map((status) => (
             <option key={status} value={status}>
@@ -218,14 +229,20 @@ function KanbanBoard({
         }}
         onDragEnd={handleDragEnd}
       >
-        <div className="grid min-w-0 gap-4 md:grid-cols-2 2xl:grid-cols-4">
+        <div
+          ref={scrollerRef}
+          tabIndex={0}
+          role="region"
+          aria-label={t('kanban.columns')}
+          className="flex min-w-0 gap-3 overflow-x-auto pb-3 md:h-[var(--board-height,32rem)]"
+        >
           {TASK_STATUSES.map((status) => (
             <KanbanColumn
               key={status}
               status={status}
               today={today}
               tasks={tasks.filter((task) => task.status === status)}
-              visible={column === status}
+              onCreate={onCreate}
               projectsById={projectsById}
               busy={busy}
               movementRestricted={movementRestricted}

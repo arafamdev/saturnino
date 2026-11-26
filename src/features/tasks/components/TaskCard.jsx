@@ -1,11 +1,11 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { CalendarDays, Flag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 
-import { Button } from '@/components/ui/button'
 import { formatDateOnly, getTodayDateOnly } from '@/lib/dates/dateOnly'
 
 import { isTaskOverdue } from '../utils/selectTasks'
+import TaskActionsMenu from './TaskActionsMenu'
 
 function TaskCard({
   ref,
@@ -15,81 +15,79 @@ function TaskCard({
   onDelete,
   dragHandle,
   children,
+  actions,
   headingLevel = 3,
   today = getTodayDateOnly(),
 }) {
   const { t, i18n } = useTranslation('app')
   const Heading = headingLevel === 4 ? 'h4' : 'h3'
+  const isBoard = headingLevel === 4
+  const overdue = isTaskOverdue(task, today)
+  const priorityClass = {
+    low: 'text-muted-foreground',
+    medium: 'text-amber-600 dark:text-amber-400',
+    high: 'text-red-600 dark:text-red-400',
+    urgent: 'text-red-700 dark:text-red-300',
+  }[task.priority]
   return (
     <article
       ref={ref}
-      className="min-w-0 rounded-xl border bg-card p-4 text-card-foreground sm:p-5"
+      className="relative min-w-0 rounded-lg border bg-card p-3 text-card-foreground shadow-xs"
     >
-      {dragHandle}
-      <div className="flex items-start gap-3">
-        <div className="min-w-0 flex-1 space-y-2">
-          <Heading className="font-semibold wrap-break-word">
-            {task.title}
-          </Heading>
-          {task.description && (
-            <p className="text-sm whitespace-pre-wrap wrap-break-word text-muted-foreground">
-              {task.description}
-            </p>
-          )}
-        </div>
-        <div className="flex shrink-0 gap-1">
-          <Button
+      <div className="flex items-start gap-1">
+        {dragHandle}
+        <Heading className="min-w-0 flex-1 text-sm leading-snug font-medium wrap-break-word">
+          <button
             type="button"
-            variant="ghost"
-            size="icon"
-            className="size-11"
-            aria-label={t('tasks.actions.editNamed', {
-              title: task.title,
-            })}
             onClick={(event) => onEdit(task, event.currentTarget)}
+            className="min-h-11 w-full rounded text-left hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:min-h-8"
           >
-            <Pencil className="size-4" aria-hidden="true" />
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="size-11 text-destructive"
-            aria-label={t('tasks.actions.deleteNamed', {
-              title: task.title,
-            })}
-            onClick={(event) => onDelete(task, event.currentTarget)}
-          >
-            <Trash2 className="size-4" aria-hidden="true" />
-          </Button>
-        </div>
+            {task.title}
+          </button>
+        </Heading>
+        {actions ?? (
+          <TaskActionsMenu task={task} onEdit={onEdit} onDelete={onDelete} />
+        )}
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-        <Link
-          to={`/app/projects/${task.projectId}`}
-          className="max-w-full truncate rounded border px-2 py-1 text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-        >
-          {project?.name ?? t('tasks.unknownProject')}
-        </Link>
-        <span className="rounded bg-primary/10 px-2 py-1 text-primary">
-          {t(`tasks.status.${task.status}`)}
-        </span>
-        <span className="rounded bg-muted px-2 py-1">
-          {t('tasks.form.priority')}: {t(`tasks.priority.${task.priority}`)}
+      {!isBoard && task.description && (
+        <p className="mt-1 line-clamp-2 text-sm whitespace-pre-wrap wrap-break-word text-muted-foreground">
+          {task.description}
+        </p>
+      )}
+      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground">
+        {!isBoard && (
+          <>
+            <Link
+              to={`/app/projects/${task.projectId}`}
+              className="max-w-full truncate rounded hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            >
+              {project?.name ?? t('tasks.unknownProject')}
+            </Link>
+            <span>{t(`tasks.status.${task.status}`)}</span>
+          </>
+        )}
+        <span className={`inline-flex items-center gap-1 ${priorityClass}`}>
+          <Flag className="size-3" aria-hidden="true" />
+          <span className="sr-only">{t('tasks.form.priority')}: </span>
+          {t(`tasks.priority.${task.priority}`)}
         </span>
         {task.dueDate && (
-          <time dateTime={task.dueDate} className="text-muted-foreground">
+          <time
+            dateTime={task.dueDate}
+            className={`inline-flex items-center gap-1 ${overdue ? 'text-destructive' : ''}`}
+          >
+            <CalendarDays className="size-3" aria-hidden="true" />
             {t('tasks.due', {
               date: formatDateOnly(task.dueDate, i18n.resolvedLanguage),
             })}
           </time>
         )}
+        {overdue && (
+          <span className="font-medium text-destructive">
+            {t('filters.overdue')}
+          </span>
+        )}
       </div>
-      {isTaskOverdue(task, today) && (
-        <p className="mt-2 text-xs font-medium text-destructive">
-          {t('filters.overdue')}
-        </p>
-      )}
       {children}
     </article>
   )

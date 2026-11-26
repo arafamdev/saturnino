@@ -228,7 +228,9 @@
     "conflict": "Esta tarefa foi alterada durante o movimento. Reveja o estado atual e tente novamente.",
     "failed": "Não foi possível mover a tarefa. A ordem anterior foi preservada. Tente novamente.",
     "saving": "A guardar o movimento…",
-    "column": "Coluna visível"
+    "column": "Coluna visível",
+    "createIn": "Adicionar tarefa a {{status}}",
+    "columns": "Colunas de tarefas, deslocar horizontalmente"
   },
   "filters": {
     "title": "Pesquisa e filtros",
@@ -372,5 +374,8 @@
     "progressLabel": "Conclusão do projeto",
     "more": "Mostrar descrição",
     "less": "Mostrar menos"
+  },
+  "taskCard": {
+    "actions": "Ações de {{title}}"
   }
 }
