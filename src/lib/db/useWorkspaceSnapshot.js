@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { workspaceRepository } from '@/lib/db/workspaceRepository'
 
-export function useDashboardData() {
+export function useWorkspaceSnapshot() {
   const [retryCount, setRetryCount] = useState(0)
   const result = useLiveQuery(async () => {
     try {

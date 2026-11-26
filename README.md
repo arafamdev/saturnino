@@ -63,7 +63,7 @@ Open **My Tasks** to manage all tasks, or open a project for its own task list. 
 
 Tasks use four statuses (Backlog, To do, In progress, Done) and four priorities (Low, Medium, High, Urgent). Due dates are calendar dates; creation, modification and completion use ISO timestamps. Reopening a completed task clears its completion timestamp. Project/task writes validate the project relationship inside a database transaction, and deleting a project still deletes its tasks atomically.
 
-Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; backup/export and offline application-shell caching are separate upcoming roadmap features.
+Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; JSON backup and restore are available in Settings; offline application-shell caching is a separate upcoming roadmap feature.
 
 ## Kanban Board
 
@@ -92,6 +92,16 @@ Metrics come from a consistent read-only snapshot of projects and tasks and upda
 **Settings** provides explicit light/dark theme and English/Portuguese selection, sharing the same state as the header. Desktop sidebar width, compact mode and section customization reuse the existing sidebar preferences. Resetting sidebar preferences changes layout/history only and preserves projects and favorites.
 
 Preferences apply immediately and are saved in localStorage when available; controls remain usable in memory if storage is blocked. Projects and tasks remain separately in IndexedDB in this browser profile. No account or cross-device synchronization is required or provided by V1.
+
+## Backup, Restore and CSV
+
+In **Settings → Data management**, download a versioned JSON backup of all projects and tasks, or export tasks as UTF-8 CSV. JSON preserves IDs, relationships, favorites, positions and timestamps. Interface preferences are separate and are not included. Files are processed locally without an upload to a server.
+
+To restore, select a Saturnino JSON backup (up to 20 MiB). The application validates the full format and relationships before showing the current and incoming counts. **Replace workspace** requires explicit confirmation and replaces all current projects/tasks. Download a backup first if you need to preserve the current workspace. Cancel leaves records unchanged.
+
+Both tables are replaced in one transaction. A failed write rolls back every change. If local records change after preview, restore is refused; cancel and select the backup again to review the latest state. Unknown versions, malformed records, duplicate IDs/positions and orphan tasks are rejected.
+
+CSV is export-only and intended for analysis. Fields are quoted and escaped; formula-like values receive a tab prefix, including Unicode variants. This changes the exported cell text and reduces spreadsheet formula interpretation, but spreadsheet applications and re-saving behavior differ. JSON is the exact restoration format.
 
 ## Getting Started
 
