@@ -1,10 +1,11 @@
 import { lazy, Suspense, useId, useRef, useState } from 'react'
 
-import { Plus } from 'lucide-react'
+import { Columns3, List, Plus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 
 import { Button } from '@/components/ui/button'
+import ProjectWorkspaceHeader from '@/features/projects/components/ProjectWorkspaceHeader'
 import { useProjects } from '@/features/projects/hooks/useProjects'
 import { useTodayDateOnly } from '@/lib/dates/useTodayDateOnly'
 import {
@@ -24,7 +25,7 @@ const KanbanBoard = lazy(
   () => import('@/features/kanban/components/KanbanBoard'),
 )
 
-function TaskCollection({ projectId }) {
+function TaskCollection({ projectId, project }) {
   const { t, i18n } = useTranslation('app')
   const headingId = useId()
   const today = useTodayDateOnly()
@@ -148,38 +149,54 @@ function TaskCollection({ projectId }) {
   }
 
   return (
-    <section aria-labelledby={headingId} className="min-w-0 space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 id={headingId} className="text-lg font-semibold">
+    <section aria-labelledby={headingId} className="min-w-0 space-y-3">
+      {project && (
+        <ProjectWorkspaceHeader
+          project={project}
+          tasks={taskQuery.tasks}
+          isPending={isLoading || isError}
+        />
+      )}
+      <div className="flex items-center justify-between gap-3 border-b pb-3">
+        <h2 id={headingId} className="sr-only">
           {t('tasks.title')}
         </h2>
+        {projectId && (
+          <div
+            role="group"
+            aria-label={t('kanban.view')}
+            className="flex gap-2"
+          >
+            {['list', 'board'].map((option) => (
+              <Button
+                key={option}
+                type="button"
+                variant={view === option ? 'secondary' : 'outline'}
+                className="min-h-11 gap-2 sm:min-h-9"
+                aria-pressed={view === option}
+                onClick={() => setView(option)}
+              >
+                {option === 'board' ? (
+                  <Columns3 className="size-4" aria-hidden="true" />
+                ) : (
+                  <List className="size-4" aria-hidden="true" />
+                )}
+                {t(`kanban.${option}`)}
+              </Button>
+            ))}
+          </div>
+        )}
         <Button
           ref={createButtonRef}
           type="button"
           disabled={!canCreate}
           onClick={() => openDialog('create')}
-          className="min-h-11 gap-2"
+          className="ml-auto min-h-11 gap-2 sm:min-h-9"
         >
           <Plus className="size-4" aria-hidden="true" />
           {t('tasks.actions.new')}
         </Button>
       </div>
-      {projectId && (
-        <div role="group" aria-label={t('kanban.view')} className="flex gap-2">
-          {['list', 'board'].map((option) => (
-            <Button
-              key={option}
-              type="button"
-              variant={view === option ? 'secondary' : 'outline'}
-              className="min-h-11"
-              aria-pressed={view === option}
-              onClick={() => setView(option)}
-            >
-              {t(`kanban.${option}`)}
-            </Button>
-          ))}
-        </div>
-      )}
       <TaskFilters
         filters={filters}
         onChange={(name, value) =>
