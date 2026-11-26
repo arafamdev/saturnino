@@ -385,15 +385,16 @@ describe('Task filters integration', () => {
     const search = await main.findByRole('searchbox', { name: 'Search tasks' })
     await waitFor(() => expect(search).toBeEnabled())
     await user.type(search, 'arvore')
+    await user.click(main.getByRole('button', { name: 'Filters' }))
     await user.selectOptions(
-      main.getByRole('combobox', { name: 'Filter by priority' }),
+      screen.getByRole('combobox', { name: 'Filter by priority' }),
       'high',
     )
     expect(
       main.getByRole('status', { name: 'Filtered task count' }),
     ).toHaveTextContent('1 of 2 tasks')
     await user.selectOptions(
-      main.getByRole('combobox', { name: 'Filter by project' }),
+      screen.getByRole('combobox', { name: 'Filter by project' }),
       second.id,
     )
     expect(main.getByText('No tasks match your filters.')).toBeInTheDocument()
@@ -412,9 +413,10 @@ describe('Task filters integration', () => {
     const second = await createTask(project.id, 'Alpha')
     renderTasks()
     const main = await mainRegion()
-    const sort = await main.findByRole('combobox', { name: 'Sort tasks' })
+    const sort = await main.findByRole('button', { name: 'Sort tasks' })
     await waitFor(() => expect(sort).toBeEnabled())
-    await user.selectOptions(sort, 'title')
+    await user.click(sort)
+    await user.click(screen.getByRole('menuitemradio', { name: 'Title, A–Z' }))
     expect(
       main
         .getAllByRole('heading', { level: 3 })
@@ -443,10 +445,10 @@ describe('Task filters integration', () => {
     })
     renderTasks()
     const main = await mainRegion()
-    const due = await main.findByRole('combobox', {
-      name: 'Filter by due date',
-    })
-    await waitFor(() => expect(due).toBeEnabled())
+    const filterButton = await main.findByRole('button', { name: 'Filters' })
+    await waitFor(() => expect(filterButton).toBeEnabled())
+    await user.click(filterButton)
+    const due = screen.getByRole('combobox', { name: 'Filter by due date' })
     const list = within(main.getByRole('list', { name: 'Task list' }))
     expect(list.getAllByText('Overdue')).toHaveLength(1)
     await user.selectOptions(due, 'overdue')
@@ -455,4 +457,128 @@ describe('Task filters integration', () => {
       main.queryByRole('heading', { name: 'Past completed' }),
     ).not.toBeInTheDocument()
   })
+})
+
+it('keeps project completion independent from the filtered result', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Workspace QA',
+  })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Completed',
+    status: 'done',
+  })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Still open',
+  })
+  renderTasks(`/app/projects/${project.id}`)
+  const main = await mainRegion()
+  const progress = await main.findByRole('progressbar', {
+    name: 'Project completion',
+  })
+  await waitFor(() => expect(progress).toHaveAttribute('value', '50'))
+  await user.type(
+    main.getByRole('searchbox', { name: 'Search tasks' }),
+    'Still open',
+  )
+  expect(
+    main.getByRole('status', { name: 'Filtered task count' }),
+  ).toHaveTextContent('1 of 2 tasks')
+  expect(progress).toHaveAttribute('value', '50')
+  expect(main.getByText('1 of 2 completed')).toBeInTheDocument()
+})
+
+it('removes one filter without resetting the chosen sort and returns popover focus', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({ name: 'Toolbar QA' })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Visible',
+    priority: 'high',
+  })
+  renderTasks()
+  const main = await mainRegion()
+  const filters = await main.findByRole('button', { name: 'Filters' })
+  await waitFor(() => expect(filters).toBeEnabled())
+  await user.click(filters)
+  await user.selectOptions(
+    screen.getByRole('combobox', { name: 'Filter by priority' }),
+    'high',
+  )
+  await user.keyboard('{Escape}')
+  await waitFor(() => expect(filters).toHaveFocus())
+  await user.click(main.getByRole('button', { name: 'Sort tasks' }))
+  await user.click(screen.getByRole('menuitemradio', { name: 'Title, A–Z' }))
+  await user.click(
+    main.getByRole('button', {
+      name: 'Remove filter: Filter by priority: High',
+    }),
+  )
+  expect(filters).not.toHaveTextContent('1')
+  await user.click(main.getByRole('button', { name: 'Sort tasks' }))
+  expect(
+    screen.getByRole('menuitemradio', { name: 'Title, A–Z' }),
+  ).toHaveAttribute('aria-checked', 'true')
+})
+
+it('edits the project from its workspace and returns focus to the actions trigger', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Header actions',
+  })
+  renderTasks(`/app/projects/${project.id}`)
+  const main = await mainRegion()
+  const trigger = await main.findByRole('button', {
+    name: 'Actions for Header actions',
+  })
+  await user.click(trigger)
+  await user.click(screen.getByRole('menuitem', { name: 'Edit project' }))
+  const dialog = within(
+    await screen.findByRole('dialog', { name: 'Edit project' }),
+  )
+  await user.type(
+    dialog.getByRole('textbox', { name: 'Description' }),
+    'Updated through the workspace',
+  )
+  await user.click(dialog.getByRole('button', { name: 'Save changes' }))
+  expect(
+    await main.findByText('Updated through the workspace'),
+  ).toBeInTheDocument()
+  await waitFor(() => expect(trigger).toHaveFocus())
+})
+
+it('preserves the workspace when project deletion is cancelled and navigates after confirmed deletion', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Delete header QA',
+  })
+  const task = await createTask(project.id)
+  const { router } = renderTasks(`/app/projects/${project.id}`)
+  const main = await mainRegion()
+  const trigger = await main.findByRole('button', {
+    name: 'Actions for Delete header QA',
+  })
+  await user.click(trigger)
+  await user.click(screen.getByRole('menuitem', { name: 'Delete project' }))
+  await user.click(
+    within(await screen.findByRole('alertdialog')).getByRole('button', {
+      name: 'Cancel',
+    }),
+  )
+  await waitFor(() => expect(trigger).toHaveFocus())
+  expect(await taskRepository.getTaskById(task.id)).toBeDefined()
+  await user.click(trigger)
+  await user.click(screen.getByRole('menuitem', { name: 'Delete project' }))
+  await user.click(
+    within(await screen.findByRole('alertdialog')).getByRole('button', {
+      name: 'Delete project',
+    }),
+  )
+  await waitFor(() =>
+    expect(router.state.location.pathname).toBe('/app/projects'),
+  )
+  expect(await projectRepository.getProjectById(project.id)).toBeUndefined()
+  expect(await taskRepository.getTaskById(task.id)).toBeUndefined()
 })
