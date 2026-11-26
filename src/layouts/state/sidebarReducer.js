@@ -131,14 +131,21 @@ export function sidebarReducer(state, action) {
     }
 
     case sidebarActionTypes.PRUNE_RECENT_PROJECTS: {
-      if (!Array.isArray(action.payload)) {
+      // Only prune IDs observed by this read; newer visits may arrive before it resolves.
+      const existingIds = Array.isArray(action.payload)
+        ? action.payload
+        : action.payload?.existingProjectIds
+      const observedIds = Array.isArray(action.payload)
+        ? state.recentProjectIds
+        : action.payload?.observedProjectIds
+      if (!Array.isArray(existingIds) || !Array.isArray(observedIds))
         return state
-      }
-
-      const existingProjectIds = new Set(action.payload)
-
-      const recentProjectIds = state.recentProjectIds.filter((projectId) =>
-        existingProjectIds.has(projectId),
+      const existingProjectIds = new Set(existingIds)
+      const observedProjectIds = new Set(observedIds)
+      const recentProjectIds = state.recentProjectIds.filter(
+        (projectId) =>
+          !observedProjectIds.has(projectId) ||
+          existingProjectIds.has(projectId),
       )
 
       if (recentProjectIds.length === state.recentProjectIds.length) {

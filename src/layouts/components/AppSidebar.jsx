@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -20,6 +20,7 @@ import WorkspaceIndicator from './WorkspaceIndicator'
 
 function AppSidebar() {
   const { t } = useTranslation('app')
+  const sidebarId = useId()
   const { width, compact, setWidth, setCompact } = useSidebar()
   const [draftWidth, setDraftWidth] = useState(null)
   const drag = useRef(null)
@@ -49,6 +50,7 @@ function AppSidebar() {
 
   return (
     <aside
+      id={sidebarId}
       style={{ width: compact ? 72 : (draftWidth ?? width) }}
       className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r bg-muted/30 lg:flex"
     >
@@ -92,6 +94,7 @@ function AppSidebar() {
           tabIndex={0}
           aria-label={t('sidebar.resize')}
           aria-orientation="vertical"
+          aria-controls={sidebarId}
           aria-valuemin={MIN_SIDEBAR_WIDTH}
           aria-valuemax={MAX_SIDEBAR_WIDTH}
           aria-valuenow={draftWidth ?? width}

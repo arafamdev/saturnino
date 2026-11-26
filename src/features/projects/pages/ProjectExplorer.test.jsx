@@ -322,6 +322,11 @@ describe('Project Explorer integration', () => {
     ).toBeInTheDocument()
 
     expect(await projectRepository.getProjects()).toHaveLength(0)
+    await waitFor(() =>
+      expect(
+        within(content).getByRole('button', { name: 'New project' }),
+      ).toHaveFocus(),
+    )
   })
 
   it('does not navigate when opening project actions', async () => {
@@ -477,4 +482,39 @@ describe('Project Explorer integration', () => {
     await waitFor(() => expect(createButton).toHaveFocus())
     expect(drawer).toBeInTheDocument()
   })
+  it.each(['cancel', 'save'])(
+    'restores focus to the actions trigger after project editing: %s',
+    async (action) => {
+      const user = userEvent.setup()
+      const project = await projectRepository.createProject({
+        name: 'Focus project',
+      })
+      renderProjectRoute()
+      const navigation = await findExplorerNavigation()
+      const trigger = within(navigation).getByRole('button', {
+        name: 'Actions for Focus project',
+      })
+      await user.click(trigger)
+      await user.click(
+        await screen.findByRole('menuitem', { name: 'Edit project' }),
+      )
+      const dialog = await screen.findByRole('dialog', { name: 'Edit project' })
+      if (action === 'save') {
+        const input = within(dialog).getByRole('textbox', {
+          name: 'Project name',
+        })
+        await user.clear(input)
+        await user.type(input, 'Updated focus project')
+      }
+      await user.click(
+        within(dialog).getByRole('button', {
+          name: action === 'save' ? 'Save changes' : 'Cancel',
+        }),
+      )
+      await waitFor(() => expect(trigger).toHaveFocus())
+      expect((await projectRepository.getProjectById(project.id)).name).toBe(
+        action === 'save' ? 'Updated focus project' : 'Focus project',
+      )
+    },
+  )
 })

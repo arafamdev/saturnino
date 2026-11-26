@@ -24,7 +24,7 @@ import MobileNavigation from './MobileNavigation'
 
 function renderSidebar() {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={['/app']}>
       <SidebarProvider>
         <AppSidebar />
         <MobileNavigation />
@@ -52,6 +52,11 @@ describe('Resizable and compact sidebar', () => {
   it('resizes with arrow keys, Home and End, respecting limits', async () => {
     const user = userEvent.setup()
     renderSidebar()
+    const activeLink = screen
+      .getByRole('navigation', { name: 'Main navigation' })
+      .querySelector('[aria-current=page]')
+    expect(activeLink).toHaveClass('flex', 'min-h-11')
+    expect(activeLink.className).not.toContain('=>')
     const separator = screen.getByRole('separator', { name: 'Resize sidebar' })
     separator.focus()
     await user.keyboard('{ArrowRight}')

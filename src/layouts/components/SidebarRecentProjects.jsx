@@ -48,6 +48,7 @@ function SidebarRecentProjects({ onNavigate }) {
         )
         pruneRecentProjects(
           recentProjectIds.filter((id) => !deletedIds.has(id)),
+          recentProjectIds,
         )
       })
       .catch(() => {

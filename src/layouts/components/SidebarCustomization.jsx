@@ -46,13 +46,18 @@ function SidebarCustomization() {
     const rows = Array.from(listRef.current.children)
     const target = rows.find((row) => {
       const bounds = row.getBoundingClientRect()
-      return event.clientY >= bounds.top && event.clientY <= bounds.bottom
+      return (
+        event.clientX >= bounds.left &&
+        event.clientX <= bounds.right &&
+        event.clientY >= bounds.top &&
+        event.clientY <= bounds.bottom
+      )
     })
     reorder(sectionId, target?.dataset.sectionId)
   }
 
   return (
-    <div className="min-w-0 border-t pt-2">
+    <div className="relative min-w-0 border-t pt-2">
       <Button
         type="button"
         variant="ghost"
@@ -134,8 +139,8 @@ function SidebarCustomization() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="min-h-11 w-7 shrink-0"
-                    disabled={!sectionOrder[index + offset]}
+                    className="min-h-11 w-7 shrink-0 aria-disabled:opacity-50"
+                    aria-disabled={!sectionOrder[index + offset]}
                     aria-label={t(key, { name: t(sectionLabelKeys[id]) })}
                     onClick={() => reorder(id, sectionOrder[index + offset])}
                   >
@@ -148,7 +153,7 @@ function SidebarCustomization() {
           <Button
             type="button"
             variant="outline"
-            className="min-h-11 w-full text-xs"
+            className="h-auto min-h-11 w-full px-2 py-2 text-xs whitespace-normal"
             onClick={() => {
               resetPreferences()
               setAnnouncement(t('sidebar.resetDone'))
@@ -158,7 +163,7 @@ function SidebarCustomization() {
           </Button>
         </div>
       )}
-      <p role="status" className="sr-only">
+      <p role="status" className="sr-only top-0 left-0">
         {announcement}
       </p>
     </div>

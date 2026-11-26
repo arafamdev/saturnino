@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useReducer } from 'react'
 
+import { useProjects } from '@/features/projects/hooks/useProjects'
+
 import {
   initialSidebarState,
   sidebarActionTypes,
@@ -9,8 +11,6 @@ import {
   loadSidebarPreferences,
   saveSidebarPreferences,
 } from '../services/sidebarStorage'
-
-import { useProjects } from '@/features/projects/hooks/useProjects'
 
 import { SidebarContext, SidebarProjectsContext } from './SidebarContext'
 
@@ -43,12 +43,15 @@ function SidebarProvider({ children }) {
     })
   }, [])
 
-  const pruneRecentProjects = useCallback((existingProjectIds) => {
-    dispatch({
-      type: sidebarActionTypes.PRUNE_RECENT_PROJECTS,
-      payload: existingProjectIds,
-    })
-  }, [])
+  const pruneRecentProjects = useCallback(
+    (existingProjectIds, observedProjectIds) => {
+      dispatch({
+        type: sidebarActionTypes.PRUNE_RECENT_PROJECTS,
+        payload: { existingProjectIds, observedProjectIds },
+      })
+    },
+    [],
+  )
 
   useEffect(() => {
     saveSidebarPreferences(state)

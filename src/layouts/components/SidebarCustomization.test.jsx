@@ -80,13 +80,18 @@ describe('Sidebar customization', () => {
     const handle = screen.getByRole('button', { name: 'Reorder Favorites' })
     handle.setPointerCapture = () => {}
     const rows = screen.getAllByRole('listitem')
-    rows[3].getBoundingClientRect = () => ({ top: 100, bottom: 150 })
+    rows[3].getBoundingClientRect = () => ({
+      top: 100,
+      bottom: 150,
+      left: 0,
+      right: 200,
+    })
     fireEvent.pointerDown(handle, { button: 0, pointerId: 1 })
-    fireEvent.pointerUp(handle, { pointerId: 1, clientY: 125 })
+    fireEvent.pointerUp(handle, { pointerId: 1, clientX: 100, clientY: 125 })
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
     fireEvent.pointerDown(handle, { button: 0, pointerId: 2 })
     fireEvent.pointerCancel(handle)
-    fireEvent.pointerUp(handle, { pointerId: 2, clientY: 125 })
+    fireEvent.pointerUp(handle, { pointerId: 2, clientX: 100, clientY: 125 })
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
   })
 

@@ -192,4 +192,15 @@ describe('Recent project history', () => {
 
     expect(nextState.recentProjectIds).toEqual([])
   })
+  it('preserves visits recorded after a pruning snapshot was captured', () => {
+    const state = recordAccess(
+      recordAccess(initialSidebarState, 'deleted'),
+      'new-project',
+    )
+    const nextState = sidebarReducer(state, {
+      type: sidebarActionTypes.PRUNE_RECENT_PROJECTS,
+      payload: { existingProjectIds: [], observedProjectIds: ['deleted'] },
+    })
+    expect(nextState.recentProjectIds).toEqual(['new-project'])
+  })
 })
