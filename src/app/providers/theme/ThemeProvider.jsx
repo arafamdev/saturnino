@@ -22,6 +22,10 @@ function getInitialTheme() {
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(getInitialTheme)
 
+  function changeTheme(nextTheme) {
+    if (nextTheme === 'light' || nextTheme === 'dark') setTheme(nextTheme)
+  }
+
   function toggleTheme() {
     setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))
   }
@@ -40,6 +44,7 @@ function ThemeProvider({ children }) {
   const contextValue = {
     theme,
     toggleTheme,
+    setTheme: changeTheme,
   }
 
   return <ThemeContext value={contextValue}>{children}</ThemeContext>
