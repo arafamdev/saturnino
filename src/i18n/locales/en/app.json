@@ -132,6 +132,9 @@
     "moveDown": "Move {{name}} down",
     "moved": "{{name}} moved to position {{position}}.",
     "reset": "Reset sidebar preferences",
-    "resetDone": "Sidebar preferences reset."
+    "resetDone": "Sidebar preferences reset.",
+    "compact": "Compact sidebar",
+    "expand": "Expand sidebar",
+    "resize": "Resize sidebar"
   }
 }

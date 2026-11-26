@@ -1,5 +1,6 @@
 import {
   initialSidebarState,
+  normalizeSidebarWidth,
   normalizeRecentProjectIds,
 } from '../state/sidebarReducer'
 
@@ -31,6 +32,11 @@ export function loadSidebarPreferences() {
     return {
       ...initialSidebarState,
       expandedSections,
+      width: normalizeSidebarWidth(parsedPreferences?.width),
+      compact:
+        typeof parsedPreferences?.compact === 'boolean'
+          ? parsedPreferences.compact
+          : false,
       sectionOrder: [
         ...new Set([
           ...(Array.isArray(parsedPreferences?.sectionOrder)

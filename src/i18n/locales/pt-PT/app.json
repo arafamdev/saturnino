@@ -132,6 +132,9 @@
     "moveDown": "Mover {{name}} para baixo",
     "moved": "{{name}} na posição {{position}}.",
     "reset": "Repor preferências da barra lateral",
-    "resetDone": "Preferências da barra lateral repostas."
+    "resetDone": "Preferências da barra lateral repostas.",
+    "compact": "Barra lateral compacta",
+    "expand": "Expandir barra lateral",
+    "resize": "Redimensionar barra lateral"
   }
 }

@@ -1,3 +1,16 @@
+export const MIN_SIDEBAR_WIDTH = 224
+export const MAX_SIDEBAR_WIDTH = 400
+export const DEFAULT_SIDEBAR_WIDTH = 256
+
+export function normalizeSidebarWidth(width) {
+  return typeof width === 'number' && Number.isFinite(width)
+    ? Math.min(
+        MAX_SIDEBAR_WIDTH,
+        Math.max(MIN_SIDEBAR_WIDTH, Math.round(width)),
+      )
+    : DEFAULT_SIDEBAR_WIDTH
+}
+
 export const MAX_RECENT_PROJECTS = 5
 
 export const sidebarSectionIds = {
@@ -8,6 +21,8 @@ export const sidebarSectionIds = {
 }
 
 export const sidebarActionTypes = {
+  SET_WIDTH: 'sidebar/setWidth',
+  SET_COMPACT: 'sidebar/setCompact',
   SET_VISIBILITY: 'sidebar/setVisibility',
   MOVE_SECTION: 'sidebar/moveSection',
   TOGGLE_SECTION: 'sidebar/toggleSection',
@@ -25,6 +40,8 @@ export const initialSidebarState = {
   },
   sectionOrder: Object.values(sidebarSectionIds),
   hiddenSections: [],
+  width: DEFAULT_SIDEBAR_WIDTH,
+  compact: false,
   recentProjectIds: [],
 }
 
@@ -45,6 +62,13 @@ export function normalizeRecentProjectIds(projectIds) {
 
 export function sidebarReducer(state, action) {
   switch (action.type) {
+    case sidebarActionTypes.SET_WIDTH:
+      return { ...state, width: normalizeSidebarWidth(action.payload) }
+    case sidebarActionTypes.SET_COMPACT:
+      return typeof action.payload === 'boolean'
+        ? { ...state, compact: action.payload }
+        : state
+
     case sidebarActionTypes.SET_VISIBILITY: {
       const { sectionId, visible } = action.payload
       if (

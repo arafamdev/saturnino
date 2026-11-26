@@ -56,6 +56,10 @@ function SidebarProvider({ children }) {
 
   const contextValue = {
     ...state,
+    setWidth: (width) =>
+      dispatch({ type: sidebarActionTypes.SET_WIDTH, payload: width }),
+    setCompact: (compact) =>
+      dispatch({ type: sidebarActionTypes.SET_COMPACT, payload: compact }),
     setSectionVisible: (sectionId, visible) =>
       dispatch({
         type: sidebarActionTypes.SET_VISIBILITY,
