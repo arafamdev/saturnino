@@ -3,6 +3,7 @@ import ProductPreviewSection from '../components/ProductPreviewSection'
 import FeaturesSection from '../components/FeaturesSection'
 import PhilosophySection from '../components/PhilosophySection'
 import HowItWorksSection from '../components/HowItWorksSection'
+import OurStorySection from '../components/OurStorySection'
 
 function LandingPage() {
   return (
@@ -12,6 +13,7 @@ function LandingPage() {
       <FeaturesSection />
       <PhilosophySection />
       <HowItWorksSection />
+      <OurStorySection />
     </>
   )
 }
