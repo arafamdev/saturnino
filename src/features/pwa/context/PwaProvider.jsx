@@ -5,7 +5,9 @@ import {
   useState,
   useSyncExternalStore,
 } from 'react'
+
 import { registerSW } from 'virtual:pwa-register'
+
 import { PwaContext } from './PwaContext'
 import PwaUpdateBanner from '../components/PwaUpdateBanner'
 import { BEFORE_PWA_UPDATE } from '../events/updateGuard'
@@ -49,6 +51,55 @@ function PwaProvider({
   const [error, setError] = useState('')
   const [isChecking, setIsChecking] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [installPrompt, setInstallPrompt] = useState(null)
+  const [isInstalling, setIsInstalling] = useState(false)
+  const [installError, setInstallError] = useState('')
+  const [isInstalled, setIsInstalled] = useState(() =>
+    Boolean(
+      window.matchMedia?.('(display-mode: standalone)').matches ||
+      navigator.standalone,
+    ),
+  )
+  const installingRef = useRef(false)
+
+  useEffect(() => {
+    function available(event) {
+      if (typeof event.prompt !== 'function') return
+      event.preventDefault()
+      setInstallPrompt(event)
+      setInstallError('')
+    }
+    function installed() {
+      setInstallPrompt(null)
+      setIsInstalled(true)
+      setInstallError('')
+    }
+    window.addEventListener('beforeinstallprompt', available)
+    window.addEventListener('appinstalled', installed)
+    return () => {
+      window.removeEventListener('beforeinstallprompt', available)
+      window.removeEventListener('appinstalled', installed)
+    }
+  }, [])
+
+  async function requestInstall() {
+    if (!installPrompt || installingRef.current || isInstalled) return
+    installingRef.current = true
+    setIsInstalling(true)
+    setInstallPrompt(null)
+    setInstallError('')
+    try {
+      // Each browser-supplied event can only be prompted once, from a user action.
+      const result = await installPrompt.prompt()
+      const choice = result ?? (await installPrompt.userChoice)
+      if (choice?.outcome === 'dismissed') setInstallError('installDismissed')
+    } catch {
+      setInstallError('installFailed')
+    } finally {
+      installingRef.current = false
+      setIsInstalling(false)
+    }
+  }
 
   const commitReload = useCallback(() => {
     if (reloadIssued.current) return
@@ -160,6 +211,11 @@ function PwaProvider({
   }
 
   const value = {
+    canInstall: Boolean(installPrompt && !isInstalled),
+    isInstalled,
+    isInstalling,
+    installError,
+    requestInstall,
     supported: Boolean(supported),
     isOnline,
     offlineReady: Boolean(supported && offlineReady),

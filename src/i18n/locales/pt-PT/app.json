@@ -337,6 +337,9 @@
     }
   },
   "settings": {
+    "helpTitle": "Ajuda e suporte",
+    "helpDescription": "Aprende a utilizar o Saturnino, instalar a aplicação e guardar backups.",
+    "userGuide": "Guia de utilização",
     "description": "Adapte este espaço de trabalho às suas preferências.",
     "appearance": "Aspeto e idioma",
     "theme": "Tema de cores",

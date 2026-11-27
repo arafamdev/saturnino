@@ -4,6 +4,10 @@ export const footerNavigation = [
     titleKey: 'footer.product',
     links: [
       {
+        labelKey: 'navigation.guide',
+        href: '/guide',
+      },
+      {
         labelKey: 'navigation.features',
         href: '/#features',
       },

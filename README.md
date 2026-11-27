@@ -12,6 +12,8 @@ Built as a React frontend project, Saturnino combines practical task management 
 
 Explore the application in your browser or install it from your browser menu when supported. No sign-in, API keys or configuration are required.
 
+New here? Follow the bilingual [User Guide](https://saturnino-app.vercel.app/guide) for a visual quick start, installation instructions and backup guidance.
+
 ## Preview
 
 Real application screenshots using fictional project data.

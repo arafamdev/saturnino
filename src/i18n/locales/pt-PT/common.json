@@ -3,6 +3,8 @@
     "changeLanguage": "Alterar idioma"
   },
   "navigation": {
+    "guide": "Guia de utilização",
+    "public": "Navegação pública",
     "home": "Início",
     "about": "Sobre",
     "openApp": "Abrir Saturnino",
