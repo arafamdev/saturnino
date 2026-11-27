@@ -16,6 +16,8 @@ Explore the application in your browser or install it from your browser menu whe
 
 Real application screenshots using fictional project data.
 
+![Dashboard analytics in dark mode](docs/images/dashboard-desktop-dark.webp)
+
 ![Desktop Kanban board in dark mode](docs/images/kanban-desktop-dark.webp)
 
 | Tablet · Light mode                                                        | Mobile · Light mode                                                        |
@@ -25,10 +27,10 @@ Real application screenshots using fictional project data.
 ## Features
 
 - **Projects and tasks:** create, edit and organize work, track completion and keep favorite projects close through a customizable sidebar.
-- **Kanban and list views:** move cards across four columns with drag and drop or keyboard-accessible menus. Add tasks directly to a column.
+- **Kanban and list views:** drag cards from their noninteractive surface across four columns, or use keyboard handles and menus. Add tasks directly to a column.
 - **Focused task details:** edit in a side panel on desktop or a full-screen panel on mobile, with explicit saving, unsaved-change protection and concurrent-edit detection.
 - **Search and planning:** combine filters, choose a sort order and set deadlines with a localized calendar.
-- **Dashboard and preferences:** review progress and upcoming deadlines, switch themes and languages, and adjust desktop navigation.
+- **Dashboard and preferences:** explore status and priority distributions, retained-date activity and actionable deadlines. Personalize navigation with a Save/Cancel modal and organized settings.
 - **Backup and offline use:** export JSON backups or CSV, restore a validated workspace and use the cached application after a completed online visit.
 
 Projects and tasks belong to the current browser profile and origin. There is no cloud synchronization; changing devices or clearing browser data can make records unavailable. Keep JSON backups, especially before moving your workspace or clearing storage.
