@@ -3,11 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { Hash } from 'lucide-react'
 
 import GuideFigure from './GuideFigure'
+import GuideInlineText from './GuideInlineText'
 import GuideFaq from './GuideFaq'
 import InstallInstructions from './InstallInstructions'
 import WorkspaceDiagram from './WorkspaceDiagram'
-
-const quickStartPositions = { project: 1, task: 3, progress: 5 }
 
 function GuideContent({ chapterId, sections }) {
   const { t } = useTranslation('guide')
@@ -36,19 +35,14 @@ function GuideContent({ chapterId, sections }) {
           key={paragraph}
           className="text-base leading-8 text-muted-foreground"
         >
-          {paragraph}
+          <GuideInlineText>{paragraph}</GuideInlineText>
         </p>
       ))}
       {section.steps.length > 0 && (
-        <ol
-          start={
-            chapterId === 'quick-start' ? quickStartPositions[section.id] : 1
-          }
-          className="list-decimal space-y-4 pl-6 text-base leading-8 text-muted-foreground"
-        >
+        <ol className="list-decimal space-y-4 pl-6 text-base leading-8 text-muted-foreground">
           {section.steps.map((step) => (
             <li key={step} className="pl-2">
-              {step}
+              <GuideInlineText>{step}</GuideInlineText>
             </li>
           ))}
         </ol>
@@ -57,10 +51,22 @@ function GuideContent({ chapterId, sections }) {
         <ul className="list-disc space-y-3 pl-6 text-base leading-8 text-muted-foreground">
           {section.bullets.map((item) => (
             <li key={item} className="pl-2">
-              {item}
+              <GuideInlineText>{item}</GuideInlineText>
             </li>
           ))}
         </ul>
+      )}
+      {['warning', 'note'].map(
+        (kind) =>
+          section[kind] && (
+            <aside
+              key={kind}
+              className={`rounded-lg border-l-4 p-4 text-sm leading-7 ${kind === 'warning' ? 'border-destructive bg-destructive/5 text-foreground' : 'border-primary/40 bg-muted/40 text-muted-foreground'}`}
+            >
+              <p className="mb-1 font-semibold text-foreground">{t(kind)}</p>
+              <GuideInlineText>{section[kind]}</GuideInlineText>
+            </aside>
+          ),
       )}
       {section.figure && <GuideFigure name={section.figure} />}
       {chapterId === 'installation' && section.id === 'platforms' && (

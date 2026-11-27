@@ -2,6 +2,8 @@ import { Accordion } from 'radix-ui'
 import { ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import GuideInlineText from './GuideInlineText'
+
 function GuideFaq() {
   const { t } = useTranslation('guide')
   return (
@@ -18,7 +20,7 @@ function GuideFaq() {
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content className="pb-5 text-sm leading-7 text-muted-foreground">
-            {answer}
+            <GuideInlineText>{answer}</GuideInlineText>
           </Accordion.Content>
         </Accordion.Item>
       ))}

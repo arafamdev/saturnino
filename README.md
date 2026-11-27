@@ -20,7 +20,7 @@ Real application screenshots using fictional project data.
 
 ![Saturnino landing page in dark mode, showing User Guide and About navigation with its orbital hero](docs/images/landing-desktop-dark.webp)
 
-![User Guide in dark mode, showing chapter navigation, Kanban instructions and a real example board](docs/images/user-guide-desktop-dark.webp)
+![User Guide in dark mode, showing chapter navigation, semantic action references and numbered Quick Start instructions](docs/images/user-guide-desktop-dark.webp)
 
 ![Desktop Kanban board in dark mode](docs/images/kanban-desktop-dark.webp)
 

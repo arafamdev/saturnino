@@ -55,7 +55,7 @@
           "id": "interface",
           "title": "Conhece o teu espaço",
           "paragraphs": [
-            "A Visão geral mostra progresso. As minhas tarefas reúne tarefas de todos os projetos. Projetos abre a lista ou quadro de cada projeto. Definições contém aspeto, barra lateral, informação local, backups e ajuda. O botão Voltar regressa pelas páginas conhecidas, com alternativa segura para a Visão geral."
+            "A <label>Visão geral</label> mostra progresso. <label>As minhas tarefas</label> reúne tarefas de todos os projetos. <label>Projetos</label> abre a lista ou quadro de cada projeto. <label>Definições</label> contém aspeto, barra lateral, informação local, backups e ajuda. O botão <action>Voltar</action> regressa pelas páginas conhecidas, com alternativa segura para a <label>Visão geral</label>."
           ],
           "steps": [],
           "bullets": []
@@ -64,7 +64,7 @@
           "id": "example",
           "title": "Um exemplo ao longo do guia",
           "paragraphs": [
-            "Website redesign é o nosso projeto fictício. Vamos planear Create wireframes e movê-la de Por fazer para Concluída. As capturas usam apenas dados de demonstração. Mostram a interface em inglês; legendas traduzidas explicam cada ação e a tua interface segue o idioma escolhido."
+            "<example>Website redesign</example> é o nosso projeto fictício. Vamos planear <example>Create wireframes</example> e movê-la de <status value=\"todo\">Por fazer</status> para <status value=\"done\">Concluída</status>. As capturas usam apenas dados de demonstração. Mostram a interface em inglês; legendas traduzidas explicam cada ação e a tua interface segue o idioma escolhido."
           ],
           "steps": [],
           "bullets": []
@@ -73,37 +73,42 @@
     },
     "quick-start": {
       "title": "Início rápido",
-      "intro": "O primeiro projeto em seis ações simples.",
+      "intro": "Cria um projeto, planeia uma tarefa e acompanha o progresso.",
       "sections": [
         {
           "id": "project",
-          "title": "1–2 · Abrir e criar",
+          "title": "Abrir e criar",
           "paragraphs": [],
           "steps": [
-            "Abre o Saturnino. Escolhe Projetos na barra lateral ou abre o menu de navegação num ecrã pequeno.",
-            "Escolhe Novo projeto. Escreve Website redesign, adiciona descrição e cor e seleciona Criar projeto. Abre-o em Ver projeto."
+            "Abre Saturnino. Escolhe <label>Projetos</label> na barra lateral; num ecrã pequeno, abre primeiro o menu de navegação.",
+            "Escolhe <action>Novo projeto</action>. Em <label>Nome do projeto</label>, escreve <example>Website redesign</example>.",
+            "Adiciona <label>Descrição</label> e escolhe <label>Cor do projeto</label>. Seleciona <action>Criar projeto</action>.",
+            "Escolhe <action>Ver projeto</action> para abrir o novo projeto."
           ],
           "bullets": [],
           "figure": "project-form"
         },
         {
           "id": "task",
-          "title": "3–4 · Adicionar e planear",
+          "title": "Adicionar e planear",
           "paragraphs": [],
           "steps": [
-            "Dentro do projeto, escolhe Nova tarefa. Escreve Create wireframes e descreve, se quiseres, a próxima ação.",
-            "Escolhe prioridade Alta, estado Por fazer e um Prazo realista no calendário. Seleciona Criar tarefa para guardar."
+            "Dentro do projeto, escolhe <action>Nova tarefa</action>.",
+            "Em <label>Título da tarefa</label>, escreve <example>Create wireframes</example>. Adiciona <label>Descrição</label> se for útil.",
+            "Define <label>Prioridade</label> como <priority value=\"high\">Alta</priority> e <label>Estado</label> como <status value=\"todo\">Por fazer</status>. Escolhe um <label>Prazo</label> realista.",
+            "Seleciona <action>Criar tarefa</action> para guardar."
           ],
           "bullets": [],
           "figure": "task-form"
         },
         {
           "id": "progress",
-          "title": "5–6 · Organizar e rever",
+          "title": "Organizar e rever",
           "paragraphs": [],
           "steps": [
-            "Escolhe Quadro. Arrasta a tarefa pelo título ou superfície para Em curso quando começares e Concluída no fim. O menu da tarefa é uma alternativa.",
-            "Abre Visão geral para consultar tarefas abertas/concluídas, prazos e progresso. Escolhe o próximo passo útil."
+            "Escolhe <label>Quadro</label> dentro do projeto.",
+            "Move <example>Create wireframes</example> para <status value=\"in-progress\">Em curso</status> quando começares e para <status value=\"done\">Concluída</status> quando terminares. Arrasta o cartão ou usa o menu da tarefa.",
+            "Abre <label>Visão geral</label> para rever o progresso e escolher o próximo passo."
           ],
           "bullets": [],
           "figure": "kanban"
@@ -118,7 +123,7 @@
           "id": "before",
           "title": "Antes de instalar",
           "paragraphs": [
-            "Abre o Saturnino online num navegador compatível. Instalação e preparação offline são diferentes: confirma Pronto para utilização offline em Definições → Espaço de trabalho local. Menus e disponibilidade variam com a versão."
+            "Abre o Saturnino online num navegador compatível. Instalação e preparação offline são diferentes: confirma <label>Pronto para utilização offline.</label> em <path><label>Definições</label> → <label>Espaço de trabalho local</label></path>. Menus e disponibilidade variam com a versão."
           ],
           "steps": [],
           "bullets": []
@@ -139,7 +144,8 @@
             "Não assumas que instalar, mudar de navegador ou abrir uma aplicação web autónoma copia os dados. Exporta JSON primeiro e verifica o destino. Usa o mesmo perfil e endereço ou restaura manualmente quando necessário."
           ],
           "steps": [],
-          "bullets": []
+          "bullets": [],
+          "note": "A instalação não transfere dados entre navegadores ou dispositivos. Exporta uma cópia JSON antes de mover o espaço de trabalho."
         }
       ]
     },
@@ -152,8 +158,8 @@
           "title": "Criar e abrir",
           "paragraphs": [],
           "steps": [
-            "Projetos → Novo projeto: introduz nome (até 80 caracteres), descrição opcional (até 500) e cor.",
-            "Escolhe Criar projeto e depois Ver projeto. Separa trabalho, estudos e objetivos pessoais em projetos reconhecíveis."
+            "<path><label>Projetos</label> → <action>Novo projeto</action></path>: introduz <label>Nome do projeto</label> (até 80 caracteres), <label>Descrição</label> opcional (até 500) e <label>Cor do projeto</label>.",
+            "Escolhe <action>Criar projeto</action> e depois <action>Ver projeto</action>. Separa trabalho, estudos e objetivos pessoais em projetos reconhecíveis."
           ],
           "bullets": [],
           "figure": "projects"
@@ -162,7 +168,7 @@
           "id": "find",
           "title": "Favoritos e acesso rápido",
           "paragraphs": [
-            "Usa a estrela para adicionar ou remover um projeto dos Favoritos. Projetos recentes acompanha visitas. O Explorador de projetos pesquisa nomes e abre projetos na barra lateral; o botão mais cria um projeto. No mobile, abre primeiro o menu de navegação."
+            "Usa a estrela para adicionar ou remover um projeto dos <label>Favoritos</label>. <label>Projetos recentes</label> acompanha visitas. O <label>Explorador de projetos</label> pesquisa nomes e abre projetos na barra lateral; o botão mais cria um projeto. No mobile, abre primeiro o menu de navegação."
           ],
           "steps": [],
           "bullets": []
@@ -170,11 +176,15 @@
         {
           "id": "edit-delete",
           "title": "Editar ou eliminar com atenção",
-          "paragraphs": [
-            "O menu de ações oferece Editar projeto: altera nome, descrição ou cor e Guarda as alterações. Eliminar projeto exige confirmação e remove definitivamente o projeto E todas as tarefas associadas. Não existe anular nem reciclagem. Exporta um backup antes de eliminar algo que possas precisar."
+          "paragraphs": [],
+          "steps": [
+            "Abre o menu de ações do projeto e seleciona <action>Editar projeto</action>. Altera <label>Nome do projeto</label>, <label>Descrição</label>, <label>Cor do projeto</label> e seleciona <action>Guardar alterações</action>.",
+            "<action>Eliminar projeto</action> exige confirmação e remove definitivamente o projeto E todas as tarefas associadas.",
+            "Não existe anular nem reciclagem.",
+            "Exporta um backup antes de eliminar algo que possas precisar."
           ],
-          "steps": [],
-          "bullets": []
+          "bullets": [],
+          "warning": "<action>Eliminar projeto</action> remove permanentemente o projeto e todas as suas tarefas. Não existe anulação. Descarrega uma cópia JSON antes de confirmar."
         }
       ]
     },
@@ -185,30 +195,44 @@
         {
           "id": "create",
           "title": "Adicionar o essencial",
-          "paragraphs": [
-            "Escolhe Nova tarefa num projeto ou em As minhas tarefas. Título (até 120 caracteres) e projeto existente são obrigatórios. Descrição é opcional (até 2000 caracteres). Escolhe estado, prioridade Baixa/Média/Alta/Urgente e prazo opcional no calendário. Seleciona Criar tarefa para guardar."
+          "paragraphs": [],
+          "steps": [
+            "Escolhe <action>Nova tarefa</action> num projeto ou em <label>As minhas tarefas</label>.",
+            "Introduz <label>Título da tarefa</label> (até 120 caracteres) e seleciona um <label>Projeto</label> existente.",
+            "Adiciona <label>Descrição</label> opcional (até 2000 caracteres).",
+            "Escolhe <label>Estado</label>, <label>Prioridade</label> e <label>Prazo</label> opcional no calendário. As prioridades são <priority value=\"low\">Baixa</priority>, <priority value=\"medium\">Média</priority>, <priority value=\"high\">Alta</priority> e <priority value=\"urgent\">Urgente</priority>.",
+            "Seleciona <action>Criar tarefa</action> para guardar."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "task-form"
         },
         {
           "id": "details",
           "title": "Abrir, editar e eliminar",
-          "paragraphs": [
-            "Um clique no título abre detalhes: painel lateral em desktop ou ecrã inteiro no mobile. Altera campos e escolhe Guardar tarefa. Cancelar não guarda; um formulário alterado pede para continuar ou descartar. Uma mensagem de conflito protege contra edições noutro separador. Eliminar tarefa exige confirmação e é permanente."
+          "paragraphs": [],
+          "steps": [
+            "Um clique no título abre detalhes: painel lateral em desktop ou ecrã inteiro no mobile.",
+            "Altera campos e escolhe <action>Guardar tarefa</action>.",
+            "<action>Cancelar</action> não guarda; um formulário alterado pede para continuar ou descartar.",
+            "Uma mensagem de conflito protege contra edições noutro separador.",
+            "<action>Eliminar tarefa</action> exige confirmação e é permanente."
           ],
-          "steps": [],
           "bullets": [],
-          "figure": "task-details"
+          "figure": "task-details",
+          "warning": "<action>Eliminar tarefa</action> é permanente. Guarda uma cópia JSON se puderes precisar desta tarefa novamente."
         },
         {
           "id": "find",
           "title": "Pesquisar, filtrar e mudar de vista",
-          "paragraphs": [
-            "A pesquisa procura títulos e descrições. Combina filtros de estado, prioridade, projeto e prazo. Remove etiquetas ou usa Limpar filtros. Escolhe uma ordenação disponível (manual, datas, prioridade ou título). Projetos oferece Lista/Quadro; As minhas tarefas é uma lista entre projetos. Filtros ou ordenação não manual limitam a reordenação para evitar posições enganadoras."
+          "paragraphs": [],
+          "steps": [
+            "Usa <label>Pesquisar tarefas</label> para procurar títulos e descrições.",
+            "Abre <label>Filtros</label> e combina <label>Filtrar por estado</label>, <label>Filtrar por prioridade</label>, <label>Filtrar por projeto</label>, <label>Filtrar por prazo</label>.",
+            "Remove etiquetas ou usa <action>Limpar filtros</action>.",
+            "Usa <label>Ordenar tarefas</label> para escolher <label>Ordem manual</label>, <label>Prazo mais próximo</label>, <label>Prioridade mais elevada</label>, <label>Título, A–Z</label>, <label>Atualizadas recentemente</label>.",
+            "<label>Projetos</label> oferece <label>Lista</label>/<label>Quadro</label>; <label>As minhas tarefas</label> é uma lista entre projetos.",
+            "Filtros ou ordenação não manual limitam a reordenação para evitar posições enganadoras."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "filters"
         }
@@ -224,29 +248,38 @@
           "paragraphs": [],
           "steps": [],
           "bullets": [
-            "Por planear: ideias e tarefas futuras que ainda não vais começar.",
-            "Por fazer: tarefas prontas para começar.",
-            "Em curso: trabalho em execução.",
-            "Concluída: tarefas terminadas; o progresso atualiza automaticamente."
+            "<status value=\"backlog\">Por planear</status>: ideias e tarefas futuras que ainda não vais começar.",
+            "<status value=\"todo\">Por fazer</status>: tarefas prontas para começar.",
+            "<status value=\"in-progress\">Em curso</status>: trabalho em execução.",
+            "<status value=\"done\">Concluída</status>: tarefas terminadas; o progresso atualiza automaticamente."
           ],
           "figure": "kanban"
         },
         {
           "id": "move",
           "title": "Arrastar e reordenar",
-          "paragraphs": [
-            "Com o rato, pressiona o título ou uma área não interativa e desloca para ativar o arrastamento. Um clique simples continua a abrir detalhes. O cartão muda de aspeto, a coluna de destino é destacada e uma linha indica inserção antes da tarefa-alvo ou no fim. Solta para guardar estado e ordem, que se mantêm após recarregar. Move Create wireframes de Por fazer para Em curso ao começar."
+          "paragraphs": [],
+          "steps": [
+            "Com o rato, pressiona o título ou uma área não interativa e desloca para ativar o arrastamento.",
+            "Um clique simples continua a abrir detalhes.",
+            "O cartão muda de aspeto, a coluna de destino é destacada e uma linha indica inserção antes da tarefa-alvo ou no fim.",
+            "Solta para guardar estado e ordem, que se mantêm após recarregar.",
+            "Move <example>Create wireframes</example> de <status value=\"todo\">Por fazer</status> para <status value=\"in-progress\">Em curso</status> ao começar."
           ],
-          "steps": [],
           "bullets": []
         },
         {
           "id": "alternatives",
           "title": "Alternativas por teclado e toque",
-          "paragraphs": [
-            "Foca a pega, prime Espaço, usa setas para mover e Espaço para largar ou Escape para cancelar. Ou abre o menu e escolhe estado, Mover para cima ou Mover para baixo. Os menus funcionam bem por toque. Arrastar por toque exige breve pressão; gestos rápidos continuam a deslocar. Desloca horizontalmente para chegar às colunas num ecrã estreito. Usa o menu se arrastar for difícil."
+          "paragraphs": [],
+          "steps": [
+            "Foca a pega com <key>Tab</key>. Prime <key>Espaço</key> ou <key>Enter</key> para pegar na tarefa, usa as setas para mover e prime <key>Espaço</key> ou <key>Enter</key> para largar. Prime <key>Escape</key> para cancelar.",
+            "Ou abre o menu e usa <label>Mover para</label> para escolher um estado. As ações de mover para cima e para baixo reordenam a tarefa.",
+            "Os menus funcionam bem por toque.",
+            "Arrastar por toque exige breve pressão; gestos rápidos continuam a deslocar.",
+            "Desloca horizontalmente para chegar às colunas num ecrã estreito.",
+            "Usa o menu se arrastar for difícil."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -259,7 +292,7 @@
           "id": "indicators",
           "title": "Ler os indicadores",
           "paragraphs": [
-            "A Visão geral conta projetos, tarefas totais, abertas, concluídas, em atraso e taxa de conclusão. Abertas são as que não estão Concluídas. Em atraso são as por concluir com prazo anterior a hoje, em datas locais. O progresso é a proporção atualmente Concluída, não horas ou esforço."
+            "A <label>Visão geral</label> conta projetos, tarefas totais, abertas, concluídas, em atraso e taxa de conclusão. Abertas são as que não têm o estado <status value=\"done\">Concluída</status>. Em atraso são as por concluir com prazo anterior a hoje, em datas locais. O progresso é a proporção atualmente <status value=\"done\">Concluída</status>, não horas ou esforço."
           ],
           "steps": [],
           "bullets": [],
@@ -269,7 +302,7 @@
           "id": "charts",
           "title": "Interpretar os gráficos",
           "paragraphs": [
-            "As distribuições por estado e prioridade descrevem tarefas ainda existentes. Criadas e concluídas compara os últimos 14 dias locais pelas datas de criação retidas e conclusão atual. Reabrir ou eliminar pode remover uma conclusão anterior: não é um histórico imutável. Ver contagens diárias abre uma tabela legível."
+            "As distribuições por estado e prioridade descrevem tarefas ainda existentes. <label>Criadas e concluídas</label> compara os últimos 14 dias locais pelas datas de criação retidas e conclusão atual. Reabrir ou eliminar pode remover uma conclusão anterior: não é um histórico imutável. <action>Ver contagens diárias</action> abre uma tabela legível."
           ],
           "steps": [],
           "bullets": []
@@ -278,7 +311,7 @@
           "id": "act",
           "title": "Transformar informação em ação",
           "paragraphs": [
-            "Indicadores com ligação, estados e prioridades abrem As minhas tarefas com o filtro correspondente. Tarefas a acompanhar reúne próximos prazos, atrasos e atualizações recentes. As ligações de progresso abrem projetos. O Saturnino não calcula tempos, velocidade de equipa nem previsões."
+            "Indicadores com ligação, estados e prioridades abrem <label>As minhas tarefas</label> com o filtro correspondente. <label>Tarefas a acompanhar</label> reúne próximos prazos, atrasos e atualizações recentes. As ligações de progresso abrem projetos. O Saturnino não calcula tempos, velocidade de equipa nem previsões."
           ],
           "steps": [],
           "bullets": []
@@ -292,30 +325,39 @@
         {
           "id": "appearance",
           "title": "Tema e idioma",
-          "paragraphs": [
-            "Usa o cabeçalho ou Definições → Aspeto e idioma para escolher Claro/Escuro e English/Português. As alterações são imediatas e ficam neste navegador quando há armazenamento disponível. Datas, formulários e este guia seguem o idioma escolhido."
+          "paragraphs": [],
+          "steps": [
+            "Usa o cabeçalho ou <path><label>Definições</label> → <label>Aspeto e idioma</label></path> para escolher <label>Claro</label> ou <label>Escuro</label> e <label>English</label> ou <label>Português</label>.",
+            "As alterações são imediatas e ficam neste navegador quando há armazenamento disponível.",
+            "Datas, formulários e este guia seguem o idioma escolhido."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "settings"
         },
         {
           "id": "sidebar",
           "title": "Organizar a barra lateral",
-          "paragraphs": [
-            "Escolhe Personalizar barra lateral na barra lateral ou Definições → Barra lateral. Ativa secções e move-as pelos controlos disponíveis. Guardar aplica o rascunho; Cancelar/Escape descarta. Repor prepara valores padrão no rascunho: guarda para aplicar. Favoritos pertencem aos projetos e recentes seguem as visitas."
+          "paragraphs": [],
+          "steps": [
+            "Escolhe <action>Personalizar barra lateral</action> na barra lateral ou <path><label>Definições</label> → <label>Barra lateral</label></path>.",
+            "Ativa secções e move-as pelos controlos disponíveis.",
+            "<action>Guardar alterações</action> aplica o rascunho; <action>Cancelar</action> ou <key>Escape</key> descarta.",
+            "<action>Repor preferências da barra lateral</action> prepara valores padrão no rascunho: guarda para aplicar.",
+            "<label>Favoritos</label> pertencem aos projetos e recentes seguem as visitas."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "sidebar"
         },
         {
           "id": "size",
           "title": "Modo compacto e largura",
-          "paragraphs": [
-            "Em desktop, redimensiona pelo separador ou escolhe largura em Definições → Barra lateral. O modo compacto reduz o espaço ocupado; desativa-o para voltar ao layout completo. Ecrãs pequenos usam menu lateral. Estas preferências não fazem parte do backup JSON."
+          "paragraphs": [],
+          "steps": [
+            "Em desktop, redimensiona pelo separador ou escolhe largura em <path><label>Definições</label> → <label>Barra lateral</label></path>.",
+            "Usa <label>Barra lateral compacta</label> para reduzir o espaço ocupado; desativa para voltar ao layout completo.",
+            "Ecrãs pequenos usam menu lateral.",
+            "Estas preferências não fazem parte do backup JSON."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -331,8 +373,8 @@
           "steps": [],
           "bullets": [
             "Separa trabalho, estudo e objetivos pessoais em projetos.",
-            "Divide objetivos grandes: Create wireframes é mais claro do que Terminar o site.",
-            "Guarda ideias em Por planear e escolhe prioridades e datas realistas."
+            "Divide objetivos grandes: <example>Create wireframes</example> é mais claro do que <example>Terminar o website</example>.",
+            "Guarda ideias em <status value=\"backlog\">Por planear</status> e escolhe prioridades e datas realistas."
           ]
         },
         {
@@ -341,8 +383,8 @@
           "paragraphs": [],
           "steps": [],
           "bullets": [
-            "Limita o trabalho em Em curso ao mesmo tempo.",
-            "Adiciona projetos frequentes aos Favoritos e revê a Visão geral.",
+            "Limita o trabalho em <status value=\"in-progress\">Em curso</status> ao mesmo tempo.",
+            "Adiciona projetos frequentes aos <label>Favoritos</label> e revê a <label>Visão geral</label>.",
             "Personaliza a barra lateral, escolhe um tema confortável e instala se houver suporte."
           ]
         },
@@ -400,7 +442,7 @@
           "paragraphs": [],
           "steps": [
             "Abre o Saturnino online e deixa carregar os ficheiros.",
-            "Definições → Espaço de trabalho local: aguarda Pronto para utilização offline. Instalar não prova que a cache terminou."
+            "<path><label>Definições</label> → <label>Espaço de trabalho local</label></path>: aguarda <label>Pronto para utilização offline.</label> Instalar não prova que a cache terminou."
           ],
           "bullets": []
         },
@@ -416,10 +458,14 @@
         {
           "id": "updates",
           "title": "Atualizar depois de guardar",
-          "paragraphs": [
-            "Online, usa Procurar atualizações em Definições → Espaço de trabalho local. Guarda antes de Recarregar para atualizar. Formulários alterados podem pedir para continuar ou descartar. Registos guardados continuam locais, mas atualizar não cria backup. Não limpes dados apenas para atualizar."
+          "paragraphs": [],
+          "steps": [
+            "Online, usa <action>Procurar atualizações</action> em <path><label>Definições</label> → <label>Espaço de trabalho local</label></path>.",
+            "Guarda antes de <action>Recarregar para atualizar</action>.",
+            "Formulários alterados podem pedir para continuar ou descartar.",
+            "Registos guardados continuam locais, mas atualizar não cria backup.",
+            "Não limpes dados apenas para atualizar."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -433,8 +479,8 @@
           "title": "Descarregar backup JSON",
           "paragraphs": [],
           "steps": [
-            "Abre Definições → Gestão de dados.",
-            "Escolhe Descarregar backup JSON e encontra o ficheiro .json.",
+            "Abre <path><label>Definições</label> → <label>Gestão de dados</label></path>.",
+            "Escolhe <action>Descarregar backup JSON</action> e encontra o ficheiro .json.",
             "Guarda-o num local que controles, idealmente também fora do dispositivo. Protege ficheiros com dados sensíveis."
           ],
           "bullets": [],
@@ -446,21 +492,23 @@
           "paragraphs": [],
           "steps": [
             "Exporta primeiro o espaço do destino se houver algo a preservar.",
-            "Escolhe Restaurar backup JSON, seleciona o ficheiro e verifica nome, data e contagens atuais/selecionadas de projetos e tarefas.",
-            "Escolhe Substituir espaço de trabalho apenas se aceitares substituir TODOS os projetos e tarefas. Registos ausentes são removidos. Cancelar não altera dados.",
+            "Escolhe <action>Restaurar backup JSON</action>, seleciona o ficheiro e verifica nome, data e contagens atuais/selecionadas de projetos e tarefas.",
+            "Escolhe <action>Substituir espaço</action> apenas se aceitares substituir TODOS os projetos e tarefas. Registos ausentes são removidos. <action>Cancelar</action> não altera dados.",
             "Verifica projetos, tarefas, favoritos, datas e ordem. Para transferir entre dispositivos, move o JSON manualmente e repete no destino."
           ],
           "bullets": [],
-          "figure": "restore"
+          "figure": "restore",
+          "warning": "<action>Substituir espaço</action> substitui todos os projetos e tarefas locais. Os registos ausentes da cópia selecionada são removidos. Exporta o espaço atual antes de continuar."
         },
         {
           "id": "included",
           "title": "O que contêm JSON e CSV",
           "paragraphs": [
-            "JSON inclui projetos (cor e favoritos) e tarefas (planeamento, estado, ordem e datas de registo). Exclui tema, idioma, layout/largura/modo compacto, recentes e cache. O restauro aceita um backup JSON Saturnino validado até 20 MiB. Exportar tarefas em CSV cria tabela para folhas de cálculo ou consulta externa; CSV não restaura um espaço. Restaurar substitui, não junta nem sincroniza."
+            "JSON inclui projetos (cor e favoritos) e tarefas (planeamento, estado, ordem e datas de registo). Exclui tema, idioma, layout/largura/modo compacto, recentes e cache. O restauro aceita um backup JSON Saturnino validado até 20 MiB. <action>Exportar tarefas em CSV</action> cria tabela para folhas de cálculo ou consulta externa; CSV não restaura um espaço. Restaurar substitui, não junta nem sincroniza."
           ],
           "steps": [],
-          "bullets": []
+          "bullets": [],
+          "note": "JSON é o formato de recuperação. CSV serve para análise externa e não restaura o espaço de trabalho."
         }
       ]
     },
@@ -551,15 +599,15 @@
   "figures": {
     "project-form": {
       "alt": "Cria Website redesign com nome, descrição e cor.",
-      "caption": "Cria Website redesign com nome, descrição e cor."
+      "caption": "Cria <example>Website redesign</example> com nome, descrição e cor."
     },
     "projects": {
       "alt": "Abre o projeto, usa a estrela ou acede aos recentes e ao Explorador de projetos.",
-      "caption": "Abre o projeto, usa a estrela ou acede aos recentes e ao Explorador de projetos."
+      "caption": "Abre o projeto, usa a estrela ou acede aos recentes e ao <label>Explorador de projetos</label>."
     },
     "task-form": {
       "alt": "Planeia Create wireframes com projeto, estado, prioridade e prazo opcional.",
-      "caption": "Planeia Create wireframes com projeto, estado, prioridade e prazo opcional."
+      "caption": "Planeia <example>Create wireframes</example> com projeto, estado, prioridade e prazo opcional."
     },
     "task-details": {
       "alt": "Clica no título para abrir detalhes; guarda explicitamente ou cancela sem guardar.",
@@ -579,15 +627,15 @@
     },
     "settings": {
       "alt": "Aspeto e idioma aplicam-se ao espaço deste navegador.",
-      "caption": "Aspeto e idioma aplicam-se ao espaço deste navegador."
+      "caption": "<label>Aspeto e idioma</label> aplicam-se ao espaço deste navegador."
     },
     "sidebar": {
       "alt": "Personaliza secções num rascunho e depois Guarda ou Cancela.",
-      "caption": "Personaliza secções num rascunho e depois Guarda ou Cancela."
+      "caption": "Personaliza secções num rascunho e seleciona <action>Guardar alterações</action> ou <action>Cancelar</action>."
     },
     "backup": {
       "alt": "Definições → Gestão de dados: JSON para recuperar, CSV para consulta externa.",
-      "caption": "Definições → Gestão de dados: JSON para recuperar, CSV para consulta externa."
+      "caption": "<path><label>Definições</label> → <label>Gestão de dados</label></path>: JSON para recuperar, CSV para consulta externa."
     },
     "restore": {
       "alt": "Revê contagens de origem/destino antes de substituir projetos e tarefas locais.",
@@ -609,15 +657,15 @@
     },
     {
       "question": "Posso utilizar sem Internet?",
-      "answer": "Sim, depois de uma visita online preparar a cache e Definições → Espaço de trabalho local indicar Pronto para utilização offline. Ligações externas precisam de rede."
+      "answer": "Sim, depois de uma visita online preparar a cache e <path><label>Definições</label> → <label>Espaço de trabalho local</label></path> indicar <label>Pronto para utilização offline.</label> Ligações externas precisam de rede."
     },
     {
       "question": "Como instalo no computador?",
-      "answer": "Segue o capítulo de instalação: menu do Chrome, ícone de aplicação disponível no Edge ou Adicionar à Dock no Safari em Macs compatíveis."
+      "answer": "Segue o capítulo de instalação: menu do Chrome, ícone de aplicação disponível no Edge ou <label>Adicionar à Dock</label> no Safari em Macs compatíveis."
     },
     {
       "question": "Como instalo no iPhone ou iPad?",
-      "answer": "Abre o site no Safari, Partilhar → Adicionar ao ecrã principal. Ativa Abrir como aplicação web quando disponível e Adicionar. Os nomes variam com a versão."
+      "answer": "Abre o site no Safari, <path><label>Partilhar</label> → <label>Adicionar ao ecrã principal</label></path>. Ativa <label>Abrir como aplicação web</label> quando disponível e <label>Adicionar</label>. Os nomes variam com a versão."
     },
     {
       "question": "Porque não aparece o botão de instalação?",
@@ -629,15 +677,15 @@
     },
     {
       "question": "Como faço um backup?",
-      "answer": "Definições → Gestão de dados → Descarregar backup JSON. Encontra e guarda o ficheiro num local seguro."
+      "answer": "<path><label>Definições</label> → <label>Gestão de dados</label> → <action>Descarregar backup JSON</action></path>. Encontra e guarda o ficheiro num local seguro."
     },
     {
       "question": "Como restauro os meus dados?",
-      "answer": "Guarda primeiro os dados atuais. Escolhe Restaurar backup JSON, revê contagens e confirma Substituir espaço de trabalho apenas quando estiveres pronto. CSV não é ficheiro de restauro."
+      "answer": "Guarda primeiro os dados atuais. Escolhe <action>Restaurar backup JSON</action>, revê contagens e confirma <action>Substituir espaço</action> apenas quando estiveres pronto. CSV não é ficheiro de restauro."
     },
     {
       "question": "E se limpar os dados do navegador?",
-      "answer": "Projetos e tarefas podem ser removidos. Precisas de JSON existente para recuperar os dados suportados; a aplicação não reconstrói registos locais eliminados."
+      "answer": "<label>Projetos</label> e tarefas podem ser removidos. Precisas de JSON existente para recuperar os dados suportados; a aplicação não reconstrói registos locais eliminados."
     },
     {
       "question": "Porque não vejo projetos noutro navegador?",
@@ -645,7 +693,7 @@
     },
     {
       "question": "Como atualizo a aplicação?",
-      "answer": "Online, Definições → Espaço de trabalho local → Procurar atualizações. Guarda edições e usa Recarregar para atualizar quando aparecer."
+      "answer": "Online, <path><label>Definições</label> → <label>Espaço de trabalho local</label> → <action>Procurar atualizações</action></path>. Guarda edições e usa <action>Recarregar para atualizar</action> quando aparecer."
     },
     {
       "question": "E se uma tarefa não aparecer?",
@@ -656,42 +704,44 @@
     {
       "title": "macOS · Safari ou Chrome",
       "steps": [
-        "No Safari numa versão compatível do macOS, abre Saturnino e Partilhar → Adicionar à Dock (ou Ficheiro → Adicionar à Dock). Confirma o nome e Adicionar.",
-        "No Chrome, usa o ícone de instalação quando disponível ou Mais → Transmitir, guardar e partilhar → Instalar página como aplicação. Segue o diálogo.",
+        "No Safari numa versão compatível do macOS, abre Saturnino e <path><label>Partilhar</label> → <label>Adicionar à Dock</label></path> (ou <path><label>Ficheiro</label> → <label>Adicionar à Dock</label></path>). Confirma o nome e <label>Adicionar</label>.",
+        "No Chrome, usa o ícone de instalação quando disponível ou <path><label>Mais</label> → <label>Transmitir, guardar e partilhar</label> → <label>Instalar página como aplicação</label></path>. Segue o diálogo.",
         "Abre pela Dock ou lançador. Verifica o espaço antes de depender de registos existentes."
       ]
     },
     {
       "title": "Windows · Edge ou Chrome",
       "steps": [
-        "No Edge, abre Saturnino e escolhe o ícone de aplicação disponível na barra de endereços quando aparecer e Instalar.",
-        "No Chrome, escolhe o ícone de instalação ou Mais → Transmitir, guardar e partilhar → Instalar página como aplicação.",
+        "No Edge, abre Saturnino e escolhe o ícone de aplicação disponível na barra de endereços quando aparecer e <label>Instalar</label>.",
+        "No Chrome, escolhe o ícone de instalação ou <path><label>Mais</label> → <label>Transmitir, guardar e partilhar</label> → <label>Instalar página como aplicação</label></path>.",
         "Segue o pedido do navegador e abre Saturnino no lançador de aplicações."
       ]
     },
     {
       "title": "iPhone · Safari",
       "steps": [
-        "Abre Saturnino no Safari e toca em Partilhar (usa Mais ou Ver mais se a versão colocar aí a opção).",
-        "Escolhe Adicionar ao ecrã principal. Ativa Abrir como aplicação web quando disponível.",
-        "Confirma Adicionar e abre Saturnino no ecrã principal. Não precisas de descarregar da App Store."
+        "Abre Saturnino no Safari e toca em <label>Partilhar</label> (usa <label>Mais</label> ou <label>Ver mais</label> se a versão colocar aí a opção).",
+        "Escolhe <label>Adicionar ao ecrã principal</label>. Ativa <label>Abrir como aplicação web</label> quando disponível.",
+        "Confirma <label>Adicionar</label> e abre Saturnino no ecrã principal. Não precisas de descarregar da App Store."
       ]
     },
     {
       "title": "iPad · Safari",
       "steps": [
-        "Abre Saturnino no Safari e escolhe Partilhar (depois Mais ou Ver mais se necessário).",
-        "Escolhe Adicionar ao ecrã principal e ativa Abrir como aplicação web quando disponível.",
-        "Toca em Adicionar e abre o ícone no ecrã principal. Verifica o espaço local."
+        "Abre Saturnino no Safari e escolhe <label>Partilhar</label> (depois <label>Mais</label> ou <label>Ver mais</label> se necessário).",
+        "Escolhe <label>Adicionar ao ecrã principal</label> e ativa <label>Abrir como aplicação web</label> quando disponível.",
+        "Toca em <label>Adicionar</label> e abre o ícone no ecrã principal. Verifica o espaço local."
       ]
     },
     {
       "title": "Android · Chrome",
       "steps": [
-        "Abre Saturnino no Chrome e Mais junto à barra de endereços.",
-        "Escolhe Instalar e criar atalho → Instalar ou Instalar aplicação/Adicionar ao ecrã principal se o navegador usar esse nome.",
+        "Abre Saturnino no Chrome e <label>Mais</label> junto à barra de endereços.",
+        "Escolhe <path><label>Instalar e criar atalho</label> → <label>Instalar</label></path> ou <label>Instalar aplicação</label>/<label>Adicionar ao ecrã principal</label> se o navegador usar esse nome.",
         "Segue o pedido e abre o ícone. Não precisas de descarregar da Google Play."
       ]
     }
-  ]
+  ],
+  "warning": "Aviso",
+  "note": "Nota"
 }

@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import GuideInlineText from './GuideInlineText'
+
 import { Button } from '@/components/ui/button'
 import { usePwa } from '@/features/pwa/hooks/usePwa'
 
@@ -52,7 +54,7 @@ function InstallInstructions() {
             <ol className="list-decimal space-y-3 pl-6 text-sm leading-7 text-muted-foreground">
               {steps.map((step) => (
                 <li key={step} className="pl-1">
-                  {step}
+                  <GuideInlineText>{step}</GuideInlineText>
                 </li>
               ))}
             </ol>
