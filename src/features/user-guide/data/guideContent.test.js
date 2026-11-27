@@ -42,3 +42,34 @@ it('covers all 15 chapters and matching complete language structures', () => {
   expect(en.faq).toHaveLength(14)
   expect(en.platforms).toHaveLength(5)
 })
+
+it.each([en, pt])(
+  'keeps image alternatives plain and warns before destructive operations',
+  (guide) => {
+    for (const figure of Object.values(guide.figures)) {
+      expect(figure.alt).not.toMatch(/<[^>]+>/)
+    }
+    for (const [chapter, section] of [
+      ['projects', 'edit-delete'],
+      ['tasks', 'details'],
+      ['backup', 'restore'],
+    ]) {
+      expect(
+        guide.chapters[chapter].sections.find(({ id }) => id === section)
+          .warning,
+      ).toBeTruthy()
+    }
+    for (const chapter of [
+      'quick-start',
+      'projects',
+      'tasks',
+      'kanban',
+      'customization',
+      'backup',
+    ]) {
+      expect(
+        guide.chapters[chapter].sections.some(({ steps }) => steps.length > 1),
+      ).toBe(true)
+    }
+  },
+)

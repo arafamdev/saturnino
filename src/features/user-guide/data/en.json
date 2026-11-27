@@ -55,7 +55,7 @@
           "id": "interface",
           "title": "Meet your workspace",
           "paragraphs": [
-            "Overview shows progress. My Tasks combines tasks from all projects. Projects opens each project's list or board. Settings holds appearance, sidebar, local workspace information, backups and help. The header's Back button returns through known workspace pages, with a safe Overview fallback."
+            "<label>Overview</label> shows progress. <label>My Tasks</label> combines tasks from all projects. <label>Projects</label> opens each project's list or board. <label>Settings</label> holds appearance, sidebar, local workspace information, backups and help. The header's <action>Go back</action> button returns through known workspace pages, with a safe <label>Overview</label> fallback."
           ],
           "steps": [],
           "bullets": []
@@ -64,7 +64,7 @@
           "id": "example",
           "title": "One example throughout",
           "paragraphs": [
-            "Website redesign is our fictional project. We will plan Create wireframes and move it from To do to Done. Screenshots use demonstration data only. They show the English interface; translated captions explain each action and your own interface follows your selected language."
+            "<example>Website redesign</example> is our fictional project. We will plan <example>Create wireframes</example> and move it from <status value=\"todo\">To do</status> to <status value=\"done\">Done</status>. Screenshots use demonstration data only. They show the English interface; translated captions explain each action and your own interface follows your selected language."
           ],
           "steps": [],
           "bullets": []
@@ -73,37 +73,42 @@
     },
     "quick-start": {
       "title": "Quick Start",
-      "intro": "Your first project in six clear actions.",
+      "intro": "Create a project, plan a task and review progress.",
       "sections": [
         {
           "id": "project",
-          "title": "1–2 · Open and create",
+          "title": "Open and create",
           "paragraphs": [],
           "steps": [
-            "Open Saturnino. Choose Projects in the sidebar, or open the navigation menu on a small screen.",
-            "Choose New project. Enter Website redesign, add a description, choose a color and select Create project. Open it with View project."
+            "Open Saturnino. Choose <label>Projects</label> in the sidebar; on a small screen, open the navigation menu first.",
+            "Choose <action>New project</action>. In <label>Project name</label>, enter <example>Website redesign</example>.",
+            "Add a <label>Description</label> and choose a <label>Project color</label>. Select <action>Create project</action>.",
+            "Choose <action>View project</action> to open your new project."
           ],
           "bullets": [],
           "figure": "project-form"
         },
         {
           "id": "task",
-          "title": "3–4 · Add and plan",
+          "title": "Add and plan",
           "paragraphs": [],
           "steps": [
-            "Inside the project, choose New task. Enter Create wireframes and optionally describe the next action.",
-            "Choose High priority, To do status and a realistic Due date in the calendar. Choose Create task to save."
+            "Inside the project, choose <action>New task</action>.",
+            "In <label>Task title</label>, enter <example>Create wireframes</example>. Add a <label>Description</label> if useful.",
+            "Set <label>Priority</label> to <priority value=\"high\">High</priority> and <label>Status</label> to <status value=\"todo\">To do</status>. Choose a realistic <label>Due date</label>.",
+            "Select <action>Create task</action> to save."
           ],
           "bullets": [],
           "figure": "task-form"
         },
         {
           "id": "progress",
-          "title": "5–6 · Organize and review",
+          "title": "Organize and review",
           "paragraphs": [],
           "steps": [
-            "Choose Board. Drag the task by its title or surface to In progress when you start, then Done when finished. The task menu is an alternative.",
-            "Open Overview to see open/completed tasks, deadlines and project progress. Choose the next useful step."
+            "Choose <label>Board</label> inside the project.",
+            "Move <example>Create wireframes</example> to <status value=\"in-progress\">In progress</status> when you start and <status value=\"done\">Done</status> when finished. Drag the card or use its task menu.",
+            "Open <label>Overview</label> to review progress and choose your next step."
           ],
           "bullets": [],
           "figure": "kanban"
@@ -118,7 +123,7 @@
           "id": "before",
           "title": "Before you install",
           "paragraphs": [
-            "Open Saturnino online in a compatible browser. Installation and offline readiness are different: check Settings → Local Workspace for Ready for offline use. Browser menus and availability vary by version."
+            "Open Saturnino online in a compatible browser. Installation and offline readiness are different: check <path><label>Settings</label> → <label>Local Workspace</label></path> and wait for the message: <label>Ready for offline use.</label> Browser menus and availability vary by version."
           ],
           "steps": [],
           "bullets": []
@@ -139,7 +144,8 @@
             "Do not assume installing, switching browsers or opening a standalone web app copies existing data. Export JSON first and check the destination. Use the same browser profile and address, or restore manually when needed."
           ],
           "steps": [],
-          "bullets": []
+          "bullets": [],
+          "note": "Installation does not transfer data between browsers or devices. Export a JSON backup before moving your workspace."
         }
       ]
     },
@@ -152,8 +158,8 @@
           "title": "Create and open",
           "paragraphs": [],
           "steps": [
-            "Projects → New project: enter a name (up to 80 characters), optional description (up to 500) and color.",
-            "Choose Create project, then View project. Separate work, studies and personal goals into recognizable projects."
+            "<path><label>Projects</label> → <action>New project</action></path>: enter <label>Project name</label> (up to 80 characters), an optional <label>Description</label> (up to 500) and <label>Project color</label>.",
+            "Choose <action>Create project</action>, then <action>View project</action>. Separate work, studies and personal goals into recognizable projects."
           ],
           "bullets": [],
           "figure": "projects"
@@ -162,7 +168,7 @@
           "id": "find",
           "title": "Favorites and quick access",
           "paragraphs": [
-            "Use a project's star to add or remove it from Favorites. Recent Projects follows your visits. Project Explorer searches project names and opens them from the sidebar; its plus button creates a project. Open the navigation menu first on mobile."
+            "Use a project's star to add or remove it from <label>Favorites</label>. <label>Recent Projects</label> follows your visits. <label>Project Explorer</label> searches project names and opens them from the sidebar; its plus button creates a project. Open the navigation menu first on mobile."
           ],
           "steps": [],
           "bullets": []
@@ -170,11 +176,15 @@
         {
           "id": "edit-delete",
           "title": "Edit or delete thoughtfully",
-          "paragraphs": [
-            "The actions menu offers Edit project: change name, description or color and Save changes. Delete project requires confirmation and permanently removes the project AND all related tasks. There is no undo or trash. Export a backup before deleting anything you may need."
+          "paragraphs": [],
+          "steps": [
+            "Open the project actions menu and select <action>Edit project</action>. Update <label>Project name</label>, <label>Description</label>, <label>Project color</label> and select <action>Save changes</action>.",
+            "<action>Delete project</action> requires confirmation and permanently removes the project AND all related tasks.",
+            "There is no undo or trash.",
+            "Export a backup before deleting anything you may need."
           ],
-          "steps": [],
-          "bullets": []
+          "bullets": [],
+          "warning": "<action>Delete project</action> permanently removes the project and all its tasks. There is no undo. Download a JSON backup before confirming."
         }
       ]
     },
@@ -185,30 +195,44 @@
         {
           "id": "create",
           "title": "Add the essentials",
-          "paragraphs": [
-            "Choose New task from a project or My Tasks. A title (up to 120 characters) and an existing project are required. Description is optional (up to 2,000 characters). Choose a status, Low/Medium/High/Urgent priority and an optional calendar date. Choose Create task to save."
+          "paragraphs": [],
+          "steps": [
+            "Choose <action>New task</action> from a project or <label>My Tasks</label>.",
+            "Enter a <label>Task title</label> (up to 120 characters) and select an existing <label>Project</label>.",
+            "Add an optional <label>Description</label> (up to 2,000 characters).",
+            "Choose <label>Status</label>, <label>Priority</label> and an optional <label>Due date</label> in the calendar. Priorities are <priority value=\"low\">Low</priority>, <priority value=\"medium\">Medium</priority>, <priority value=\"high\">High</priority> and <priority value=\"urgent\">Urgent</priority>.",
+            "Select <action>Create task</action> to save."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "task-form"
         },
         {
           "id": "details",
           "title": "Open, edit and delete",
-          "paragraphs": [
-            "A simple title click opens details: a side panel on desktop or full-screen panel on mobile. Change fields and choose Save task. Cancel leaves changes unsaved; a dirty form asks whether to continue or discard. A conflict message protects against another tab's edit. Delete task requires confirmation and is permanent."
+          "paragraphs": [],
+          "steps": [
+            "A simple title click opens details: a side panel on desktop or full-screen panel on mobile.",
+            "Change fields and choose <action>Save task</action>.",
+            "<action>Cancel</action> leaves changes unsaved; a dirty form asks whether to continue or discard.",
+            "A conflict message protects against another tab's edit.",
+            "<action>Delete task</action> requires confirmation and is permanent."
           ],
-          "steps": [],
           "bullets": [],
-          "figure": "task-details"
+          "figure": "task-details",
+          "warning": "<action>Delete task</action> is permanent. Keep a JSON backup if you may need this task again."
         },
         {
           "id": "find",
           "title": "Search, filter and change views",
-          "paragraphs": [
-            "Search matches titles and descriptions. Combine status, priority, project and due-date filters. Remove individual chips or Clear filters. Choose an available sort order (manual, dates, priority or title). Projects offer List/Board; My Tasks is a cross-project list. Filters or nonmanual sorting restrict reordering so hidden tasks do not lead to misleading positions."
+          "paragraphs": [],
+          "steps": [
+            "Use <label>Search tasks</label> to find titles and descriptions.",
+            "Open <label>Filters</label> and combine <label>Filter by status</label>, <label>Filter by priority</label>, <label>Filter by project</label>, <label>Filter by due date</label>.",
+            "Remove individual chips or <action>Clear filters</action>.",
+            "Use <label>Sort tasks</label> to choose <label>Manual order</label>, <label>Due date, soonest first</label>, <label>Priority, highest first</label>, <label>Title, A–Z</label> or <label>Recently updated</label>.",
+            "<label>Projects</label> offer <label>List</label> or <label>Board</label>; <label>My Tasks</label> is a cross-project list.",
+            "Filters or nonmanual sorting restrict reordering so hidden tasks do not lead to misleading positions."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "filters"
         }
@@ -224,29 +248,38 @@
           "paragraphs": [],
           "steps": [],
           "bullets": [
-            "Backlog: ideas and future tasks you are not starting yet.",
-            "To do: tasks ready to begin.",
-            "In progress: work you are actively doing.",
-            "Done: finished tasks; project progress updates automatically."
+            "<status value=\"backlog\">Backlog</status>: ideas and future tasks you are not starting yet.",
+            "<status value=\"todo\">To do</status>: tasks ready to begin.",
+            "<status value=\"in-progress\">In progress</status>: work you are actively doing.",
+            "<status value=\"done\">Done</status>: finished tasks; project progress updates automatically."
           ],
           "figure": "kanban"
         },
         {
           "id": "move",
           "title": "Drag and reorder",
-          "paragraphs": [
-            "With a mouse, press a title or noninteractive surface and move enough to activate drag. A simple title click still opens details. The card changes appearance, the destination column is outlined and a line shows insertion before a target task or at the end. Release to save status and order; both survive reload. Move Create wireframes from To do to In progress when starting."
+          "paragraphs": [],
+          "steps": [
+            "With a mouse, press a title or noninteractive surface and move enough to activate drag.",
+            "A simple title click still opens details.",
+            "The card changes appearance, the destination column is outlined and a line shows insertion before a target task or at the end.",
+            "Release to save status and order; both survive reload.",
+            "Move <example>Create wireframes</example> from <status value=\"todo\">To do</status> to <status value=\"in-progress\">In progress</status> when starting."
           ],
-          "steps": [],
           "bullets": []
         },
         {
           "id": "alternatives",
           "title": "Keyboard and touch alternatives",
-          "paragraphs": [
-            "Focus the drag handle, press Space, use arrow keys to move, then Space to drop or Escape to cancel. Or open the task menu and choose a status, Move up or Move down. Menus work well on touch screens. Touch dragging needs a short hold; quick scroll gestures remain scrolling. Scroll horizontally to reach columns on a narrow screen. Use the menu if dragging feels awkward."
+          "paragraphs": [],
+          "steps": [
+            "Focus the drag handle with <key>Tab</key>. Press <key>Space</key> or <key>Enter</key> to pick up the task, use the arrow keys to move, and press <key>Space</key> or <key>Enter</key> to drop. Press <key>Escape</key> to cancel.",
+            "Or open the task menu and use <label>Move to</label> to choose a status. Its move up and move down actions reorder the task.",
+            "Menus work well on touch screens.",
+            "Touch dragging needs a short hold; quick scroll gestures remain scrolling.",
+            "Scroll horizontally to reach columns on a narrow screen.",
+            "Use the menu if dragging feels awkward."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -259,7 +292,7 @@
           "id": "indicators",
           "title": "Read the indicators",
           "paragraphs": [
-            "Overview counts projects, total tasks, open tasks, completed tasks, overdue tasks and completion rate. Open means not Done. Overdue means unfinished with a due date before today, using local dates. Project progress is the proportion currently Done, not hours or effort."
+            "<label>Overview</label> counts projects, total tasks, open tasks, completed tasks, overdue tasks and completion rate. Open means not <status value=\"done\">Done</status>. Overdue means unfinished with a due date before today, using local dates. Project progress is the proportion currently <status value=\"done\">Done</status>, not hours or effort."
           ],
           "steps": [],
           "bullets": [],
@@ -269,7 +302,7 @@
           "id": "charts",
           "title": "Interpret the charts",
           "paragraphs": [
-            "Status and priority distributions describe tasks still here. Created and completed compares the last 14 local days using retained creation and current completion dates. Reopening or deleting can remove an earlier completion: this is not an immutable activity log. View daily counts opens a readable table."
+            "<label>Status</label> and priority distributions describe tasks still here. <label>Created and completed</label> compares the last 14 local days using retained creation and current completion dates. Reopening or deleting can remove an earlier completion: this is not an immutable activity log. <action>View daily counts</action> opens a readable table."
           ],
           "steps": [],
           "bullets": []
@@ -278,7 +311,7 @@
           "id": "act",
           "title": "Turn an insight into action",
           "paragraphs": [
-            "Linked indicators, statuses and priorities open My Tasks with the corresponding filter. Tasks to watch groups upcoming deadlines, overdue tasks and recent updates. Project progress links open projects. Saturnino does not calculate time tracking, team velocity or forecasts."
+            "Linked indicators, statuses and priorities open <label>My Tasks</label> with the corresponding filter. <label>Tasks to watch</label> groups upcoming deadlines, overdue tasks and recent updates. Project progress links open projects. Saturnino does not calculate time tracking, team velocity or forecasts."
           ],
           "steps": [],
           "bullets": []
@@ -292,30 +325,39 @@
         {
           "id": "appearance",
           "title": "Theme and language",
-          "paragraphs": [
-            "Use the header or Settings → Appearance and language to select Light/Dark and English/Português. Changes apply immediately and are saved in this browser when storage is available. Dates, forms and this guide follow the selected language."
+          "paragraphs": [],
+          "steps": [
+            "Use the header or <path><label>Settings</label> → <label>Appearance and language</label></path> to select <label>Light</label> or <label>Dark</label> and <label>English</label> or <label>Português</label>.",
+            "Changes apply immediately and are saved in this browser when storage is available.",
+            "Dates, forms and this guide follow the selected language."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "settings"
         },
         {
           "id": "sidebar",
           "title": "Arrange your sidebar",
-          "paragraphs": [
-            "Choose Customize sidebar in the sidebar or Settings → Sidebar. Toggle sections and move them using the available controls. Save applies the draft; Cancel/Escape discards it. Reset prepares defaults in the draft: save to apply. Favorites belong to projects and recent projects follow your visits."
+          "paragraphs": [],
+          "steps": [
+            "Choose <action>Customize sidebar</action> in the sidebar or <path><label>Settings</label> → <label>Sidebar</label></path>.",
+            "Toggle sections and move them using the available controls.",
+            "<action>Save changes</action> applies the draft; <action>Cancel</action> or <key>Escape</key> discards it.",
+            "<action>Reset sidebar preferences</action> prepares defaults in the draft: save to apply.",
+            "<label>Favorites</label> belong to projects and recent projects follow your visits."
           ],
-          "steps": [],
           "bullets": [],
           "figure": "sidebar"
         },
         {
           "id": "size",
           "title": "Compact mode and width",
-          "paragraphs": [
-            "On desktop, resize with the sidebar divider or choose a width in Settings → Sidebar. Compact mode reduces its footprint; turn it off for the full layout. Small screens use a navigation drawer. These preferences are separate from a JSON workspace backup."
+          "paragraphs": [],
+          "steps": [
+            "On desktop, resize with the sidebar divider or choose a width in <path><label>Settings</label> → <label>Sidebar</label></path>.",
+            "Use <label>Compact sidebar</label> to reduce its footprint; turn it off for the full layout.",
+            "Small screens use a navigation drawer.",
+            "These preferences are separate from a JSON workspace backup."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -331,8 +373,8 @@
           "steps": [],
           "bullets": [
             "Separate work, study and personal goals into projects.",
-            "Break big goals into small tasks: Create wireframes is clearer than Finish the website.",
-            "Keep future ideas in Backlog and choose realistic priorities and dates."
+            "Break big goals into small tasks: <example>Create wireframes</example> is clearer than <example>Finish the website</example>.",
+            "Keep future ideas in <status value=\"backlog\">Backlog</status> and choose realistic priorities and dates."
           ]
         },
         {
@@ -341,8 +383,8 @@
           "paragraphs": [],
           "steps": [],
           "bullets": [
-            "Limit how much work is In progress at once.",
-            "Favorite frequent projects and review Overview regularly.",
+            "Limit how much work is <status value=\"in-progress\">In progress</status> at once.",
+            "Favorite frequent projects and review <label>Overview</label> regularly.",
             "Customize the sidebar, choose a comfortable theme and install the app if supported."
           ]
         },
@@ -400,7 +442,7 @@
           "paragraphs": [],
           "steps": [
             "Open Saturnino online and allow application files to finish loading.",
-            "Settings → Local Workspace: wait for Ready for offline use. Installation alone does not prove the cache is complete."
+            "<path><label>Settings</label> → <label>Local Workspace</label></path>: wait for <label>Ready for offline use.</label> Installation alone does not prove the cache is complete."
           ],
           "bullets": []
         },
@@ -416,10 +458,14 @@
         {
           "id": "updates",
           "title": "Update after saving",
-          "paragraphs": [
-            "When online, use Check for updates in Settings → Local Workspace. Save your work before Reload to update. Unsaved forms may ask to continue editing or discard. Saved records remain local, but an update does not create a backup. Do not clear site data just to update."
+          "paragraphs": [],
+          "steps": [
+            "When online, use <action>Check for updates</action> in <path><label>Settings</label> → <label>Local Workspace</label></path>.",
+            "Save your work before <action>Reload to update</action>.",
+            "Unsaved forms may ask to continue editing or discard.",
+            "Saved records remain local, but an update does not create a backup.",
+            "Do not clear site data just to update."
           ],
-          "steps": [],
           "bullets": []
         }
       ]
@@ -433,8 +479,8 @@
           "title": "Download a JSON backup",
           "paragraphs": [],
           "steps": [
-            "Open Settings → Data management.",
-            "Choose Download JSON backup and locate the .json file.",
+            "Open <path><label>Settings</label> → <label>Data management</label></path>.",
+            "Choose <action>Download JSON backup</action> and locate the .json file.",
             "Keep it somewhere you control, ideally off the device too. Protect files containing sensitive information."
           ],
           "bullets": [],
@@ -446,21 +492,23 @@
           "paragraphs": [],
           "steps": [
             "Export the destination's existing workspace first if there is anything to keep.",
-            "Choose Restore JSON backup, select the file and review its name, date and current/selected project and task counts.",
-            "Choose Replace workspace only if you accept replacing ALL local projects and tasks. Records absent from the file are removed. Cancel leaves data unchanged.",
+            "Choose <action>Restore JSON backup</action>, select the file and review its name, date and current/selected project and task counts.",
+            "Choose <action>Replace workspace</action> only if you accept replacing ALL local projects and tasks. Records absent from the file are removed. <action>Cancel</action> leaves data unchanged.",
             "Check expected projects, tasks, favorites, dates and order after restoring. To transfer devices, move the JSON file yourself and repeat at the destination."
           ],
           "bullets": [],
-          "figure": "restore"
+          "figure": "restore",
+          "warning": "<action>Replace workspace</action> replaces all local projects and tasks. Records absent from the selected backup are removed. Export the current workspace before continuing."
         },
         {
           "id": "included",
           "title": "What JSON and CSV contain",
           "paragraphs": [
-            "JSON includes projects (color and favorites) and tasks (planning fields, status, order and timestamps). It excludes theme, language, sidebar layout/width/compact mode, recent history and app cache. Restore accepts a validated Saturnino JSON backup up to 20 MiB. Export tasks as CSV makes a table for spreadsheets or external review; CSV cannot restore a workspace. Restore replaces, it does not merge or synchronize."
+            "JSON includes projects (color and favorites) and tasks (planning fields, status, order and timestamps). It excludes theme, language, sidebar layout/width/compact mode, recent history and app cache. Restore accepts a validated Saturnino JSON backup up to 20 MiB. <action>Export tasks as CSV</action> makes a table for spreadsheets or external review; CSV cannot restore a workspace. Restore replaces, it does not merge or synchronize."
           ],
           "steps": [],
-          "bullets": []
+          "bullets": [],
+          "note": "JSON is the recovery format. CSV is for external analysis and cannot restore your workspace."
         }
       ]
     },
@@ -551,15 +599,15 @@
   "figures": {
     "project-form": {
       "alt": "Create Website redesign with a name, description and color.",
-      "caption": "Create Website redesign with a name, description and color."
+      "caption": "Create <example>Website redesign</example> with a name, description and color."
     },
     "projects": {
       "alt": "Open your project, use its star or access recent projects and Project Explorer.",
-      "caption": "Open your project, use its star or access recent projects and Project Explorer."
+      "caption": "Open your project, use its star or access recent projects and <label>Project Explorer</label>."
     },
     "task-form": {
       "alt": "Plan Create wireframes with a project, status, priority and optional due date.",
-      "caption": "Plan Create wireframes with a project, status, priority and optional due date."
+      "caption": "Plan <example>Create wireframes</example> with a project, status, priority and optional due date."
     },
     "task-details": {
       "alt": "Click a task title to open details; save explicitly or cancel without saving.",
@@ -579,15 +627,15 @@
     },
     "settings": {
       "alt": "Appearance and language apply to this browser's workspace.",
-      "caption": "Appearance and language apply to this browser's workspace."
+      "caption": "<label>Appearance and language</label> apply to this browser's workspace."
     },
     "sidebar": {
       "alt": "Customize sections in a draft, then Save or Cancel.",
-      "caption": "Customize sections in a draft, then Save or Cancel."
+      "caption": "Customize sections in a draft, then select <action>Save changes</action> or <action>Cancel</action>."
     },
     "backup": {
       "alt": "Settings → Data management: JSON for recovery, CSV for external review.",
-      "caption": "Settings → Data management: JSON for recovery, CSV for external review."
+      "caption": "<path><label>Settings</label> → <label>Data management</label></path>: JSON for recovery, CSV for external review."
     },
     "restore": {
       "alt": "Review source/destination counts before replacing local projects and tasks.",
@@ -609,15 +657,15 @@
     },
     {
       "question": "Can I work without Internet?",
-      "answer": "Yes, after an online visit finishes caching and Settings → Local Workspace reports Ready for offline use. External links still need a connection."
+      "answer": "Yes, after an online visit finishes caching and <path><label>Settings</label> → <label>Local Workspace</label></path> reports <label>Ready for offline use.</label> External links still need a connection."
     },
     {
       "question": "How do I install on a computer?",
-      "answer": "Use the installation chapter: Chrome's install menu, Edge's App available icon, or Safari Add to Dock on compatible Macs."
+      "answer": "Use the installation chapter: Chrome's install menu, Edge's <label>App available</label> icon, or Safari <label>Add to Dock</label> on compatible Macs."
     },
     {
       "question": "How do I install on iPhone or iPad?",
-      "answer": "Open the site in Safari, Share → Add to Home Screen. Enable Open as Web App when offered, then Add. Menu names vary by system version."
+      "answer": "Open the site in Safari, <path><label>Share</label> → <label>Add to Home Screen</label></path>. Enable <label>Open as Web App</label> when offered, then <label>Add</label>. Menu names vary by system version."
     },
     {
       "question": "Why is there no install button?",
@@ -629,15 +677,15 @@
     },
     {
       "question": "How do I make a backup?",
-      "answer": "Settings → Data management → Download JSON backup. Find and keep the file in a safe location."
+      "answer": "<path><label>Settings</label> → <label>Data management</label> → <action>Download JSON backup</action></path>. Find and keep the file in a safe location."
     },
     {
       "question": "How do I restore my data?",
-      "answer": "Back up current data first. Choose Restore JSON backup, review counts and confirm Replace workspace only when ready. CSV is not a restore file."
+      "answer": "Back up current data first. Choose <action>Restore JSON backup</action>, review counts and confirm <action>Replace workspace</action> only when ready. CSV is not a restore file."
     },
     {
       "question": "What if I clear browser data?",
-      "answer": "Projects and tasks may be removed. You will need an existing JSON backup to recover supported data; the app cannot reconstruct deleted local records."
+      "answer": "<label>Projects</label> and tasks may be removed. You will need an existing JSON backup to recover supported data; the app cannot reconstruct deleted local records."
     },
     {
       "question": "Why are projects missing in another browser?",
@@ -645,7 +693,7 @@
     },
     {
       "question": "How do I update the app?",
-      "answer": "Online, Settings → Local Workspace → Check for updates. Save edits, then Reload to update when offered."
+      "answer": "Online, <path><label>Settings</label> → <label>Local Workspace</label> → <action>Check for updates</action></path>. Save edits, then <action>Reload to update</action> when offered."
     },
     {
       "question": "What if a task does not appear?",
@@ -656,42 +704,44 @@
     {
       "title": "macOS · Safari or Chrome",
       "steps": [
-        "In Safari on a compatible macOS version, open Saturnino, then Share → Add to Dock (or File → Add to Dock). Confirm the name and Add.",
-        "In Chrome, use the address-bar install icon when offered, or More → Cast, save, and share → Install page as app. Follow the browser dialog.",
+        "In Safari on a compatible macOS version, open Saturnino, then <path><label>Share</label> → <label>Add to Dock</label></path> (or <path><label>File</label> → <label>Add to Dock</label></path>). Confirm the name and <label>Add</label>.",
+        "In Chrome, use the address-bar install icon when offered, or <path><label>More</label> → <label>Cast, save, and share</label> → <label>Install page as app</label></path>. Follow the browser dialog.",
         "Open it from the Dock or app launcher. Check the workspace before relying on existing records."
       ]
     },
     {
       "title": "Windows · Edge or Chrome",
       "steps": [
-        "In Edge, open Saturnino and choose the App available icon in the address bar when offered, then Install.",
-        "In Chrome, choose the install icon or More → Cast, save, and share → Install page as app.",
+        "In Edge, open Saturnino and choose the <label>App available</label> icon in the address bar when offered, then <label>Install</label>.",
+        "In Chrome, choose the install icon or <path><label>More</label> → <label>Cast, save, and share</label> → <label>Install page as app</label></path>.",
         "Follow the browser prompt, then open Saturnino from your app launcher."
       ]
     },
     {
       "title": "iPhone · Safari",
       "steps": [
-        "Open Saturnino in Safari, then tap Share (use More or View More if your system places it there).",
-        "Choose Add to Home Screen. Enable Open as Web App when available.",
-        "Confirm Add, then open Saturnino from the Home Screen. No App Store download is needed."
+        "Open Saturnino in Safari, then tap <label>Share</label> (use <label>More</label> or <label>View More</label> if your system places it there).",
+        "Choose <label>Add to Home Screen</label>. Enable <label>Open as Web App</label> when available.",
+        "Confirm <label>Add</label>, then open Saturnino from the Home Screen. No App Store download is needed."
       ]
     },
     {
       "title": "iPad · Safari",
       "steps": [
-        "Open Saturnino in Safari and choose Share (then More or View More if needed).",
-        "Choose Add to Home Screen and enable Open as Web App when offered.",
-        "Tap Add and open the icon from the Home Screen. Check your local workspace."
+        "Open Saturnino in Safari and choose <label>Share</label> (then <label>More</label> or <label>View More</label> if needed).",
+        "Choose <label>Add to Home Screen</label> and enable <label>Open as Web App</label> when offered.",
+        "Tap <label>Add</label> and open the icon from the Home Screen. Check your local workspace."
       ]
     },
     {
       "title": "Android · Chrome",
       "steps": [
-        "Open Saturnino in Chrome and open More beside the address bar.",
-        "Choose Install and create shortcut → Install, or Install app/Add to Home screen if your browser uses that label.",
+        "Open Saturnino in Chrome and open <label>More</label> beside the address bar.",
+        "Choose <path><label>Install and create shortcut</label> → <label>Install</label></path>, or <label>Install app</label>/<label>Add to Home screen</label> if your browser uses that label.",
         "Follow the prompt and launch the icon. No Google Play download is needed."
       ]
     }
-  ]
+  ],
+  "warning": "Warning",
+  "note": "Note"
 }

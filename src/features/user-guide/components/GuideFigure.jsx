@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import GuideInlineText from './GuideInlineText'
+
 const images = import.meta.glob('../assets/*.webp', {
   eager: true,
   query: '?url',
@@ -39,7 +41,7 @@ function GuideFigure({ name }) {
         />
       </a>
       <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        {t(`figures.${name}.caption`)}{' '}
+        <GuideInlineText>{t(`figures.${name}.caption`)}</GuideInlineText>{' '}
         <span className="mt-1 block text-xs">{t('figureNote')}</span>
         <span className="mt-1 block text-xs">{t('imageHint')}</span>
       </figcaption>
