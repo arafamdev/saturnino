@@ -3,6 +3,7 @@ import { useDroppable } from '@dnd-kit/react'
 import { useTranslation } from 'react-i18next'
 import { Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { taskStatusClasses } from '@/features/tasks/data/taskAppearance'
 import KanbanTaskCard from './KanbanTaskCard'
 
 function KanbanColumn({ status, tasks, onCreate, projectsById, ...cardProps }) {
@@ -23,7 +24,7 @@ function KanbanColumn({ status, tasks, onCreate, projectsById, ...cardProps }) {
       <div className="mb-2 flex items-center gap-2">
         <span
           aria-hidden="true"
-          className={`size-2 shrink-0 rounded-full ${status === 'done' ? 'bg-emerald-500' : status === 'todo' ? 'bg-blue-500' : status === 'in-progress' ? 'bg-primary' : 'bg-muted-foreground'}`}
+          className={`size-2 shrink-0 rounded-full ${taskStatusClasses[status]}`}
         />
         <h3
           id={headingId}

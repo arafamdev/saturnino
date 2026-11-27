@@ -131,9 +131,9 @@ function DataManagementPanel() {
   return (
     <section
       aria-labelledby={`${id}-heading`}
-      className="space-y-4 rounded-xl border bg-card p-5"
+      className="space-y-4 rounded-xl border bg-card p-4"
     >
-      <h2 id={`${id}-heading`} className="text-lg font-semibold">
+      <h2 id={`${id}-heading`} className="text-base font-semibold">
         {t('dataManagement.title')}
       </h2>
       <p className="text-sm text-muted-foreground">

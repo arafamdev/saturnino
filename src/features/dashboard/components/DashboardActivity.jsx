@@ -15,13 +15,16 @@ function DashboardActivity({ summary }) {
     summary.projectProgress.map((project) => [project.id, project]),
   )
   return (
-    <div className="grid min-w-0 gap-6 xl:grid-cols-2">
+    <div className="grid min-w-0 gap-4 xl:grid-cols-2">
       <section
         aria-labelledby="dashboard-projects-heading"
-        className="min-w-0 rounded-xl border bg-card p-5"
+        className="min-w-0 rounded-xl border bg-card p-4"
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 id="dashboard-projects-heading" className="text-lg font-semibold">
+          <h2
+            id="dashboard-projects-heading"
+            className="text-base font-semibold"
+          >
             {t('dashboard.projectProgress')}
           </h2>
           <Link
@@ -36,7 +39,7 @@ function DashboardActivity({ summary }) {
             {t('dashboard.noProjects')}
           </p>
         ) : (
-          <ul className="mt-4 space-y-5">
+          <ul className="mt-4 space-y-4">
             {summary.projectProgress.slice(0, 6).map((project) => (
               <li key={project.id} className="min-w-0 space-y-2">
                 <div className="flex items-start justify-between gap-3">
@@ -73,9 +76,12 @@ function DashboardActivity({ summary }) {
       </section>
       <section
         aria-labelledby="dashboard-deadlines-heading"
-        className="min-w-0 rounded-xl border bg-card p-5"
+        className="min-w-0 rounded-xl border bg-card p-4"
       >
-        <h2 id="dashboard-deadlines-heading" className="text-lg font-semibold">
+        <h2
+          id="dashboard-deadlines-heading"
+          className="text-base font-semibold"
+        >
           {t('dashboard.upcoming')}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">

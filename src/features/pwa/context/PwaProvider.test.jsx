@@ -261,3 +261,46 @@ it('waits for a dirty-draft guard before activating an explicit update', async (
     window.removeEventListener('saturnino:before-pwa-update', guard)
   }
 })
+
+it('finishes an explicitly requested update on controllerchange even without a Workbox callback', async () => {
+  const user = userEvent.setup()
+  worker.controller = { id: 'old' }
+  setup()
+  registered({ active: {}, waiting: {} })
+  await user.click(screen.getByRole('button', { name: 'Reload to update' }))
+  expect(reload).not.toHaveBeenCalled()
+  worker.controller = { id: 'new' }
+  act(() => worker.dispatchEvent(new Event('controllerchange')))
+  expect(reload).toHaveBeenCalledOnce()
+  act(() => options.onNeedReload())
+  act(() => worker.dispatchEvent(new Event('controllerchange')))
+  expect(reload).toHaveBeenCalledOnce()
+})
+
+it('shows a notice instead of reloading when another tab changes the controller', async () => {
+  worker.controller = { id: 'old' }
+  setup()
+  registered({ active: {} })
+  worker.controller = { id: 'external-update' }
+  act(() => worker.dispatchEvent(new Event('controllerchange')))
+  expect(reload).not.toHaveBeenCalled()
+  expect(
+    screen.getByRole('complementary', { name: 'An update is ready' }),
+  ).toBeInTheDocument()
+  await userEvent.click(
+    screen.getByRole('button', { name: 'Reload to update' }),
+  )
+  expect(reload).toHaveBeenCalledOnce()
+})
+
+it('treats the first worker claim as offline readiness rather than an update', () => {
+  setup()
+  registered({ active: {} })
+  worker.controller = { id: 'first-install' }
+  act(() => worker.dispatchEvent(new Event('controllerchange')))
+  expect(
+    screen.getByRole('status', { name: 'Offline cache status' }),
+  ).toHaveTextContent('Ready for offline use.')
+  expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+  expect(reload).not.toHaveBeenCalled()
+})

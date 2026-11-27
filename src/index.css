@@ -59,6 +59,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  /* Task semantics */
+  --color-status-backlog: var(--muted-foreground);
+  --color-status-todo: var(--status-todo);
+  --color-status-progress: var(--primary);
+  --color-status-done: var(--status-done);
+  --color-priority-low: var(--muted-foreground);
+  --color-priority-medium: var(--priority-medium);
+  --color-priority-high: var(--priority-high);
+  --color-priority-urgent: var(--priority-urgent);
+
   /* Chart colors */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -108,6 +118,11 @@
   --accent: var(--soft-muted);
   --accent-foreground: var(--soft-foreground);
   --destructive: oklch(0.577 0.245 27.325);
+  --status-todo: #3b82f6;
+  --status-done: #10b981;
+  --priority-medium: #92400e;
+  --priority-high: #b91c1c;
+  --priority-urgent: #991b1b;
 
   /* Borders and focus */
   --border: var(--soft-border);
@@ -157,6 +172,11 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --status-todo: #60a5fa;
+  --status-done: #34d399;
+  --priority-medium: #fbbf24;
+  --priority-high: #f87171;
+  --priority-urgent: #fca5a5;
 
   /* Borders and focus */
   --border: oklch(1 0 0 / 10%);

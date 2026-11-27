@@ -54,10 +54,10 @@ function AppSidebar() {
       style={{ width: compact ? 72 : (draftWidth ?? width) }}
       className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r bg-muted/30 lg:flex"
     >
-      <div className={compact ? 'flex justify-center py-5' : 'px-5 py-5'}>
+      <div className={compact ? 'flex justify-center py-4' : 'px-4 py-4'}>
         <Logo className={compact ? '[&>span]:sr-only' : undefined} />
       </div>
-      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-3 py-4">
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-3">
         {compact ? (
           <AppNavigation compact />
         ) : (

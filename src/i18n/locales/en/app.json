@@ -308,7 +308,8 @@
     "localData": "Projects and tasks are stored in this browser profile. Preferences are stored separately. No account is required and data is not synchronized across devices.",
     "feedback": "Preference feedback",
     "applied": "Preferences applied.",
-    "languageFailed": "Could not change the language. Try again."
+    "languageFailed": "Could not change the language. Try again.",
+    "desktopPreferences": "Width and compact mode apply on desktop screens (1024 px and wider). Your preferences are kept for your next desktop visit; mobile uses the navigation menu."
   },
   "dataManagement": {
     "title": "Data management",
@@ -374,7 +375,9 @@
     "progress": "{{completed}} of {{total}} completed",
     "progressLabel": "Project completion",
     "more": "Show description",
-    "less": "Show less"
+    "less": "Show less",
+    "expandName": "Expand project name",
+    "collapseName": "Collapse project name"
   },
   "taskCard": {
     "actions": "Actions for {{title}}"

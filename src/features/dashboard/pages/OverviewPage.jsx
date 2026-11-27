@@ -15,9 +15,11 @@ function OverviewPage() {
     ? buildDashboardSummary(query.snapshot, today)
     : null
   return (
-    <div className="min-w-0 space-y-6">
+    <div className="min-w-0 space-y-4">
       <header className="space-y-2">
-        <h1 className="text-2xl font-semibold">{t('navigation.overview')}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {t('navigation.overview')}
+        </h1>
         <p className="text-sm text-muted-foreground">
           {t('dashboard.description')}
         </p>
@@ -47,7 +49,7 @@ function OverviewPage() {
       ) : (
         <>
           {summary.projectCount === 0 && (
-            <section className="space-y-3 rounded-xl border border-dashed p-5">
+            <section className="space-y-3 rounded-xl border border-dashed p-4">
               <h2 className="font-semibold">{t('dashboard.welcome')}</h2>
               <p className="text-sm text-muted-foreground">
                 {t('dashboard.startDescription')}
