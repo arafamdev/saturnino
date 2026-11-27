@@ -92,6 +92,7 @@ it('updates width and compact preferences without touching project records', asy
   const project = await projectRepository.createProject({ name: 'Settings QA' })
   renderSettings()
   const main = await mainRegion()
+  await user.click(main.getByRole('tab', { name: 'Sidebar', exact: true }))
   await selectOption(
     user,
     main.getByRole('combobox', { name: 'Sidebar width on desktop' }),
@@ -112,17 +113,25 @@ it('reuses sidebar section customization and resets preferences only', async () 
   })
   renderSettings()
   const main = await mainRegion()
+  await user.click(main.getByRole('tab', { name: 'Sidebar', exact: true }))
   await user.click(main.getByRole('button', { name: 'Customize sidebar' }))
   await user.click(
-    main.getByRole('checkbox', { name: 'Favorites', exact: true }),
+    screen.getByRole('checkbox', { name: 'Favorites', exact: true }),
   )
   expect(
     JSON.parse(localStorage.getItem('saturnino:sidebar-preferences'))
       .hiddenSections,
+  ).toEqual([])
+  await user.click(screen.getByRole('button', { name: 'Save changes' }))
+  expect(
+    JSON.parse(localStorage.getItem('saturnino:sidebar-preferences'))
+      .hiddenSections,
   ).toContain('favorites')
+  await user.click(main.getByRole('button', { name: 'Customize sidebar' }))
   await user.click(
-    main.getByRole('button', { name: 'Reset sidebar preferences' }),
+    screen.getByRole('button', { name: 'Reset sidebar preferences' }),
   )
+  await user.click(screen.getByRole('button', { name: 'Save changes' }))
   expect(
     JSON.parse(localStorage.getItem('saturnino:sidebar-preferences')),
   ).toMatchObject({
@@ -187,4 +196,27 @@ it('explains a language failure and allows another attempt', async () => {
     ).toHaveTextContent('Português'),
   )
   expect(main.queryByRole('alert')).not.toBeInTheDocument()
+})
+
+it('navigates categories by keyboard and retains local/offline and backup information', async () => {
+  const user = userEvent.setup()
+  renderSettings()
+  const main = await mainRegion()
+  const appearance = main.getByRole('tab', { name: 'Appearance and language' })
+  appearance.focus()
+  await user.keyboard('{ArrowRight}{ArrowRight}')
+  expect(main.getByRole('tab', { name: 'Local Workspace' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  )
+  expect(main.getByText(/No account is required/)).toBeVisible()
+  expect(main.getByRole('button', { name: 'Check for updates' })).toBeVisible()
+  await user.keyboard('{ArrowRight}')
+  expect(
+    main.getByRole('button', { name: 'Download JSON backup' }),
+  ).toBeVisible()
+  expect(main.getByText(/JSON backups up to 20 MiB/)).toBeVisible()
+  expect(
+    main.queryByRole('combobox', { name: 'Color theme' }),
+  ).not.toBeInTheDocument()
 })

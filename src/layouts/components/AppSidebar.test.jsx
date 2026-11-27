@@ -148,6 +148,7 @@ describe('Resizable and compact sidebar', () => {
     await user.click(
       screen.getByRole('button', { name: 'Reset sidebar preferences' }),
     )
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     await waitFor(() =>
       expect(loadSidebarPreferences()).toEqual(initialSidebarState),
     )

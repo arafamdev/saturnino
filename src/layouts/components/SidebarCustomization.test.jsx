@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
@@ -41,6 +41,8 @@ describe('Sidebar customization', () => {
     const user = await renderCustomization()
     expect(screen.getByRole('checkbox', { name: 'Workspace' })).toBeDisabled()
     await user.click(screen.getByRole('checkbox', { name: 'Favorites' }))
+    expect(loadSidebarPreferences().hiddenSections).toEqual([])
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(loadSidebarPreferences().hiddenSections).toEqual(['favorites'])
     const state = sidebarReducer(initialSidebarState, {
       type: sidebarActionTypes.SET_VISIBILITY,
@@ -63,6 +65,8 @@ describe('Sidebar customization', () => {
     expect(screen.getByRole('status')).toHaveTextContent(
       'Favorites moved to position 3.',
     )
+    expect(loadSidebarPreferences().sectionOrder[1]).toBe('favorites')
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(loadSidebarPreferences().sectionOrder[2]).toBe('favorites')
   })
 
@@ -76,7 +80,7 @@ describe('Sidebar customization', () => {
   })
 
   it('supports pointer drop and pointer cancellation', async () => {
-    await renderCustomization()
+    const user = await renderCustomization()
     const handle = screen.getByRole('button', { name: 'Reorder Favorites' })
     handle.setPointerCapture = () => {}
     const rows = screen.getAllByRole('listitem')
@@ -88,11 +92,35 @@ describe('Sidebar customization', () => {
     })
     fireEvent.pointerDown(handle, { button: 0, pointerId: 1 })
     fireEvent.pointerUp(handle, { pointerId: 1, clientX: 100, clientY: 125 })
-    expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
+    expect(sectionNames()[3]).toBe('Favorites')
     fireEvent.pointerDown(handle, { button: 0, pointerId: 2 })
     fireEvent.pointerCancel(handle, { pointerId: 2 })
     fireEvent.pointerUp(handle, { pointerId: 2, clientX: 100, clientY: 125 })
+    expect(sectionNames()[3]).toBe('Favorites')
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
+  })
+
+  it('discards Cancel and Escape drafts, restores focus and reloads current preferences', async () => {
+    const user = await renderCustomization()
+    await user.click(screen.getByRole('checkbox', { name: 'Favorites' }))
+    await user.click(
+      screen.getByRole('button', { name: 'Move Favorites down' }),
+    )
+    await user.click(
+      screen.getByRole('button', { name: 'Cancel', exact: true }),
+    )
+    const trigger = screen.getByRole('button', { name: 'Customize sidebar' })
+    expect(trigger).toHaveFocus()
+    expect(loadSidebarPreferences()).toEqual(initialSidebarState)
+    await user.click(trigger)
+    expect(screen.getByRole('checkbox', { name: 'Favorites' })).toBeChecked()
+    await user.click(
+      screen.getByRole('button', { name: 'Reset sidebar preferences' }),
+    )
+    await user.keyboard('{Escape}')
+    expect(trigger).toHaveFocus()
+    expect(loadSidebarPreferences()).toEqual(initialSidebarState)
   })
 
   it('normalizes old, duplicate and corrupted preferences', () => {
@@ -121,10 +149,11 @@ describe('Sidebar customization', () => {
     await user.click(
       screen.getByRole('button', { name: 'Reset sidebar preferences' }),
     )
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(loadSidebarPreferences()).toEqual(initialSidebarState)
   })
   it('ignores secondary pointers and cancellation from another pointer', async () => {
-    await renderCustomization()
+    const user = await renderCustomization()
     const handle = screen.getByRole('button', { name: 'Reorder Favorites' })
     const otherHandle = screen.getByRole('button', {
       name: 'Reorder Workspace',
@@ -147,6 +176,51 @@ describe('Sidebar customization', () => {
     fireEvent.pointerCancel(handle, { pointerId: 2 })
     expect(loadSidebarPreferences().sectionOrder[1]).toBe('favorites')
     fireEvent.pointerUp(handle, { pointerId: 1, clientX: 100, clientY: 125 })
+    expect(sectionNames()[3]).toBe('Favorites')
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(loadSidebarPreferences().sectionOrder[3]).toBe('favorites')
   })
+})
+
+it('writes once on Save and never persists a reset that is cancelled', async () => {
+  const stored = {
+    ...initialSidebarState,
+    width: 380,
+    compact: true,
+    hiddenSections: ['favorites'],
+  }
+  localStorage.setItem('saturnino:sidebar-preferences', JSON.stringify(stored))
+  const user = await renderCustomization()
+  const writes = vi.spyOn(Storage.prototype, 'setItem')
+  try {
+    await user.click(
+      screen.getByRole('button', { name: 'Reset sidebar preferences' }),
+    )
+    await user.click(
+      screen.getByRole('button', { name: 'Cancel', exact: true }),
+    )
+    expect(writes).not.toHaveBeenCalled()
+    expect(loadSidebarPreferences()).toEqual(stored)
+    await user.click(screen.getByRole('button', { name: 'Customize sidebar' }))
+    await user.click(screen.getByRole('checkbox', { name: 'Favorites' }))
+    await user.click(
+      screen.getByRole('button', { name: 'Move Favorites down' }),
+    )
+    expect(writes).not.toHaveBeenCalled()
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
+    expect(writes).toHaveBeenCalledTimes(1)
+    expect(loadSidebarPreferences()).toMatchObject({
+      width: 380,
+      compact: true,
+      hiddenSections: [],
+      sectionOrder: [
+        'workspace',
+        'recentProjects',
+        'favorites',
+        'projectExplorer',
+      ],
+    })
+  } finally {
+    writes.mockRestore()
+  }
 })

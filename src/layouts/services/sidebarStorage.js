@@ -2,6 +2,7 @@ import {
   initialSidebarState,
   normalizeSidebarWidth,
   normalizeRecentProjectIds,
+  normalizeSidebarCustomization,
 } from '../state/sidebarReducer'
 
 const SIDEBAR_STORAGE_KEY = 'saturnino:sidebar-preferences'
@@ -37,26 +38,7 @@ export function loadSidebarPreferences() {
         typeof parsedPreferences?.compact === 'boolean'
           ? parsedPreferences.compact
           : false,
-      sectionOrder: [
-        ...new Set([
-          ...(Array.isArray(parsedPreferences?.sectionOrder)
-            ? parsedPreferences.sectionOrder
-            : []
-          ).filter((id) => initialSidebarState.sectionOrder.includes(id)),
-          ...initialSidebarState.sectionOrder,
-        ]),
-      ],
-      hiddenSections: Array.isArray(parsedPreferences?.hiddenSections)
-        ? [
-            ...new Set(
-              parsedPreferences.hiddenSections.filter(
-                (id) =>
-                  id !== 'workspace' &&
-                  initialSidebarState.sectionOrder.includes(id),
-              ),
-            ),
-          ]
-        : [],
+      ...normalizeSidebarCustomization(parsedPreferences),
       recentProjectIds: normalizeRecentProjectIds(
         parsedPreferences?.recentProjectIds,
       ),

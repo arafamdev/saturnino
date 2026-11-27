@@ -25,6 +25,7 @@ export const sidebarActionTypes = {
   SET_COMPACT: 'sidebar/setCompact',
   SET_VISIBILITY: 'sidebar/setVisibility',
   MOVE_SECTION: 'sidebar/moveSection',
+  APPLY_CUSTOMIZATION: 'sidebar/applyCustomization',
   TOGGLE_SECTION: 'sidebar/toggleSection',
   RESET_PREFERENCES: 'sidebar/resetPreferences',
   RECORD_PROJECT_ACCESS: 'sidebar/recordProjectAccess',
@@ -60,8 +61,37 @@ export function normalizeRecentProjectIds(projectIds) {
   ].slice(0, MAX_RECENT_PROJECTS)
 }
 
+export function normalizeSidebarCustomization(preferences) {
+  const validIds = initialSidebarState.sectionOrder
+  return {
+    sectionOrder: [
+      ...new Set([
+        ...(Array.isArray(preferences?.sectionOrder)
+          ? preferences.sectionOrder
+          : []
+        ).filter((id) => validIds.includes(id)),
+        ...validIds,
+      ]),
+    ],
+    hiddenSections: [
+      ...new Set(
+        (Array.isArray(preferences?.hiddenSections)
+          ? preferences.hiddenSections
+          : []
+        ).filter((id) => id !== 'workspace' && validIds.includes(id)),
+      ),
+    ],
+  }
+}
+
 export function sidebarReducer(state, action) {
   switch (action.type) {
+    case sidebarActionTypes.APPLY_CUSTOMIZATION:
+      // Commit only draft-owned fields; visits/width may change while it is open.
+      return {
+        ...(action.payload?.reset ? initialSidebarState : state),
+        ...normalizeSidebarCustomization(action.payload),
+      }
     case sidebarActionTypes.SET_WIDTH:
       return { ...state, width: normalizeSidebarWidth(action.payload) }
     case sidebarActionTypes.SET_COMPACT:
