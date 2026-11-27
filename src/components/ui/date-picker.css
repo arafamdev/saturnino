@@ -1,0 +1,11 @@
+.saturnino-date-popover {
+  --calendar-cell-size: 36px;
+  width: calc(7 * var(--calendar-cell-size) + 26px);
+  max-width: calc(100vw - 16px);
+}
+
+@media (pointer: coarse) {
+  .saturnino-date-popover {
+    --calendar-cell-size: 40px;
+  }
+}

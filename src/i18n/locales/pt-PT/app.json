@@ -168,7 +168,10 @@
       "chooseProject": "Escolhe um projeto",
       "status": "Estado",
       "priority": "Prioridade",
-      "dueDate": "Prazo"
+      "dueDate": "Prazo",
+      "planning": "Planeamento",
+      "titlePlaceholder": "O que é preciso fazer?",
+      "descriptionPlaceholder": "Adiciona contexto, notas ou o próximo passo…"
     },
     "status": {
       "backlog": "Por planear",
@@ -185,7 +188,7 @@
     "dialog": {
       "createTitle": "Criar tarefa",
       "editTitle": "Editar tarefa",
-      "description": "Define o projeto, o estado, a prioridade e um prazo opcional."
+      "description": "Adiciona o essencial e planeia os detalhes."
     },
     "delete": {
       "title": "Eliminar tarefa?",
@@ -383,7 +386,7 @@
     "actions": "Ações de {{title}}"
   },
   "taskDetails": {
-    "description": "Consulta os detalhes. As alterações só são guardadas quando escolhes Guardar tarefa.",
+    "description": "Planeia o próximo passo. Guarda quando estiver pronto.",
     "createdAt": "Criada",
     "updatedAt": "Última atualização",
     "completedAt": "Concluída",
@@ -402,6 +405,7 @@
     "manual": "Data (AAAA-MM-DD)",
     "hint": "Introduz uma data de calendário, por exemplo 2026-12-15.",
     "clear": "Limpar data",
-    "done": "Concluir"
+    "done": "Concluir",
+    "typeDate": "Introduzir data"
   }
 }

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useId, useState } from 'react'
 
-import { CalendarDays, X } from 'lucide-react'
+import { CalendarDays, Keyboard, X } from 'lucide-react'
 import { Popover } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
 
@@ -14,6 +14,8 @@ import { cn } from '@/lib/utils'
 
 import { Button } from './button'
 import { Input, inputClassName } from './input'
+
+import './date-picker.css'
 
 const Calendar = lazy(() => import('./calendar'))
 
@@ -29,6 +31,7 @@ function DatePicker({
   const { t, i18n } = useTranslation('app')
   const manualId = useId()
   const [open, setOpen] = useState(false)
+  const [manualOpen, setManualOpen] = useState(false)
   const [month, setMonth] = useState(
     () => dateOnlyToLocalDate(value) ?? new Date(),
   )
@@ -40,7 +43,10 @@ function DatePicker({
     <Popover.Root
       open={open}
       onOpenChange={(next) => {
-        if (next) setMonth(dateOnlyToLocalDate(value) ?? new Date())
+        if (next) {
+          setMonth(dateOnlyToLocalDate(value) ?? new Date())
+          setManualOpen(Boolean(value && !isValidDateOnly(value)))
+        }
         setOpen(next)
       }}
     >
@@ -68,29 +74,19 @@ function DatePicker({
       <Popover.Portal>
         <Popover.Content
           align="start"
+          side="top"
           sideOffset={6}
-          collisionPadding={4}
+          collisionPadding={8}
           onEscapeKeyDown={(event) => event.stopPropagation()}
           aria-label={t('datePicker.title')}
-          className="z-[70] max-h-[var(--radix-popover-content-available-height)] w-[min(22.5rem,calc(100vw-0.5rem))] overflow-x-hidden overflow-y-auto [scrollbar-width:none] rounded-xl border bg-popover p-0 text-popover-foreground min-[360px]:p-3 shadow-xl outline-none"
+          className="saturnino-date-popover z-[70] max-h-[var(--radix-popover-content-available-height)] overflow-x-hidden overflow-y-auto [scrollbar-width:none] rounded-xl border bg-popover p-3 text-popover-foreground shadow-xl outline-none"
         >
-          <div className="sticky top-0 z-10 mb-2 flex items-center justify-between gap-2 bg-popover p-3 min-[360px]:p-0">
-            <h3 className="text-sm font-medium">{t('datePicker.title')}</h3>
-            <Popover.Close asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="size-11"
-                aria-label={t('datePicker.close')}
-              >
-                <X className="size-4" aria-hidden="true" />
-              </Button>
-            </Popover.Close>
-          </div>
           <Suspense
             fallback={
-              <p role="status" className="p-4 text-sm">
+              <p
+                role="status"
+                className="flex min-h-64 items-center justify-center text-sm text-muted-foreground"
+              >
                 {t('datePicker.loading')}
               </p>
             }
@@ -106,37 +102,56 @@ function DatePicker({
               }}
             />
           </Suspense>
-          <div className="mx-3 mt-3 space-y-2 border-t pt-3 min-[360px]:mx-0">
-            <label htmlFor={manualId} className="text-xs font-medium">
-              {t('datePicker.manual')}
-            </label>
-            <Input
-              id={manualId}
-              value={value ?? ''}
-              onChange={(event) => {
-                const next = event.target.value
-                onChange(next)
-                const date = dateOnlyToLocalDate(next)
-                if (date) setMonth(date)
-              }}
-              placeholder="YYYY-MM-DD"
-              autoComplete="off"
-              spellCheck={false}
-              aria-invalid={Boolean(value && !isValidDateOnly(value))}
-              aria-describedby={`${manualId}-hint`}
-            />
-            <p
-              id={`${manualId}-hint`}
-              className="text-xs text-muted-foreground"
+          {manualOpen && (
+            <div
+              id={`${manualId}-entry`}
+              className="mt-3 space-y-2 border-t pt-3"
             >
-              {t('datePicker.hint')}
-            </p>
-          </div>
-          <div className="sticky bottom-0 z-10 mt-3 flex justify-between gap-2 bg-popover p-3 min-[360px]:p-0">
+              <label htmlFor={manualId} className="text-xs font-medium">
+                {t('datePicker.manual')}
+              </label>
+              <Input
+                id={manualId}
+                value={value ?? ''}
+                onChange={(event) => {
+                  const next = event.target.value
+                  onChange(next)
+                  const date = dateOnlyToLocalDate(next)
+                  if (date) setMonth(date)
+                }}
+                placeholder="YYYY-MM-DD"
+                autoComplete="off"
+                spellCheck={false}
+                aria-invalid={Boolean(value && !isValidDateOnly(value))}
+                aria-describedby={`${manualId}-hint`}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault()
+                    if (!value || isValidDateOnly(value)) setOpen(false)
+                  }
+                }}
+              />
+              <p id={`${manualId}-hint`} className="sr-only">
+                {t('datePicker.hint')}
+              </p>
+            </div>
+          )}
+          <div className="mt-2 flex items-center justify-between gap-1 border-t pt-2">
             <Button
               type="button"
               variant="ghost"
-              className="min-h-11"
+              className="min-h-10 gap-2 px-2 text-xs"
+              aria-expanded={manualOpen}
+              aria-controls={`${manualId}-entry`}
+              onClick={() => setManualOpen((current) => !current)}
+            >
+              <Keyboard className="size-4" aria-hidden="true" />
+              {t('datePicker.typeDate')}
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="min-h-10 px-2 text-xs"
               onClick={() => {
                 onChange('')
                 setOpen(false)
@@ -145,8 +160,14 @@ function DatePicker({
               {t('datePicker.clear')}
             </Button>
             <Popover.Close asChild>
-              <Button type="button" variant="outline" className="min-h-11">
-                {t('datePicker.done')}
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-10"
+                aria-label={t('datePicker.close')}
+              >
+                <X className="size-4" aria-hidden="true" />
               </Button>
             </Popover.Close>
           </div>

@@ -95,11 +95,14 @@ describe('Task management integration', () => {
       'Urgent',
     )
     await user.click(form.getByLabelText('Due date'))
+    await user.click(screen.getByRole('button', { name: 'Type date' }))
     await user.type(
       await screen.findByRole('textbox', { name: 'Date (YYYY-MM-DD)' }),
       '2026-12-15',
     )
-    await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
+    await user.click(
+      screen.getByRole('button', { name: 'Close calendar', exact: true }),
+    )
     await user.click(form.getByRole('button', { name: 'Create task' }))
     const main = await mainRegion()
     expect(

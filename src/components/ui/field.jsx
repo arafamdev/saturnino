@@ -1,7 +1,10 @@
 function Field({ id, label, error, required = false, children }) {
   return (
     <div className="min-w-0 space-y-2">
-      <label htmlFor={id} className="text-sm font-medium">
+      <label
+        htmlFor={id}
+        className="block text-[0.8125rem] leading-5 font-medium text-muted-foreground"
+      >
         {label}
         {required && (
           <span className="ml-1 text-destructive" aria-hidden="true">

@@ -129,121 +129,141 @@ function TaskForm({
     <form
       noValidate
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={stickyActions ? 'flex min-h-full flex-col gap-4' : 'space-y-4'}
+      className={stickyActions ? 'flex min-h-0 flex-1 flex-col' : 'space-y-6'}
     >
-      <Field
-        id={`${formId}-title`}
-        label={t('tasks.form.title')}
-        error={errors.title}
-      >
-        <Input
-          {...fieldAttributes('title')}
-          type="text"
-          required
-          {...register('title', {
-            validate: {
-              required: (value) =>
-                Boolean(value.trim()) || t('tasks.errors.titleRequired'),
-              maxLength: (value) =>
-                value.trim().length <= TASK_TITLE_MAX_LENGTH ||
-                t('tasks.errors.titleTooLong'),
-            },
-          })}
-        />
-      </Field>
-      <Field
-        id={`${formId}-description`}
-        label={t('tasks.form.description')}
-        error={errors.description}
-      >
-        <Textarea
-          {...fieldAttributes('description')}
-          rows={3}
-          {...register('description', {
-            validate: (value) =>
-              value.trim().length <= TASK_DESCRIPTION_MAX_LENGTH ||
-              t('tasks.errors.descriptionInvalid'),
-          })}
-        />
-      </Field>
-      <Field
-        id={`${formId}-projectId`}
-        label={t('tasks.form.project')}
-        error={errors.projectId}
-      >
-        {selectField(
-          'projectId',
-          [
-            ['', t('tasks.form.chooseProject')],
-            ...sortedProjects.map((project) => [project.id, project.name]),
-          ],
-          t('tasks.form.chooseProject'),
-        )}
-      </Field>
-      <div className="grid min-w-0 gap-4 sm:grid-cols-2">
-        <Field
-          id={`${formId}-status`}
-          label={t('tasks.form.status')}
-          error={errors.status}
-        >
-          {selectField(
-            'status',
-            TASK_STATUSES.map((value) => [value, t(`tasks.status.${value}`)]),
-          )}
-        </Field>
-        <Field
-          id={`${formId}-priority`}
-          label={t('tasks.form.priority')}
-          error={errors.priority}
-        >
-          {selectField(
-            'priority',
-            TASK_PRIORITIES.map((value) => [
-              value,
-              t(`tasks.priority.${value}`),
-            ]),
-          )}
-        </Field>
-      </div>
-      <Field
-        id={`${formId}-dueDate`}
-        label={t('tasks.form.dueDate')}
-        error={errors.dueDate}
-      >
-        <Controller
-          name="dueDate"
-          control={control}
-          rules={{
-            validate: (value) =>
-              !value ||
-              isValidDateOnly(value) ||
-              t('tasks.errors.dueDateInvalid'),
-          }}
-          render={({ field }) => (
-            <DatePicker {...fieldAttributes('dueDate')} {...field} />
-          )}
-        />
-      </Field>
-      {errors.root && (
-        <p
-          ref={submitErrorRef}
-          tabIndex={-1}
-          role="alert"
-          className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive"
-        >
-          {errors.root.message}
-        </p>
-      )}
-      {children}
       <div
-        className={`flex flex-wrap justify-end gap-2 border-t bg-background pt-4 ${stickyActions ? 'sticky bottom-0 z-10 mt-auto pb-2' : ''}`}
+        className={
+          stickyActions
+            ? 'min-h-0 flex-1 space-y-6 overflow-y-auto px-5 py-6 sm:px-6'
+            : 'space-y-6'
+        }
+      >
+        <Field
+          id={`${formId}-title`}
+          label={t('tasks.form.title')}
+          error={errors.title}
+          required
+        >
+          <Input
+            {...fieldAttributes('title')}
+            placeholder={t('tasks.form.titlePlaceholder')}
+            className="font-medium"
+            type="text"
+            required
+            {...register('title', {
+              validate: {
+                required: (value) =>
+                  Boolean(value.trim()) || t('tasks.errors.titleRequired'),
+                maxLength: (value) =>
+                  value.trim().length <= TASK_TITLE_MAX_LENGTH ||
+                  t('tasks.errors.titleTooLong'),
+              },
+            })}
+          />
+        </Field>
+        <Field
+          id={`${formId}-description`}
+          label={t('tasks.form.description')}
+          error={errors.description}
+        >
+          <Textarea
+            {...fieldAttributes('description')}
+            rows={4}
+            placeholder={t('tasks.form.descriptionPlaceholder')}
+            {...register('description', {
+              validate: (value) =>
+                value.trim().length <= TASK_DESCRIPTION_MAX_LENGTH ||
+                t('tasks.errors.descriptionInvalid'),
+            })}
+          />
+        </Field>
+        <fieldset className="grid min-w-0 gap-4 rounded-xl border bg-card/50 p-4">
+          <legend className="px-1 text-xs font-medium text-muted-foreground">
+            {t('tasks.form.planning')}
+          </legend>
+          <Field
+            id={`${formId}-projectId`}
+            label={t('tasks.form.project')}
+            error={errors.projectId}
+          >
+            {selectField(
+              'projectId',
+              [
+                ['', t('tasks.form.chooseProject')],
+                ...sortedProjects.map((project) => [project.id, project.name]),
+              ],
+              t('tasks.form.chooseProject'),
+            )}
+          </Field>
+          <div className="grid min-w-0 gap-4 min-[360px]:grid-cols-2">
+            <Field
+              id={`${formId}-status`}
+              label={t('tasks.form.status')}
+              error={errors.status}
+            >
+              {selectField(
+                'status',
+                TASK_STATUSES.map((value) => [
+                  value,
+                  t(`tasks.status.${value}`),
+                ]),
+              )}
+            </Field>
+            <Field
+              id={`${formId}-priority`}
+              label={t('tasks.form.priority')}
+              error={errors.priority}
+            >
+              {selectField(
+                'priority',
+                TASK_PRIORITIES.map((value) => [
+                  value,
+                  t(`tasks.priority.${value}`),
+                ]),
+              )}
+            </Field>
+          </div>
+          <Field
+            id={`${formId}-dueDate`}
+            label={t('tasks.form.dueDate')}
+            error={errors.dueDate}
+          >
+            <Controller
+              name="dueDate"
+              control={control}
+              rules={{
+                validate: (value) =>
+                  !value ||
+                  isValidDateOnly(value) ||
+                  t('tasks.errors.dueDateInvalid'),
+              }}
+              render={({ field }) => (
+                <DatePicker {...fieldAttributes('dueDate')} {...field} />
+              )}
+            />
+          </Field>
+        </fieldset>
+        {errors.root && (
+          <p
+            ref={submitErrorRef}
+            tabIndex={-1}
+            role="alert"
+            className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive"
+          >
+            {errors.root.message}
+          </p>
+        )}
+        {children}
+      </div>
+      <div
+        className={`flex shrink-0 flex-wrap justify-end gap-3 border-t bg-background py-4 ${stickyActions ? 'px-5 sm:px-6' : ''}`}
       >
         <Button
           type="button"
           variant="outline"
           disabled={isSubmitting}
           onClick={onCancel}
-          className="min-h-11"
+          className="min-h-11 px-4"
         >
           {t('tasks.actions.cancel')}
         </Button>

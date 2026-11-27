@@ -1,10 +1,13 @@
 import { useState } from 'react'
 
-import { FolderKanban, X } from 'lucide-react'
+import { FolderKanban } from 'lucide-react'
 import { Dialog } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '@/components/ui/button'
+import {
+  FormDialogHeader,
+  formDialogContentClassName,
+} from '@/components/ui/form-dialog'
 
 import { projectRepository } from '../services/projectRepository'
 import ProjectForm from './ProjectForm'
@@ -49,49 +52,27 @@ function ProjectDialog({
 
         <Dialog.Content
           onCloseAutoFocus={onCloseAutoFocus}
-          className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl sm:p-6"
+          className={formDialogContentClassName}
         >
-          {/* Dialog header */}
-          <div className="mb-6 flex items-start gap-3">
-            <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <FolderKanban className="size-5" aria-hidden="true" />
-            </div>
-
-            <div className="min-w-0 flex-1 space-y-1">
-              <Dialog.Title className="text-lg font-semibold">
-                {t(
-                  isEditing
-                    ? 'projects.dialog.editTitle'
-                    : 'projects.dialog.createTitle',
-                )}
-              </Dialog.Title>
-
-              <Dialog.Description className="text-sm text-muted-foreground">
-                {t(
-                  isEditing
-                    ? 'projects.dialog.editDescription'
-                    : 'projects.dialog.createDescription',
-                )}
-              </Dialog.Description>
-            </div>
-
-            <Dialog.Close asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                disabled={isSaving}
-                aria-label={t('projects.actions.close')}
-              >
-                <X className="size-5" aria-hidden="true" />
-              </Button>
-            </Dialog.Close>
-          </div>
-
-          {/* Shared create and edit form */}
+          <FormDialogHeader
+            icon={FolderKanban}
+            title={t(
+              isEditing
+                ? 'projects.dialog.editTitle'
+                : 'projects.dialog.createTitle',
+            )}
+            description={t(
+              isEditing
+                ? 'projects.dialog.editDescription'
+                : 'projects.dialog.createDescription',
+            )}
+            closeLabel={t('projects.actions.close')}
+            disabled={isSaving}
+          />
           <ProjectForm
             key={project?.id ?? 'new-project'}
             project={project}
+            scrollable
             onSubmit={handleSaveProject}
             onCancel={() => handleOpenChange(false)}
           />
