@@ -135,7 +135,12 @@
     "resetDone": "Preferências da barra lateral repostas.",
     "compact": "Barra lateral compacta",
     "expand": "Expandir barra lateral",
-    "resize": "Redimensionar barra lateral"
+    "resize": "Redimensionar barra lateral",
+    "customizeDescription": "Escolha as secções da navegação e organize-as pela ordem que prefere.",
+    "closeCustomize": "Fechar personalização da barra lateral",
+    "save": "Guardar alterações",
+    "cancel": "Cancelar",
+    "resetPending": "Ao guardar, serão repostos a ordem e visibilidade das secções, a largura e o modo compacto. O histórico de projetos recentes será limpo; projetos e tarefas serão mantidos."
   },
   "tasks": {
     "title": "Tarefas",
@@ -345,7 +350,8 @@
     "feedback": "Feedback das preferências",
     "applied": "Preferências aplicadas.",
     "languageFailed": "Não foi possível alterar o idioma. Tente novamente.",
-    "desktopPreferences": "A largura e o modo compacto aplicam-se em ecrãs desktop (a partir de 1024 px). As preferências ficam guardadas para a próxima visita em desktop; no mobile é usado o menu de navegação."
+    "desktopPreferences": "A largura e o modo compacto aplicam-se em ecrãs desktop (a partir de 1024 px). As preferências ficam guardadas para a próxima visita em desktop; no mobile é usado o menu de navegação.",
+    "categories": "Categorias de definições"
   },
   "dataManagement": {
     "title": "Gestão de dados",

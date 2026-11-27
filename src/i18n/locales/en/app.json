@@ -135,7 +135,12 @@
     "resetDone": "Sidebar preferences reset.",
     "compact": "Compact sidebar",
     "expand": "Expand sidebar",
-    "resize": "Resize sidebar"
+    "resize": "Resize sidebar",
+    "customizeDescription": "Choose what appears in your navigation and arrange it in your preferred order.",
+    "closeCustomize": "Close sidebar customization",
+    "save": "Save changes",
+    "cancel": "Cancel",
+    "resetPending": "Defaults will apply when you save: section visibility and order, desktop width and compact mode. Recent project history will be cleared; projects and tasks are kept."
   },
   "tasks": {
     "title": "Tasks",
@@ -345,7 +350,8 @@
     "feedback": "Preference feedback",
     "applied": "Preferences applied.",
     "languageFailed": "Could not change the language. Try again.",
-    "desktopPreferences": "Width and compact mode apply on desktop screens (1024 px and wider). Your preferences are kept for your next desktop visit; mobile uses the navigation menu."
+    "desktopPreferences": "Width and compact mode apply on desktop screens (1024 px and wider). Your preferences are kept for your next desktop visit; mobile uses the navigation menu.",
+    "categories": "Settings categories"
   },
   "dataManagement": {
     "title": "Data management",

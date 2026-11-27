@@ -92,3 +92,43 @@ describe('sidebarReducer', () => {
     expect(nextState).toEqual(initialSidebarState)
   })
 })
+
+it('atomically normalizes customization and preserves concurrent preference fields', () => {
+  const state = {
+    ...initialSidebarState,
+    width: 380,
+    compact: true,
+    recentProjectIds: ['new-visit'],
+    expandedSections: {
+      ...initialSidebarState.expandedSections,
+      favorites: false,
+    },
+  }
+  const next = sidebarReducer(state, {
+    type: sidebarActionTypes.APPLY_CUSTOMIZATION,
+    payload: {
+      sectionOrder: ['favorites', 'bogus', 'favorites'],
+      hiddenSections: ['workspace', 'favorites', 'favorites'],
+    },
+  })
+  expect(next).toEqual({
+    ...state,
+    sectionOrder: [
+      'favorites',
+      'workspace',
+      'recentProjects',
+      'projectExplorer',
+    ],
+    hiddenSections: ['favorites'],
+  })
+  expect(state.sectionOrder).toEqual(initialSidebarState.sectionOrder)
+  const reset = sidebarReducer(state, {
+    type: sidebarActionTypes.APPLY_CUSTOMIZATION,
+    payload: { ...next, reset: true },
+  })
+  expect(reset).toEqual({
+    ...initialSidebarState,
+    sectionOrder: next.sectionOrder,
+    hiddenSections: ['favorites'],
+  })
+})

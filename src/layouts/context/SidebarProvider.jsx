@@ -67,6 +67,11 @@ function SidebarProvider({ children }) {
 
   const contextValue = {
     ...state,
+    applyCustomization: (draft) =>
+      dispatch({
+        type: sidebarActionTypes.APPLY_CUSTOMIZATION,
+        payload: draft,
+      }),
     setWidth: (width) =>
       dispatch({ type: sidebarActionTypes.SET_WIDTH, payload: width }),
     setCompact: (compact) =>
