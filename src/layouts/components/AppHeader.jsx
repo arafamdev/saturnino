@@ -6,7 +6,7 @@ import MobileNavigation from './MobileNavigation'
 
 function AppHeader() {
   return (
-    <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-3 border-b bg-background px-3 sm:px-6">
+    <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-3 border-b bg-chrome px-3 sm:px-6">
       <div className="flex min-w-0 items-center gap-3">
         <MobileNavigation />
         <AppBreadcrumbs />

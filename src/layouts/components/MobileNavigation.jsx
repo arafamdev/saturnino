@@ -37,7 +37,7 @@ function MobileNavigation() {
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 lg:hidden" />
 
-          <Dialog.Content className="fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r bg-background shadow-xl lg:hidden">
+          <Dialog.Content className="fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r bg-chrome shadow-xl lg:hidden">
             <Dialog.Title className="sr-only">
               {t('navigation.label')}
             </Dialog.Title>

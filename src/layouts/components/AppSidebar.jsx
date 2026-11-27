@@ -52,7 +52,7 @@ function AppSidebar() {
     <aside
       id={sidebarId}
       style={{ width: compact ? 72 : (draftWidth ?? width) }}
-      className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r bg-muted/30 lg:flex"
+      className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r bg-chrome lg:flex dark:bg-muted/30"
     >
       <div className={compact ? 'flex justify-center py-4' : 'px-4 py-4'}>
         <Logo className={compact ? '[&>span]:sr-only' : undefined} />
