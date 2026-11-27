@@ -6,6 +6,7 @@ import {
   PointerSensor,
   PointerActivationConstraints,
 } from '@dnd-kit/dom'
+import { getInteractiveElement } from '@dnd-kit/dom/utilities'
 import { useTranslation } from 'react-i18next'
 
 import { TASK_STATUSES } from '@/features/tasks/data/taskOptions'
@@ -19,6 +20,18 @@ function sensors(defaults) {
     PointerSensor.configure({
       // Pointer input uses the card; KeyboardSensor keeps the explicit handle.
       activatorElements: (source) => [source.element],
+      preventActivation(event, source) {
+        const target = event.target
+        if (!(target instanceof Element)) return false
+        const interactive = getInteractiveElement(target)
+        // The title supports click and drag; menus keep their native interaction.
+        return Boolean(
+          interactive &&
+          interactive !== source.handle &&
+          !source.handle?.contains(target) &&
+          !interactive.matches('[data-task-drag-title]'),
+        )
+      },
       activationConstraints(event) {
         return event.pointerType === 'touch'
           ? [

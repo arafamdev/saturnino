@@ -303,7 +303,7 @@ it('starts from the keyboard handle and cancels without writing', async () => {
   expect((await taskRepository.getTaskById(task.id)).status).toBe('todo')
 })
 
-it('activates card surface only after mouse distance, while title and menu remain interactive', async () => {
+it('activates card and title after mouse distance while preserving clicks and menus', async () => {
   const user = userEvent.setup()
   await taskRepository.createTask({
     projectId: project.id,
@@ -333,10 +333,15 @@ it('activates card surface only after mouse distance, while title and menu remai
   })
   await user.pointer([
     { target: title, coords: { x: 10, y: 10 }, keys: '[MouseLeft>]' },
-    { coords: { x: 40, y: 10 } },
-    { keys: '[/MouseLeft]' },
+    { coords: { x: 13, y: 10 } },
   ])
   expect(handle).toHaveAttribute('aria-pressed', 'false')
+  await user.pointer([{ coords: { x: 40, y: 10 } }])
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'true'))
+  await user.keyboard('{Escape}')
+  await user.pointer({ keys: '[/MouseLeft]' })
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'false'))
+  expect(edit).not.toHaveBeenCalled()
   await user.click(title)
   expect(edit).toHaveBeenCalledWith(
     expect.objectContaining({ title: 'Surface gestures' }),
