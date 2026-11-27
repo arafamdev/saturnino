@@ -16,11 +16,12 @@
   /* Soft light palette */
   --lunar-white: #f4f4f5;
   --pure-white: #ffffff;
-  --soft-background: #eeeff2;
-  --soft-surface: #f7f7f9;
-  --soft-muted: #e4e6eb;
-  --soft-border: #d9dbe1;
-  --soft-foreground: #272930;
+  --soft-background: #e4e6ec;
+  --soft-chrome: #e9ebf0;
+  --soft-surface: #f1f2f5;
+  --soft-muted: #dce0e8;
+  --soft-border: #cbd0d9;
+  --soft-foreground: #242630;
   --soft-muted-foreground: #555963;
 }
 
@@ -36,6 +37,7 @@
   /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-chrome: var(--chrome);
 
   /* Surface colors */
   --color-card: var(--card);
@@ -101,6 +103,7 @@
   /* Base colors */
   --background: var(--soft-background);
   --foreground: var(--soft-foreground);
+  --chrome: var(--soft-chrome);
 
   /* Surface colors */
   --card: var(--soft-surface);
@@ -137,7 +140,7 @@
   --chart-5: oklch(0.269 0 0);
 
   /* Sidebar colors */
-  --sidebar: var(--soft-surface);
+  --sidebar: var(--soft-chrome);
   --sidebar-foreground: var(--soft-foreground);
   --sidebar-primary: var(--deep-indigo);
   --sidebar-primary-foreground: var(--pure-white);
@@ -155,6 +158,7 @@
   /* Base colors */
   --background: var(--space-black);
   --foreground: var(--lunar-white);
+  --chrome: var(--space-black);
 
   /* Surface colors */
   --card: var(--graphite);
