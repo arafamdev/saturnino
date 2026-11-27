@@ -30,6 +30,14 @@ const pageRoutes = [
           return { Component }
         },
       },
+      {
+        path: 'guide/:chapterId?',
+        lazy: async () => {
+          const { default: Component } =
+            await import('@/features/user-guide/pages/UserGuidePage')
+          return { Component }
+        },
+      },
     ],
   },
 

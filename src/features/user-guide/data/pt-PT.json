@@ -1,0 +1,697 @@
+{
+  "title": "Guia de utilização",
+  "subtitle": "Um pouco de orientação. Muito mais clareza.",
+  "description": "Aprende a organizar o teu dia a dia, um passo de cada vez.",
+  "groups": [
+    "Primeiros passos",
+    "O teu espaço de trabalho",
+    "Dados e privacidade",
+    "Suporte e futuro"
+  ],
+  "chaptersLabel": "Capítulos do guia",
+  "menu": "Explorar capítulos",
+  "onThisPage": "Nesta página",
+  "previous": "Capítulo anterior",
+  "next": "Próximo capítulo",
+  "open": "Abrir Saturnino",
+  "return": "Voltar ao espaço de trabalho",
+  "step": "Passo {{number}}",
+  "figureNote": "Espaço de exemplo real • Interface em inglês",
+  "diagramLabel": "Diagrama ilustrativo",
+  "current": "Hoje · local-first",
+  "futureLabel": "Visão futura · ainda não disponível",
+  "deviceLabels": ["Computador", "Tablet", "Telemóvel"],
+  "independent": "Um espaço independente por dispositivo, perfil de navegador e endereço do site.",
+  "futureDiagram": "Conta opcional → sincronização cloud → os teus dispositivos. Trabalho local e acesso offline fazem parte da visão.",
+  "skip": "Saltar para o conteúdo do guia",
+  "notFound": "Capítulo não encontrado",
+  "notFoundText": "Escolhe um capítulo do guia para continuar.",
+  "permalink": "Ligação para esta secção",
+  "install": "Instalar Saturnino",
+  "installing": "A abrir instalação…",
+  "installed": "O Saturnino está instalado ou aberto numa janela autónoma.",
+  "imageHint": "Seleciona a imagem para a ver em tamanho completo (abre num novo separador).",
+  "manual": "Não aparece o botão? Segue as instruções do navegador abaixo. A disponibilidade depende do navegador, dispositivo e de a aplicação já estar instalada.",
+  "installDismissed": "A instalação não foi concluída. Podes continuar no navegador ou seguir as instruções manuais.",
+  "installFailed": "Não foi possível abrir o pedido de instalação. Segue as instruções manuais abaixo.",
+  "helpTitle": "Ajuda e suporte",
+  "helpDescription": "Aprende a utilizar o teu espaço, instalar a aplicação e guardar backups.",
+  "official": "Instruções oficiais",
+  "chapters": {
+    "introduction": {
+      "title": "Introdução",
+      "intro": "Tudo na sua órbita. Um espaço tranquilo para projetos e planos do dia a dia.",
+      "sections": [
+        {
+          "id": "welcome",
+          "title": "O teu trabalho, ao teu ritmo",
+          "paragraphs": [
+            "O Saturnino ajuda-te a dividir um objetivo em pequenas tarefas e perceber o próximo passo. Utiliza-o para estudos, trabalho independente, projetos pessoais ou atividades diárias. Não precisas de conta."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "interface",
+          "title": "Conhece o teu espaço",
+          "paragraphs": [
+            "A Visão geral mostra progresso. As minhas tarefas reúne tarefas de todos os projetos. Projetos abre a lista ou quadro de cada projeto. Definições contém aspeto, barra lateral, informação local, backups e ajuda. O botão Voltar regressa pelas páginas conhecidas, com alternativa segura para a Visão geral."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "example",
+          "title": "Um exemplo ao longo do guia",
+          "paragraphs": [
+            "Website redesign é o nosso projeto fictício. Vamos planear Create wireframes e movê-la de Por fazer para Concluída. As capturas usam apenas dados de demonstração. Mostram a interface em inglês; legendas traduzidas explicam cada ação e a tua interface segue o idioma escolhido."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "quick-start": {
+      "title": "Início rápido",
+      "intro": "O primeiro projeto em seis ações simples.",
+      "sections": [
+        {
+          "id": "project",
+          "title": "1–2 · Abrir e criar",
+          "paragraphs": [],
+          "steps": [
+            "Abre o Saturnino. Escolhe Projetos na barra lateral ou abre o menu de navegação num ecrã pequeno.",
+            "Escolhe Novo projeto. Escreve Website redesign, adiciona descrição e cor e seleciona Criar projeto. Abre-o em Ver projeto."
+          ],
+          "bullets": [],
+          "figure": "project-form"
+        },
+        {
+          "id": "task",
+          "title": "3–4 · Adicionar e planear",
+          "paragraphs": [],
+          "steps": [
+            "Dentro do projeto, escolhe Nova tarefa. Escreve Create wireframes e descreve, se quiseres, a próxima ação.",
+            "Escolhe prioridade Alta, estado Por fazer e um Prazo realista no calendário. Seleciona Criar tarefa para guardar."
+          ],
+          "bullets": [],
+          "figure": "task-form"
+        },
+        {
+          "id": "progress",
+          "title": "5–6 · Organizar e rever",
+          "paragraphs": [],
+          "steps": [
+            "Escolhe Quadro. Arrasta a tarefa pelo título ou superfície para Em curso quando começares e Concluída no fim. O menu da tarefa é uma alternativa.",
+            "Abre Visão geral para consultar tarefas abertas/concluídas, prazos e progresso. Escolhe o próximo passo útil."
+          ],
+          "bullets": [],
+          "figure": "kanban"
+        }
+      ]
+    },
+    "installation": {
+      "title": "Instalação",
+      "intro": "Mantém o Saturnino por perto, sem descarregar da App Store ou Google Play.",
+      "sections": [
+        {
+          "id": "before",
+          "title": "Antes de instalar",
+          "paragraphs": [
+            "Abre o Saturnino online num navegador compatível. Instalação e preparação offline são diferentes: confirma Pronto para utilização offline em Definições → Espaço de trabalho local. Menus e disponibilidade variam com a versão."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "platforms",
+          "title": "Escolhe o teu dispositivo",
+          "paragraphs": [
+            "Segue as instruções por plataforma abaixo. O botão opcional aparece apenas quando o navegador disponibiliza um pedido de instalação. A ausência do botão não impede utilizar um separador normal."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "storage",
+          "title": "Verifica o teu espaço local",
+          "paragraphs": [
+            "Não assumas que instalar, mudar de navegador ou abrir uma aplicação web autónoma copia os dados. Exporta JSON primeiro e verifica o destino. Usa o mesmo perfil e endereço ou restaura manualmente quando necessário."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "projects": {
+      "title": "Projetos",
+      "intro": "Dá a cada objetivo o seu espaço.",
+      "sections": [
+        {
+          "id": "create",
+          "title": "Criar e abrir",
+          "paragraphs": [],
+          "steps": [
+            "Projetos → Novo projeto: introduz nome (até 80 caracteres), descrição opcional (até 500) e cor.",
+            "Escolhe Criar projeto e depois Ver projeto. Separa trabalho, estudos e objetivos pessoais em projetos reconhecíveis."
+          ],
+          "bullets": [],
+          "figure": "projects"
+        },
+        {
+          "id": "find",
+          "title": "Favoritos e acesso rápido",
+          "paragraphs": [
+            "Usa a estrela para adicionar ou remover um projeto dos Favoritos. Projetos recentes acompanha visitas. O Explorador de projetos pesquisa nomes e abre projetos na barra lateral; o botão mais cria um projeto. No mobile, abre primeiro o menu de navegação."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "edit-delete",
+          "title": "Editar ou eliminar com atenção",
+          "paragraphs": [
+            "O menu de ações oferece Editar projeto: altera nome, descrição ou cor e Guarda as alterações. Eliminar projeto exige confirmação e remove definitivamente o projeto E todas as tarefas associadas. Não existe anular nem reciclagem. Exporta um backup antes de eliminar algo que possas precisar."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "tasks": {
+      "title": "Tarefas",
+      "intro": "Transforma um plano numa ação concreta.",
+      "sections": [
+        {
+          "id": "create",
+          "title": "Adicionar o essencial",
+          "paragraphs": [
+            "Escolhe Nova tarefa num projeto ou em As minhas tarefas. Título (até 120 caracteres) e projeto existente são obrigatórios. Descrição é opcional (até 2000 caracteres). Escolhe estado, prioridade Baixa/Média/Alta/Urgente e prazo opcional no calendário. Seleciona Criar tarefa para guardar."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "task-form"
+        },
+        {
+          "id": "details",
+          "title": "Abrir, editar e eliminar",
+          "paragraphs": [
+            "Um clique no título abre detalhes: painel lateral em desktop ou ecrã inteiro no mobile. Altera campos e escolhe Guardar tarefa. Cancelar não guarda; um formulário alterado pede para continuar ou descartar. Uma mensagem de conflito protege contra edições noutro separador. Eliminar tarefa exige confirmação e é permanente."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "task-details"
+        },
+        {
+          "id": "find",
+          "title": "Pesquisar, filtrar e mudar de vista",
+          "paragraphs": [
+            "A pesquisa procura títulos e descrições. Combina filtros de estado, prioridade, projeto e prazo. Remove etiquetas ou usa Limpar filtros. Escolhe uma ordenação disponível (manual, datas, prioridade ou título). Projetos oferece Lista/Quadro; As minhas tarefas é uma lista entre projetos. Filtros ou ordenação não manual limitam a reordenação para evitar posições enganadoras."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "filters"
+        }
+      ]
+    },
+    "kanban": {
+      "title": "Quadro Kanban",
+      "intro": "Vê o trabalho passar de ideia a conclusão.",
+      "sections": [
+        {
+          "id": "columns",
+          "title": "Quatro etapas claras",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Por planear: ideias e tarefas futuras que ainda não vais começar.",
+            "Por fazer: tarefas prontas para começar.",
+            "Em curso: trabalho em execução.",
+            "Concluída: tarefas terminadas; o progresso atualiza automaticamente."
+          ],
+          "figure": "kanban"
+        },
+        {
+          "id": "move",
+          "title": "Arrastar e reordenar",
+          "paragraphs": [
+            "Com o rato, pressiona o título ou uma área não interativa e desloca para ativar o arrastamento. Um clique simples continua a abrir detalhes. O cartão muda de aspeto, a coluna de destino é destacada e uma linha indica inserção antes da tarefa-alvo ou no fim. Solta para guardar estado e ordem, que se mantêm após recarregar. Move Create wireframes de Por fazer para Em curso ao começar."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "alternatives",
+          "title": "Alternativas por teclado e toque",
+          "paragraphs": [
+            "Foca a pega, prime Espaço, usa setas para mover e Espaço para largar ou Escape para cancelar. Ou abre o menu e escolhe estado, Mover para cima ou Mover para baixo. Os menus funcionam bem por toque. Arrastar por toque exige breve pressão; gestos rápidos continuam a deslocar. Desloca horizontalmente para chegar às colunas num ecrã estreito. Usa o menu se arrastar for difícil."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "dashboard": {
+      "title": "Visão geral",
+      "intro": "Compreende o trabalho que tens.",
+      "sections": [
+        {
+          "id": "indicators",
+          "title": "Ler os indicadores",
+          "paragraphs": [
+            "A Visão geral conta projetos, tarefas totais, abertas, concluídas, em atraso e taxa de conclusão. Abertas são as que não estão Concluídas. Em atraso são as por concluir com prazo anterior a hoje, em datas locais. O progresso é a proporção atualmente Concluída, não horas ou esforço."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "dashboard"
+        },
+        {
+          "id": "charts",
+          "title": "Interpretar os gráficos",
+          "paragraphs": [
+            "As distribuições por estado e prioridade descrevem tarefas ainda existentes. Criadas e concluídas compara os últimos 14 dias locais pelas datas de criação retidas e conclusão atual. Reabrir ou eliminar pode remover uma conclusão anterior: não é um histórico imutável. Ver contagens diárias abre uma tabela legível."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "act",
+          "title": "Transformar informação em ação",
+          "paragraphs": [
+            "Indicadores com ligação, estados e prioridades abrem As minhas tarefas com o filtro correspondente. Tarefas a acompanhar reúne próximos prazos, atrasos e atualizações recentes. As ligações de progresso abrem projetos. O Saturnino não calcula tempos, velocidade de equipa nem previsões."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "customization": {
+      "title": "Personalização",
+      "intro": "Adapta o espaço à tua forma de trabalhar.",
+      "sections": [
+        {
+          "id": "appearance",
+          "title": "Tema e idioma",
+          "paragraphs": [
+            "Usa o cabeçalho ou Definições → Aspeto e idioma para escolher Claro/Escuro e English/Português. As alterações são imediatas e ficam neste navegador quando há armazenamento disponível. Datas, formulários e este guia seguem o idioma escolhido."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "settings"
+        },
+        {
+          "id": "sidebar",
+          "title": "Organizar a barra lateral",
+          "paragraphs": [
+            "Escolhe Personalizar barra lateral na barra lateral ou Definições → Barra lateral. Ativa secções e move-as pelos controlos disponíveis. Guardar aplica o rascunho; Cancelar/Escape descarta. Repor prepara valores padrão no rascunho: guarda para aplicar. Favoritos pertencem aos projetos e recentes seguem as visitas."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "sidebar"
+        },
+        {
+          "id": "size",
+          "title": "Modo compacto e largura",
+          "paragraphs": [
+            "Em desktop, redimensiona pelo separador ou escolhe largura em Definições → Barra lateral. O modo compacto reduz o espaço ocupado; desativa-o para voltar ao layout completo. Ecrãs pequenos usam menu lateral. Estas preferências não fazem parte do backup JSON."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "productivity": {
+      "title": "Tira o máximo partido do Saturnino",
+      "intro": "Pequenos hábitos tornam o espaço útil.",
+      "sections": [
+        {
+          "id": "plan",
+          "title": "Começa por um objetivo possível",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Separa trabalho, estudo e objetivos pessoais em projetos.",
+            "Divide objetivos grandes: Create wireframes é mais claro do que Terminar o site.",
+            "Guarda ideias em Por planear e escolhe prioridades e datas realistas."
+          ]
+        },
+        {
+          "id": "focus",
+          "title": "Mantém o próximo passo visível",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Limita o trabalho em Em curso ao mesmo tempo.",
+            "Adiciona projetos frequentes aos Favoritos e revê a Visão geral.",
+            "Personaliza a barra lateral, escolhe um tema confortável e instala se houver suporte."
+          ]
+        },
+        {
+          "id": "protect",
+          "title": "Cria um hábito de backup",
+          "paragraphs": [
+            "Guarda backups JSON regularmente, sobretudo antes de limpar dados, mudar de dispositivo ou restaurar outro ficheiro. Mantém cópias num local fácil de encontrar. CSV ajuda a consultar tarefas externamente mas não restaura um espaço."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "local-first": {
+      "title": "Local-first e privacidade",
+      "intro": "O teu espaço vive neste navegador e dispositivo.",
+      "sections": [
+        {
+          "id": "storage",
+          "title": "O que fica local",
+          "paragraphs": [
+            "Não precisas de conta. Projetos, tarefas e favoritos ficam na base de dados local do navegador. Tema, idioma e preferências da barra lateral são separados. Instalar como PWA não acrescenta backup cloud nem sincronização."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "devices",
+          "title": "Cada ambiente é independente",
+          "paragraphs": [
+            "Computador, tablet e telemóvel têm espaços separados. Outros navegadores, perfis ou endereços podem ter armazenamento diferente no mesmo dispositivo. Transfere trabalho explicitamente por exportação e restauro JSON. Um redirect não transfere dados locais."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "care",
+          "title": "Protege o dispositivo e os ficheiros",
+          "paragraphs": [
+            "Limpar dados, sessões privadas, falha do dispositivo ou remoção de armazenamento pelo navegador pode tornar registos indisponíveis. A arquitetura não encripta registos locais nem os protege de quem aceda ao perfil. Guarda backups. Alojamento e ligações externas podem fazer pedidos de rede; local-first não é garantia absoluta de privacidade."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "offline": {
+      "title": "Utilização offline",
+      "intro": "Continua a trabalhar depois de preparar a aplicação.",
+      "sections": [
+        {
+          "id": "prepare",
+          "title": "Preparar antes de desligar",
+          "paragraphs": [],
+          "steps": [
+            "Abre o Saturnino online e deixa carregar os ficheiros.",
+            "Definições → Espaço de trabalho local: aguarda Pronto para utilização offline. Instalar não prova que a cache terminou."
+          ],
+          "bullets": []
+        },
+        {
+          "id": "work",
+          "title": "O que funciona offline",
+          "paragraphs": [
+            "Com cache pronta e armazenamento disponível, cria/edita projetos e tarefas, move cartões, filtra e consulta progresso. Este guia e as imagens incluídas ficam em cache; referências externas precisam de Internet. Limites e remoção de armazenamento continuam a aplicar-se. Offline não é sincronização nem backup."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "updates",
+          "title": "Atualizar depois de guardar",
+          "paragraphs": [
+            "Online, usa Procurar atualizações em Definições → Espaço de trabalho local. Guarda antes de Recarregar para atualizar. Formulários alterados podem pedir para continuar ou descartar. Registos guardados continuam locais, mas atualizar não cria backup. Não limpes dados apenas para atualizar."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "backup": {
+      "title": "Backup e restauro",
+      "intro": "Um ficheiro guardado permite recuperar ou transferir o espaço.",
+      "sections": [
+        {
+          "id": "export",
+          "title": "Descarregar backup JSON",
+          "paragraphs": [],
+          "steps": [
+            "Abre Definições → Gestão de dados.",
+            "Escolhe Descarregar backup JSON e encontra o ficheiro .json.",
+            "Guarda-o num local que controles, idealmente também fora do dispositivo. Protege ficheiros com dados sensíveis."
+          ],
+          "bullets": [],
+          "figure": "backup"
+        },
+        {
+          "id": "restore",
+          "title": "Pré-visualizar antes de substituir",
+          "paragraphs": [],
+          "steps": [
+            "Exporta primeiro o espaço do destino se houver algo a preservar.",
+            "Escolhe Restaurar backup JSON, seleciona o ficheiro e verifica nome, data e contagens atuais/selecionadas de projetos e tarefas.",
+            "Escolhe Substituir espaço de trabalho apenas se aceitares substituir TODOS os projetos e tarefas. Registos ausentes são removidos. Cancelar não altera dados.",
+            "Verifica projetos, tarefas, favoritos, datas e ordem. Para transferir entre dispositivos, move o JSON manualmente e repete no destino."
+          ],
+          "bullets": [],
+          "figure": "restore"
+        },
+        {
+          "id": "included",
+          "title": "O que contêm JSON e CSV",
+          "paragraphs": [
+            "JSON inclui projetos (cor e favoritos) e tarefas (planeamento, estado, ordem e datas de registo). Exclui tema, idioma, layout/largura/modo compacto, recentes e cache. O restauro aceita um backup JSON Saturnino validado até 20 MiB. Exportar tarefas em CSV cria tabela para folhas de cálculo ou consulta externa; CSV não restaura um espaço. Restaurar substitui, não junta nem sincroniza."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "limitations": {
+      "title": "Limitações atuais",
+      "intro": "Conhece o que existe antes de depender da aplicação.",
+      "sections": [
+        {
+          "id": "today",
+          "title": "Ainda não disponível",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Sem contas nem autenticação.",
+            "Sem armazenamento cloud ou sincronização automática entre dispositivos.",
+            "Sem colaboração nem espaço de equipa partilhado."
+          ]
+        },
+        {
+          "id": "storage",
+          "title": "O armazenamento local exige cuidado",
+          "paragraphs": [
+            "Limpar armazenamento pode remover trabalho. Perfis privados, outro navegador ou dispositivo podem abrir espaço vazio. Não existe reciclagem nem recuperação automática. Uma nova instalação não recupera registos perdidos: guarda backups JSON."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "platform",
+          "title": "Diferenças entre navegadores",
+          "paragraphs": [
+            "As opções e pedidos programáticos de instalação variam por plataforma. Offline exige cache inicial completa e armazenamento. Ligações externas precisam de Internet. Usa menus em vez de arrastar se o gesto for difícil."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "future": {
+      "title": "Visão futura",
+      "intro": "Um espaço ligado opcional, com uma base local-first.",
+      "sections": [
+        {
+          "id": "direction",
+          "title": "Uma direção, sem promessa de lançamento",
+          "paragraphs": [
+            "A visão de longo prazo inclui contas opcionais, autenticação e sincronização cloud do mesmo espaço entre dispositivos. Preservar trabalho local e acesso offline faz parte da visão. Estas funções NÃO estão implementadas nesta versão e não têm data prometida."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "now-next",
+          "title": "Hoje e um possível amanhã",
+          "paragraphs": [
+            "Hoje, cada perfil e origem guarda registos independentes; a transferência usa JSON. Um serviço opcional futuro ligaria dispositivos por conta autenticada mantendo utilização local. Migração, permissões e conflitos exigiriam implementação cuidada primeiro."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "continue",
+          "title": "Útil hoje",
+          "paragraphs": [
+            "Organiza projetos, planeia tarefas, usa Kanban e guarda backups já, sem esperar pela cloud. Este guia ensina apenas funções que podes utilizar hoje."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "faq": {
+      "title": "Perguntas frequentes e resolução de problemas",
+      "intro": "Encontra uma resposta e regressa ao trabalho.",
+      "sections": [
+        {
+          "id": "answers",
+          "title": "Respostas às tuas perguntas",
+          "paragraphs": [
+            "Estas respostas descrevem a aplicação local-first atual. Se faltar algo, verifica filtros e perfil antes de restaurar dados."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    }
+  },
+  "figures": {
+    "project-form": {
+      "alt": "Cria Website redesign com nome, descrição e cor.",
+      "caption": "Cria Website redesign com nome, descrição e cor."
+    },
+    "projects": {
+      "alt": "Abre o projeto, usa a estrela ou acede aos recentes e ao Explorador de projetos.",
+      "caption": "Abre o projeto, usa a estrela ou acede aos recentes e ao Explorador de projetos."
+    },
+    "task-form": {
+      "alt": "Planeia Create wireframes com projeto, estado, prioridade e prazo opcional.",
+      "caption": "Planeia Create wireframes com projeto, estado, prioridade e prazo opcional."
+    },
+    "task-details": {
+      "alt": "Clica no título para abrir detalhes; guarda explicitamente ou cancela sem guardar.",
+      "caption": "Clica no título para abrir detalhes; guarda explicitamente ou cancela sem guardar."
+    },
+    "filters": {
+      "alt": "Pesquisa e combina filtros; limpa etiquetas ativas para voltar a ver tarefas escondidas.",
+      "caption": "Pesquisa e combina filtros; limpa etiquetas ativas para voltar a ver tarefas escondidas."
+    },
+    "kanban": {
+      "alt": "Move trabalho pelas quatro colunas ou usa o menu de ações de cada tarefa.",
+      "caption": "Move trabalho pelas quatro colunas ou usa o menu de ações de cada tarefa."
+    },
+    "dashboard": {
+      "alt": "Consulta contagens, distribuições por estado/prioridade e atividade por datas retidas.",
+      "caption": "Consulta contagens, distribuições por estado/prioridade e atividade por datas retidas."
+    },
+    "settings": {
+      "alt": "Aspeto e idioma aplicam-se ao espaço deste navegador.",
+      "caption": "Aspeto e idioma aplicam-se ao espaço deste navegador."
+    },
+    "sidebar": {
+      "alt": "Personaliza secções num rascunho e depois Guarda ou Cancela.",
+      "caption": "Personaliza secções num rascunho e depois Guarda ou Cancela."
+    },
+    "backup": {
+      "alt": "Definições → Gestão de dados: JSON para recuperar, CSV para consulta externa.",
+      "caption": "Definições → Gestão de dados: JSON para recuperar, CSV para consulta externa."
+    },
+    "restore": {
+      "alt": "Revê contagens de origem/destino antes de substituir projetos e tarefas locais.",
+      "caption": "Revê contagens de origem/destino antes de substituir projetos e tarefas locais."
+    }
+  },
+  "faq": [
+    {
+      "question": "O Saturnino é gratuito?",
+      "answer": "A aplicação publicada atualmente pode ser utilizada sem pagamento nem conta. Isto não promete condições de serviços opcionais futuros."
+    },
+    {
+      "question": "Preciso de criar uma conta?",
+      "answer": "Não. O espaço atual é local-first e não tem início de sessão."
+    },
+    {
+      "question": "Onde ficam os meus projetos?",
+      "answer": "Na base de dados local deste perfil para este endereço. Um JSON exportado é uma cópia separada."
+    },
+    {
+      "question": "Posso utilizar sem Internet?",
+      "answer": "Sim, depois de uma visita online preparar a cache e Definições → Espaço de trabalho local indicar Pronto para utilização offline. Ligações externas precisam de rede."
+    },
+    {
+      "question": "Como instalo no computador?",
+      "answer": "Segue o capítulo de instalação: menu do Chrome, ícone de aplicação disponível no Edge ou Adicionar à Dock no Safari em Macs compatíveis."
+    },
+    {
+      "question": "Como instalo no iPhone ou iPad?",
+      "answer": "Abre o site no Safari, Partilhar → Adicionar ao ecrã principal. Ativa Abrir como aplicação web quando disponível e Adicionar. Os nomes variam com a versão."
+    },
+    {
+      "question": "Porque não aparece o botão de instalação?",
+      "answer": "O navegador pode não suportar o pedido, ainda não o disponibilizar ou a aplicação já estar instalada. Segue as instruções manuais ou continua num separador."
+    },
+    {
+      "question": "Posso usar os mesmos projetos em vários dispositivos?",
+      "answer": "Não automaticamente. Exporta JSON na origem e restaura no destino. Não existe junção nem sincronização cloud."
+    },
+    {
+      "question": "Como faço um backup?",
+      "answer": "Definições → Gestão de dados → Descarregar backup JSON. Encontra e guarda o ficheiro num local seguro."
+    },
+    {
+      "question": "Como restauro os meus dados?",
+      "answer": "Guarda primeiro os dados atuais. Escolhe Restaurar backup JSON, revê contagens e confirma Substituir espaço de trabalho apenas quando estiveres pronto. CSV não é ficheiro de restauro."
+    },
+    {
+      "question": "E se limpar os dados do navegador?",
+      "answer": "Projetos e tarefas podem ser removidos. Precisas de JSON existente para recuperar os dados suportados; a aplicação não reconstrói registos locais eliminados."
+    },
+    {
+      "question": "Porque não vejo projetos noutro navegador?",
+      "answer": "Navegadores, perfis, dispositivos e origens têm armazenamento separado. Regressa ao ambiente original ou restaura backup; não o limpes."
+    },
+    {
+      "question": "Como atualizo a aplicação?",
+      "answer": "Online, Definições → Espaço de trabalho local → Procurar atualizações. Guarda edições e usa Recarregar para atualizar quando aparecer."
+    },
+    {
+      "question": "E se uma tarefa não aparecer?",
+      "answer": "Limpa pesquisa e filtros, verifica projeto e coluna e confirma perfil/endereço. Reabre a página se o carregamento falhar. Não restaures por cima sem guardar backup e rever a pré-visualização."
+    }
+  ],
+  "platforms": [
+    {
+      "title": "macOS · Safari ou Chrome",
+      "steps": [
+        "No Safari numa versão compatível do macOS, abre Saturnino e Partilhar → Adicionar à Dock (ou Ficheiro → Adicionar à Dock). Confirma o nome e Adicionar.",
+        "No Chrome, usa o ícone de instalação quando disponível ou Mais → Transmitir, guardar e partilhar → Instalar página como aplicação. Segue o diálogo.",
+        "Abre pela Dock ou lançador. Verifica o espaço antes de depender de registos existentes."
+      ]
+    },
+    {
+      "title": "Windows · Edge ou Chrome",
+      "steps": [
+        "No Edge, abre Saturnino e escolhe o ícone de aplicação disponível na barra de endereços quando aparecer e Instalar.",
+        "No Chrome, escolhe o ícone de instalação ou Mais → Transmitir, guardar e partilhar → Instalar página como aplicação.",
+        "Segue o pedido do navegador e abre Saturnino no lançador de aplicações."
+      ]
+    },
+    {
+      "title": "iPhone · Safari",
+      "steps": [
+        "Abre Saturnino no Safari e toca em Partilhar (usa Mais ou Ver mais se a versão colocar aí a opção).",
+        "Escolhe Adicionar ao ecrã principal. Ativa Abrir como aplicação web quando disponível.",
+        "Confirma Adicionar e abre Saturnino no ecrã principal. Não precisas de descarregar da App Store."
+      ]
+    },
+    {
+      "title": "iPad · Safari",
+      "steps": [
+        "Abre Saturnino no Safari e escolhe Partilhar (depois Mais ou Ver mais se necessário).",
+        "Escolhe Adicionar ao ecrã principal e ativa Abrir como aplicação web quando disponível.",
+        "Toca em Adicionar e abre o ícone no ecrã principal. Verifica o espaço local."
+      ]
+    },
+    {
+      "title": "Android · Chrome",
+      "steps": [
+        "Abre Saturnino no Chrome e Mais junto à barra de endereços.",
+        "Escolhe Instalar e criar atalho → Instalar ou Instalar aplicação/Adicionar ao ecrã principal se o navegador usar esse nome.",
+        "Segue o pedido e abre o ícone. Não precisas de descarregar da Google Play."
+      ]
+    }
+  ]
+}

@@ -337,6 +337,9 @@
     }
   },
   "settings": {
+    "helpTitle": "Help & Support",
+    "helpDescription": "Learn to use Saturnino, install it and keep a backup.",
+    "userGuide": "User Guide",
     "description": "Make this workspace feel right for you.",
     "appearance": "Appearance and language",
     "theme": "Color theme",

@@ -1,0 +1,697 @@
+{
+  "title": "User Guide",
+  "subtitle": "A little guidance. A lot more clarity.",
+  "description": "Learn to organize your everyday work, one step at a time.",
+  "groups": [
+    "Getting started",
+    "Your workspace",
+    "Data & privacy",
+    "Support & future"
+  ],
+  "chaptersLabel": "Guide chapters",
+  "menu": "Browse chapters",
+  "onThisPage": "On this page",
+  "previous": "Previous chapter",
+  "next": "Next chapter",
+  "open": "Open Saturnino",
+  "return": "Return to workspace",
+  "step": "Step {{number}}",
+  "figureNote": "Real example workspace • English interface",
+  "diagramLabel": "Illustrative diagram",
+  "current": "Today · local-first",
+  "futureLabel": "Future vision · not available yet",
+  "deviceLabels": ["Computer", "Tablet", "Phone"],
+  "independent": "Separate workspace on each device, browser profile and site address.",
+  "futureDiagram": "Optional account → cloud sync → your devices. Local work and offline access remain part of the vision.",
+  "skip": "Skip to guide content",
+  "notFound": "Chapter not found",
+  "notFoundText": "Choose a chapter from the guide to continue.",
+  "permalink": "Link to this section",
+  "install": "Install Saturnino",
+  "installing": "Opening installation…",
+  "installed": "Saturnino is installed or running in a standalone window.",
+  "imageHint": "Select the image for a full-size view (opens in a new tab).",
+  "manual": "No install button? Use the browser instructions below. Availability depends on your browser, device and whether the app is already installed.",
+  "installDismissed": "Installation was not completed. You can continue in your browser or use the manual instructions.",
+  "installFailed": "The installation request could not be opened. Use the manual instructions below.",
+  "helpTitle": "Help & Support",
+  "helpDescription": "Learn to use your workspace, install the app and keep a backup.",
+  "official": "Official instructions",
+  "chapters": {
+    "introduction": {
+      "title": "Introduction",
+      "intro": "Everything in its orbit. A calm place for projects and everyday plans.",
+      "sections": [
+        {
+          "id": "welcome",
+          "title": "Your work, at your pace",
+          "paragraphs": [
+            "Saturnino helps you break a goal into small tasks and see what comes next. Use it for studies, freelance work, personal projects or everyday activities. No account is required."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "interface",
+          "title": "Meet your workspace",
+          "paragraphs": [
+            "Overview shows progress. My Tasks combines tasks from all projects. Projects opens each project's list or board. Settings holds appearance, sidebar, local workspace information, backups and help. The header's Back button returns through known workspace pages, with a safe Overview fallback."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "example",
+          "title": "One example throughout",
+          "paragraphs": [
+            "Website redesign is our fictional project. We will plan Create wireframes and move it from To do to Done. Screenshots use demonstration data only. They show the English interface; translated captions explain each action and your own interface follows your selected language."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "quick-start": {
+      "title": "Quick Start",
+      "intro": "Your first project in six clear actions.",
+      "sections": [
+        {
+          "id": "project",
+          "title": "1–2 · Open and create",
+          "paragraphs": [],
+          "steps": [
+            "Open Saturnino. Choose Projects in the sidebar, or open the navigation menu on a small screen.",
+            "Choose New project. Enter Website redesign, add a description, choose a color and select Create project. Open it with View project."
+          ],
+          "bullets": [],
+          "figure": "project-form"
+        },
+        {
+          "id": "task",
+          "title": "3–4 · Add and plan",
+          "paragraphs": [],
+          "steps": [
+            "Inside the project, choose New task. Enter Create wireframes and optionally describe the next action.",
+            "Choose High priority, To do status and a realistic Due date in the calendar. Choose Create task to save."
+          ],
+          "bullets": [],
+          "figure": "task-form"
+        },
+        {
+          "id": "progress",
+          "title": "5–6 · Organize and review",
+          "paragraphs": [],
+          "steps": [
+            "Choose Board. Drag the task by its title or surface to In progress when you start, then Done when finished. The task menu is an alternative.",
+            "Open Overview to see open/completed tasks, deadlines and project progress. Choose the next useful step."
+          ],
+          "bullets": [],
+          "figure": "kanban"
+        }
+      ]
+    },
+    "installation": {
+      "title": "Installation",
+      "intro": "Keep Saturnino close, without an App Store or Google Play download.",
+      "sections": [
+        {
+          "id": "before",
+          "title": "Before you install",
+          "paragraphs": [
+            "Open Saturnino online in a compatible browser. Installation and offline readiness are different: check Settings → Local Workspace for Ready for offline use. Browser menus and availability vary by version."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "platforms",
+          "title": "Choose your device",
+          "paragraphs": [
+            "Follow the platform instructions below. The optional install button appears only when this browser supplies an installation request. A missing button does not stop you using a normal browser tab."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "storage",
+          "title": "Check your local workspace",
+          "paragraphs": [
+            "Do not assume installing, switching browsers or opening a standalone web app copies existing data. Export JSON first and check the destination. Use the same browser profile and address, or restore manually when needed."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "intro": "Give every goal its own space.",
+      "sections": [
+        {
+          "id": "create",
+          "title": "Create and open",
+          "paragraphs": [],
+          "steps": [
+            "Projects → New project: enter a name (up to 80 characters), optional description (up to 500) and color.",
+            "Choose Create project, then View project. Separate work, studies and personal goals into recognizable projects."
+          ],
+          "bullets": [],
+          "figure": "projects"
+        },
+        {
+          "id": "find",
+          "title": "Favorites and quick access",
+          "paragraphs": [
+            "Use a project's star to add or remove it from Favorites. Recent Projects follows your visits. Project Explorer searches project names and opens them from the sidebar; its plus button creates a project. Open the navigation menu first on mobile."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "edit-delete",
+          "title": "Edit or delete thoughtfully",
+          "paragraphs": [
+            "The actions menu offers Edit project: change name, description or color and Save changes. Delete project requires confirmation and permanently removes the project AND all related tasks. There is no undo or trash. Export a backup before deleting anything you may need."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "tasks": {
+      "title": "Tasks",
+      "intro": "Turn a plan into a concrete action.",
+      "sections": [
+        {
+          "id": "create",
+          "title": "Add the essentials",
+          "paragraphs": [
+            "Choose New task from a project or My Tasks. A title (up to 120 characters) and an existing project are required. Description is optional (up to 2,000 characters). Choose a status, Low/Medium/High/Urgent priority and an optional calendar date. Choose Create task to save."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "task-form"
+        },
+        {
+          "id": "details",
+          "title": "Open, edit and delete",
+          "paragraphs": [
+            "A simple title click opens details: a side panel on desktop or full-screen panel on mobile. Change fields and choose Save task. Cancel leaves changes unsaved; a dirty form asks whether to continue or discard. A conflict message protects against another tab's edit. Delete task requires confirmation and is permanent."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "task-details"
+        },
+        {
+          "id": "find",
+          "title": "Search, filter and change views",
+          "paragraphs": [
+            "Search matches titles and descriptions. Combine status, priority, project and due-date filters. Remove individual chips or Clear filters. Choose an available sort order (manual, dates, priority or title). Projects offer List/Board; My Tasks is a cross-project list. Filters or nonmanual sorting restrict reordering so hidden tasks do not lead to misleading positions."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "filters"
+        }
+      ]
+    },
+    "kanban": {
+      "title": "Kanban Board",
+      "intro": "See work move from idea to completion.",
+      "sections": [
+        {
+          "id": "columns",
+          "title": "Four clear stages",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Backlog: ideas and future tasks you are not starting yet.",
+            "To do: tasks ready to begin.",
+            "In progress: work you are actively doing.",
+            "Done: finished tasks; project progress updates automatically."
+          ],
+          "figure": "kanban"
+        },
+        {
+          "id": "move",
+          "title": "Drag and reorder",
+          "paragraphs": [
+            "With a mouse, press a title or noninteractive surface and move enough to activate drag. A simple title click still opens details. The card changes appearance, the destination column is outlined and a line shows insertion before a target task or at the end. Release to save status and order; both survive reload. Move Create wireframes from To do to In progress when starting."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "alternatives",
+          "title": "Keyboard and touch alternatives",
+          "paragraphs": [
+            "Focus the drag handle, press Space, use arrow keys to move, then Space to drop or Escape to cancel. Or open the task menu and choose a status, Move up or Move down. Menus work well on touch screens. Touch dragging needs a short hold; quick scroll gestures remain scrolling. Scroll horizontally to reach columns on a narrow screen. Use the menu if dragging feels awkward."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "intro": "Understand the work you have.",
+      "sections": [
+        {
+          "id": "indicators",
+          "title": "Read the indicators",
+          "paragraphs": [
+            "Overview counts projects, total tasks, open tasks, completed tasks, overdue tasks and completion rate. Open means not Done. Overdue means unfinished with a due date before today, using local dates. Project progress is the proportion currently Done, not hours or effort."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "dashboard"
+        },
+        {
+          "id": "charts",
+          "title": "Interpret the charts",
+          "paragraphs": [
+            "Status and priority distributions describe tasks still here. Created and completed compares the last 14 local days using retained creation and current completion dates. Reopening or deleting can remove an earlier completion: this is not an immutable activity log. View daily counts opens a readable table."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "act",
+          "title": "Turn an insight into action",
+          "paragraphs": [
+            "Linked indicators, statuses and priorities open My Tasks with the corresponding filter. Tasks to watch groups upcoming deadlines, overdue tasks and recent updates. Project progress links open projects. Saturnino does not calculate time tracking, team velocity or forecasts."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "customization": {
+      "title": "Customization",
+      "intro": "Make the workspace fit your way of working.",
+      "sections": [
+        {
+          "id": "appearance",
+          "title": "Theme and language",
+          "paragraphs": [
+            "Use the header or Settings → Appearance and language to select Light/Dark and English/Português. Changes apply immediately and are saved in this browser when storage is available. Dates, forms and this guide follow the selected language."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "settings"
+        },
+        {
+          "id": "sidebar",
+          "title": "Arrange your sidebar",
+          "paragraphs": [
+            "Choose Customize sidebar in the sidebar or Settings → Sidebar. Toggle sections and move them using the available controls. Save applies the draft; Cancel/Escape discards it. Reset prepares defaults in the draft: save to apply. Favorites belong to projects and recent projects follow your visits."
+          ],
+          "steps": [],
+          "bullets": [],
+          "figure": "sidebar"
+        },
+        {
+          "id": "size",
+          "title": "Compact mode and width",
+          "paragraphs": [
+            "On desktop, resize with the sidebar divider or choose a width in Settings → Sidebar. Compact mode reduces its footprint; turn it off for the full layout. Small screens use a navigation drawer. These preferences are separate from a JSON workspace backup."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "productivity": {
+      "title": "Make the most of Saturnino",
+      "intro": "Small habits make your workspace useful.",
+      "sections": [
+        {
+          "id": "plan",
+          "title": "Start with a manageable goal",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Separate work, study and personal goals into projects.",
+            "Break big goals into small tasks: Create wireframes is clearer than Finish the website.",
+            "Keep future ideas in Backlog and choose realistic priorities and dates."
+          ]
+        },
+        {
+          "id": "focus",
+          "title": "Keep the next step visible",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "Limit how much work is In progress at once.",
+            "Favorite frequent projects and review Overview regularly.",
+            "Customize the sidebar, choose a comfortable theme and install the app if supported."
+          ]
+        },
+        {
+          "id": "protect",
+          "title": "Build a backup habit",
+          "paragraphs": [
+            "Save JSON backups regularly, especially before clearing browser data, moving devices or restoring another file. Keep copies somewhere you can find again. CSV helps review tasks externally but cannot restore a workspace."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "local-first": {
+      "title": "Local-first & Privacy",
+      "intro": "Your workspace lives in this browser and device.",
+      "sections": [
+        {
+          "id": "storage",
+          "title": "What stays local",
+          "paragraphs": [
+            "No account is required. Projects, tasks and favorites are stored in the browser's local database. Theme, language and sidebar preferences are stored separately. Installing as a PWA does not add cloud backup or synchronization."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "devices",
+          "title": "Each environment is independent",
+          "paragraphs": [
+            "Computer, tablet and phone each have a separate workspace. Other browsers, profiles or site addresses can have different storage on the same device. Transfer work explicitly with a JSON export and restore. A redirect does not transfer local data."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "care",
+          "title": "Protect your device and files",
+          "paragraphs": [
+            "Clearing site data, private sessions, device failure or browser storage eviction can make records unavailable. This architecture does not encrypt local records or protect them from someone with access to your browser profile. Keep backups. Hosting and external links may make network requests; local-first is not an absolute privacy guarantee."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "offline": {
+      "title": "Offline Usage",
+      "intro": "Keep working once the app is ready on your device.",
+      "sections": [
+        {
+          "id": "prepare",
+          "title": "Prepare before disconnecting",
+          "paragraphs": [],
+          "steps": [
+            "Open Saturnino online and allow application files to finish loading.",
+            "Settings → Local Workspace: wait for Ready for offline use. Installation alone does not prove the cache is complete."
+          ],
+          "bullets": []
+        },
+        {
+          "id": "work",
+          "title": "What works offline",
+          "paragraphs": [
+            "With cache ready and local storage available, create/edit projects and tasks, move cards, filter and review progress. This guide and its bundled images are cached with the app; external references need Internet. Storage limits and eviction still apply. Offline is not synchronization or backup."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "updates",
+          "title": "Update after saving",
+          "paragraphs": [
+            "When online, use Check for updates in Settings → Local Workspace. Save your work before Reload to update. Unsaved forms may ask to continue editing or discard. Saved records remain local, but an update does not create a backup. Do not clear site data just to update."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "backup": {
+      "title": "Backup & Restore",
+      "intro": "A saved file lets you recover or move your workspace.",
+      "sections": [
+        {
+          "id": "export",
+          "title": "Download a JSON backup",
+          "paragraphs": [],
+          "steps": [
+            "Open Settings → Data management.",
+            "Choose Download JSON backup and locate the .json file.",
+            "Keep it somewhere you control, ideally off the device too. Protect files containing sensitive information."
+          ],
+          "bullets": [],
+          "figure": "backup"
+        },
+        {
+          "id": "restore",
+          "title": "Preview before replacing",
+          "paragraphs": [],
+          "steps": [
+            "Export the destination's existing workspace first if there is anything to keep.",
+            "Choose Restore JSON backup, select the file and review its name, date and current/selected project and task counts.",
+            "Choose Replace workspace only if you accept replacing ALL local projects and tasks. Records absent from the file are removed. Cancel leaves data unchanged.",
+            "Check expected projects, tasks, favorites, dates and order after restoring. To transfer devices, move the JSON file yourself and repeat at the destination."
+          ],
+          "bullets": [],
+          "figure": "restore"
+        },
+        {
+          "id": "included",
+          "title": "What JSON and CSV contain",
+          "paragraphs": [
+            "JSON includes projects (color and favorites) and tasks (planning fields, status, order and timestamps). It excludes theme, language, sidebar layout/width/compact mode, recent history and app cache. Restore accepts a validated Saturnino JSON backup up to 20 MiB. Export tasks as CSV makes a table for spreadsheets or external review; CSV cannot restore a workspace. Restore replaces, it does not merge or synchronize."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "limitations": {
+      "title": "Current Limitations",
+      "intro": "Know what is available before relying on it.",
+      "sections": [
+        {
+          "id": "today",
+          "title": "Not available today",
+          "paragraphs": [],
+          "steps": [],
+          "bullets": [
+            "No accounts or authentication.",
+            "No cloud storage or automatic cross-device synchronization.",
+            "No team collaboration or shared workspace."
+          ]
+        },
+        {
+          "id": "storage",
+          "title": "Local storage needs care",
+          "paragraphs": [
+            "Clearing storage can remove your work. Private profiles, another browser or device may open an empty workspace. There is no trash or automatic recovery service. A new installation cannot recover lost local records: keep JSON backups."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "platform",
+          "title": "Browser differences",
+          "paragraphs": [
+            "Installation options and programmatic prompts vary by platform. Offline needs a completed initial cache and available storage. External links require Internet. Use menus instead of drag and drop when a gesture is uncomfortable."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "future": {
+      "title": "Future Vision",
+      "intro": "An optional connected workspace, with a local-first foundation.",
+      "sections": [
+        {
+          "id": "direction",
+          "title": "A direction, not a release promise",
+          "paragraphs": [
+            "The long-term vision includes optional accounts, authentication and cloud synchronization for the same workspace across devices. Preserving local work and offline access is part of that vision. These features are NOT implemented in this version and have no promised date."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "now-next",
+          "title": "Today and a possible tomorrow",
+          "paragraphs": [
+            "Today, each browser profile and origin holds independent records; transfer uses JSON files. A future optional service would connect devices through an authenticated account while retaining local use. Migration, permissions and conflict handling would need careful implementation first."
+          ],
+          "steps": [],
+          "bullets": []
+        },
+        {
+          "id": "continue",
+          "title": "Useful today",
+          "paragraphs": [
+            "Organize projects, plan tasks, use Kanban and keep backups now, without waiting for cloud features. This guide only teaches features you can use today."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    },
+    "faq": {
+      "title": "FAQ & Troubleshooting",
+      "intro": "Find an answer and get back to work.",
+      "sections": [
+        {
+          "id": "answers",
+          "title": "Your questions, answered",
+          "paragraphs": [
+            "These answers describe the current local-first app. Check filters and browser profile before restoring if something seems missing."
+          ],
+          "steps": [],
+          "bullets": []
+        }
+      ]
+    }
+  },
+  "figures": {
+    "project-form": {
+      "alt": "Create Website redesign with a name, description and color.",
+      "caption": "Create Website redesign with a name, description and color."
+    },
+    "projects": {
+      "alt": "Open your project, use its star or access recent projects and Project Explorer.",
+      "caption": "Open your project, use its star or access recent projects and Project Explorer."
+    },
+    "task-form": {
+      "alt": "Plan Create wireframes with a project, status, priority and optional due date.",
+      "caption": "Plan Create wireframes with a project, status, priority and optional due date."
+    },
+    "task-details": {
+      "alt": "Click a task title to open details; save explicitly or cancel without saving.",
+      "caption": "Click a task title to open details; save explicitly or cancel without saving."
+    },
+    "filters": {
+      "alt": "Search and combine filters; clear active chips to see hidden tasks again.",
+      "caption": "Search and combine filters; clear active chips to see hidden tasks again."
+    },
+    "kanban": {
+      "alt": "Move work through four columns, or use each task's action menu.",
+      "caption": "Move work through four columns, or use each task's action menu."
+    },
+    "dashboard": {
+      "alt": "Review real counts, status/priority distributions and retained-date activity.",
+      "caption": "Review real counts, status/priority distributions and retained-date activity."
+    },
+    "settings": {
+      "alt": "Appearance and language apply to this browser's workspace.",
+      "caption": "Appearance and language apply to this browser's workspace."
+    },
+    "sidebar": {
+      "alt": "Customize sections in a draft, then Save or Cancel.",
+      "caption": "Customize sections in a draft, then Save or Cancel."
+    },
+    "backup": {
+      "alt": "Settings → Data management: JSON for recovery, CSV for external review.",
+      "caption": "Settings → Data management: JSON for recovery, CSV for external review."
+    },
+    "restore": {
+      "alt": "Review source/destination counts before replacing local projects and tasks.",
+      "caption": "Review source/destination counts before replacing local projects and tasks."
+    }
+  },
+  "faq": [
+    {
+      "question": "Is Saturnino free?",
+      "answer": "The currently published application can be used without payment or an account. This is not a promise about the terms of future optional services."
+    },
+    {
+      "question": "Do I need an account?",
+      "answer": "No. The current workspace is local-first and has no sign-in."
+    },
+    {
+      "question": "Where are my projects stored?",
+      "answer": "In this browser profile's local database for this site address. A JSON file you export is a separate copy."
+    },
+    {
+      "question": "Can I work without Internet?",
+      "answer": "Yes, after an online visit finishes caching and Settings → Local Workspace reports Ready for offline use. External links still need a connection."
+    },
+    {
+      "question": "How do I install on a computer?",
+      "answer": "Use the installation chapter: Chrome's install menu, Edge's App available icon, or Safari Add to Dock on compatible Macs."
+    },
+    {
+      "question": "How do I install on iPhone or iPad?",
+      "answer": "Open the site in Safari, Share → Add to Home Screen. Enable Open as Web App when offered, then Add. Menu names vary by system version."
+    },
+    {
+      "question": "Why is there no install button?",
+      "answer": "The browser may not support a programmatic prompt, may not consider it ready, or the app may already be installed. Use manual instructions or continue in a tab."
+    },
+    {
+      "question": "Can I use the same projects on several devices?",
+      "answer": "Not automatically. Export JSON from the source and restore at the destination. There is no merge or cloud sync."
+    },
+    {
+      "question": "How do I make a backup?",
+      "answer": "Settings → Data management → Download JSON backup. Find and keep the file in a safe location."
+    },
+    {
+      "question": "How do I restore my data?",
+      "answer": "Back up current data first. Choose Restore JSON backup, review counts and confirm Replace workspace only when ready. CSV is not a restore file."
+    },
+    {
+      "question": "What if I clear browser data?",
+      "answer": "Projects and tasks may be removed. You will need an existing JSON backup to recover supported data; the app cannot reconstruct deleted local records."
+    },
+    {
+      "question": "Why are projects missing in another browser?",
+      "answer": "Browsers, profiles, devices and origins use separate storage. Return to the original environment or restore a backup; do not clear it."
+    },
+    {
+      "question": "How do I update the app?",
+      "answer": "Online, Settings → Local Workspace → Check for updates. Save edits, then Reload to update when offered."
+    },
+    {
+      "question": "What if a task does not appear?",
+      "answer": "Clear search and filters, check its project and status column, and check the browser profile/address. Reopen the page if loading failed. Do not restore over your workspace until you have backed it up and reviewed the replacement preview."
+    }
+  ],
+  "platforms": [
+    {
+      "title": "macOS · Safari or Chrome",
+      "steps": [
+        "In Safari on a compatible macOS version, open Saturnino, then Share → Add to Dock (or File → Add to Dock). Confirm the name and Add.",
+        "In Chrome, use the address-bar install icon when offered, or More → Cast, save, and share → Install page as app. Follow the browser dialog.",
+        "Open it from the Dock or app launcher. Check the workspace before relying on existing records."
+      ]
+    },
+    {
+      "title": "Windows · Edge or Chrome",
+      "steps": [
+        "In Edge, open Saturnino and choose the App available icon in the address bar when offered, then Install.",
+        "In Chrome, choose the install icon or More → Cast, save, and share → Install page as app.",
+        "Follow the browser prompt, then open Saturnino from your app launcher."
+      ]
+    },
+    {
+      "title": "iPhone · Safari",
+      "steps": [
+        "Open Saturnino in Safari, then tap Share (use More or View More if your system places it there).",
+        "Choose Add to Home Screen. Enable Open as Web App when available.",
+        "Confirm Add, then open Saturnino from the Home Screen. No App Store download is needed."
+      ]
+    },
+    {
+      "title": "iPad · Safari",
+      "steps": [
+        "Open Saturnino in Safari and choose Share (then More or View More if needed).",
+        "Choose Add to Home Screen and enable Open as Web App when offered.",
+        "Tap Add and open the icon from the Home Screen. Check your local workspace."
+      ]
+    },
+    {
+      "title": "Android · Chrome",
+      "steps": [
+        "Open Saturnino in Chrome and open More beside the address bar.",
+        "Choose Install and create shortcut → Install, or Install app/Add to Home screen if your browser uses that label.",
+        "Follow the prompt and launch the icon. No Google Play download is needed."
+      ]
+    }
+  ]
+}

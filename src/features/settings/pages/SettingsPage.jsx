@@ -1,14 +1,20 @@
 import { useId, useState } from 'react'
+
 import { useTranslation } from 'react-i18next'
 import { Database, Languages, PanelLeft, HardDrive } from 'lucide-react'
 import { Tabs } from 'radix-ui'
+import { Link } from 'react-router'
+
+import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select'
 import PwaSettingsPanel from '@/features/pwa/components/PwaSettingsPanel'
 import DataManagementPanel from '@/features/data-management/components/DataManagementPanel'
-import { useTheme } from '@/app/providers/theme/useTheme'
-import { supportedLanguages } from '@/i18n/languages'
 import SidebarCustomization from '@/layouts/components/SidebarCustomization'
+
+import { useTheme } from '@/app/providers/theme/useTheme'
 import { useSidebar } from '@/layouts/hooks/useSidebar'
+
+import { supportedLanguages } from '@/i18n/languages'
 import {
   MAX_SIDEBAR_WIDTH,
   MIN_SIDEBAR_WIDTH,
@@ -214,6 +220,20 @@ function SettingsPage() {
           <DataManagementPanel />
         </Tabs.Content>
       </Tabs.Root>
+      <section
+        className="space-y-3 rounded-xl border bg-card p-5 sm:p-6"
+        aria-labelledby={`${id}-help`}
+      >
+        <h2 id={`${id}-help`} className="text-base font-semibold">
+          {t('settings.helpTitle')}
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          {t('settings.helpDescription')}
+        </p>
+        <Button asChild variant="outline" className="min-h-11">
+          <Link to="/guide">{t('settings.userGuide')}</Link>
+        </Button>
+      </section>
       {languageError && (
         <p role="alert" className="text-sm text-destructive">
           {t('settings.languageFailed')}

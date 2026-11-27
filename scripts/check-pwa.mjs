@@ -39,6 +39,20 @@ async function files(directory) {
 const assets = (await files('assets/')).filter((path) =>
   /\.(js|css|woff2?|svg|webp|png)$/.test(path),
 )
+const guideImages = assets.filter((path) => /\/guide-.*\.webp$/.test(path))
+assert.equal(
+  guideImages.length,
+  11,
+  'Expected all guide screenshots in the build',
+)
+const guideImageBytes = (
+  await Promise.all(
+    guideImages.map(
+      async (path) => (await readFile(new URL(path, root))).byteLength,
+    ),
+  )
+).reduce((total, bytes) => total + bytes, 0)
+assert.ok(guideImageBytes <= 512 * 1024, 'Guide screenshot budget exceeded')
 for (const path of [
   'index.html',
   'favicon.svg',
@@ -56,4 +70,7 @@ assert.ok(html.includes('manifest.webmanifest'))
 assert.ok(html.includes('apple-touch-icon'))
 console.log(
   `Verified PWA manifest, ${manifest.icons.length} icons and ${assets.length} precached assets.`,
+)
+console.log(
+  `Verified ${guideImages.length} guide images: ${guideImageBytes} bytes (512 KiB budget).`,
 )
