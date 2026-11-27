@@ -16,7 +16,9 @@
   /* Soft light palette */
   --lunar-white: #f4f4f5;
   --pure-white: #ffffff;
-  --soft-background: #e4e6ec;
+  --soft-background: #e7e9ee;
+  --soft-board-column: #d9dde5;
+  --soft-board-card: #f5f6f8;
   --soft-chrome: #e9ebf0;
   --soft-surface: #f1f2f5;
   --soft-muted: #dce0e8;
@@ -41,6 +43,8 @@
 
   /* Surface colors */
   --color-card: var(--card);
+  --color-board-column: var(--soft-board-column);
+  --color-board-card: var(--soft-board-card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);

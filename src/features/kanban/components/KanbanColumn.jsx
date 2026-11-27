@@ -19,7 +19,7 @@ function KanbanColumn({ status, tasks, onCreate, projectsById, ...cardProps }) {
       ref={ref}
       data-column={status}
       aria-labelledby={headingId}
-      className={`flex w-72 min-w-64 shrink-0 flex-col rounded-xl bg-muted/40 p-3 md:flex-1 ${isDropTarget ? 'ring-2 ring-inset ring-primary' : ''}`}
+      className={`flex w-72 min-w-64 shrink-0 flex-col rounded-xl bg-board-column p-3 md:flex-1 dark:bg-muted/40 has-[[data-task-drop-target]]:ring-2 has-[[data-task-drop-target]]:ring-primary ${isDropTarget ? 'ring-2 ring-inset ring-primary' : ''}`}
     >
       <div className="mb-2 flex items-center gap-2">
         <span
@@ -62,6 +62,9 @@ function KanbanColumn({ status, tasks, onCreate, projectsById, ...cardProps }) {
             {...cardProps}
           />
         ))}
+        {isDropTarget && (
+          <li aria-hidden="true" className="h-0.5 rounded-full bg-primary" />
+        )}
         {tasks.length === 0 && (
           <li className="py-4 text-sm text-muted-foreground">
             {t('kanban.empty')}

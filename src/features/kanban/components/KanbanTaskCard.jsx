@@ -1,12 +1,14 @@
-import { useDraggable, useDroppable } from '@dnd-kit/react'
+import { useRef } from 'react'
+
+import { useDraggable, useDroppable, useDragDropMonitor } from '@dnd-kit/react'
 import { ArrowDown, ArrowUp, GripVertical } from 'lucide-react'
 import { DropdownMenu } from 'radix-ui'
-import TaskActionsMenu, {
-  taskMenuItemClass,
-} from '@/features/tasks/components/TaskActionsMenu'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
+import TaskActionsMenu, {
+  taskMenuItemClass,
+} from '@/features/tasks/components/TaskActionsMenu'
 import TaskCard from '@/features/tasks/components/TaskCard'
 import { TASK_STATUSES } from '@/features/tasks/data/taskOptions'
 
@@ -23,6 +25,12 @@ function KanbanTaskCard({
   onDelete,
 }) {
   const { t } = useTranslation('app')
+  const dragged = useRef(false)
+  useDragDropMonitor({
+    onDragStart({ operation }) {
+      if (operation.source?.id === task.id) dragged.current = true
+    },
+  })
   const { ref, handleRef, isDragSource } = useDraggable({
     id: task.id,
     type: 'task',
@@ -37,8 +45,15 @@ function KanbanTaskCard({
   return (
     <li
       ref={targetRef}
-      className={`${isDropTarget ? 'rounded-md ring-2 ring-primary' : ''} ${isDragSource ? 'opacity-40' : ''}`}
+      data-task-drop-target={isDropTarget || undefined}
+      className={`relative ${isDragSource ? 'opacity-40' : ''}`}
     >
+      {isDropTarget && (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-2 right-0 left-0 z-10 h-0.5 rounded-full bg-primary before:absolute before:-top-0.5 before:-left-0.5 before:size-1.5 before:rounded-full before:bg-primary"
+        />
+      )}
       <TaskCard
         ref={ref}
         className={
@@ -49,6 +64,14 @@ function KanbanTaskCard({
         project={project}
         onEdit={onEdit}
         onDelete={onDelete}
+        onTitlePointerDown={() => {
+          dragged.current = false
+        }}
+        onTitleClick={(event) => {
+          // Ignore the click synthesized when releasing or cancelling a drag.
+          if (event.detail > 0 && dragged.current) return
+          onEdit(task, event.currentTarget)
+        }}
         headingLevel={4}
         actions={
           <TaskActionsMenu
