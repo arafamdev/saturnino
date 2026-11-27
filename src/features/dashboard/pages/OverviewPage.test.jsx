@@ -147,3 +147,39 @@ it('renders the overview in Portuguese', async () => {
   ).toBeInTheDocument()
   expect(metric('Taxa de conclusão')).toHaveTextContent('0%')
 })
+
+it('switches attention lists with the keyboard and labels current updates honestly', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Attention QA',
+  })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Past deadline',
+    dueDate: '2000-01-01',
+  })
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Saved completion',
+    status: 'done',
+  })
+  renderOverview()
+  await screen.findByRole('heading', { name: 'Tasks to watch' })
+  await user.click(screen.getByRole('tab', { name: 'Overdue', exact: true }))
+  expect(
+    await screen.findByRole('link', { name: 'Past deadline', exact: true }),
+  ).toBeInTheDocument()
+  expect(
+    screen.queryByRole('link', { name: 'Saved completion', exact: true }),
+  ).not.toBeInTheDocument()
+  await user.keyboard('{ArrowRight}')
+  expect(
+    screen.getByRole('tab', { name: 'Updated', exact: true }),
+  ).toHaveAttribute('aria-selected', 'true')
+  expect(
+    await screen.findByRole('link', { name: 'Saved completion', exact: true }),
+  ).toBeInTheDocument()
+  expect(
+    screen.getByText(/Earlier edits are not listed separately/),
+  ).toBeInTheDocument()
+})
