@@ -37,6 +37,18 @@ Real application screenshots using fictional project data.
 
 Projects and tasks belong to the current browser profile and origin. There is no cloud synchronization; changing devices or clearing browser data can make records unavailable. Keep JSON backups, especially before moving your workspace or clearing storage.
 
+## Motivation & Future Vision
+
+Saturnino was born from a personal need to better organize my daily life, manage my projects, keep track of my tasks, and stay focused on what matters.
+
+What started as a personal project has grown into an application designed for anyone looking for a simple, intuitive, and accessible way to organize their work and everyday life.
+
+Saturnino currently follows a local-first approach, keeping projects and tasks stored directly on the user's device without requiring an account. It can also be installed as a Progressive Web App (PWA) on supported browsers and used offline after the initial setup.
+
+The long-term vision is to introduce optional user accounts and cloud synchronization, allowing users to access and manage their workspace seamlessly across multiple devices while preserving the local-first experience.
+
+Saturnino is an evolving project, built with purpose, simplicity, and continuous improvement in mind.
+
 ## Tech Stack
 
 - **Interface:** React 19, JavaScript, Tailwind CSS 4, Radix UI and Lucide.
