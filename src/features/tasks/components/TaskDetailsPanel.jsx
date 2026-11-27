@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react'
 
-import { ClipboardList, Trash2, X } from 'lucide-react'
+import { ClipboardList, Trash2 } from 'lucide-react'
 import { AlertDialog, Dialog } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
+import { FormDialogHeader } from '@/components/ui/form-dialog'
 
 import { useTaskDraftGuard } from '../hooks/useTaskDraftGuard'
 import { taskRepository } from '../services/taskRepository'
@@ -60,39 +61,20 @@ function TaskDetailsPanel({
             onFocusCapture={(event) => {
               lastPanelFocus.current = event.target
             }}
-            className="fixed inset-y-0 right-0 z-50 flex h-dvh w-full flex-col border-l bg-background shadow-xl sm:max-w-[500px]"
+            className="fixed inset-y-0 right-0 z-50 flex h-dvh w-full flex-col border-l bg-background shadow-xl sm:max-w-[600px]"
           >
-            <header className="flex shrink-0 items-start gap-3 border-b p-4 sm:p-5">
-              <ClipboardList
-                className="mt-2 size-5 shrink-0 text-primary"
-                aria-hidden="true"
-              />
-              <div className="min-w-0 flex-1">
-                <Dialog.Title className="text-lg font-semibold">
-                  {t('tasks.dialog.editTitle')}
-                </Dialog.Title>
-                <Dialog.Description className="mt-1 text-sm text-muted-foreground">
-                  {t('taskDetails.description')}
-                </Dialog.Description>
-              </div>
-              <Dialog.Close asChild>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="size-11 shrink-0"
-                  disabled={saving}
-                  aria-label={t('tasks.actions.close')}
-                >
-                  <X className="size-4" aria-hidden="true" />
-                </Button>
-              </Dialog.Close>
-            </header>
-            <div className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-5">
+            <FormDialogHeader
+              icon={ClipboardList}
+              title={t('tasks.dialog.editTitle')}
+              description={t('taskDetails.description')}
+              closeLabel={t('tasks.actions.close')}
+              disabled={saving}
+            />
+            <div className="flex min-h-0 flex-1 flex-col">
               {(changed || isMissing) && (
                 <p
                   role="status"
-                  className="mb-4 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm"
+                  className="mx-5 mt-4 shrink-0 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm sm:mx-6"
                 >
                   {t(isMissing ? 'taskDetails.removed' : 'taskDetails.changed')}
                 </p>

@@ -131,11 +131,14 @@ it('rejects invalid manual civil dates and submits a corrected leap day without 
     'Calendar QA',
   )
   await user.click(screen.getByRole('button', { name: 'Due date' }))
+  await user.click(screen.getByRole('button', { name: 'Type date' }))
   const input = await screen.findByRole('textbox', {
     name: 'Date (YYYY-MM-DD)',
   })
   await user.type(input, '2026-02-29')
-  await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
+  await user.click(
+    screen.getByRole('button', { name: 'Close calendar', exact: true }),
+  )
   await user.click(screen.getByRole('button', { name: 'Create task' }))
   expect(await screen.findByRole('alert')).toHaveTextContent(
     'Enter a valid date.',
@@ -147,7 +150,9 @@ it('rejects invalid manual civil dates and submits a corrected leap day without 
   })
   await user.clear(corrected)
   await user.type(corrected, '2028-02-29')
-  await user.click(screen.getByRole('button', { name: 'Done', exact: true }))
+  await user.click(
+    screen.getByRole('button', { name: 'Close calendar', exact: true }),
+  )
   await user.click(screen.getByRole('button', { name: 'Create task' }))
   await waitFor(() =>
     expect(onSubmit).toHaveBeenCalledWith(

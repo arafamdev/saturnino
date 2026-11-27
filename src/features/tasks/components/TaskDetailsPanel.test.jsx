@@ -246,6 +246,7 @@ it('cancels deletion without losing the draft, then deletes only after confirmat
 it('closes the nested calendar with Escape before guarding a dirty panel', async () => {
   const { user, panel } = await openPanel()
   await user.click(panel.getByRole('button', { name: 'Due date' }))
+  await user.click(screen.getByRole('button', { name: 'Type date' }))
   await user.type(
     await screen.findByRole('textbox', { name: 'Date (YYYY-MM-DD)' }),
     '2028-02-29',

@@ -1,10 +1,13 @@
 import { useState } from 'react'
 
-import { X } from 'lucide-react'
+import { ClipboardList } from 'lucide-react'
 import { Dialog } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '@/components/ui/button'
+import {
+  FormDialogHeader,
+  formDialogContentClassName,
+} from '@/components/ui/form-dialog'
 
 import { taskRepository } from '../services/taskRepository'
 
@@ -43,34 +46,21 @@ function TaskDialog({
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60" />
         <Dialog.Content
           onCloseAutoFocus={onCloseAutoFocus}
-          className="fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl border bg-background p-5 shadow-xl sm:p-6"
+          className={formDialogContentClassName}
         >
-          <div className="mb-5 flex items-start justify-between gap-3">
-            <div className="space-y-1">
-              <Dialog.Title className="text-lg font-semibold">
-                {t(
-                  task ? 'tasks.dialog.editTitle' : 'tasks.dialog.createTitle',
-                )}
-              </Dialog.Title>
-              <Dialog.Description className="text-sm text-muted-foreground">
-                {t('tasks.dialog.description')}
-              </Dialog.Description>
-            </div>
-            <Dialog.Close asChild>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                disabled={isSaving}
-                aria-label={t('tasks.actions.close')}
-              >
-                <X className="size-4" aria-hidden="true" />
-              </Button>
-            </Dialog.Close>
-          </div>
+          <FormDialogHeader
+            icon={ClipboardList}
+            title={t(
+              task ? 'tasks.dialog.editTitle' : 'tasks.dialog.createTitle',
+            )}
+            description={t('tasks.dialog.description')}
+            closeLabel={t('tasks.actions.close')}
+            disabled={isSaving}
+          />
           <TaskForm
             key={task?.id ?? `new-task-${initialStatus ?? 'todo'}`}
             task={task}
+            stickyActions
             initialStatus={initialStatus}
             projectId={projectId}
             projects={projects}

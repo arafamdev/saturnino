@@ -168,7 +168,10 @@
       "chooseProject": "Choose a project",
       "status": "Status",
       "priority": "Priority",
-      "dueDate": "Due date"
+      "dueDate": "Due date",
+      "planning": "Planning",
+      "titlePlaceholder": "What needs to get done?",
+      "descriptionPlaceholder": "Add context, notes or a clear next step…"
     },
     "status": {
       "backlog": "Backlog",
@@ -185,7 +188,7 @@
     "dialog": {
       "createTitle": "Create task",
       "editTitle": "Edit task",
-      "description": "Set the project, status, priority and optional due date."
+      "description": "Add the essentials, then plan the details."
     },
     "delete": {
       "title": "Delete task?",
@@ -383,7 +386,7 @@
     "actions": "Actions for {{title}}"
   },
   "taskDetails": {
-    "description": "Review the details. Changes are saved only when you choose Save task.",
+    "description": "Plan the next step. Save when you’re ready.",
     "createdAt": "Created",
     "updatedAt": "Last updated",
     "completedAt": "Completed",
@@ -402,6 +405,7 @@
     "manual": "Date (YYYY-MM-DD)",
     "hint": "Enter a calendar date, for example 2026-12-15.",
     "clear": "Clear date",
-    "done": "Done"
+    "done": "Done",
+    "typeDate": "Type date"
   }
 }
