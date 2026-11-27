@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router'
+import { Outlet, ScrollRestoration } from 'react-router'
 
 import AppHeader from './components/AppHeader'
 import AppSidebar from './components/AppSidebar'
@@ -18,6 +18,7 @@ function AppLayout() {
           </main>
         </div>
       </div>
+      <ScrollRestoration />
     </SidebarProvider>
   )
 }
