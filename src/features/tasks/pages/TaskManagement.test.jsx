@@ -627,3 +627,22 @@ it('creates from a column with its status and restores the column trigger', asyn
   )
   await waitFor(() => expect(trigger).toHaveFocus())
 })
+
+it('keeps long project names available through an explicit expansion control', async () => {
+  const user = userEvent.setup()
+  const project = await projectRepository.createProject({
+    name: 'Project ' + 'W'.repeat(72),
+  })
+  renderTasks(`/app/projects/${project.id}`)
+  const heading = await screen.findByRole('heading', {
+    name: project.name,
+    level: 1,
+  })
+  const expand = within(heading).getByRole('button', { name: project.name })
+  expect(expand).toHaveAttribute('aria-expanded', 'false')
+  await user.click(expand)
+  expect(expand).toHaveAttribute('aria-expanded', 'true')
+  await user.click(expand)
+  expect(expand).toHaveAttribute('aria-expanded', 'false')
+  expect(await projectRepository.getProjectById(project.id)).toEqual(project)
+})

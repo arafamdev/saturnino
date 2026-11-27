@@ -176,7 +176,7 @@ function TaskCollection({ projectId, project }) {
                 key={option}
                 type="button"
                 variant={view === option ? 'secondary' : 'outline'}
-                className="min-h-11 gap-2 sm:min-h-9"
+                className="min-h-11 min-w-11 gap-2 sm:min-h-9"
                 aria-pressed={view === option}
                 onClick={() => setView(option)}
               >
@@ -185,7 +185,9 @@ function TaskCollection({ projectId, project }) {
                 ) : (
                   <List className="size-4" aria-hidden="true" />
                 )}
-                {t(`kanban.${option}`)}
+                <span className="sr-only min-[360px]:not-sr-only">
+                  {t(`kanban.${option}`)}
+                </span>
               </Button>
             ))}
           </div>

@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react'
 import { registerSW } from 'virtual:pwa-register'
 import { PwaContext } from './PwaContext'
 import PwaUpdateBanner from '../components/PwaUpdateBanner'
@@ -35,6 +41,7 @@ function PwaProvider({
   const registrationRef = useRef(null)
   const updateRef = useRef(null)
   const reloadRequested = useRef(false)
+  const reloadIssued = useRef(false)
   const operations = useRef({ checking: false, updating: false })
   const [offlineReady, setOfflineReady] = useState(false)
   const [needRefresh, setNeedRefresh] = useState(false)
@@ -43,19 +50,34 @@ function PwaProvider({
   const [isChecking, setIsChecking] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
 
+  const commitReload = useCallback(() => {
+    if (reloadIssued.current) return
+    reloadIssued.current = true
+    reloadPage()
+  }, [reloadPage])
+
   useEffect(() => {
     if (!supported) return
     let active = true
     const worker = navigator.serviceWorker
+    let previousController = worker.controller
     function controlled() {
-      if (active && worker.controller) setOfflineReady(true)
+      const controller = worker.controller
+      if (!active || !controller) return
+      setOfflineReady(true)
+      if (controller !== previousController) {
+        // Workbox may classify rapid or cross-tab updates as external.
+        if (reloadRequested.current) commitReload()
+        else if (previousController) setNeedRefresh(true)
+        previousController = controller
+      }
     }
     worker.addEventListener('controllerchange', controlled)
     updateRef.current = registerSW({
       immediate: true,
       onNeedReload() {
         if (!active) return
-        if (reloadRequested.current) reloadPage()
+        if (reloadRequested.current) commitReload()
         else setNeedRefresh(true)
       },
       onOfflineReady() {
@@ -81,7 +103,7 @@ function PwaProvider({
       registrationRef.current = null
       updateRef.current = null
     }
-  }, [supported, reloadPage])
+  }, [supported, commitReload])
 
   async function checkForUpdates() {
     const registration = registrationRef.current
@@ -123,9 +145,10 @@ function PwaProvider({
     setIsUpdating(true)
     setError('')
     reloadRequested.current = true
+    reloadIssued.current = false
     try {
       if (registrationRef.current && !registrationRef.current.waiting)
-        reloadPage()
+        commitReload()
       else await updateRef.current(true)
     } catch {
       reloadRequested.current = false

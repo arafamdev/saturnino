@@ -7,6 +7,7 @@ import {
   Percent,
   TriangleAlert,
 } from 'lucide-react'
+import { taskStatusClasses } from '@/features/tasks/data/taskAppearance'
 import { TASK_STATUSES } from '@/features/tasks/data/taskOptions'
 
 const metrics = [
@@ -26,15 +27,15 @@ function DashboardStats({ summary }) {
     maximumFractionDigits: 0,
   })
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <dl className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {metrics.map(([label, field, Icon]) => (
-          <div key={field} className="min-w-0 rounded-xl border bg-card p-5">
+          <div key={field} className="min-w-0 rounded-xl border bg-card p-4">
             <dt className="flex items-center justify-between gap-3 text-sm text-muted-foreground">
               {t(`dashboard.metrics.${label}`)}
-              <Icon className="size-5 text-primary" aria-hidden="true" />
+              <Icon className="size-4 text-primary" aria-hidden="true" />
             </dt>
-            <dd className="mt-3 text-3xl font-semibold tabular-nums">
+            <dd className="mt-2 text-2xl font-semibold tabular-nums">
               {field === 'completionRate'
                 ? percent.format(summary[field] / 100)
                 : numbers.format(summary[field])}
@@ -44,9 +45,9 @@ function DashboardStats({ summary }) {
       </dl>
       <section
         aria-labelledby="dashboard-status-heading"
-        className="rounded-xl border bg-card p-5"
+        className="rounded-xl border bg-card p-4"
       >
-        <h2 id="dashboard-status-heading" className="text-lg font-semibold">
+        <h2 id="dashboard-status-heading" className="text-base font-semibold">
           {t('dashboard.distribution')}
         </h2>
         {summary.taskCount === 0 && (
@@ -71,7 +72,7 @@ function DashboardStats({ summary }) {
                   className="h-2 overflow-hidden rounded-full bg-muted"
                 >
                   <div
-                    className="h-full rounded-full bg-primary"
+                    className={`h-full rounded-full ${taskStatusClasses[status]}`}
                     style={{ width: `${share * 100}%` }}
                   />
                 </div>

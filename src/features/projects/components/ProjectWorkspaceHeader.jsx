@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { FolderKanban } from 'lucide-react'
+import { ChevronDown, FolderKanban } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 
@@ -17,6 +17,7 @@ function ProjectWorkspaceHeader({ project, tasks, isPending }) {
   const triggerRef = useRef(null)
   const headingRef = useRef(null)
   const [dialog, setDialog] = useState(null)
+  const [nameExpanded, setNameExpanded] = useState(false)
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const completed = tasks.filter((task) => task.status === 'done').length
   const percentage = tasks.length
@@ -57,7 +58,32 @@ function ProjectWorkspaceHeader({ project, tasks, isPending }) {
             tabIndex={-1}
             className="text-xl leading-tight font-semibold tracking-tight wrap-break-word outline-none sm:text-2xl"
           >
-            {project.name}
+            {project.name.length > 40 ? (
+              <button
+                type="button"
+                className="flex min-h-11 w-full items-start gap-1 rounded text-left focus-visible:ring-2 focus-visible:ring-ring"
+                aria-expanded={nameExpanded}
+                aria-description={t(
+                  nameExpanded
+                    ? 'projectWorkspace.collapseName'
+                    : 'projectWorkspace.expandName',
+                )}
+                title={project.name}
+                onClick={() => setNameExpanded((value) => !value)}
+              >
+                <span
+                  className={`min-w-0 flex-1 ${nameExpanded ? '' : 'line-clamp-2'}`}
+                >
+                  {project.name}
+                </span>
+                <ChevronDown
+                  className={`mt-1 size-3 shrink-0 ${nameExpanded ? 'rotate-180' : ''}`}
+                  aria-hidden="true"
+                />
+              </button>
+            ) : (
+              project.name
+            )}
           </h1>
         </div>
         <div className="flex shrink-0 items-center">

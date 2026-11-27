@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 
 import { formatDateOnly, getTodayDateOnly } from '@/lib/dates/dateOnly'
 
+import { taskPriorityClasses } from '../data/taskAppearance'
+
 import { isTaskOverdue } from '../utils/selectTasks'
 import TaskActionsMenu from './TaskActionsMenu'
 
@@ -23,16 +25,11 @@ function TaskCard({
   const Heading = headingLevel === 4 ? 'h4' : 'h3'
   const isBoard = headingLevel === 4
   const overdue = isTaskOverdue(task, today)
-  const priorityClass = {
-    low: 'text-muted-foreground',
-    medium: 'text-amber-600 dark:text-amber-400',
-    high: 'text-red-600 dark:text-red-400',
-    urgent: 'text-red-700 dark:text-red-300',
-  }[task.priority]
+  const priorityClass = taskPriorityClasses[task.priority]
   return (
     <article
       ref={ref}
-      className="relative min-w-0 rounded-lg border bg-card p-3 text-card-foreground shadow-xs"
+      className="relative min-w-0 rounded-md border bg-card p-3 text-card-foreground shadow-xs"
     >
       <div className="flex items-start gap-1">
         {dragHandle}

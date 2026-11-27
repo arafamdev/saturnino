@@ -308,7 +308,8 @@
     "localData": "Os projetos e tarefas são guardados neste perfil do navegador. As preferências são guardadas separadamente. Não é necessária uma conta e os dados não são sincronizados entre dispositivos.",
     "feedback": "Feedback das preferências",
     "applied": "Preferências aplicadas.",
-    "languageFailed": "Não foi possível alterar o idioma. Tente novamente."
+    "languageFailed": "Não foi possível alterar o idioma. Tente novamente.",
+    "desktopPreferences": "A largura e o modo compacto aplicam-se em ecrãs desktop (a partir de 1024 px). As preferências ficam guardadas para a próxima visita em desktop; no mobile é usado o menu de navegação."
   },
   "dataManagement": {
     "title": "Gestão de dados",
@@ -374,7 +375,9 @@
     "progress": "{{completed}} de {{total}} concluídas",
     "progressLabel": "Conclusão do projeto",
     "more": "Mostrar descrição",
-    "less": "Mostrar menos"
+    "less": "Mostrar menos",
+    "expandName": "Expandir nome do projeto",
+    "collapseName": "Recolher nome do projeto"
   },
   "taskCard": {
     "actions": "Ações de {{title}}"

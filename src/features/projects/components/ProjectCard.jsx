@@ -9,11 +9,11 @@ function ProjectCard({ project, onEdit, onDelete }) {
   const { t } = useTranslation('app')
 
   return (
-    <article className="group relative flex min-w-0 flex-col rounded-xl border bg-card p-5 text-card-foreground transition-colors hover:border-primary/40 hover:bg-accent/30 focus-within:border-primary/40">
+    <article className="group relative flex min-w-0 flex-col rounded-xl border bg-card p-4 text-card-foreground transition-colors hover:border-primary/40 hover:bg-accent/30 focus-within:border-primary/40">
       {/* Project header */}
-      <div className="mb-5 flex items-center justify-between gap-3">
+      <div className="mb-3 flex items-center justify-between gap-3">
         <div
-          className="flex size-11 shrink-0 items-center justify-center rounded-lg"
+          className="flex size-10 shrink-0 items-center justify-center rounded-lg"
           style={{ backgroundColor: `${project.color}20` }}
         >
           <FolderKanban
@@ -48,7 +48,7 @@ function ProjectCard({ project, onEdit, onDelete }) {
       </div>
 
       {/* Project navigation */}
-      <div className="mt-5 border-t pt-4">
+      <div className="mt-3 border-t pt-3">
         <Link
           to={`/app/projects/${project.id}`}
           aria-label={t('projects.actions.viewNamed', {

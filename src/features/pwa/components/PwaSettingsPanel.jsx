@@ -21,9 +21,9 @@ function PwaSettingsPanel() {
   return (
     <section
       aria-labelledby={id}
-      className="space-y-4 rounded-xl border bg-card p-5"
+      className="space-y-4 rounded-xl border bg-card p-4"
     >
-      <h2 id={id} className="text-lg font-semibold">
+      <h2 id={id} className="text-base font-semibold">
         {t('pwa.title')}
       </h2>
       <p className="text-sm text-muted-foreground">

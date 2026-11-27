@@ -37,7 +37,7 @@ function KanbanTaskCard({
   return (
     <li
       ref={targetRef}
-      className={`${isDropTarget ? 'rounded-lg ring-2 ring-primary' : ''} ${isDragSource ? 'opacity-40' : ''}`}
+      className={`${isDropTarget ? 'rounded-md ring-2 ring-primary' : ''} ${isDragSource ? 'opacity-40' : ''}`}
     >
       <TaskCard
         ref={ref}

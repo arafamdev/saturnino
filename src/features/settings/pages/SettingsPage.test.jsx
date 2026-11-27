@@ -10,6 +10,7 @@ import { database } from '@/lib/db/database'
 import { projectRepository } from '@/features/projects/services/projectRepository'
 import { LANGUAGE_STORAGE_KEY } from '@/i18n/languages'
 import i18n from '@/i18n'
+import { selectOption } from '@/test/selectOption'
 
 function renderSettings() {
   const router = createMemoryRouter(routes, {
@@ -40,9 +41,10 @@ it('synchronizes explicit theme selection with the header and restores it on rem
   const user = userEvent.setup()
   const view = renderSettings()
   const main = await mainRegion()
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Color theme' }),
-    'light',
+    'Light',
   )
   expect(document.documentElement).not.toHaveClass('dark')
   expect(localStorage.getItem('saturnino-theme')).toBe('light')
@@ -56,27 +58,28 @@ it('synchronizes explicit theme selection with the header and restores it on rem
   renderSettings()
   expect(
     (await mainRegion()).getByRole('combobox', { name: 'Color theme' }),
-  ).toHaveValue('light')
+  ).toHaveTextContent('Light')
   await user.click(screen.getByRole('button', { name: 'Switch to dark mode' }))
   expect(
     (await mainRegion()).getByRole('combobox', { name: 'Color theme' }),
-  ).toHaveValue('dark')
+  ).toHaveTextContent('Dark')
 })
 
 it('changes language through the same i18next state used by the header', async () => {
   const user = userEvent.setup()
   renderSettings()
   const main = await mainRegion()
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Display language' }),
-    'pt-PT',
+    'Português',
   )
   expect(
     await main.findByRole('heading', { name: 'Definições', level: 1 }),
   ).toBeInTheDocument()
   expect(
     main.getByRole('combobox', { name: 'Idioma da interface' }),
-  ).toHaveValue('pt-PT')
+  ).toHaveTextContent('Português')
   expect(document.documentElement).toHaveAttribute('lang', 'pt-PT')
   expect(localStorage.getItem(LANGUAGE_STORAGE_KEY)).toBe('pt-PT')
   expect(
@@ -89,9 +92,10 @@ it('updates width and compact preferences without touching project records', asy
   const project = await projectRepository.createProject({ name: 'Settings QA' })
   renderSettings()
   const main = await mainRegion()
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Sidebar width on desktop' }),
-    '320',
+    '320 px',
   )
   await user.click(main.getByRole('checkbox', { name: 'Compact sidebar' }))
   const stored = JSON.parse(
@@ -140,14 +144,16 @@ it('keeps preferences usable when localStorage is unavailable', async () => {
   const user = userEvent.setup()
   renderSettings()
   const main = await mainRegion()
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Color theme' }),
-    'light',
+    'Light',
   )
   expect(document.documentElement).not.toHaveClass('dark')
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Display language' }),
-    'pt-PT',
+    'Português',
   )
   expect(
     await main.findByRole('heading', { name: 'Definições' }),
@@ -161,22 +167,24 @@ it('explains a language failure and allows another attempt', async () => {
   const spy = vi
     .spyOn(i18n, 'changeLanguage')
     .mockRejectedValueOnce(new Error('LANGUAGE_FAILED'))
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Display language' }),
-    'pt-PT',
+    'Português',
   )
   expect(await main.findByRole('alert')).toHaveTextContent(
     'Could not change the language',
   )
   spy.mockRestore()
-  await user.selectOptions(
+  await selectOption(
+    user,
     main.getByRole('combobox', { name: 'Display language' }),
-    'pt-PT',
+    'Português',
   )
   await waitFor(() =>
     expect(
       main.getByRole('combobox', { name: 'Idioma da interface' }),
-    ).toHaveValue('pt-PT'),
+    ).toHaveTextContent('Português'),
   )
   expect(main.queryByRole('alert')).not.toBeInTheDocument()
 })
