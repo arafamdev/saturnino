@@ -295,7 +295,40 @@
     "loading": "Loading overview…",
     "welcome": "Start your first project",
     "startDescription": "Create a project, add tasks and track your progress here.",
-    "startAction": "Go to projects"
+    "startAction": "Go to projects",
+    "total": "total",
+    "priorityDistribution": "Tasks by priority",
+    "activityTitle": "Created and completed",
+    "activityPeriod": "Last 14 days · local dates",
+    "chartLegend": "Activity series",
+    "created": "Created",
+    "completed": "Completed",
+    "insufficientActivity": "Activity on at least two different days is needed for a meaningful comparison.",
+    "activityNote": "Counts use the creation and current completion dates of tasks still here. Reopening or deleting a task can remove an earlier completion.",
+    "dailyCounts": "View daily counts",
+    "date": "Date",
+    "taskWatch": "Tasks to watch",
+    "viewTasks": "View all tasks",
+    "watchTabs": {
+      "upcoming": "Upcoming",
+      "overdue": "Overdue",
+      "recent": "Updated"
+    },
+    "watchTitles": {
+      "upcoming": "Upcoming deadlines",
+      "overdue": "Overdue tasks",
+      "recent": "Recently updated tasks"
+    },
+    "watchDescriptions": {
+      "upcoming": "Your next five unfinished tasks due today or later.",
+      "overdue": "The five earliest overdue tasks that still need attention.",
+      "recent": "Tasks with the latest saved changes. Earlier edits are not listed separately."
+    },
+    "watchEmpty": {
+      "upcoming": "No upcoming deadlines.",
+      "overdue": "No overdue tasks.",
+      "recent": "No recent task updates."
+    }
   },
   "settings": {
     "description": "Make this workspace feel right for you.",

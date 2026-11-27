@@ -16,6 +16,7 @@ import {
 
 import { useTasks } from '../hooks/useTasks'
 import { useProjectTaskView } from '../hooks/useProjectTaskView'
+import { useTaskFilters } from '../hooks/useTaskFilters'
 
 import DeleteTaskDialog from './DeleteTaskDialog'
 import TaskDialog from './TaskDialog'
@@ -33,7 +34,7 @@ function TaskCollection({ projectId, project }) {
   const today = useTodayDateOnly()
   const taskQuery = useTasks(projectId)
   const projectQuery = useProjects()
-  const [filters, setFilters] = useState(DEFAULT_TASK_FILTERS)
+  const [filters, setFilters] = useTaskFilters(projectId)
   const [view, setView] = useProjectTaskView(projectId)
   const [activeDialog, setActiveDialog] = useState(null)
   const createButtonRef = useRef(null)

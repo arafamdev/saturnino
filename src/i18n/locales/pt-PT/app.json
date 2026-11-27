@@ -295,7 +295,40 @@
     "loading": "A carregar a visão geral…",
     "welcome": "Comece pelo primeiro projeto",
     "startDescription": "Crie um projeto, adicione tarefas e acompanhe aqui o progresso.",
-    "startAction": "Ir para projetos"
+    "startAction": "Ir para projetos",
+    "total": "no total",
+    "priorityDistribution": "Tarefas por prioridade",
+    "activityTitle": "Criadas e concluídas",
+    "activityPeriod": "Últimos 14 dias · datas locais",
+    "chartLegend": "Séries de atividade",
+    "created": "Criadas",
+    "completed": "Concluídas",
+    "insufficientActivity": "É necessária atividade em pelo menos dois dias diferentes para uma comparação útil.",
+    "activityNote": "Contagens das datas de criação e conclusão atual das tarefas ainda neste espaço. Reabrir ou eliminar uma tarefa pode remover uma conclusão anterior.",
+    "dailyCounts": "Ver contagens diárias",
+    "date": "Data",
+    "taskWatch": "Tarefas a acompanhar",
+    "viewTasks": "Ver todas as tarefas",
+    "watchTabs": {
+      "upcoming": "Próximas",
+      "overdue": "Em atraso",
+      "recent": "Atualizadas"
+    },
+    "watchTitles": {
+      "upcoming": "Próximos prazos",
+      "overdue": "Tarefas em atraso",
+      "recent": "Tarefas atualizadas recentemente"
+    },
+    "watchDescriptions": {
+      "upcoming": "As próximas cinco tarefas por concluir com prazo para hoje ou depois.",
+      "overdue": "As cinco tarefas com prazo mais antigo que ainda precisam de atenção.",
+      "recent": "Tarefas com alterações guardadas mais recentes. As edições anteriores não são apresentadas separadamente."
+    },
+    "watchEmpty": {
+      "upcoming": "Sem próximos prazos.",
+      "overdue": "Sem tarefas em atraso.",
+      "recent": "Sem atualizações recentes de tarefas."
+    }
   },
   "settings": {
     "description": "Adapte este espaço de trabalho às suas preferências.",
