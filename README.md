@@ -18,7 +18,9 @@ New here? Follow the bilingual [User Guide](https://saturnino-app.vercel.app/gui
 
 Real application screenshots using fictional project data.
 
-![Saturnino landing page with its orbital branding and hero in dark mode](docs/images/landing-desktop-dark.webp)
+![Saturnino landing page in dark mode, showing User Guide and About navigation with its orbital hero](docs/images/landing-desktop-dark.webp)
+
+![User Guide in dark mode, showing chapter navigation, Kanban instructions and a real example board](docs/images/user-guide-desktop-dark.webp)
 
 ![Desktop Kanban board in dark mode](docs/images/kanban-desktop-dark.webp)
 
