@@ -4,7 +4,7 @@
 
 Saturnino is a local-first project and task manager for organizing work without an account. A focused Kanban workspace brings project progress, priorities and deadlines into one place, with a compact interface inspired by the application's orbital identity.
 
-Built as a React portfolio project, Saturnino combines practical task management with careful keyboard interactions, responsive layouts and data integrity. Work stays on your device, while English and Portuguese interfaces and light and dark themes make the workspace your own.
+Built as a React frontend project, Saturnino combines practical task management with careful keyboard interactions, responsive layouts and data integrity. Work stays on your device, while English and Portuguese interfaces and light and dark themes make the workspace your own.
 
 ## Live Demo
 
