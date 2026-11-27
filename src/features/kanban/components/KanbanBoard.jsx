@@ -17,6 +17,8 @@ function sensors(defaults) {
   return [
     ...defaults.filter((sensor) => sensor !== PointerSensor),
     PointerSensor.configure({
+      // Pointer input uses the card; KeyboardSensor keeps the explicit handle.
+      activatorElements: (source) => [source.element],
       activationConstraints(event) {
         return event.pointerType === 'touch'
           ? [
