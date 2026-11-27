@@ -3,8 +3,9 @@ import { createBrowserRouter } from 'react-router'
 import PageLoader from '@/components/shared/PageLoader'
 
 import PublicLayout from '@/layouts/PublicLayout'
+import NavigationHistoryProvider from './navigation/NavigationHistoryProvider'
 
-export const routes = [
+const pageRoutes = [
   // Public routes
   {
     path: '/',
@@ -100,6 +101,10 @@ export const routes = [
       return { Component }
     },
   },
+]
+
+export const routes = [
+  { element: <NavigationHistoryProvider />, children: pageRoutes },
 ]
 
 export function createAppRouter() {

@@ -16,7 +16,7 @@ export function useTaskFilters(projectId) {
         const next = typeof update === 'function' ? update(previous) : update
         return writeTaskFilterParams(current, next, projectId)
       },
-      { replace: true },
+      { replace: true, preventScrollReset: true },
     )
   }
 
