@@ -18,7 +18,11 @@ async function chooseAction(user, title, action) {
 }
 
 let project
-function ReactiveBoard({ movementRestricted = false, onlyTodo = false }) {
+function ReactiveBoard({
+  movementRestricted = false,
+  onlyTodo = false,
+  onEdit = vi.fn(),
+}) {
   const { tasks } = useTasks(project.id)
   return (
     <MemoryRouter>
@@ -29,7 +33,7 @@ function ReactiveBoard({ movementRestricted = false, onlyTodo = false }) {
           onlyTodo ? tasks.filter((task) => task.status === 'todo') : tasks
         }
         projects={[project]}
-        onEdit={vi.fn()}
+        onEdit={onEdit}
         onDelete={vi.fn()}
       />
     </MemoryRouter>
@@ -45,11 +49,57 @@ beforeEach(async () => {
       disconnect() {}
     },
   )
+  // jsdom has no Web Animations API; the board disables drag animations.
+  vi.stubGlobal(
+    'PointerEvent',
+    class extends MouseEvent {
+      constructor(type, options = {}) {
+        super(type, options)
+        Object.assign(this, {
+          pointerId: options.pointerId ?? 1,
+          pointerType: options.pointerType ?? 'mouse',
+          isPrimary: options.isPrimary ?? true,
+        })
+      }
+    },
+  )
+  vi.stubGlobal('Animation', class {})
+  vi.stubGlobal(
+    'matchMedia',
+    vi.fn(() => ({
+      matches: true,
+      addEventListener() {},
+      removeEventListener() {},
+    })),
+  )
+  vi.stubGlobal(
+    'IntersectionObserver',
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  )
+  Object.defineProperty(document, 'elementFromPoint', {
+    configurable: true,
+    value: () => document.body,
+  })
+  Object.defineProperty(document, 'getAnimations', {
+    configurable: true,
+    value: () => [],
+  })
+  Object.defineProperty(Element.prototype, 'getAnimations', {
+    configurable: true,
+    value: () => [],
+  })
   await database.tasks.clear()
   await database.projects.clear()
   project = await projectRepository.createProject({ name: 'Kanban QA' })
 })
 afterEach(() => {
+  delete document.elementFromPoint
+  delete document.getAnimations
+  delete Element.prototype.getAnimations
   vi.restoreAllMocks()
   vi.unstubAllGlobals()
 })
@@ -231,4 +281,93 @@ it('returns focus to the board when a status change hides the filtered card', as
   await waitFor(() =>
     expect(screen.getByRole('region', { name: 'Board' })).toHaveFocus(),
   )
+})
+
+it('starts from the keyboard handle and cancels without writing', async () => {
+  const user = userEvent.setup()
+  const task = await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Keyboard surface',
+  })
+  const move = vi.spyOn(taskRepository, 'moveTask')
+  render(<ReactiveBoard />)
+  const handle = await screen.findByRole('button', {
+    name: 'Drag Keyboard surface',
+  })
+  handle.focus()
+  await user.keyboard(' ')
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'true'))
+  await user.keyboard('{Escape}')
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'false'))
+  expect(move).not.toHaveBeenCalled()
+  expect((await taskRepository.getTaskById(task.id)).status).toBe('todo')
+})
+
+it('activates card surface only after mouse distance, while title and menu remain interactive', async () => {
+  const user = userEvent.setup()
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Surface gestures',
+  })
+  const move = vi.spyOn(taskRepository, 'moveTask')
+  const edit = vi.fn()
+  render(<ReactiveBoard onEdit={edit} />)
+  const handle = await screen.findByRole('button', {
+    name: 'Drag Surface gestures',
+  })
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'false'))
+  const article = handle.closest('article')
+  await user.pointer([
+    { target: article, coords: { x: 10, y: 10 }, keys: '[MouseLeft>]' },
+    { coords: { x: 13, y: 10 } },
+  ])
+  expect(handle).toHaveAttribute('aria-pressed', 'false')
+  await user.pointer([{ coords: { x: 25, y: 10 } }])
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'true'))
+  await user.keyboard('{Escape}')
+  await user.pointer({ keys: '[/MouseLeft]' })
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'false'))
+  const title = screen.getByRole('button', {
+    name: 'Surface gestures',
+    exact: true,
+  })
+  await user.pointer([
+    { target: title, coords: { x: 10, y: 10 }, keys: '[MouseLeft>]' },
+    { coords: { x: 40, y: 10 } },
+    { keys: '[/MouseLeft]' },
+  ])
+  expect(handle).toHaveAttribute('aria-pressed', 'false')
+  await user.click(title)
+  expect(edit).toHaveBeenCalledWith(
+    expect.objectContaining({ title: 'Surface gestures' }),
+    title,
+  )
+  await user.click(
+    screen.getByRole('button', { name: 'Actions for Surface gestures' }),
+  )
+  expect(
+    screen.getByRole('menuitem', { name: 'Done', exact: true }),
+  ).toBeVisible()
+  expect(move).not.toHaveBeenCalled()
+})
+
+it('keeps touch scrolling gestures below the hold threshold from starting drag', async () => {
+  const user = userEvent.setup()
+  await taskRepository.createTask({
+    projectId: project.id,
+    title: 'Touch surface',
+  })
+  render(<ReactiveBoard />)
+  const handle = await screen.findByRole('button', {
+    name: 'Drag Touch surface',
+  })
+  await waitFor(() => expect(handle).toHaveAttribute('aria-pressed', 'false'))
+  const article = handle.closest('article')
+  await user.pointer([
+    { target: article, coords: { x: 10, y: 10 }, keys: '[TouchA>]' },
+    { pointerName: 'TouchA', coords: { x: 10, y: 45 } },
+    { keys: '[/TouchA]' },
+  ])
+  expect(handle).toHaveAttribute('aria-pressed', 'false')
+  expect((await taskRepository.getTasks(project.id))[0].status).toBe('todo')
 })

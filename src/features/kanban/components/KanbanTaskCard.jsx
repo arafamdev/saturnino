@@ -41,6 +41,9 @@ function KanbanTaskCard({
     >
       <TaskCard
         ref={ref}
+        className={
+          busy || movementRestricted ? '' : 'cursor-grab active:cursor-grabbing'
+        }
         task={task}
         today={today}
         project={project}
@@ -92,7 +95,7 @@ function KanbanTaskCard({
             ref={handleRef}
             type="button"
             variant="ghost"
-            className="size-11 shrink-0 touch-none px-0 text-muted-foreground md:size-8"
+            className="size-11 shrink-0 touch-none cursor-grab px-0 text-muted-foreground active:cursor-grabbing md:size-8"
             disabled={busy || movementRestricted}
             aria-label={t('kanban.drag', { title: task.title })}
             data-task-focus="handle"

@@ -19,6 +19,7 @@ function TaskCard({
   children,
   actions,
   headingLevel = 3,
+  className = '',
   today = getTodayDateOnly(),
 }) {
   const { t, i18n } = useTranslation('app')
@@ -29,7 +30,7 @@ function TaskCard({
   return (
     <article
       ref={ref}
-      className="relative min-w-0 rounded-md border bg-card p-3 text-card-foreground shadow-xs"
+      className={`relative min-w-0 rounded-md border bg-card p-3 text-card-foreground shadow-xs ${className}`}
     >
       <div className="flex items-start gap-1">
         {dragHandle}
@@ -37,7 +38,7 @@ function TaskCard({
           <button
             type="button"
             onClick={(event) => onEdit(task, event.currentTarget)}
-            className="min-h-11 w-full rounded text-left hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:min-h-8"
+            className="min-h-11 w-full cursor-pointer rounded text-left hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:min-h-8"
           >
             {task.title}
           </button>
