@@ -2,190 +2,58 @@
 
 > Everything in its orbit.
 
-Saturnino is a project management and productivity application designed to help people organize their projects, manage tasks, and stay focused.
+Saturnino is a local-first project and task manager for organizing work without an account. A focused Kanban workspace brings project progress, priorities and deadlines into one place, with a compact interface inspired by the application's orbital identity.
 
-[Open Saturnino](https://saturnino-ten.vercel.app) · [Source code](https://github.com/arafamdev/saturnino)
+Built as a React portfolio project, Saturnino combines practical task management with careful keyboard interactions, responsive layouts and data integrity. Work stays on your device, while English and Portuguese interfaces and light and dark themes make the workspace your own.
 
-## Philosophy
+## Live Demo
 
-Organize. Focus. Evolve.
+[Open Saturnino](https://saturnino-ten.vercel.app)
 
-## Project Status
+Explore the application in your browser or install it from your browser menu when supported. No sign-in, API keys or configuration are required.
 
-V1 implements a local-first workspace with projects, tasks, an accessible Kanban board, combined filters, dashboard metrics, preferences, JSON backup/restore, CSV export and an installable offline application. No account is required.
+## Application Preview
 
-Data belongs to the current browser profile and origin. Keep JSON backups when changing devices, domains or browser profiles.
+Real application screenshots using fictional project data.
+
+![Desktop Kanban board in dark mode](docs/images/kanban-desktop-dark.webp)
+
+| Tablet · Light mode                                                        | Mobile · Light mode                                                        |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| ![Tablet Kanban board in light mode](docs/images/kanban-tablet-light.webp) | ![Mobile Kanban board in light mode](docs/images/kanban-mobile-light.webp) |
+
+## Features
+
+- **Projects and tasks:** create, edit and organize work, track completion and keep favorite projects close through a customizable sidebar.
+- **Kanban and list views:** move cards across four columns with drag and drop or keyboard-accessible menus. Add tasks directly to a column.
+- **Focused task details:** edit in a side panel on desktop or a full-screen panel on mobile, with explicit saving, unsaved-change protection and concurrent-edit detection.
+- **Search and planning:** combine filters, choose a sort order and set deadlines with a localized calendar.
+- **Dashboard and preferences:** review progress and upcoming deadlines, switch themes and languages, and adjust desktop navigation.
+- **Backup and offline use:** export JSON backups or CSV, restore a validated workspace and use the cached application after a completed online visit.
+
+Projects and tasks belong to the current browser profile and origin. There is no cloud synchronization; changing devices or clearing browser data can make records unavailable. Keep JSON backups, especially before moving your workspace or clearing storage.
 
 ## Tech Stack
 
-### Core
+React 19 · JavaScript · Vite 8 · Tailwind CSS 4 · React Router · Dexie / IndexedDB · React Hook Form · Radix UI · dnd-kit · DayPicker · i18next · Workbox.
 
-- React 19
-- JavaScript
-- Vite
-- React Router
-- Dexie and IndexedDB
-- React Hook Form
-- i18next (English and Portuguese)
-- Workbox and vite-plugin-pwa
-
-### Styling and UI
-
-- Tailwind CSS v4
-- shadcn/ui
-- Radix UI
-- Lucide React
-- Inter
-
-### Testing
-
-- Vitest
-- React Testing Library
-- jsdom
-
-### Code Quality and Automation
-
-- ESLint
-- Prettier
-- GitHub Actions
-
-## Architecture
-
-Saturnino follows a hybrid feature-based architecture, separating application configuration, business features, shared components, layouts, and utilities.
-
-## Smart Sidebar
-
-The sidebar lists favorite, recently visited and all projects. Project Explorer supports search, natural alphabetical/numeric sorting, creation, editing and confirmed deletion. Project changes react to IndexedDB updates through Dexie.
-
-Choose **Customize sidebar** to hide optional sections or change their order. Drag a handle with a mouse or touch, press Up/Down on a focused handle, or use the move buttons. Workspace navigation cannot be hidden. Desktop and mobile share section preferences.
-
-On desktop, drag the sidebar edge to resize between 224 and 400 pixels. Focus the separator and use Left/Right (16-pixel steps), Home (minimum) or End (maximum). Compact mode provides icon navigation with keyboard-accessible tooltips; expand it to access project sections and customization. Mobile always uses the full navigation drawer.
-
-Preferences are stored locally under `saturnino:sidebar-preferences`. Older preferences are filled with defaults; invalid fields are normalized. **Reset sidebar preferences** restores section order, visibility, expansion, width and compact mode, and clears recent history. It does not change projects or favorites. If storage is unavailable, navigation remains usable, but preferences may not survive a reload.
-
-For contributors: `SidebarProvider` owns reducer state and a shared sidebar project query. `useReducer` applies immutable preference changes; `useContext` shares them; `useEffect` persists preferences and verifies missing history references; `useRef` tracks focus targets and pointer gestures; local `useState` previews resizing without writing storage on every movement. Project data continues through the repository and Dexie, separately from UI preferences.
-
-## Task Management
-
-Open **My Tasks** to manage all tasks, or open a project for its own task list. Every task belongs to a project and includes a title, description, status, priority and optional due date. Creation, editing and confirmed deletion update all relevant views reactively.
-
-Tasks use four statuses (Backlog, To do, In progress, Done) and four priorities (Low, Medium, High, Urgent). Due dates are calendar dates; creation, modification and completion use ISO timestamps. Reopening a completed task clears its completion timestamp. Project/task writes validate the project relationship inside a database transaction, and deleting a project still deletes its tasks atomically.
-
-Data remains in IndexedDB in the current browser profile and origin. No account or cloud service is required. Browser data clearing can remove local records; JSON backup and restore are available in Settings; offline application-shell caching is available after the first completed online visit.
-
-## Kanban Board
-
-Inside a project, switch between **List** and **Board**. The board groups tasks into Backlog, To do, In progress and Done. Drag a card by its handle to another column or onto another card to change its position. A column background appends the task; dropping onto a card uses that card's position. Escape cancels a drag.
-
-Every card also offers a status selector and move-up/down buttons, so moving tasks does not require a dragging gesture. The selector inserts at the start of the chosen status. On mobile, choose the visible column using the column selector. Successful moves restore focus to the corresponding control in the destination column.
-
-Movement re-reads persisted tasks and renumbers both affected columns in one IndexedDB transaction. A failed write preserves the previous order; a task edited during the gesture produces a conflict message. Moving to Done records completion, and reopening clears it. The board loads on demand and does not add drag-and-drop code to the global task list until opened.
-
-## Search and Filters
-
-Search task titles and descriptions without case or accent differences. Combine status, priority and due-date filters; **My Tasks** also filters by project. Deadlines can show overdue, today, after today or undated tasks. Completed tasks are excluded from overdue results and warnings.
-
-Sort by manual order, earliest due date (undated tasks last), highest priority, natural title order or latest update. Sorting changes presentation only. The result count and empty-result message reflect the combined criteria; **Clear filters** restores the default view. Filters apply to both list and board and remain local to the current collection view.
-
-While filters or an alternative sort are active, board dragging and position buttons are unavailable because hidden cards would make insertion positions ambiguous. Clear filters and select manual order to reorder. Status selectors remain available; if changing status hides a card, focus returns to the board.
-
-## Dashboard
-
-**Overview** shows project/task totals, open and completed tasks, overdue work and the completion rate. Status distribution includes text counts and percentages; project progress uses labelled native progress bars. The six most recently updated projects link to their details, and the next five unfinished deadlines include today and later dates.
-
-Metrics come from a consistent read-only snapshot of projects and tasks and update reactively after local changes. No derived counters are stored in the database. Empty, loading and storage-error states have distinct feedback and retry. The civil day refreshes after local midnight and when the tab regains focus or visibility, keeping dashboard deadlines, filters and overdue labels current.
-
-## Settings
-
-**Settings** provides explicit light/dark theme and English/Portuguese selection, sharing the same state as the header. Desktop sidebar width, compact mode and section customization reuse the existing sidebar preferences. Resetting sidebar preferences changes layout/history only and preserves projects and favorites.
-
-Preferences apply immediately and are saved in localStorage when available; controls remain usable in memory if storage is blocked. Projects and tasks remain separately in IndexedDB in this browser profile. No account or cross-device synchronization is required or provided by V1.
-
-## Backup, Restore and CSV
-
-In **Settings → Data management**, download a versioned JSON backup of all projects and tasks, or export tasks as UTF-8 CSV. JSON preserves IDs, relationships, favorites, positions and timestamps. Interface preferences are separate and are not included. Files are processed locally without an upload to a server.
-
-To restore, select a Saturnino JSON backup (up to 20 MiB). The application validates the full format and relationships before showing the current and incoming counts. **Replace workspace** requires explicit confirmation and replaces all current projects/tasks. Download a backup first if you need to preserve the current workspace. Cancel leaves records unchanged.
-
-Both tables are replaced in one transaction. A failed write rolls back every change. If local records change after preview, restore is refused; cancel and select the backup again to review the latest state. Unknown versions, malformed records, duplicate IDs/positions and orphan tasks are rejected.
-
-CSV is export-only and intended for analysis. Fields are quoted and escaped; formula-like values receive a tab prefix, including Unicode variants. This changes the exported cell text and reduces spreadsheet formula interpretation, but spreadsheet applications and re-saving behavior differ. JSON is the exact restoration format.
-
-## Installable App and Offline Use
-
-Install Saturnino using your browser's **Install app** or **Add to Home Screen** option when available. Open **Settings → App and offline use** and wait for **Ready for offline use** before relying on the cached application. The first visit needs a connection; clearing browser storage can remove both the cache and local records, so keep JSON backups.
-
-The production build precaches the application shell, lazy route/board chunks, fonts and images. After caching, direct navigation, task creation and Kanban changes work without the application server. Projects and tasks remain in IndexedDB; the service worker only manages application files.
-
-An update banner lets you reload when ready or postpone. Save unfinished form edits before choosing **Reload to update**. An update activated in another tab also asks before reloading this page. Saved records and interface preferences are preserved.
-
-Service workers are disabled in the development server. Verify the production build locally with:
-
-```bash
-npm run build
-npm run check:pwa
-npm run preview -- --host 127.0.0.1 --port 4173
-```
-
-After the cache is ready, stopping that preview server lets you verify cached navigation on the same origin. `npm run check:pwa` validates manifest icons and actual precache coverage and also runs in CI. Regenerate the committed PWA icons from the existing orbital SVG with `npm run generate:pwa-assets`.
+Quality checks use Vitest, React Testing Library, ESLint, Prettier and GitHub Actions. The application is hosted on Vercel.
 
 ## Getting Started
 
-Use a Node.js version supported by Vite 8 (20.19+ or 22.12+); this release was verified with Node 26.3.0 and npm 11.16.0. No API keys or environment variables are required.
-
-Clone the repository:
+Use Node.js 26, the version used by CI, and npm.
 
 ```bash
 git clone https://github.com/arafamdev/saturnino.git
 cd saturnino
-```
-
-Install dependencies:
-
-```bash
 npm ci
-```
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-## Available Scripts
+Open the local URL printed by Vite. Run `npm test` for the test suite, `npm run lint` for linting and `npm run build` for a production build. Use `npm run preview` to preview that build, including offline caching.
 
-| Command                | Description                  |
-| ---------------------- | ---------------------------- |
-| `npm run dev`          | Start the development server |
-| `npm run build`        | Create a production build    |
-| `npm run preview`      | Preview the production build |
-| `npm run lint`         | Check code quality           |
-| `npm run format`       | Format project files         |
-| `npm run format:check` | Check code formatting        |
-| `npm test`             | Run all automated tests      |
-| `npm run test:watch`   | Run tests in watch mode      |
+## Author
 
-## Continuous Integration
+**Arafam Mussa Silla**
 
-GitHub Actions automatically checks code formatting, linting, automated tests, production builds, PWA precache coverage and production dependency security.
-
-The release suite includes 461 tests across 45 files, covering transaction rollback, import validation, conflicting writes, filtering, keyboard interactions, storage failures and controlled service-worker updates. Browser verification also covered writes with the preview server stopped and a real update from 1.0.0-rc.1 to 1.0.0 across two tabs, preserving an unsaved form in the second tab. Native operating-system installation, physical airplane mode and a full browser/screen-reader matrix remain manual checks.
-
-## Deployment
-
-Deploy the repository as a Vite frontend with `npm ci`, `npm run build`, and output directory `dist`. `vercel.json` serves the SPA shell for direct client routes and requests revalidation of the service worker and manifest. No backend or managed database is needed. Keep the same production origin to retain access to existing browser data; use JSON backup/restore to transfer a workspace to another origin.
-
-## Project Structure
-
-- `src/app`: route configuration and application setup.
-- `src/features`: projects, tasks, dashboard, settings, sidebar, backup and PWA behavior.
-- `src/lib/db`: Dexie schema, repositories and consistent workspace snapshots.
-- `src/components`: shared presentation and UI primitives.
-- `src/i18n`: English and Portuguese translations.
-- `scripts/check-pwa.mjs`: production manifest and precache verification.
-
-Server state lives in IndexedDB and is observed through Dexie live queries. Context/reducers hold shared interface preferences; forms and filters use local component state. Metrics are derived from a consistent snapshot rather than stored as duplicated counters.
-
----
-
-Built with purpose. Inspired by legacy.
+[GitHub](https://github.com/arafamdev) · [LinkedIn](https://www.linkedin.com/in/arafam-mussa-silla-5a7866446/) · [Portfolio](https://arafam.dev)
